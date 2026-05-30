@@ -21,7 +21,7 @@
 
 <main class="doc-shell">
   <h1 style="margin-top:8px;">Документи та протоколи</h1>
-  <p class="page-hint">Опубліковані документи організації. Натисніть, щоб відкрити PDF.</p>
+  <p class="page-hint">Документи організації. Натисніть, щоб відкрити PDF.</p>
 
   <div id="loading" class="loading-screen">
     <span class="spinner"></span>
@@ -51,6 +51,35 @@
     return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()}`;
   }
 
+  function fileHref(id) { return `${WORKER}/api/public/documents/${encodeURIComponent(id)}/file`; }
+
+  function progressText(d) {
+    const n = d.signedCount || 0;
+    if (d.mode === 'fixed' && d.requiredCount) return `${n} / ${d.requiredCount} підписів`;
+    return `${n} підписів · збір триває`;
+  }
+
+  function card(d, icon, cta, meta) {
+    return `
+      <a class="doc-card" style="display:flex;align-items:center;gap:14px;text-decoration:none;"
+         href="${fileHref(d.id)}" target="_blank" rel="noopener">
+        <span style="font-size:30px;">${icon}</span>
+        <span style="flex:1;">
+          <span class="doc-card-title" style="display:block;">${esc(d.title)}</span>
+          <span class="doc-card-meta">${esc(meta)}</span>
+        </span>
+        <span class="tile-cta">${cta}</span>
+      </a>`;
+  }
+
+  function sectionHtml(title, count, cardsHtml) {
+    return `
+      <section class="doc-group">
+        <div class="doc-group-head"><span class="doc-group-title">${esc(title)}</span><span class="doc-group-count">${count}</span></div>
+        <div class="doc-group-body">${cardsHtml}</div>
+      </section>`;
+  }
+
   async function load() {
     try {
       const res = await fetch(`${WORKER}/api/public/documents`);
@@ -58,16 +87,21 @@
       const docs = data.documents || [];
       $('#loading').classList.add('hidden');
       if (!docs.length) { $('#empty').classList.remove('hidden'); return; }
-      $('#list').innerHTML = docs.map((d) => `
-        <a class="doc-card" style="display:flex;align-items:center;gap:14px;text-decoration:none;"
-           href="${WORKER}/api/public/documents/${encodeURIComponent(d.id)}/file" target="_blank" rel="noopener">
-          <span style="font-size:30px;">📄</span>
-          <span style="flex:1;">
-            <span class="doc-card-title" style="display:block;">${esc(d.title)}</span>
-            <span class="doc-card-meta">${d.closedAt ? 'підписано ' + fmt(d.closedAt) : ''}${d.signedCount ? ' · ' + d.signedCount + ' підписів' : ''}</span>
-          </span>
-          <span class="tile-cta">Відкрити →</span>
-        </a>`).join('');
+
+      const signing = docs.filter((d) => d.status !== 'signed');
+      const archive = docs.filter((d) => d.status === 'signed');
+
+      let html = '';
+      if (signing.length) {
+        html += sectionHtml('Зараз на підписанні', signing.length,
+          signing.map((d) => card(d, '📝', 'Відкрити PDF →', progressText(d))).join(''));
+      }
+      if (archive.length) {
+        html += sectionHtml('Опубліковані документи', archive.length,
+          archive.map((d) => card(d, '📄', 'Відкрити →',
+            `${d.closedAt ? 'підписано ' + fmt(d.closedAt) : ''}${d.signedCount ? ' · ' + d.signedCount + ' підписів' : ''}`)).join(''));
+      }
+      $('#list').innerHTML = html;
     } catch (e) {
       $('#loading').classList.add('hidden');
       $('#list').innerHTML = `<div class="banner banner-error"><span class="banner-icon">!</span><div>Не вдалося завантажити список документів.</div></div>`;

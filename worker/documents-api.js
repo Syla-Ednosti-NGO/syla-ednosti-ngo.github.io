@@ -267,15 +267,17 @@ async function servePdfByToken(token, env, cors) {
 
 async function listPublic(env, cors) {
   const { results } = await env.DB.prepare(
-    `SELECT d.id, d.title, d.closed_at,
+    `SELECT d.id, d.title, d.status, d.mode, d.required_count, d.closed_at, d.created_at,
             (SELECT COUNT(*) FROM signatures s WHERE s.document_id = d.id) AS signed_count
      FROM documents d
-     WHERE d.published = 1 AND d.status = 'signed'
-     ORDER BY d.closed_at DESC`
+     WHERE d.published = 1
+     ORDER BY d.created_at DESC`
   ).all();
   return json({
     documents: (results || []).map(d => ({
-      id: d.id, title: d.title, closedAt: d.closed_at, signedCount: d.signed_count,
+      id: d.id, title: d.title, status: d.status, mode: d.mode,
+      requiredCount: d.required_count, closedAt: d.closed_at,
+      createdAt: d.created_at, signedCount: d.signed_count,
     })),
   }, 200, cors);
 }

@@ -58,6 +58,12 @@ const STATUS = {
   signed: { label: 'Підписаний', cls: 'pill-signed' },
 };
 
+/* label for the portal-visibility toggle (works for both in-progress and signed docs) */
+function portalLabel(doc) {
+  if (doc.status === 'signed') return doc.published ? 'Зняти з порталу' : 'Опублікувати';
+  return doc.published ? 'Сховати з порталу' : 'Показати на порталі';
+}
+
 /* ===== bootstrap ===== */
 async function boot() {
   if (!TOKEN || !WORKER) return authFail();
@@ -174,7 +180,7 @@ function renderCard(doc) {
       <button type="button" class="btn btn-ghost" data-act="toggle-sigs">Підписи (${doc.signedCount})</button>
       <button type="button" class="btn btn-accent" data-act="download">⬇ Підписаний PDF</button>
       ${doc.status !== 'signed' ? `<button type="button" class="btn btn-ghost" data-act="close">Завершити збір</button>` : ''}
-      ${doc.status === 'signed' ? `<button type="button" class="btn btn-ghost" data-act="publish">${doc.published ? 'Зняти з порталу' : 'Опублікувати'}</button>` : ''}
+      <button type="button" class="btn btn-ghost" data-act="publish">${portalLabel(doc)}</button>
       <button type="button" class="btn btn-danger" data-act="delete">Видалити</button>
     </div>
 
@@ -236,7 +242,7 @@ async function togglePublish(doc) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ published: !doc.published }),
   });
-  if (res.ok) { toast(doc.published ? 'Знято з порталу' : '✓ Опубліковано'); loadDocs(); }
+  if (res.ok) { toast(doc.published ? 'Прибрано з порталу' : '✓ Показано на порталі'); loadDocs(); }
   else toast('Не вдалося змінити', { error: true });
 }
 
