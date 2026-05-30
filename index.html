@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ГО «Сила Єдності»</title>
+<meta name="description" content="Громадська організація «Сила Єдності» — членство та документи організації.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <div class="app-title">
+      <span class="brand-mark">СИЛА&nbsp;ЄДНОСТІ</span>
+      <span class="app-sub">громадська організація</span>
+    </div>
+  </div>
+</header>
+
+<main class="landing">
+  <section class="hero">
+    <h1 class="hero-title">Громадська організація<br>«Сила Єдності»</h1>
+    <p class="hero-sub">Оберіть розділ нижче.</p>
+  </section>
+
+  <div class="tiles">
+    <a class="tile" href="membership-form/">
+      <div class="tile-icon" aria-hidden="true">📝</div>
+      <div class="tile-body">
+        <h2 class="tile-title">Вступ до організації</h2>
+        <p class="tile-text">Заповніть заяву на членство — покроково, з підписом, і надішліть на пошту організації.</p>
+      </div>
+      <span class="tile-cta">Подати заяву →</span>
+    </a>
+
+    <a class="tile" href="documents/">
+      <div class="tile-icon" aria-hidden="true">📄</div>
+      <div class="tile-body">
+        <h2 class="tile-title">Документи та протоколи</h2>
+        <p class="tile-text">Протоколи й документи, пов'язані з діяльністю організації, та їх підписання.</p>
+      </div>
+      <span class="tile-cta">Перейти →</span>
+    </a>
+  </div>
+</main>
+
+<footer class="landing-footer">
+  <span>© <span id="year"></span> ГО «Сила Єдності»</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

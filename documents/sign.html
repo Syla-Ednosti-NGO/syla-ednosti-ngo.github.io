@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Підписання документа — ГО «Сила Єдності»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/documents.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand-mark" href="../">СИЛА&nbsp;ЄДНОСТІ</a>
+    <span class="app-sub">підписання документа</span>
+  </div>
+</header>
+
+<main class="doc-shell">
+
+  <!-- Loading -->
+  <div id="loading" class="loading-screen">
+    <span class="spinner"></span>
+    <span>Завантаження документа…</span>
+  </div>
+
+  <!-- Invalid / closed -->
+  <div id="closed-view" class="hidden">
+    <h1 class="doc-title" id="closed-title">Документ</h1>
+    <div class="banner banner-signed" id="closed-banner">
+      <span class="banner-icon">✓</span>
+      <div>
+        <strong>Збір підписів завершено.</strong><br>
+        Цей документ більше не приймає нові підписи.
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign form -->
+  <div id="form-view" class="hidden">
+    <h1 class="doc-title" id="doc-title">Документ</h1>
+    <p class="progress-hint" id="progress-hint"></p>
+
+    <div class="section-label">Документ для ознайомлення</div>
+    <iframe id="pdf-viewer" class="pdf-viewer" title="Документ"></iframe>
+    <a id="pdf-open" class="pdf-open-link" target="_blank" rel="noopener">↗ Відкрити PDF у новій вкладці</a>
+
+    <div class="section-label">Ваші дані</div>
+    <div class="grid-2">
+      <div class="q">
+        <label class="q-label" for="lastName">Прізвище</label>
+        <input type="text" id="lastName" class="big-input" autocomplete="family-name" placeholder="Іваненко">
+        <div class="field-error" data-error-for="lastName"></div>
+      </div>
+      <div class="q">
+        <label class="q-label" for="firstName">Ім'я</label>
+        <input type="text" id="firstName" class="big-input" autocomplete="given-name" placeholder="Олена">
+        <div class="field-error" data-error-for="firstName"></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="q">
+        <label class="q-label" for="middleName">По батькові</label>
+        <input type="text" id="middleName" class="big-input" autocomplete="additional-name" placeholder="Петрівна">
+      </div>
+      <div class="q">
+        <label class="q-label" for="signDate">Дата підпису</label>
+        <input type="date" id="signDate" class="big-input">
+      </div>
+    </div>
+
+    <div class="section-label">Ваш підпис</div>
+    <p class="page-hint">Підпишіться пальцем, мишею або сфотографуйте підпис на білому аркуші.</p>
+
+    <div class="sig-widget" id="sigWidget">
+      <div class="sig-tabs" role="tablist">
+        <button type="button" class="sig-tab active" data-sig-tab="draw" role="tab">✍️ Намалювати</button>
+        <button type="button" class="sig-tab" data-sig-tab="photo" role="tab">📷 Сфотографувати</button>
+      </div>
+      <div class="sig-panel active" data-sig-panel="draw">
+        <div class="sig-canvas-wrap">
+          <canvas class="signature-canvas"></canvas>
+          <div class="sig-placeholder">Підпишіться тут</div>
+        </div>
+        <div class="sig-actions">
+          <button type="button" class="btn-link btn-clear-sig">✕ Очистити</button>
+        </div>
+      </div>
+      <div class="sig-panel" data-sig-panel="photo">
+        <label class="sig-upload-btn">
+          <span class="sig-upload-icon">📷</span>
+          <span class="sig-upload-text">Обрати або зробити фото</span>
+          <input type="file" class="sig-photo-input" accept="image/*" capture="environment" hidden>
+        </label>
+        <div class="sig-preview-wrap hidden">
+          <img class="sig-preview" alt="Підпис">
+          <button type="button" class="btn-link btn-clear-photo">✕ Видалити та обрати інше</button>
+        </div>
+      </div>
+    </div>
+    <div class="field-error" data-error-for="signature"></div>
+
+    <button type="button" id="btn-submit" class="btn btn-primary btn-big" style="margin-top:20px;">
+      Підписати документ
+    </button>
+  </div>
+
+  <!-- Success -->
+  <div id="done-view" class="hidden">
+    <div class="done-screen">
+      <div class="done-check">✓</div>
+      <h1 class="doc-title" style="margin-bottom:8px;">Підпис надіслано!</h1>
+      <p class="muted">Дякуємо. Ваш підпис збережено.</p>
+    </div>
+  </div>
+
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="signature.js"></script>
+<script src="sign.js"></script>
+</body>
+</html>

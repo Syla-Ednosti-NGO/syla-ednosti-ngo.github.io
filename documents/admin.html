@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Адміністрування документів — ГО «Сила Єдності»</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/documents.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand-mark" href="../">СИЛА&nbsp;ЄДНОСТІ</a>
+    <span class="app-sub">адміністрування документів</span>
+  </div>
+</header>
+
+<main class="doc-shell doc-shell-wide">
+
+  <div id="auth-loading" class="loading-screen">
+    <span class="spinner"></span>
+    <span>Перевірка доступу…</span>
+  </div>
+
+  <div id="auth-error" class="hidden">
+    <div class="banner banner-error">
+      <span class="banner-icon">!</span>
+      <div>
+        <strong>Доступ заборонено.</strong><br>
+        Відкрийте адмін-панель за повним секретним посиланням виду
+        <code>admin.html#k=ВАШ_ТОКЕН</code>.
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-view" class="hidden">
+    <div class="admin-toolbar">
+      <h1 style="margin:0;font-size:24px;">Документи</h1>
+      <button type="button" id="btn-new" class="btn btn-primary">+ Новий документ</button>
+    </div>
+    <div id="doc-list"></div>
+    <div id="empty" class="empty-state hidden">
+      <div class="empty-state-icon">📄</div>
+      <p>Ще немає документів.<br>Натисніть «Новий документ», щоб завантажити перший протокол.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- New document modal -->
+<div id="newModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <h2>Новий документ</h2>
+
+    <div class="q">
+      <label class="q-label" for="m-title">Назва документа</label>
+      <input type="text" id="m-title" class="big-input" placeholder="Протокол №1 загальних зборів">
+      <div class="field-error" data-error-for="m-title"></div>
+    </div>
+
+    <div class="q">
+      <label class="q-label">PDF-файл документа</label>
+      <label class="file-drop" id="m-drop">
+        <span id="m-drop-text">📎 Обрати PDF-файл</span>
+        <input type="file" id="m-file" accept="application/pdf,.pdf" hidden>
+      </label>
+      <div class="field-error" data-error-for="m-file"></div>
+    </div>
+
+    <div class="q">
+      <label class="q-label">Скільки підписів потрібно?</label>
+      <div class="radio-card-row">
+        <label class="radio-card active" data-mode="fixed">
+          <input type="radio" name="m-mode" value="fixed" checked>
+          <div>
+            <div class="radio-card-title">Фіксована кількість</div>
+            <div class="radio-card-desc">Документ стане «Підписаним» автоматично, коли набереться задана кількість підписів.</div>
+          </div>
+        </label>
+        <label class="radio-card" data-mode="open">
+          <input type="radio" name="m-mode" value="open">
+          <div>
+            <div class="radio-card-title">Відкрита (закрию вручну)</div>
+            <div class="radio-card-desc">Збір триває, поки ви не натиснете «Завершити збір». Підписати може будь-яка кількість людей.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="q" id="m-count-wrap">
+      <label class="q-label" for="m-count">Кількість підписів</label>
+      <input type="number" id="m-count" class="big-input" min="1" max="100" value="2" style="max-width:140px;">
+      <div class="field-error" data-error-for="m-count"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="m-cancel">Скасувати</button>
+      <button type="button" class="btn btn-primary" id="m-create">Створити</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden host for rendering the signature sheet to an image -->
+<div id="sheetHost" aria-hidden="true" style="position:fixed;left:-10000px;top:0;"></div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

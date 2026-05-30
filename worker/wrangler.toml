@@ -1,0 +1,25 @@
+name = "documents-api"
+main = "documents-api.js"
+compatibility_date = "2024-10-01"
+
+[vars]
+# Origins allowed to call this API (comma-separated). Add your custom domain here later.
+ALLOWED_ORIGINS = "https://syla-ednosti-ngo.github.io,http://127.0.0.1:8765,http://localhost:8765"
+
+# D1 database binding.
+# Create once:  wrangler d1 create documents-db
+# then paste the printed database_id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "documents-db"
+database_id = "1fc1261b-3596-4c96-97d0-a5345e05122b"
+
+# R2 bucket binding (stores original PDFs + signature images).
+# Create once:  wrangler r2 bucket create documents-files
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "documents-files"
+
+# ADMIN_TOKEN is a secret — the value that unlocks the admin panel.
+# Set with:  wrangler secret put ADMIN_TOKEN
+# (generate a long random string; that string goes into the admin link as #k=...)

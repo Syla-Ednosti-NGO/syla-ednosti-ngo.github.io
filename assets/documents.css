@@ -1,0 +1,160 @@
+/* ===== Documents portal (sign + admin + index) ===== */
+
+.doc-shell { max-width: 760px; margin: 0 auto; padding: 24px 20px 90px; }
+.doc-shell-wide { max-width: 1000px; }
+
+.doc-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.doc-title { font-size: 24px; margin: 0; }
+
+/* PDF viewer */
+.pdf-viewer {
+  width: 100%;
+  height: 60vh;
+  min-height: 360px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  background: var(--gray-100);
+}
+.pdf-open-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.section-label {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 28px 0 12px;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Closed / status banners */
+.banner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: var(--r);
+  margin: 16px 0;
+  font-size: 15px;
+}
+.banner-icon { font-size: 22px; line-height: 1; }
+.banner-signed { background: #E7F6EE; color: #1d6e40; border: 1px solid #B9E3CB; }
+.banner-info { background: var(--yellow-soft); color: #6b5800; border: 1px solid #F0DD8E; }
+.banner-error { background: #FDECEC; color: #9b2222; border: 1px solid #F3C2C2; }
+
+.progress-hint { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
+
+/* Success screen */
+.done-screen { text-align: center; padding: 40px 16px; }
+.done-check {
+  width: 72px; height: 72px; margin: 0 auto 18px;
+  border-radius: 50%; background: #E7F6EE; color: var(--green);
+  display: flex; align-items: center; justify-content: center; font-size: 38px;
+}
+
+/* ===== Admin ===== */
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+
+.doc-card {
+  background: var(--paper);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-l);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 14px;
+}
+.doc-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.doc-card-title { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--navy); margin: 0; }
+.doc-card-meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.doc-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.doc-card-actions .btn { padding: 8px 12px; font-size: 13.5px; }
+
+.progress-bar { height: 8px; background: var(--gray-100); border-radius: 999px; overflow: hidden; margin-top: 12px; }
+.progress-bar > span { display: block; height: 100%; background: var(--green); border-radius: 999px; transition: width 240ms ease; }
+
+.copy-row { display: flex; gap: 8px; margin-top: 12px; }
+.copy-row input {
+  flex: 1; font-size: 13px; padding: 9px 11px;
+  border: 2px solid var(--gray-200); border-radius: var(--r); background: var(--gray-50); color: var(--muted);
+}
+
+/* signatures list */
+.sig-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 10px; }
+.sig-cell { border: 1px solid var(--gray-200); border-radius: var(--r); padding: 10px 12px; background: var(--gray-50); }
+.sig-cell-name { font-weight: 700; color: var(--navy); font-size: 14px; }
+.sig-cell-date { color: var(--muted); font-size: 12.5px; margin-bottom: 6px; }
+.sig-cell-img { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--r-s); height: 70px; display: flex; align-items: center; justify-content: center; }
+.sig-cell-img img { max-height: 64px; max-width: 100%; }
+
+.empty-state { text-align: center; color: var(--muted); padding: 50px 20px; }
+.empty-state-icon { font-size: 44px; margin-bottom: 10px; }
+
+/* modal */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(15,26,46,.45);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 16px; z-index: 50; overflow-y: auto;
+}
+.modal {
+  background: var(--paper); border-radius: var(--r-l);
+  width: 100%; max-width: 480px; padding: 24px; box-shadow: var(--shadow);
+}
+.modal h2 { margin: 0 0 16px; font-size: 20px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+
+.radio-card-row { display: grid; gap: 10px; }
+.radio-card {
+  display: flex; gap: 10px; align-items: flex-start;
+  border: 2px solid var(--gray-200); border-radius: var(--r); padding: 12px 14px; cursor: pointer;
+}
+.radio-card.active { border-color: var(--navy); background: var(--yellow-soft); }
+.radio-card input { margin-top: 3px; }
+.radio-card-title { font-weight: 700; color: var(--navy); font-size: 14.5px; }
+.radio-card-desc { color: var(--muted); font-size: 13px; }
+
+.file-drop {
+  border: 2px dashed var(--gray-300); border-radius: var(--r);
+  padding: 22px; text-align: center; cursor: pointer; color: var(--muted);
+}
+.file-drop:hover { border-color: var(--blue-mid); }
+.file-drop.has-file { border-style: solid; border-color: var(--green); color: var(--navy); }
+
+.sig-list-wrap { margin-top: 14px; border-top: 1px dashed var(--gray-200); padding-top: 12px; }
+
+/* ===== Signature sheet (rendered to image, appended to PDF) ===== */
+.sheet {
+  width: 794px;
+  min-height: 1123px;
+  background: #fff;
+  color: #0F1A2E;
+  padding: 60px 56px;
+  box-sizing: border-box;
+  font-family: 'Manrope', system-ui, sans-serif;
+}
+.sheet-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: #6E7380; }
+.sheet-org { font-weight: 600; }
+.sheet-title {
+  font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 30px;
+  text-align: center; margin: 44px 0 6px; letter-spacing: .05em; color: #1A2B4A;
+}
+.sheet-subtitle { text-align: center; font-size: 16px; margin-bottom: 34px; }
+.sheet-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.sheet-table th, .sheet-table td { border: 1px solid #C3CAD4; padding: 10px 12px; vertical-align: middle; }
+.sheet-table th { background: #F7F8FA; font-weight: 700; text-align: left; }
+.sheet-num { width: 44px; text-align: center; }
+.sheet-fio { }
+.sheet-date { width: 116px; }
+.sheet-sig { width: 200px; height: 84px; text-align: center; }
+.sheet-sig img { max-height: 72px; max-width: 188px; }
+.sheet-empty { text-align: center; color: #6E7380; padding: 30px; }

@@ -1,0 +1,7 @@
+node_modules/
+worker/.wrangler/
+worker/node_modules/
+.DS_Store
+*.log
+.dev.vars
+_secret.json

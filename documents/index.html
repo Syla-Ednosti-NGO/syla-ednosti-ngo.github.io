@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Документи та протоколи — ГО «Сила Єдності»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/documents.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="brand-mark" href="../">СИЛА&nbsp;ЄДНОСТІ</a>
+    <span class="app-sub">документи та протоколи</span>
+  </div>
+</header>
+
+<main class="doc-shell">
+  <h1 style="margin-top:8px;">Документи та протоколи</h1>
+  <p class="page-hint">Опубліковані документи організації. Натисніть, щоб відкрити PDF.</p>
+
+  <div id="loading" class="loading-screen">
+    <span class="spinner"></span>
+    <span>Завантаження…</span>
+  </div>
+
+  <div id="list"></div>
+
+  <div id="empty" class="empty-state hidden">
+    <div class="empty-state-icon">📂</div>
+    <p>Поки немає опублікованих документів.</p>
+  </div>
+</main>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  const WORKER = (window.DOCS_CONFIG && window.DOCS_CONFIG.WORKER_URL || '').replace(/\/+$/, '');
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  function fmt(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    const p = (n) => String(n).padStart(2, '0');
+    return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()}`;
+  }
+
+  async function load() {
+    try {
+      const res = await fetch(`${WORKER}/api/public/documents`);
+      const data = await res.json();
+      const docs = data.documents || [];
+      $('#loading').classList.add('hidden');
+      if (!docs.length) { $('#empty').classList.remove('hidden'); return; }
+      $('#list').innerHTML = docs.map((d) => `
+        <a class="doc-card" style="display:flex;align-items:center;gap:14px;text-decoration:none;"
+           href="${WORKER}/api/public/documents/${encodeURIComponent(d.id)}/file" target="_blank" rel="noopener">
+          <span style="font-size:30px;">📄</span>
+          <span style="flex:1;">
+            <span class="doc-card-title" style="display:block;">${esc(d.title)}</span>
+            <span class="doc-card-meta">${d.closedAt ? 'підписано ' + fmt(d.closedAt) : ''}${d.signedCount ? ' · ' + d.signedCount + ' підписів' : ''}</span>
+          </span>
+          <span class="tile-cta">Відкрити →</span>
+        </a>`).join('');
+    } catch (e) {
+      $('#loading').classList.add('hidden');
+      $('#list').innerHTML = `<div class="banner banner-error"><span class="banner-icon">!</span><div>Не вдалося завантажити список документів.</div></div>`;
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>
