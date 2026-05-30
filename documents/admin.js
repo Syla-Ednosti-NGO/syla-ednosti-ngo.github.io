@@ -87,10 +87,58 @@ async function loadDocs() {
     const docs = data.documents || [];
     list.innerHTML = '';
     $('#empty').classList.toggle('hidden', docs.length > 0);
-    docs.forEach(doc => list.appendChild(renderCard(doc)));
+    if (!docs.length) return;
+
+    const active = docs.filter(d => d.status !== 'signed');
+    const done = docs.filter(d => d.status === 'signed');
+
+    list.appendChild(renderGroup({
+      key: 'active', title: 'Збір триває', docs: active,
+      emptyNote: 'Зараз немає документів у зборі.',
+    }));
+    if (done.length) {
+      list.appendChild(renderGroup({
+        key: 'done', title: 'Завершені', docs: done,
+        collapsible: true, collapsed: true,
+      }));
+    }
   } catch (e) {
     list.innerHTML = `<div class="banner banner-error"><span class="banner-icon">!</span><div>Не вдалося завантажити список: ${esc(e.message)}</div></div>`;
   }
+}
+
+function renderGroup({ key, title, docs, collapsible = false, collapsed = false, emptyNote = '' }) {
+  const section = document.createElement('section');
+  section.className = 'doc-group';
+  section.dataset.group = key;
+
+  const head = document.createElement(collapsible ? 'button' : 'div');
+  head.className = 'doc-group-head';
+  if (collapsible) {
+    head.type = 'button';
+    head.classList.add('doc-group-toggle');
+    head.setAttribute('aria-expanded', String(!collapsed));
+  }
+  head.innerHTML =
+    (collapsible ? '<span class="doc-group-chevron" aria-hidden="true">▸</span>' : '') +
+    `<span class="doc-group-title">${esc(title)}</span>` +
+    `<span class="doc-group-count">${docs.length}</span>`;
+  section.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'doc-group-body';
+  if (collapsible && collapsed) body.classList.add('hidden');
+  if (docs.length) docs.forEach(doc => body.appendChild(renderCard(doc)));
+  else if (emptyNote) body.innerHTML = `<div class="doc-group-empty muted">${esc(emptyNote)}</div>`;
+  section.appendChild(body);
+
+  if (collapsible) {
+    head.addEventListener('click', () => {
+      const hidden = body.classList.toggle('hidden');
+      head.setAttribute('aria-expanded', String(!hidden));
+    });
+  }
+  return section;
 }
 
 function renderCard(doc) {
