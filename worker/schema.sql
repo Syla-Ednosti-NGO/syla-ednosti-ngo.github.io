@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS documents (
   sign_token     TEXT NOT NULL UNIQUE,
   published      INTEGER NOT NULL DEFAULT 0,       -- 1 = visible on public portal
   created_at     TEXT NOT NULL,
-  closed_at      TEXT
+  closed_at      TEXT,
+  signed_pdf_key TEXT                               -- R2 key of the composed «signed» PDF (original + signature sheet); set when finalized
 );
 CREATE INDEX IF NOT EXISTS idx_documents_sign_token ON documents(sign_token);
 CREATE INDEX IF NOT EXISTS idx_documents_created ON documents(created_at);

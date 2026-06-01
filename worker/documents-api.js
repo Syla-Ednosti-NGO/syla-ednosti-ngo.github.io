@@ -25,6 +25,10 @@
  *     GET    /api/admin/documents/:id/file — original PDF bytes
  *     POST   /api/admin/documents/:id/close   — force status 'signed'
  *     POST   /api/admin/documents/:id/publish — body {published:bool}
+ *     POST   /api/admin/documents/:id/signed-pdf — store composed signed PDF (body: application/pdf)
+ *
+ * Note: /api/public/documents/:id/file serves the composed signed PDF once the
+ *       document is 'signed' and a signed_pdf_key exists; otherwise the original.
  */
 
 export default {
@@ -74,6 +78,7 @@ export default {
             if (seg[4] === 'file' && m === 'GET') return servePdfById(id, env, cors);
             if (seg[4] === 'close' && m === 'POST') return closeDoc(id, env, cors);
             if (seg[4] === 'publish' && m === 'POST') return publishDoc(id, request, env, cors);
+            if (seg[4] === 'signed-pdf' && m === 'POST') return putSignedPdf(id, request, env, cors);
           }
         }
       }
@@ -177,12 +182,29 @@ async function publishDoc(id, request, env, cors) {
   return json({ ok: true, published: !!published }, 200, cors);
 }
 
+/* Store the composed signed PDF (original + «Аркуш підписів»), built client-side
+   in the admin browser. The public portal serves it once the document is signed. */
+async function putSignedPdf(id, request, env, cors) {
+  const doc = await env.DB.prepare(`SELECT id FROM documents WHERE id = ?`).bind(id).first();
+  if (!doc) return json({ error: 'Документ не знайдено' }, 404, cors);
+
+  const buf = await request.arrayBuffer();
+  if (!buf || buf.byteLength === 0) return json({ error: 'Порожній файл' }, 400, cors);
+  const head = String.fromCharCode(...new Uint8Array(buf.slice(0, 5)));
+  if (!head.startsWith('%PDF')) return json({ error: 'Очікується PDF' }, 400, cors);
+
+  const key = `docs/${id}/signed.pdf`;
+  await env.BUCKET.put(key, buf, { httpMetadata: { contentType: 'application/pdf' } });
+  await env.DB.prepare(`UPDATE documents SET signed_pdf_key = ? WHERE id = ?`).bind(key, id).run();
+  return json({ ok: true }, 200, cors);
+}
+
 async function deleteDoc(id, env, cors) {
   const doc = await env.DB.prepare(`SELECT * FROM documents WHERE id = ?`).bind(id).first();
   if (!doc) return json({ error: 'Документ не знайдено' }, 404, cors);
 
   const { results } = await env.DB.prepare(`SELECT image_key FROM signatures WHERE document_id = ?`).bind(id).all();
-  const keys = [doc.pdf_key, ...(results || []).map(r => r.image_key)].filter(Boolean);
+  const keys = [doc.pdf_key, doc.signed_pdf_key, ...(results || []).map(r => r.image_key)].filter(Boolean);
   await Promise.all(keys.map(k => env.BUCKET.delete(k).catch(() => {})));
 
   await env.DB.prepare(`DELETE FROM signatures WHERE document_id = ?`).bind(id).run();
@@ -284,9 +306,13 @@ async function listPublic(env, cors) {
 
 async function servePublicPdf(id, env, cors) {
   const doc = await env.DB.prepare(
-    `SELECT pdf_key, pdf_name FROM documents WHERE id = ? AND published = 1`
+    `SELECT pdf_key, pdf_name, title, status, signed_pdf_key FROM documents WHERE id = ? AND published = 1`
   ).bind(id).first();
   if (!doc) return json({ error: 'Документ не знайдено' }, 404, cors);
+  // Once collection is finished, serve the composed signed PDF (with the signature sheet).
+  if (doc.status === 'signed' && doc.signed_pdf_key) {
+    return servePdf(doc.signed_pdf_key, `${doc.title} (підписаний).pdf`, env, cors);
+  }
   return servePdf(doc.pdf_key, doc.pdf_name, env, cors);
 }
 
@@ -324,6 +350,7 @@ function rowToDoc(d) {
     status: d.status,
     signToken: d.sign_token,
     published: !!d.published,
+    signedPdf: !!d.signed_pdf_key,
     signedCount: d.signed_count != null ? d.signed_count : 0,
     createdAt: d.created_at,
     closedAt: d.closed_at,

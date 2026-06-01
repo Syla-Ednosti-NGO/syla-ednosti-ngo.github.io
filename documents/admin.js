@@ -108,9 +108,31 @@ async function loadDocs() {
         collapsible: true, collapsed: true,
       }));
     }
+
+    // make sure every finished+published doc has its signed PDF stored for the portal
+    syncSignedPdfs(docs);
   } catch (e) {
     list.innerHTML = `<div class="banner banner-error"><span class="banner-icon">!</span><div>Не вдалося завантажити список: ${esc(e.message)}</div></div>`;
   }
+}
+
+/* Self-heal: a finished document that is public but whose signed PDF was never
+   stored (e.g. fixed-mode auto-closed while already published). Compose + upload. */
+async function syncSignedPdfs(docs) {
+  const gaps = (docs || []).filter(d => d.status === 'signed' && d.published && !d.signedPdf);
+  if (!gaps.length) return;
+  toast('Оновлюю підписані версії на порталі…', { ms: 4000 });
+  let ok = 0;
+  for (const doc of gaps) {
+    try {
+      const bytes = await composeSignedPdfBytes(doc);
+      await uploadSignedPdf(doc, bytes);
+      ok++;
+    } catch (e) {
+      console.error('signed-pdf sync failed', doc.id, e);
+    }
+  }
+  if (ok) toast('✓ Портал оновлено');
 }
 
 function renderGroup({ key, title, docs, collapsible = false, collapsed = false, emptyNote = '' }) {
@@ -232,17 +254,37 @@ async function fetchDetail(id) {
 async function closeDoc(doc) {
   if (!confirm(`Завершити збір підписів за «${doc.title}»? Документ стане «Підписаним» і більше не прийматиме підписи.`)) return;
   const res = await api(`/api/admin/documents/${doc.id}/close`, { method: 'POST' });
-  if (res.ok) { toast('✓ Збір завершено'); loadDocs(); }
-  else toast('Не вдалося завершити', { error: true });
+  if (!res.ok) { toast('Не вдалося завершити', { error: true }); return; }
+  toast('✓ Збір завершено');
+  // if it is already shown on the portal, refresh the public copy to the signed version
+  if (doc.published) {
+    try {
+      const bytes = await composeSignedPdfBytes({ ...doc, status: 'signed' });
+      await uploadSignedPdf(doc, bytes);
+    } catch (e) { console.error('signed-pdf refresh after close failed', e); }
+  }
+  loadDocs();
 }
 
 async function togglePublish(doc) {
+  const turningOn = !doc.published;
+  // Publishing a finished document → make sure the portal serves the signed version (with signatures).
+  if (turningOn && doc.status === 'signed') {
+    toast('Готуємо підписану версію…', { ms: 6000 });
+    try {
+      const bytes = await composeSignedPdfBytes(doc);
+      await uploadSignedPdf(doc, bytes);
+    } catch (e) {
+      toast('Не вдалося підготувати підписану версію: ' + e.message, { error: true, ms: 4000 });
+      return;
+    }
+  }
   const res = await api(`/api/admin/documents/${doc.id}/publish`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ published: !doc.published }),
+    body: JSON.stringify({ published: turningOn }),
   });
-  if (res.ok) { toast(doc.published ? 'Прибрано з порталу' : '✓ Показано на порталі'); loadDocs(); }
+  if (res.ok) { toast(turningOn ? '✓ Показано на порталі' : 'Прибрано з порталу'); loadDocs(); }
   else toast('Не вдалося змінити', { error: true });
 }
 
@@ -259,33 +301,56 @@ async function downloadSigned(btn, doc) {
   btn.disabled = true;
   btn.textContent = 'Готуємо…';
   try {
-    const [fileRes, detail] = await Promise.all([
-      api(`/api/admin/documents/${doc.id}/file`),
-      fetchDetail(doc.id),
-    ]);
-    if (!fileRes.ok) throw new Error('Не вдалося отримати PDF');
-    const origBytes = await fileRes.arrayBuffer();
-    const sigs = detail.signatures || [];
-
-    const images = await buildSheetImages(doc.title, sigs);
-
-    const { PDFDocument } = PDFLib;
-    const pdfDoc = await PDFDocument.load(origBytes);
-    const A4 = [595.28, 841.89];
-    for (const dataUrl of images) {
-      const img = await pdfDoc.embedJpg(dataUrl);
-      const page = pdfDoc.addPage(A4);
-      page.drawImage(img, { x: 0, y: 0, width: A4[0], height: A4[1] });
-    }
-    const out = await pdfDoc.save();
+    const out = await composeSignedPdfBytes(doc);
     downloadBlob(new Blob([out], { type: 'application/pdf' }), `${doc.title} (підписаний).pdf`);
     toast('✓ PDF завантажено');
+    // keep the public portal copy in sync when a finished doc is shown publicly
+    if (doc.status === 'signed' && doc.published) {
+      uploadSignedPdf(doc, out).catch((e) => console.error('signed-pdf sync failed', e));
+    }
   } catch (e) {
     console.error(e);
     toast('Помилка: ' + e.message, { error: true, ms: 4000 });
   } finally {
     btn.disabled = false;
     btn.textContent = original;
+  }
+}
+
+/* Compose the signed PDF (original + appended «Аркуш підписів») entirely in the
+   browser — html2canvas renders the Cyrillic sheet, pdf-lib appends it. Returns bytes. */
+async function composeSignedPdfBytes(doc) {
+  const [fileRes, detail] = await Promise.all([
+    api(`/api/admin/documents/${doc.id}/file`),
+    fetchDetail(doc.id),
+  ]);
+  if (!fileRes.ok) throw new Error('Не вдалося отримати PDF');
+  const origBytes = await fileRes.arrayBuffer();
+  const sigs = detail.signatures || [];
+
+  const images = await buildSheetImages(doc.title || detail.title, sigs);
+
+  const { PDFDocument } = PDFLib;
+  const pdfDoc = await PDFDocument.load(origBytes);
+  const A4 = [595.28, 841.89];
+  for (const dataUrl of images) {
+    const img = await pdfDoc.embedJpg(dataUrl);
+    const page = pdfDoc.addPage(A4);
+    page.drawImage(img, { x: 0, y: 0, width: A4[0], height: A4[1] });
+  }
+  return await pdfDoc.save();
+}
+
+/* Upload the composed signed PDF so the public portal can serve it (with signatures). */
+async function uploadSignedPdf(doc, bytes) {
+  const res = await api(`/api/admin/documents/${doc.id}/signed-pdf`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/pdf' },
+    body: bytes,
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error || `Помилка ${res.status}`);
   }
 }
 
