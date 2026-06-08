@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/vision.css">
+<link rel="stylesheet" href="../assets/vision-screens.css">
 </head>
 <body>
 
@@ -19,10 +20,9 @@
   </div>
 </header>
 
-<main class="vision-shell">
+<!-- ─── ВІЗИТКА ─── -->
+<div class="vwrap" style="padding-top:28px; padding-bottom:40px;">
   <a class="vision-back" href="index.html">← Усі учасники</a>
-
-  <!-- Візитівка -->
   <div class="visitka">
     <div class="visitka-ava" aria-label="Аватар Крістіни">К</div>
     <div class="visitka-body">
@@ -38,107 +38,321 @@
       </div>
     </div>
   </div>
+</div>
 
-  <p class="page-hint" style="margin:0 0 20px;">Ключові напрями, які Кріс хоче розвивати.</p>
 
-  <!-- 01 — split -->
-  <section class="screen">
-    <div class="screen-num">Напрям 01</div>
-    <h2 class="screen-title">Не «школа зброї», а наука</h2>
-    <div class="screen-split">
+<!-- ══════════════════════════════════════════════════════════
+     ЕКРАН 01 — ФІЛОСОФІЯ: «Не школа зброї, а наука»
+     ══════════════════════════════════════════════════════════ -->
+<section class="vscreen">
+  <div class="vs-deco" aria-hidden="true">01</div>
+  <div class="vscreen-inner">
+    <div class="vs-grid">
+
+      <!-- TEXT -->
       <div>
-        <p class="screen-why">Дрон — комплексна система й предмет науки. За керуванням стоять цілі дисципліни, а найважливіше — <em>розуміння, як це працює</em>, а не саме пілотування.</p>
-        <blockquote class="screen-quote">«Пілотування — це всього 5%, а то й 10% від загального. Найголовніше — розуміння, як саме це працює».</blockquote>
-      </div>
-      <div class="screen-visual">
-        <div class="splitbar"><div class="seg-a" style="width:10%">10%</div><div class="seg-b" style="width:90%">90%</div></div>
-        <div class="splitbar-cap">Пілотування ≈ 10% · Розуміння та інженерія ≈ 90% <i>(за оцінкою Кріс)</i></div>
-        <div class="chips">
-          <span class="chip">Фізика</span>
-          <span class="chip">Метеорологія</span>
-          <span class="chip">Хімія (акумулятори)</span>
-          <span class="chip">Зв'язок / радіо</span>
-          <span class="chip">Інженерія</span>
+        <div class="vs-kicker">Філософія</div>
+        <h2 class="vs-title">Не «школа зброї», а наука</h2>
+        <p class="vs-body">Дрон — не зброя, а складна технічна система й предмет науки. Навчитися «піднімати» апарат — лише вершина айсберга. Головне — розуміти, як він працює: від радіозв'язку та метеорології до хімії акумуляторів. Саме це Кріс хоче дати дітям — не навичку натискати стіки, а інженерне мислення.</p>
+        <blockquote class="vs-quote">«Пілотування — це всього 5–10&nbsp;%. Найголовніше — розуміння, як&nbsp;саме це працює».</blockquote>
+        <div class="vs-result">
+          <span class="vs-result-ic" aria-hidden="true">🎯</span>
+          <div><b>Результат:</b> діти сприймають дрон як науку й інженерію — і втягуються в технічні дисципліни (STEM), а не в мілітарний хайп.</div>
         </div>
       </div>
-    </div>
-    <div class="screen-result"><span aria-hidden="true">🎯</span><div><b>Результат:</b> діти сприймають дрон як науку й інженерію, а не зброю — і втягуються в технічні дисципліни (STEM).</div></div>
-  </section>
 
-  <!-- 02 — visual-led taxonomy -->
-  <section class="screen">
-    <div class="screen-num">Напрям 02</div>
-    <h2 class="screen-title">Різноманіття дронів і власний проєкт</h2>
-    <p class="screen-why">Світ безпілотних систем — це не лише FPV. Діти знайомляться з усім спектром і самостійно обирають, що саме хочуть розвивати.</p>
-    <div class="dtax">
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">🥽</span><div><h4>FPV</h4><p>Мультиротор, керований «від першої особи» через відеоокуляри; високоманеврений.</p></div></div>
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">🚁</span><div><h4>Квадрокоптери (DJI / Mavic)</h4><p>Стабільні й прості в керуванні; зйомка, моніторинг, навчання.</p></div></div>
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">✈️</span><div><h4>Літакового типу (fixed-wing)</h4><p>Нерухоме крило — більші дальність і час польоту.</p></div></div>
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">🔃</span><div><h4>VTOL / гібридні</h4><p>Вертикальний зліт як коптер + ефективний політ як літак.</p></div></div>
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">🤖</span><div><h4>Наземні (НРК)</h4><p>Наземні платформи: логістика, евакуація, розвідка.</p></div></div>
-      <div class="dtax-item"><span class="dtax-ic" aria-hidden="true">🌊</span><div><h4>Надводні / водні</h4><p>Безпілотні катери та апарати на воді.</p></div></div>
-    </div>
-    <blockquote class="screen-quote">«Школа має розвиватися так, щоб діти самі обрали проєкт — зібрати FPV, літак, чи придумати нову ідею».</blockquote>
-    <div class="screen-result"><span aria-hidden="true">🎯</span><div><b>Результат:</b> кожна дитина чи команда веде власний проєкт — від ідеї до збірки й випробування.</div></div>
-  </section>
+      <!-- VISUAL: ICEBERG INFOGRAPHIC -->
+      <div class="vs-visual">
+        <div class="iceberg-wrap">
+          <svg class="iceberg" viewBox="0 0 480 600" role="img" aria-label="Інфографіка-айсберг: пілотування — лише 10 відсотків над водою, 90 відсотків — інженерія під поверхнею">
+            <defs>
+              <linearGradient id="ig-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#CEDFEF"/>
+                <stop offset="100%" stop-color="#E6F0F8"/>
+              </linearGradient>
+              <linearGradient id="ig-sea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6AAED4"/>
+                <stop offset="60%" stop-color="#3A7FB5"/>
+                <stop offset="100%" stop-color="#1E5A8A"/>
+              </linearGradient>
+              <linearGradient id="ig-tip" x1=".3" y1="0" x2=".7" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#D6E8F4"/>
+              </linearGradient>
+              <linearGradient id="ig-mass" x1=".3" y1="0" x2=".7" y2="1">
+                <stop offset="0%" stop-color="#AED4EC"/>
+                <stop offset="50%" stop-color="#82BCD9"/>
+                <stop offset="100%" stop-color="#5EA3C6"/>
+              </linearGradient>
+            </defs>
 
-  <!-- 03 — split reversed, transfer diagram -->
-  <section class="screen">
-    <div class="screen-num">Напрям 03</div>
-    <h2 class="screen-title">Ветерани як наставники</h2>
-    <div class="screen-split rev">
-      <div class="screen-visual">
-        <div class="transfer">
-          <div class="tnode"><div class="ic" aria-hidden="true">🎖️</div><h4>Ветеран</h4></div>
-          <div class="tarrow">→<small>досвід · дисципліна · бойовий дух</small></div>
-          <div class="tnode"><div class="ic" aria-hidden="true">🧑‍🎓</div><h4>Підліток</h4></div>
+            <!-- SKY -->
+            <rect width="480" height="200" fill="url(#ig-sky)"/>
+
+            <!-- SUN -->
+            <circle cx="68" cy="56" r="32" fill="#FFD93D" opacity=".18"/>
+            <circle cx="68" cy="56" r="19" fill="#FFD93D" opacity=".38"/>
+            <circle cx="68" cy="56" r="9"  fill="#FFD93D" opacity=".55"/>
+
+            <!-- OCEAN -->
+            <rect y="200" width="480" height="400" fill="url(#ig-sea)"/>
+
+            <!-- WAVE LINES -->
+            <path d="M0,200 C24,191 48,191 72,200 C96,209 120,209 144,200 C168,191 192,191 216,200 C240,209 264,209 288,200 C312,191 336,191 360,200 C384,209 408,209 432,200 C456,191 480,191 480,200"
+                  fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+            <path d="M-12,207 C12,198 36,198 60,207 C84,216 108,216 132,207 C156,198 180,198 204,207 C228,216 252,216 276,207 C300,198 324,198 348,207 C372,216 396,216 420,207 C444,198 468,198 492,207"
+                  fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.5"/>
+
+            <!-- ICEBERG TIP (above water) — small, curved -->
+            <path d="M240,100
+                     C248,100 260,135 270,165
+                     C275,178 278,190 279,197 L280,200
+                     L200,200 L201,197
+                     C202,190 205,178 210,165
+                     C220,135 232,100 240,100 Z"
+                  fill="url(#ig-tip)" stroke="#A6CBE2" stroke-width="1.5"/>
+
+            <!-- ICEBERG BODY (under water) — massive, curved -->
+            <path d="M200,200 L280,200
+                     C298,232 330,280 345,330
+                     C358,374 356,415 342,448
+                     C328,478 298,502 265,515
+                     C250,520 232,522 218,518
+                     C185,508 155,485 138,455
+                     C122,424 116,385 125,340
+                     C136,290 168,238 200,200 Z"
+                  fill="url(#ig-mass)" stroke="#6BA6C4" stroke-width="1.5" opacity=".8"/>
+
+            <!-- REFLECTION highlight on ice -->
+            <path d="M218,206 C213,240 204,290 202,340 C201,362 204,380 209,392"
+                  fill="none" stroke="rgba(255,255,255,.25)" stroke-width="4" stroke-linecap="round"/>
+
+            <!-- ─── ABOVE WATER: 10% LABEL ─── -->
+            <line x1="282" y1="155" x2="365" y2="132" stroke="#1A2B4A" stroke-width=".8" opacity=".3"/>
+            <circle cx="365" cy="132" r="3" fill="#1A2B4A" opacity=".35"/>
+            <text x="378" y="126" font-family="'Unbounded', sans-serif" font-weight="900" font-size="30" fill="#1A2B4A">10%</text>
+            <text x="378" y="148" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="#5A7A9A">пілотування</text>
+
+            <!-- ─── UNDER WATER: 90% LABEL ─── -->
+            <text x="240" y="370" text-anchor="middle" font-family="'Unbounded', sans-serif" font-weight="900" font-size="60" fill="#FFFFFF" opacity=".9">90%</text>
+            <text x="240" y="400" text-anchor="middle" font-family="'Manrope', sans-serif" font-weight="700" font-size="14" fill="rgba(255,255,255,.72)">інженерія · наука · розуміння</text>
+
+            <!-- ─── DISCIPLINE LABELS — LEFT SIDE ─── -->
+            <line x1="135" y1="298" x2="52" y2="278" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="52" cy="278" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="46" y="273" text-anchor="end" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Фізика</text>
+
+            <line x1="122" y1="365" x2="44" y2="348" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="44" cy="348" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="38" y="343" text-anchor="end" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Метеорологія</text>
+
+            <line x1="130" y1="432" x2="50" y2="422" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="50" cy="422" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="44" y="417" text-anchor="end" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Хімія</text>
+
+            <!-- ─── DISCIPLINE LABELS — RIGHT SIDE ─── -->
+            <line x1="340" y1="295" x2="420" y2="275" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="420" cy="275" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="430" y="270" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Радіозв'язок</text>
+
+            <line x1="348" y1="368" x2="422" y2="350" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="422" cy="350" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="432" y="345" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Інженерія</text>
+
+            <line x1="332" y1="440" x2="415" y2="428" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+            <circle cx="415" cy="428" r="2.5" fill="rgba(255,255,255,.45)"/>
+            <text x="425" y="423" font-family="'Manrope', sans-serif" font-weight="600" font-size="12.5" fill="rgba(255,255,255,.68)">Навігація</text>
+
+            <!-- DECORATIVE BUBBLES -->
+            <circle cx="178" cy="240" r="4.5" fill="rgba(255,255,255,.15)"/>
+            <circle cx="186" cy="228" r="2.5" fill="rgba(255,255,255,.1)"/>
+            <circle cx="300" cy="248" r="3.5" fill="rgba(255,255,255,.12)"/>
+            <circle cx="310" cy="236" r="2" fill="rgba(255,255,255,.08)"/>
+            <circle cx="165" cy="470" r="3.5" fill="rgba(255,255,255,.08)"/>
+            <circle cx="308" cy="478" r="4" fill="rgba(255,255,255,.08)"/>
+            <circle cx="255" cy="490" r="2.5" fill="rgba(255,255,255,.06)"/>
+            <circle cx="195" cy="320" r="2" fill="rgba(255,255,255,.06)"/>
+            <circle cx="290" cy="440" r="2" fill="rgba(255,255,255,.06)"/>
+          </svg>
+          <p class="iceberg-caption">Над водою — те, що бачать усі: пілотування. Під водою — справжня глибина: шість дисциплін, без яких дрон не полетить.</p>
         </div>
-        <div class="splitbar-cap" style="margin-top:12px;">Зворотний ефект: нова повага підлітків до ветеранів + їхня інтеграція в цивільне життя.</div>
       </div>
-      <div>
-        <p class="screen-why">У школі викладають ветерани — носії унікального досвіду. Вони передають не лише навички, а й дисципліну та силу духу (не для війни, а щоб «класно жити це життя»).</p>
-        <blockquote class="screen-quote">«Необхідно, щоб у цій школі працювали ветерани. Підлітки можуть подивитись на них іншими очима».</blockquote>
-      </div>
-    </div>
-    <div class="screen-result"><span aria-hidden="true">🎯</span><div><b>Результат:</b> підлітки переймають досвід і бачать ветеранів по-новому; ветерани відчувають потрібність.</div></div>
-  </section>
 
-  <!-- 04 — flow -->
-  <section class="screen">
-    <div class="screen-num">Напрям 04</div>
-    <h2 class="screen-title">Як навчаємо і з чого почнемо</h2>
-    <p class="screen-why">Подача — у живому, «грайливому» тоні: теорію одразу підкріплюємо практикою. Старт — невеликий тестовий курс (MVP), далі масштабування; з рівним залученням хлопців і дівчат.</p>
-    <div class="flow">
-      <div class="flow-step"><div class="ic" aria-hidden="true">📚</div><h4>Теорія</h4><p>коротко й цікаво</p></div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step"><div class="ic" aria-hidden="true">🎮</div><h4>Практика й симулятори</h4><p>одразу «руками»</p></div>
-      <div class="flow-arrow" aria-hidden="true">→</div>
-      <div class="flow-step"><div class="ic" aria-hidden="true">🛠️</div><h4>Власний проєкт</h4><p>збірка й випробування</p></div>
     </div>
-    <div class="chips">
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ЕКРАН 02 — КРУГОЗІР: «Не лише FPV»
+     ══════════════════════════════════════════════════════════ -->
+<section class="vscreen alt">
+  <div class="vs-deco" aria-hidden="true">02</div>
+  <div class="vscreen-inner">
+    <div class="vs-kicker">Кругозір</div>
+    <h2 class="vs-title">Не лише FPV: цілий світ безпілотних систем</h2>
+    <p class="vs-body">Щоб діти могли свідомо обрати, що розвивати, вони мають побачити весь спектр — від маневрених FPV до наземних і водних апаратів. А далі — обрати власний напрям і вести проєкт.</p>
+
+    <div class="spectrum">
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">🥽</span>
+        <h4>FPV-дрони</h4>
+        <p>Мультиротор, керований «від першої особи» через відеоокуляри. Високоманеврений та швидкий.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">🚁</span>
+        <h4>Квадрокоптери</h4>
+        <p>Стабільні й прості в освоєнні. Зйомка, моніторинг, навчання — базовий клас.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">✈️</span>
+        <h4>Fixed-wing (літакові)</h4>
+        <p>Нерухоме крило — більша дальність і час польоту. Розвідка, картографія.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">🔃</span>
+        <h4>VTOL / гібриди</h4>
+        <p>Вертикальний зліт як коптер + ефективний політ як літак. Перспективний клас.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">🤖</span>
+        <h4>Наземні (НРК)</h4>
+        <p>Роботизовані платформи: логістика, евакуація, розвідка на рівні землі.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-ic" aria-hidden="true">🌊</span>
+        <h4>Водні / надводні</h4>
+        <p>Безпілотні катери та підводні апарати. Нове поле для інновацій і досліджень.</p>
+      </div>
+    </div>
+
+    <blockquote class="vs-quote">«Школа має розвиватися так, щоб діти самі обрали проєкт — зібрати FPV, літак чи придумати нову ідею».</blockquote>
+    <div class="vs-result">
+      <span class="vs-result-ic" aria-hidden="true">🎯</span>
+      <div><b>Результат:</b> кожна дитина чи команда веде власний проєкт — від ідеї до збірки й випробування.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ЕКРАН 03 — ЛЮДИ: «Ветерани — наставники й приклад»
+     ══════════════════════════════════════════════════════════ -->
+<section class="vscreen navy">
+  <div class="vs-deco" aria-hidden="true">03</div>
+  <div class="vscreen-inner">
+    <div class="vs-kicker">Люди</div>
+    <h2 class="vs-title">Ветерани — як наставники й приклад</h2>
+    <p class="vs-body">Унікальність школи — у викладачах. Ветерани передають не лише навички, а й дисципліну та силу духу. Це двосторонній обмін: підлітки переймають досвід, а ветерани повертаються до мирного життя через потрібну справу.</p>
+
+    <div class="exchange">
+      <div class="ex-node">
+        <div class="ex-circle" aria-hidden="true">🎖️</div>
+        <h4>Ветеран</h4>
+      </div>
+      <div class="ex-mid">
+        <div class="ex-flow"><span class="ar">→</span> досвід · дисципліна · бойовий дух</div>
+        <div class="ex-flow"><span class="ar">←</span> нова повага · сенс · інтеграція в мирне життя</div>
+      </div>
+      <div class="ex-node">
+        <div class="ex-circle" aria-hidden="true">🧑‍🎓</div>
+        <h4>Підліток</h4>
+      </div>
+    </div>
+
+    <blockquote class="vs-quote">«Підлітки можуть подивитись на ветеранів іншими очима — побачити в них особливих і цікавих людей».</blockquote>
+    <div class="vs-result">
+      <span class="vs-result-ic" aria-hidden="true">🎯</span>
+      <div><b>Результат:</b> підлітки переймають досвід і бачать ветеранів по-новому; ветерани відчувають потрібність і повертаються в суспільство.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ЕКРАН 04 — МЕТОД: «Від теорії — одразу до проєкту»
+     ══════════════════════════════════════════════════════════ -->
+<section class="vscreen cream">
+  <div class="vs-deco" aria-hidden="true">04</div>
+  <div class="vscreen-inner">
+    <div class="vs-kicker">Метод</div>
+    <h2 class="vs-title">Від теорії — одразу до власного проєкту</h2>
+    <p class="vs-body">Подача — жива, «грайлива»: мінімум сухої теорії, максимум практики. Старт — короткий тестовий курс (MVP), далі масштабування. Рівне залучення хлопців і дівчат.</p>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-dot">1</div>
+        <h4>Теорія</h4>
+        <p>Коротко й цікаво, без зубріння — основи аеродинаміки, радіо, електроніки</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">2</div>
+        <h4>Практика й симулятори</h4>
+        <p>Одразу «руками» — щоб відчути апарат і зрозуміти фізику на дотик</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">3</div>
+        <h4>Власний проєкт</h4>
+        <p>Збірка, програмування, випробування — від ідеї до робочого прототипу</p>
+      </div>
+    </div>
+
+    <div class="chips" style="margin-bottom:40px; justify-content:center;">
       <span class="chip">MVP: тестовий тиждень</span>
       <span class="chip">Хлопці й дівчата</span>
       <span class="chip">Партнери-виробники</span>
       <span class="chip">Відео від підрозділів</span>
     </div>
-    <blockquote class="screen-quote">«Я сприймаю дрони як цілу науку — і хотіла б, щоб діти теж бачили в цьому інженерні можливості».</blockquote>
-    <div class="screen-result"><span aria-hidden="true">🎯</span><div><b>Результат:</b> мотивовані діти, які лишаються в темі, бо одразу бачать сенс і практику.</div></div>
-  </section>
 
-  <div class="contrib-box">
-    <h3>🧭 Роль і внесок Кріс</h3>
-    <ul>
-      <li>Стратегічне бачення та концепція школи безпілотних систем.</li>
-      <li>Залучення ветеранів і вибудова партнерств.</li>
-      <li>Інженерно-науковий стрижень програми.</li>
-      <li>Як Голова організації — загальне керівництво напрямом.</li>
-    </ul>
+    <blockquote class="vs-quote">«Я сприймаю дрони як цілу науку — і хотіла б, щоб діти теж бачили в цьому інженерні можливості».</blockquote>
+    <div class="vs-result">
+      <span class="vs-result-ic" aria-hidden="true">🎯</span>
+      <div><b>Результат:</b> мотивовані діти, які лишаються в темі, бо одразу бачать сенс і практику.</div>
+    </div>
   </div>
+</section>
 
+
+<!-- ══════════════════════════════════════════════════════════
+     ЕКРАН 05 — РОЛЬ І ВНЕСОК
+     ══════════════════════════════════════════════════════════ -->
+<section class="vscreen navy">
+  <div class="vs-deco" aria-hidden="true">05</div>
+  <div class="vscreen-inner">
+    <div class="vs-kicker">Підсумок</div>
+    <h2 class="vs-title">Роль і внесок Кріс</h2>
+    <p class="vs-body">Що конкретно Крістіна привносить у проєкт як Голова організації та автор ідеї школи безпілотних систем.</p>
+
+    <div class="contrib-grid">
+      <div class="contrib-card">
+        <span class="contrib-icon" aria-hidden="true">🧭</span>
+        <h4>Стратегічне бачення</h4>
+        <p>Концепція школи як науково-інженерного простору, а не курсів «пілотування». Бачить ціль на роки вперед.</p>
+      </div>
+      <div class="contrib-card">
+        <span class="contrib-icon" aria-hidden="true">🤝</span>
+        <h4>Партнерства і люди</h4>
+        <p>Залучення ветеранів-наставників, зв'язок із виробниками дронів, формування команди однодумців.</p>
+      </div>
+      <div class="contrib-card">
+        <span class="contrib-icon" aria-hidden="true">⚙️</span>
+        <h4>Інженерний стрижень</h4>
+        <p>Науково-технічна основа програми: від фізики польоту до хімії акумуляторів — глибина замість поверхні.</p>
+      </div>
+      <div class="contrib-card">
+        <span class="contrib-icon" aria-hidden="true">👑</span>
+        <h4>Загальне керівництво</h4>
+        <p>Як Голова ГО — координація напрямів, прийняття рішень, представництво організації назовні.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vwrap" style="padding-top:28px; padding-bottom:18px;">
   <p class="vision-foot">Складено за голосовим записом Крістіни; цитати відредаговано для читабельності. Технічні блоки описують загальноприйняті категорії безпілотних систем і потребують фінальної вичитки фахівцем. Аватар — стилізований (генерується окремо).</p>
-</main>
+</div>
 
 <footer class="landing-footer"><span>© <span id="year"></span> ГО «Сила Єдності»</span></footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
