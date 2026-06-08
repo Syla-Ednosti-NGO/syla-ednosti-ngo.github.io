@@ -74,3 +74,57 @@
   .person-tiles { grid-template-columns: 1fr; }
   .vision-name { font-size: 24px; }
 }
+
+/* ===== research / product discovery ===== */
+.research-lead { font-size: 17px; line-height: 1.6; color: var(--navy); margin: 24px 0; background: var(--gray-50); border-left: 4px solid var(--yellow); padding: 16px 18px; border-radius: var(--r); }
+
+.seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+.seg { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; }
+.seg h3 { margin: 0 0 5px; font-size: 15px; }
+.seg p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
+
+.persona { background: var(--paper); border: 1px solid var(--gray-200); border-radius: var(--r-l); padding: 22px; box-shadow: var(--shadow-sm); margin-bottom: 18px; position: relative; overflow: hidden; }
+.persona::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--yellow); }
+.persona-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.persona-ava { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--f-display); font-weight: 900; font-size: 20px; display: flex; align-items: center; justify-content: center; flex: none; }
+.persona-name { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--navy); margin: 0; }
+.persona-tag { color: var(--muted); font-size: 13.5px; margin: 2px 0 0; }
+.persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+.persona-grid h4 { margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-family: var(--f-display); }
+.persona-grid ul { margin: 0 0 8px; padding-left: 18px; }
+.persona-grid li { font-size: 14px; line-height: 1.45; margin-bottom: 3px; }
+.persona-quote { grid-column: 1 / -1; border-left: 3px solid var(--yellow); background: var(--gray-50); padding: 10px 14px; border-radius: var(--r-s); font-style: italic; color: var(--navy); font-size: 14.5px; line-height: 1.5; }
+
+.empathy { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.empathy-cell { background: var(--paper); border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; }
+.empathy-cell h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--navy); font-family: var(--f-display); }
+.empathy-cell ul { margin: 0; padding-left: 18px; }
+.empathy-cell li { font-size: 14px; line-height: 1.5; margin-bottom: 5px; }
+.empathy-cell.pain { background: #FDECEC; border-color: #F3C2C2; }
+.empathy-cell.gain { background: #E7F6EE; border-color: #B9E3CB; }
+
+.pg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.pg { border-radius: var(--r); padding: 16px 18px; border: 1px solid var(--gray-200); }
+.pg.pains { background: #FDECEC; border-color: #F3C2C2; }
+.pg.gains { background: #E7F6EE; border-color: #B9E3CB; }
+.pg h3 { margin: 0 0 10px; font-size: 16px; }
+.pg ul { margin: 0; padding-left: 18px; }
+.pg li { font-size: 14.5px; line-height: 1.5; margin-bottom: 6px; }
+
+.jtbd { background: var(--gray-50); border-left: 4px solid var(--navy); border-radius: var(--r-s); padding: 12px 16px; margin-bottom: 10px; font-size: 15px; line-height: 1.55; }
+
+.vp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.vp { background: var(--paper); border: 1px solid var(--gray-200); border-radius: var(--r-l); padding: 20px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+.vp::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--yellow); }
+.vp h3 { margin: 4px 0 10px; font-size: 17px; }
+.vp ul { margin: 0; padding-left: 18px; }
+.vp li { font-size: 14.5px; line-height: 1.5; margin-bottom: 6px; }
+
+/* pull quotes on participant pages */
+.quotes { margin-top: 8px; }
+.pull-quote { border-left: 4px solid var(--yellow); background: var(--gray-50); padding: 12px 16px; border-radius: var(--r-s); margin: 0 0 12px; font-size: 15.5px; line-height: 1.55; color: var(--navy); font-style: italic; }
+.pull-quote span { display: block; margin-top: 5px; font-style: normal; font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 620px) {
+  .seg-grid, .persona-grid, .empathy, .pg-grid, .vp-grid { grid-template-columns: 1fr; }
+}
