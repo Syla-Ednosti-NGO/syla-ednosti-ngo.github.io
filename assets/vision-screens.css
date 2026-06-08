@@ -414,6 +414,138 @@
   margin: 0;
 }
 
+/* ========================================
+   QUOTES GRID (extra quotes screen)
+   ======================================== */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 40px;
+}
+.quotes-grid .big-quote:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.big-quote {
+  background: var(--paper);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-l);
+  padding: 40px 36px 36px;
+  margin: 0;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: transform 180ms ease, box-shadow 220ms ease;
+}
+.big-quote:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.bq-mark {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--yellow);
+  position: absolute;
+  top: 12px;
+  left: 28px;
+  opacity: .5;
+  pointer-events: none;
+}
+.big-quote p {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--navy);
+  margin: 0;
+  font-weight: 500;
+  position: relative;
+}
+
+/* ========================================
+   AUDIENCE SPLIT (two-segment cards)
+   ======================================== */
+.audience-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 28px 0 48px;
+}
+.aud-card {
+  border-radius: var(--r-l);
+  padding: 40px 32px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.aud-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+}
+.aud-card.aud-cold {
+  background: #FDF5F0;
+  border: 2px solid #F0D5C2;
+}
+.aud-card.aud-cold::before { background: #E08A1E; }
+.aud-card.aud-warm {
+  background: #EEF8F2;
+  border: 2px solid #B9E3CB;
+}
+.aud-card.aud-warm::before { background: #2E9E5B; }
+.aud-card .aud-icon {
+  font-size: 44px;
+  margin-bottom: 18px;
+  display: block;
+}
+.aud-card h4 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--navy);
+  margin: 0 0 8px;
+}
+.aud-card .aud-tag {
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+.aud-card.aud-cold .aud-tag { color: #c0652a; }
+.aud-card.aud-warm .aud-tag { color: #1d6e40; }
+.aud-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.aud-card li {
+  font-size: 15.5px;
+  line-height: 1.65;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+/* pyramid / foundation SVG */
+.pyramid-wrap { text-align: center; }
+.pyramid {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 6px 24px rgba(26,43,74,.1));
+}
+.pyramid-caption {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin-top: 20px;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* --- old contrib box (keep for compat) --- */
 .contrib-box { padding: 24px 28px; margin-top: 32px; }
 
@@ -429,6 +561,8 @@
   .exchange { grid-template-columns: 1fr; gap: 24px; }
   .ex-circle { width: 120px; height: 120px; font-size: 52px; }
   .contrib-grid { grid-template-columns: 1fr; gap: 22px; }
+  .quotes-grid { grid-template-columns: 1fr; }
+  .audience-split { grid-template-columns: 1fr; gap: 22px; }
   .timeline { grid-template-columns: 1fr; gap: 36px; }
   .timeline::before { display: none; }
   .tl-dot { width: 90px; height: 90px; font-size: 30px; }
