@@ -1,0 +1,76 @@
+/* ===== Бачення розвитку (vision section) ===== */
+.vision-shell { max-width: 820px; margin: 0 auto; padding: 36px 20px 72px; }
+
+.vision-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--f-display); font-weight: 700; font-size: 13px;
+  color: var(--navy); text-decoration: none; letter-spacing: .02em; margin-bottom: 18px;
+}
+.vision-back:hover { text-decoration: underline; }
+
+.vision-head { margin-bottom: 6px; }
+.vision-name { font-size: 30px; margin: 0 0 10px; }
+.vision-role {
+  display: inline-block; background: var(--yellow-soft); color: #6b5800;
+  border: 1px solid #F0DD8E; border-radius: 999px; padding: 5px 13px;
+  font-size: 13px; font-weight: 600;
+}
+
+.vision-lead {
+  font-size: 18px; line-height: 1.55; color: var(--navy);
+  background: var(--gray-50); border-left: 4px solid var(--yellow);
+  padding: 16px 18px; border-radius: var(--r); margin: 24px 0 8px;
+}
+
+.vision-section { margin-top: 28px; }
+.vision-section h2 { font-size: 20px; margin: 0 0 14px; }
+
+.vision-list { list-style: none; padding: 0; margin: 0; }
+.vision-list li {
+  position: relative; padding-left: 26px; margin-bottom: 12px;
+  font-size: 15.5px; line-height: 1.5;
+}
+.vision-list li::before {
+  content: ""; position: absolute; left: 4px; top: 8px;
+  width: 9px; height: 9px; border-radius: 2px;
+  background: var(--yellow); box-shadow: 0 0 0 1.5px var(--navy);
+}
+
+.vision-foot {
+  margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--gray-200);
+  color: var(--muted); font-size: 13px;
+}
+
+/* ===== index ===== */
+.vision-intro {
+  background: var(--paper); border: 1px solid var(--gray-200);
+  border-radius: var(--r-l); padding: 22px 24px; box-shadow: var(--shadow-sm);
+  margin: 6px 0 28px; position: relative; overflow: hidden;
+}
+.vision-intro::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--yellow); }
+.vision-intro h2 { margin: 6px 0 10px; font-size: 20px; }
+.vision-intro p { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
+
+.person-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.person-tile {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--paper); border: 1px solid var(--gray-200);
+  border-radius: var(--r-l); padding: 22px 22px 20px;
+  text-decoration: none; color: var(--ink); box-shadow: var(--shadow-sm);
+  transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.person-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--navy); }
+.person-ava {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  font-family: var(--f-display); font-weight: 900; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.person-name { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--navy); margin: 0; }
+.person-role { color: var(--muted); font-size: 13.5px; margin: 3px 0 0; line-height: 1.4; }
+.person-cta { margin-top: auto; font-family: var(--f-display); font-weight: 700; font-size: 13px; color: var(--navy); letter-spacing: .02em; }
+
+@media (max-width: 620px) {
+  .person-tiles { grid-template-columns: 1fr; }
+  .vision-name { font-size: 24px; }
+}
