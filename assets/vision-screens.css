@@ -1073,6 +1073,99 @@
 .method-card--practice li::before { color: rgba(255,217,61,.4); }
 
 /* ========================================
+   VOICE GRID (shared vision — member perspectives)
+   ======================================== */
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 36px 0 0;
+}
+.voice-card {
+  background: #fff;
+  border: 1px solid rgba(26,43,74,.08);
+  border-radius: var(--r-l);
+  padding: 28px 26px 24px;
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
+  transition: transform 180ms ease, box-shadow 220ms ease;
+}
+.voice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(26,43,74,.1);
+}
+.voice-who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.voice-ava {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--yellow);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 16px;
+  color: #fff;
+}
+.voice-ava img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.voice-name {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  margin: 0;
+}
+.voice-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+.voice-card p.voice-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+}
+.voice-card blockquote {
+  border-left: 3px solid var(--yellow);
+  padding: 0 0 0 16px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-style: italic;
+}
+/* voice cards on navy */
+.vscreen.navy .voice-card {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: none;
+}
+.vscreen.navy .voice-card:hover { background: rgba(255,255,255,.1); }
+.vscreen.navy .voice-name { color: #fff; }
+.vscreen.navy .voice-label { color: rgba(255,255,255,.5); }
+.vscreen.navy .voice-card p.voice-text { color: #C8D6E4; }
+.vscreen.navy .voice-card blockquote { color: rgba(255,255,255,.55); }
+/* voice cards spanning full width when odd last */
+.voice-grid > .voice-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 900px) {
@@ -1096,6 +1189,7 @@
   .stair-4 { margin-left: 48px; }
   .freedom-grid { grid-template-columns: 1fr; }
   .balance-row { grid-template-columns: 1fr; }
+  .voice-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
   .spectrum { grid-template-columns: 1fr; }
