@@ -245,6 +245,35 @@
   border-color: rgba(26,43,74,.1);
 }
 
+/* cream overrides for components designed for navy bg */
+.vscreen.cream .contrib-card {
+  background: #fff;
+  border-color: rgba(26,43,74,.08);
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
+}
+.vscreen.cream .contrib-card:hover { background: #FAFAFA; }
+.vscreen.cream .contrib-card h4 { color: var(--navy); }
+.vscreen.cream .contrib-card p { color: #5A6E82; }
+
+.vscreen.cream .method-card {
+  background: #fff;
+  border-color: rgba(26,43,74,.08);
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
+}
+.vscreen.cream .method-card h4 { color: var(--navy); }
+.vscreen.cream .method-card--practice h4 { color: #7a5f00; }
+.vscreen.cream .method-card li { color: #5A6E82; }
+.vscreen.cream .method-card li::before { color: rgba(26,43,74,.25); }
+.vscreen.cream .method-card--practice li::before { color: rgba(122,95,0,.3); }
+
+.vscreen.cream .freedom-card {
+  background: #fff;
+  border-color: rgba(26,43,74,.08);
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
+}
+.vscreen.cream .freedom-card h4 { color: var(--navy); }
+.vscreen.cream .freedom-card p { color: #5A6E82; }
+
 /* ========================================
    SCREEN 01 — ICEBERG INFOGRAPHIC
    ======================================== */
@@ -606,6 +635,24 @@
   margin-bottom: 8px;
   color: var(--ink);
 }
+.aud-card p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* audience cards on navy bg */
+.vscreen.navy .aud-card.aud-cold {
+  background: rgba(253,245,240,.06);
+  border-color: rgba(240,213,194,.2);
+}
+.vscreen.navy .aud-card.aud-warm {
+  background: rgba(238,248,242,.06);
+  border-color: rgba(185,227,203,.2);
+}
+.vscreen.navy .aud-card h4 { color: #fff; }
+.vscreen.navy .aud-card p  { color: #B8CADB; }
 
 /* pyramid / foundation — HTML cards */
 .pyramid-wrap {
