@@ -246,15 +246,6 @@
 }
 
 /* cream overrides for components designed for navy bg */
-.vscreen.cream .contrib-card {
-  background: #fff;
-  border-color: rgba(26,43,74,.08);
-  box-shadow: 0 2px 12px rgba(26,43,74,.06);
-}
-.vscreen.cream .contrib-card:hover { background: #FAFAFA; }
-.vscreen.cream .contrib-card h4 { color: var(--navy); }
-.vscreen.cream .contrib-card p { color: #5A6E82; }
-
 .vscreen.cream .method-card {
   background: #fff;
   border-color: rgba(26,43,74,.08);
@@ -495,14 +486,15 @@
   margin: 36px 0 0;
 }
 .contrib-card {
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
+  background: #fff;
+  border: 1px solid rgba(26,43,74,.08);
   border-radius: var(--r-l);
   padding: 40px 32px 36px;
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
   transition: background 180ms ease, transform 180ms ease;
 }
 .contrib-card:hover {
-  background: rgba(255,255,255,.1);
+  background: #FAFAFA;
   transform: translateY(-4px);
 }
 .contrib-icon {
@@ -514,15 +506,24 @@
   font-family: var(--f-display);
   font-weight: 900;
   font-size: 20px;
-  color: #fff;
+  color: var(--navy);
   margin: 0 0 14px;
 }
 .contrib-card p {
   font-size: 16px;
   line-height: 1.7;
-  color: #B8CADB;
+  color: #5A6E82;
   margin: 0;
 }
+/* contrib cards on navy bg */
+.vscreen.navy .contrib-card {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: none;
+}
+.vscreen.navy .contrib-card:hover { background: rgba(255,255,255,.1); }
+.vscreen.navy .contrib-card h4 { color: #fff; }
+.vscreen.navy .contrib-card p { color: #B8CADB; }
 
 /* ========================================
    QUOTES GRID (extra quotes screen)
