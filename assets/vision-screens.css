@@ -722,6 +722,309 @@
 .contrib-box { padding: 24px 28px; margin-top: 32px; }
 
 /* ========================================
+   TWO PATHS (Tykhyy — wait vs accelerate)
+   ======================================== */
+.two-paths {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.path-card {
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+}
+.path-card--passive {
+  background: #F0F0F0;
+  border: 1px solid #E0E0E0;
+  opacity: .7;
+}
+.path-card--active {
+  background: linear-gradient(135deg, #1E3256, #142138);
+  border: 2px solid #FFD93D;
+  box-shadow: 0 8px 32px rgba(26,43,74,.18);
+}
+.path-icon { font-size: 36px; display: block; margin-bottom: 12px; }
+.path-card h4 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+.path-card--passive h4 { color: var(--muted); }
+.path-card--active h4  { color: #FFD93D; }
+.path-card p { font-size: 14px; line-height: 1.6; margin: 0; }
+.path-card--passive p { color: #888; }
+.path-card--active p  { color: rgba(255,255,255,.7); }
+.path-vs {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 14px 0;
+}
+
+/* ========================================
+   FREEDOM GRID (Tykhyy — 3 cards on navy)
+   ======================================== */
+.freedom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin: 40px 0 36px;
+}
+.freedom-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 26px 24px 22px;
+  text-align: center;
+}
+.freedom-icon { font-size: 30px; display: block; margin-bottom: 14px; }
+.freedom-card h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.freedom-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.6);
+  margin: 0;
+}
+
+/* ========================================
+   BALANCE ROW (Tykhyy — yes/no contrast)
+   ======================================== */
+.balance-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 40px 0 36px;
+}
+.balance-card {
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.balance-card--no {
+  background: rgba(220,53,69,.08);
+  border: 1px solid rgba(220,53,69,.25);
+}
+.balance-card--yes {
+  background: rgba(40,167,69,.08);
+  border: 1px solid rgba(40,167,69,.25);
+}
+.balance-mark {
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.balance-card--no .balance-mark { color: #DC3545; }
+.balance-card--yes .balance-mark { color: #28A745; }
+.balance-card p {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+  margin: 0;
+  color: var(--navy);
+}
+
+/* ========================================
+   STAIRCASE (Nedok — ascending steps)
+   ======================================== */
+.staircase-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.stair-step {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(26,43,74,.07);
+}
+.stair-1 {
+  background: linear-gradient(135deg, #E8F0F8, #D8E8F4);
+  margin-left: 0;
+}
+.stair-2 {
+  background: linear-gradient(135deg, #C4DFF0, #A8D0E8);
+  margin-left: 32px;
+}
+.stair-3 {
+  background: linear-gradient(135deg, #6AAED4, #4A96C0);
+  margin-left: 64px;
+  color: #fff;
+}
+.stair-4 {
+  background: linear-gradient(135deg, #1E3256, #142138);
+  margin-left: 96px;
+  color: #fff;
+}
+.stair-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 16px;
+  flex-shrink: 0;
+  border: 2px solid rgba(26,43,74,.15);
+  background: rgba(255,255,255,.15);
+  color: var(--navy);
+}
+.stair-3 .stair-num,
+.stair-4 .stair-num {
+  border-color: rgba(255,255,255,.3);
+  color: #fff;
+}
+.stair-4 .stair-num { border-color: #FFD93D; color: #FFD93D; }
+.stair-label {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 17px;
+  margin: 0 0 3px;
+}
+.stair-3 .stair-label,
+.stair-4 .stair-label { color: #fff; }
+.stair-4 .stair-label { color: #FFD93D; }
+.stair-sub {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  opacity: .6;
+}
+
+/* ========================================
+   LESSON GRID (Nedok — 8 lessons)
+   ======================================== */
+.lesson-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 40px;
+}
+.lesson-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 12px rgba(26,43,74,.06);
+  border: 1px solid rgba(26,43,74,.06);
+  position: relative;
+}
+.lesson-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.lesson-num--wide {
+  width: auto;
+  padding: 0 12px;
+  border-radius: 16px;
+}
+.lesson-num--gold {
+  background: #FFD93D;
+  color: var(--navy);
+}
+.lesson-card h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 6px;
+  color: var(--navy);
+}
+.lesson-card p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+.lesson-card--accent {
+  background: linear-gradient(135deg, #1E3256, #142138);
+  border-color: transparent;
+}
+.lesson-card--accent h4 { color: #FFD93D; }
+.lesson-card--accent p { color: rgba(255,255,255,.65); }
+
+/* ========================================
+   METHOD SPLIT (Nedok — theory vs practice)
+   ======================================== */
+.method-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0 36px;
+}
+.method-card {
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+}
+.method-card--theory {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+}
+.method-card--practice {
+  background: rgba(255,217,61,.08);
+  border: 1px solid rgba(255,217,61,.2);
+}
+.method-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+.method-card h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.method-card--practice h4 { color: #FFD93D; }
+.method-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.method-card li {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.7);
+  padding: 4px 0 4px 18px;
+  position: relative;
+}
+.method-card li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,.3);
+}
+.method-card--practice li::before { color: rgba(255,217,61,.4); }
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 900px) {
@@ -738,6 +1041,13 @@
   .timeline { grid-template-columns: 1fr; gap: 36px; }
   .timeline::before { display: none; }
   .tl-dot { width: 90px; height: 90px; font-size: 30px; }
+  .lesson-grid { grid-template-columns: 1fr; }
+  .method-split { grid-template-columns: 1fr; }
+  .stair-2 { margin-left: 16px; }
+  .stair-3 { margin-left: 32px; }
+  .stair-4 { margin-left: 48px; }
+  .freedom-grid { grid-template-columns: 1fr; }
+  .balance-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
   .spectrum { grid-template-columns: 1fr; }
@@ -745,4 +1055,7 @@
   .vs-deco { font-size: 100px; }
   .visitka { flex-direction: column; text-align: center; padding: 24px; }
   .traits { justify-content: center; }
+  .stair-step { padding: 14px 18px; gap: 14px; }
+  .stair-2, .stair-3, .stair-4 { margin-left: 0; }
+  .stair-label { font-size: 15px; }
 }
