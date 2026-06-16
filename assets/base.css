@@ -1,36 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap');
 /* ======================================================
    Об’єднані. Сильні. Разом! — shared base styles
    Design tokens + reset + shared UI components.
    Used by: landing, /documents/ (admin, sign, portal).
+   Brand identity: «Інженерний мінімалізм» (обрано 2026-06-17;
+   значення = brand/themes.css [data-theme="3"]).
    ====================================================== */
 
 :root {
-  --yellow: #FFD93D;
-  --yellow-soft: #FFF3B8;
-  --blue-light: #B7DCF5;
-  --blue-mid: #5BAFE0;
-  --navy: #1A2B4A;
-  --ink: #0F1A2E;
-  --muted: #6E7380;
-  --cream: #FFF8E1;
+  --yellow: #0F5BFF;          /* accent — electric blue */
+  --yellow-soft: #E8F0FF;
+  --blue-light: #E8F0FF;
+  --blue-mid: #0F5BFF;
+  --navy: #171A1F;            /* near-black brand */
+  --ink: #23272E;
+  --muted: #6B7280;
+  --cream: #F4F6F8;
   --paper: #FFFFFF;
-  --gray-50: #F7F8FA;
-  --gray-100: #EEF1F5;
-  --gray-200: #DDE2EA;
-  --gray-300: #C3CAD4;
-  --green: #2E9E5B;
-  --amber: #E08A1E;
-  --danger: #D33;
+  --gray-50: #F6F7F8;
+  --gray-100: #F0F1F3;
+  --gray-200: #E6E8EB;
+  --gray-300: #D3D7DC;
+  --green: #3BA776;
+  --amber: #C77B12;
+  --danger: #D23B3B;
 
-  --r: 10px;
-  --r-s: 6px;
-  --r-l: 16px;
+  --r: 8px;
+  --r-s: 4px;
+  --r-l: 14px;
 
-  --shadow-sm: 0 1px 2px rgba(15, 26, 46, .06);
-  --shadow: 0 6px 24px rgba(15, 26, 46, .10);
+  --shadow-sm: 0 1px 0 rgba(23, 26, 31, .04);
+  --shadow: 0 1px 2px rgba(23, 26, 31, .06), 0 0 0 1px rgba(23, 26, 31, .04);
 
-  --f-display: 'Unbounded', system-ui, sans-serif;
-  --f-body: 'Manrope', system-ui, -apple-system, sans-serif;
+  --f-display: 'Onest', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, -apple-system, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
