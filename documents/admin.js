@@ -389,7 +389,7 @@ function sheetHtml(title, sigs, startIndex, pageLabel) {
   return `
     <div class="sheet">
       <div class="sheet-head">
-        <div class="sheet-org">Громадська організація «Сила Єдності»</div>
+        <div class="sheet-org">Громадська організація «Об’єднані. Сильні. Разом!»</div>
         ${pageLabel ? `<div class="sheet-page">арк. ${pageLabel}</div>` : ''}
       </div>
       <div class="sheet-title">АРКУШ ПІДПИСІВ</div>

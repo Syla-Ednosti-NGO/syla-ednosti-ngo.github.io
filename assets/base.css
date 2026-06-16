@@ -1,5 +1,5 @@
 /* ======================================================
-   Сила Єдності — shared base styles
+   Об’єднані. Сильні. Разом! — shared base styles
    Design tokens + reset + shared UI components.
    Used by: landing, /documents/ (admin, sign, portal).
    ====================================================== */
@@ -81,6 +81,14 @@ a { color: inherit; }
   border-bottom: 1px dashed var(--gray-300);
 }
 .header-link:hover { border-bottom-style: solid; }
+/* Longer brand name «Об’єднані. Сильні. Разом!» — shrink on narrow screens */
+@media (max-width: 560px) {
+  .brand-mark { font-size: 15px; letter-spacing: 0.02em; }
+}
+@media (max-width: 430px) {
+  .brand-mark { font-size: 13.5px; }
+  .app-sub { display: none; }
+}
 
 /* ========= LAYOUT ========= */
 .wrap {

@@ -1,5 +1,5 @@
 /**
- * documents-api — Cloudflare Worker for the «Сила Єдності» document-signing system.
+ * documents-api — Cloudflare Worker for the «Об’єднані. Сильні. Разом!» document-signing system.
  *
  * Storage:
  *   - D1   (binding DB)     — documents + signatures metadata
