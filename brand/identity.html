@@ -582,7 +582,7 @@
   .em .grid{ position:absolute; inset:0; pointer-events:none;
     background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px);
     background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
-  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; }
+  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; text-shadow:0 1px 10px rgba(0,0,0,.45); }
   .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
   .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
   .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
@@ -615,8 +615,10 @@
   .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
   .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
   .em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
-  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,17,22,.55),rgba(14,17,22,.9)); }
-  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; }
+  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:
+    radial-gradient(70% 60% at 50% 46%, rgba(14,17,22,.72), transparent 100%),
+    linear-gradient(180deg, rgba(14,17,22,.6), rgba(14,17,22,.92)); }
+  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; margin:18px auto 0; color:#fff; text-shadow:0 2px 26px rgba(0,0,0,.7); }
   .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
   .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); padding:7px 14px; border-radius:100px; }
   .em .light{ background:var(--gray-50); color:var(--ink); }
@@ -1290,9 +1292,14 @@
   var lum=function(a){var f=function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};return .2126*f(a[0])+.7152*f(a[1])+.0722*f(a[2]);};
   var ratio=function(a,b){var L1=lum(a),L2=lum(b),hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+.05)/(lo+.05);};
   var effBg=function(el){var e=el;while(e&&e.nodeType===1){var s=getComputedStyle(e);var c=parse(s.backgroundColor);if(c&&c[3]>0)return [c[0],c[1],c[2]];e=e.parentElement;}return [255,255,255];};
-  function fix(root){ if(!root)return;
+  var hasImgBg=function(el,root){ var a=el; while(a&&a.nodeType===1){ var bi=getComputedStyle(a).backgroundImage; if(bi&&bi!=='none')return true; if(a===root)break; a=a.parentElement; } return false; };
+  /* Concepts authored with photo backgrounds are excluded — they set their own
+     correct colours; a luminance corrector can't see sibling/background images. */
+  var SKIP={c3:1};
+  function fix(root){ if(!root||SKIP[root.id])return;
     root.querySelectorAll('*').forEach(function(el){
       if(el.closest('svg'))return;
+      if(hasImgBg(el,root))return; /* can't judge luminance over an image — never auto-recolour */
       var t='';el.childNodes.forEach(function(n){if(n.nodeType===3)t+=n.textContent;});
       if(t.trim().length<2)return;
       var s=getComputedStyle(el);var fg=parse(s.color);if(!fg)return;

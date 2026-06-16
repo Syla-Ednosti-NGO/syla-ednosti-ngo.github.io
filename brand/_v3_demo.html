@@ -7,7 +7,7 @@
   .em .grid{ position:absolute; inset:0; pointer-events:none;
     background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px);
     background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
-  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; }
+  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; text-shadow:0 1px 10px rgba(0,0,0,.45); }
   .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
   .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
   .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
@@ -40,8 +40,10 @@
   .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
   .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
   .em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
-  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,17,22,.55),rgba(14,17,22,.9)); }
-  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; }
+  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:
+    radial-gradient(70% 60% at 50% 46%, rgba(14,17,22,.72), transparent 100%),
+    linear-gradient(180deg, rgba(14,17,22,.6), rgba(14,17,22,.92)); }
+  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; margin:18px auto 0; color:#fff; text-shadow:0 2px 26px rgba(0,0,0,.7); }
   .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
   .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); padding:7px 14px; border-radius:100px; }
   .em .light{ background:var(--gray-50); color:var(--ink); }
