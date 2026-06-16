@@ -1,0 +1,38 @@
+/* ==========================================================
+   Brand candidate fonts — free Ukrainian + supporting faces
+   Loaded by /brand/identity.html for the identity showcase.
+   e-Ukraine: Fedoriv, CC BY 4.0 (via jsDelivr from haos616/e-Ukraine)
+   ========================================================== */
+
+/* ---- e-Ukraine Head (display) ---- */
+@font-face{font-family:'e-Ukraine Head';font-weight:300;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-UkraineHead-Light.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine Head';font-weight:400;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-UkraineHead-Regular.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine Head';font-weight:500;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-UkraineHead-Medium.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine Head';font-weight:700;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-UkraineHead-Bold.woff2') format('woff2');}
+
+/* ---- e-Ukraine (text) ---- */
+@font-face{font-family:'e-Ukraine';font-weight:300;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-Ukraine-Light.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine';font-weight:400;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-Ukraine-Regular.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine';font-weight:500;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-Ukraine-Medium.woff2') format('woff2');}
+@font-face{font-family:'e-Ukraine';font-weight:700;font-style:normal;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/haos616/e-Ukraine@master/static/fonts/e-Ukraine-Bold.woff2') format('woff2');}
+
+/* ---- NAMU (cultural display) — Dmytro Rastvortsev, self-hosted woff2 ----
+   Provided by the client; NAMU-1990 is the modern geometric cut. */
+@font-face{font-family:'NAMU';font-weight:400;font-style:normal;font-display:swap;
+  src:url('fonts/NAMU-1990.woff2') format('woff2');}
+@font-face{font-family:'NAMU';font-weight:700;font-style:normal;font-display:swap;
+  src:url('fonts/NAMU-1990.woff2') format('woff2');}
+/* Heritage alternate (classic forms) */
+@font-face{font-family:'NAMU 1850';font-weight:400;font-style:normal;font-display:swap;
+  src:url('fonts/NAMU-1850.woff2') format('woff2');}
+/* Decorative cut with tryzub glyphs */
+@font-face{font-family:'NAMU Tryzub';font-weight:400;font-style:normal;font-display:swap;
+  src:url('fonts/NAMU-Tryzub.woff2') format('woff2');}

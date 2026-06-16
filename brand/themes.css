@@ -1,0 +1,143 @@
+/* ==========================================================
+   Candidate brand themes — token sets (single source of truth)
+   Each [data-theme="N"] block redefines the FULL token contract.
+   Adopting one = promote its block to :root in assets/base.css.
+   ========================================================== */
+
+/* 1. Громадянська міць */
+[data-theme="1"]{
+  --navy:#1B2A57;
+  --ink:#16203A;
+  --muted:#5B6B8C;
+  --paper:#FFFFFF;
+  --gray-50:#F4F6FB;
+  --gray-100:#EBEFF7;
+  --gray-200:#DCE3F0;
+  --gray-300:#C3CDE0;
+  --cream:#FBF8F0;
+  --yellow:#F2B807;
+  --yellow-soft:#FBEFC4;
+  --blue-mid:#2D6FE0;
+  --blue-light:#E4EDFB;
+  --green:#1E9E6A;
+  --amber:#C77700;
+  --danger:#D8392B;
+  --r:10px;
+  --r-s:6px;
+  --r-l:16px;
+  --shadow-sm:0 1px 2px rgba(22,32,58,.06), 0 1px 3px rgba(22,32,58,.08);
+  --shadow:0 6px 16px rgba(22,32,58,.10), 0 2px 6px rgba(22,32,58,.06);
+  --f-display:'e-Ukraine Head', 'Unbounded', system-ui, sans-serif;
+  --f-body:'Onest', 'Manrope', system-ui, sans-serif;
+}
+
+/* 2. «Поле і небо» */
+[data-theme="2"] {
+  --navy: #15324F;
+  --ink: #1C2733;
+  --muted: #6B7585;
+  --paper: #FFFFFF;
+  --gray-50: #F7F4EC;
+  --gray-100: #F0EBDF;
+  --gray-200: #E2DBCB;
+  --gray-300: #C9C0AC;
+  --cream: #FBF4E6;
+  --yellow: #F4B23E;
+  --yellow-soft: #FCE7B8;
+  --blue-mid: #2E86C9;
+  --blue-light: #CFE7F8;
+  --green: #3FA46A;
+  --amber: #E08A1E;
+  --danger: #D9544D;
+
+  --r: 12px;
+  --r-s: 7px;
+  --r-l: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(21, 50, 79, .07);
+  --shadow: 0 10px 30px rgba(21, 50, 79, .12);
+
+  --f-display: 'Unbounded', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, -apple-system, sans-serif;
+}
+
+/* 3. «Інженерний мінімалізм» */
+[data-theme="3"]{
+  --navy:#171A1F;
+  --ink:#23272E;
+  --muted:#6B7280;
+  --paper:#FFFFFF;
+  --gray-50:#F6F7F8;
+  --gray-100:#F0F1F3;
+  --gray-200:#E6E8EB;
+  --gray-300:#D3D7DC;
+  --cream:#F4F6F8;
+  --yellow:#0F5BFF;
+  --yellow-soft:#E8F0FF;
+  --blue-mid:#0F5BFF;
+  --blue-light:#E8F0FF;
+  --green:#3BA776;
+  --amber:#C77B12;
+  --danger:#D23B3B;
+  --r:8px;
+  --r-s:4px;
+  --r-l:14px;
+  --shadow-sm:0 1px 0 rgba(23,26,31,.04);
+  --shadow:0 1px 2px rgba(23,26,31,.06), 0 0 0 1px rgba(23,26,31,.04);
+  --f-display:'Onest', system-ui, sans-serif;
+  --f-body:'Onest', system-ui, sans-serif;
+}
+
+/* 4. «Сила і впевненість» */
+[data-theme="4"]{
+  --navy:#0E1626;
+  --ink:#14213A;
+  --muted:#5C6B82;
+  --paper:#FFFFFF;
+  --gray-50:#F4F5F7;
+  --gray-100:#ECEEF1;
+  --gray-200:#DDE1E7;
+  --gray-300:#C3C9D3;
+  --cream:#FFF6EC;
+  --yellow:#FF7A1A;
+  --yellow-soft:#FFE8D2;
+  --blue-mid:#FFC400;
+  --blue-light:#FFF3CC;
+  --green:#1F9D55;
+  --amber:#F5A524;
+  --danger:#E5484D;
+  --r:10px;
+  --r-s:6px;
+  --r-l:16px;
+  --shadow-sm:0 1px 2px rgba(14,22,38,.08), 0 2px 6px rgba(14,22,38,.06);
+  --shadow:0 18px 48px -16px rgba(14,22,38,.42);
+  --f-display:'Unbounded', system-ui, sans-serif;
+  --f-body:'Manrope', system-ui, sans-serif;
+}
+
+/* 5. Культурний код */
+[data-theme="5"]{
+  --navy:#1E3A5F;
+  --ink:#2A2723;
+  --muted:#7A6F5E;
+  --paper:#FFFDF8;
+  --gray-50:#FBF6EC;
+  --gray-100:#F4ECDC;
+  --gray-200:#E7DAC2;
+  --gray-300:#D6C5A6;
+  --cream:#F2E8D5;
+  --yellow:#C68A2E;
+  --yellow-soft:#F6E6C4;
+  --blue-mid:#3E6B96;
+  --blue-light:#DCE7F0;
+  --green:#5E7A3C;
+  --amber:#C68A2E;
+  --danger:#B5563A;
+  --r:10px;
+  --r-s:6px;
+  --r-l:16px;
+  --shadow-sm:0 1px 2px rgba(42,39,35,.06), 0 1px 1px rgba(42,39,35,.04);
+  --shadow:0 8px 28px -10px rgba(30,58,95,.18), 0 2px 8px -4px rgba(42,39,35,.10);
+  --f-display:'NAMU','Unbounded',sans-serif;
+  --f-body:'Onest',system-ui,sans-serif;
+}
