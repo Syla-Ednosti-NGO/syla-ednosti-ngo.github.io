@@ -10,36 +10,84 @@
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="themes.css">
 <style>
-  :root{ --barh:56px;
-    --navy:#1A2B4A;--ink:#0F1A2E;--muted:#6E7380;--paper:#fff;--gray-50:#F7F8FA;--gray-100:#EEF1F5;
-    --gray-200:#DDE2EA;--gray-300:#C3CAD4;--cream:#FFF8E1;--yellow:#FFD93D;--yellow-soft:#FFF3B8;
-    --blue-mid:#5BAFE0;--blue-light:#B7DCF5;--green:#2E9E5B;--amber:#E08A1E;--danger:#D33;
-    --r:10px;--r-s:6px;--r-l:16px;--shadow-sm:0 1px 2px rgba(15,26,46,.06);--shadow:0 6px 24px rgba(15,26,46,.10);
-    --f-display:'Unbounded',sans-serif;--f-body:'Manrope',sans-serif; }
+  :root{ --barh:56px; }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Onest',system-ui,sans-serif;background:#0E1116;color:#fff;-webkit-font-smoothing:antialiased}
-  .bar{position:sticky;top:0;z-index:100;height:var(--barh);background:#0E1116;border-bottom:1px solid rgba(255,255,255,.08);
-    display:flex;align-items:center;gap:14px;padding:0 16px}
+  .bar{position:sticky;top:0;z-index:100;height:var(--barh);background:#0E1116;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:14px;padding:0 16px}
   .brand{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;color:#fff;white-space:nowrap;flex:none}
   .brand i{color:#0F5BFF;font-style:normal}
   .cbtns{display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;flex:1;scrollbar-width:none;-ms-overflow-style:none}
   .cbtns::-webkit-scrollbar{display:none}
-  .cbtn{font-family:'Onest',sans-serif;font-size:13px;font-weight:600;color:#C7CDD6;background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;white-space:nowrap;flex:none}
+  .cbtn{font-family:'Onest',sans-serif;font-size:13px;font-weight:600;color:#C7CDD6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;white-space:nowrap;flex:none}
   .cbtn b{font-family:'e-Ukraine Head',sans-serif;color:#0F5BFF}
-  .cbtn span{opacity:.95}
   .cbtn:hover{border-color:rgba(255,255,255,.3);color:#fff}
   .cbtn.active{background:#fff;color:#0E1116;border-color:#fff}
   .cbtn.active b{color:#0F5BFF}
   .cap{font-size:11.5px;color:#7A828E;white-space:nowrap;flex:none}
-  #stage{background:#fff}
-  .concept{background:#fff}
-  /* compact-style concepts (1,2,4,5) get breathing room; concept 3 is full-bleed */
-  .concept:not(#c3){padding:30px clamp(16px,4vw,48px) 70px;background:#0E1116}
-  .concept:not(#c3) > .dir{max-width:1100px;margin:0 auto}
   @media (max-width:820px){ .cap{display:none} }
   @media (max-width:560px){ .brand{display:none} }
   @media (max-width:430px){ .cbtn span{display:none} .cbtn{padding:8px 12px} }
+
+  /* ===== shared fullscreen photo-demo (token-driven; --em-dark = concept's --navy) ===== */
+  .em{ --em-dark:var(--navy); --em-line:rgba(255,255,255,.05); font-family:var(--f-body); color:var(--ink); display:block; }
+  .em .screen{ min-height:calc(100vh - var(--barh,56px)); display:flex; flex-direction:column; justify-content:center; position:relative; padding:64px 7vw; }
+  .em .dark{ background:var(--em-dark); color:#fff; }
+  .em .light{ background:var(--gray-50); color:var(--ink); }
+  .em .grid{ position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px); background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
+  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; text-shadow:0 1px 10px rgba(0,0,0,.45); }
+  .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
+  .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
+  .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
+  .em .em-h.ink{ color:var(--ink); }
+  .em .acc{ color:var(--yellow); }
+  .em .lead{ font-size:clamp(15px,1.5vw,18px); line-height:1.65; max-width:54ch; margin:22px 0 0; }
+  .em .dark .lead, .em .feat .lead{ color:rgba(255,255,255,.78); }
+  .em .light .lead{ color:var(--muted); }
+  .em .btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top:34px; }
+  .em .btn{ font-family:var(--f-body); font-weight:600; font-size:15px; padding:14px 24px; border-radius:var(--r); border:1.5px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:9px; text-decoration:none; transition:.15s; }
+  .em .btn-p{ background:var(--yellow); color:#0E1116; font-weight:700; }
+  .em .btn-p:hover{ filter:brightness(1.08); }
+  .em .btn-g{ background:transparent; color:#fff; border-color:rgba(255,255,255,.3); }
+  .em .btn-g:hover{ border-color:#fff; }
+  .em .light .btn-g{ color:var(--ink); border-color:var(--gray-300); }
+  .em .stats{ display:flex; gap:48px; flex-wrap:wrap; margin-top:54px; }
+  .em .stat .n{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3vw,40px); letter-spacing:-.02em; color:#fff; }
+  .em .stat .n .u{ color:var(--yellow); }
+  .em .stat .l{ font-size:12.5px; color:rgba(255,255,255,.6); margin-top:4px; max-width:16ch; }
+  .em .hero-bg,.em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  .em .hero-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,12,16,.92) 0%,rgba(10,12,16,.84) 42%,rgba(10,12,16,.4) 100%); }
+  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:radial-gradient(70% 60% at 50% 46%,rgba(10,12,16,.72),transparent 100%),linear-gradient(180deg,rgba(10,12,16,.6),rgba(10,12,16,.92)); }
+  .em .hero-in{ position:relative; z-index:2; max-width:1180px; width:100%; margin:0 auto; }
+  .em .wrap{ max-width:1180px; width:100%; margin:0 auto; }
+  .em .split{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
+  .em .shot{ position:relative; border-radius:var(--r-l); overflow:hidden; aspect-ratio:4/3; box-shadow:0 1px 0 rgba(255,255,255,.06),0 30px 60px -30px rgba(0,0,0,.6); }
+  .em .shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .em .shot .tag{ position:absolute; left:14px; bottom:14px; z-index:2; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:rgba(10,12,16,.72); border:1px solid rgba(255,255,255,.16); padding:6px 12px; border-radius:100px; }
+  .em .disc{ list-style:none; padding:0; margin:26px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gray-200); border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; }
+  .em .disc li{ background:var(--paper); padding:18px 20px; display:flex; gap:13px; align-items:flex-start; }
+  .em .disc .di{ width:34px; height:34px; border-radius:var(--r-s); background:var(--blue-light); color:var(--yellow); display:flex; align-items:center; justify-content:center; flex:none; }
+  .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
+  .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.06); padding:7px 14px; border-radius:100px; }
+  .em .coleyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; margin:18px auto 0; color:#fff; text-shadow:0 2px 26px rgba(0,0,0,.7); }
+  .em .num-strip{ display:flex; border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; margin-top:34px; background:var(--paper); }
+  .em .num-strip > div{ flex:1; padding:22px 20px; border-left:1px solid var(--gray-200); }
+  .em .num-strip > div:first-child{ border-left:none; }
+  .em .num-strip .n{ font-family:var(--f-display); font-weight:800; font-size:30px; color:var(--ink); letter-spacing:-.02em; }
+  .em .num-strip .n .u{ color:var(--yellow); }
+  .em .num-strip .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .em .feat-strip{ background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.16); }
+  .em .feat-strip > div{ border-left-color:rgba(255,255,255,.16); }
+  .em .feat-strip .n{ color:#fff; } .em .feat-strip .l{ color:rgba(255,255,255,.72); }
+  @media (max-width:860px){
+    .em .split{ grid-template-columns:1fr; gap:30px; }
+    .em .disc{ grid-template-columns:1fr; }
+    .em .num-strip{ flex-wrap:wrap; } .em .num-strip > div{ flex:1 1 45%; }
+    .em .hero-bg::after{ background:linear-gradient(180deg,rgba(10,12,16,.5),rgba(10,12,16,.92)); }
+    .em .screen{ padding:54px 24px; min-height:auto; }
+  }
 </style>
 </head>
 <body>
@@ -53,1219 +101,407 @@
   <span class="cap" id="cap"></span>
 </header>
 <main id="stage">
-<div class="concept" id="c1"><section class="dir" data-theme="1" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
-  <style>
-    .dir[data-theme="1"] *{box-sizing:border-box}
-    .dir[data-theme="1"] h1,.dir[data-theme="1"] h2,.dir[data-theme="1"] h3,.dir[data-theme="1"] .dsp{font-family:var(--f-display);letter-spacing:-.01em;line-height:1.06;margin:0}
-    .dir[data-theme="1"] p{margin:0;line-height:1.6}
-    .dir[data-theme="1"] .wrap{padding:34px 38px}
-    .dir[data-theme="1"] .lbl{font-family:var(--f-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-mid);font-weight:700;margin-bottom:16px}
-    .dir[data-theme="1"] .rule{height:1px;background:var(--gray-200);margin:36px 0}
-    .dir[data-theme="1"] .btn{font-family:var(--f-display);font-weight:600;font-size:15px;border-radius:var(--r);padding:13px 22px;border:1.5px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.15s}
-    .dir[data-theme="1"] .btn-primary{background:var(--yellow);color:var(--navy);box-shadow:var(--shadow-sm)}
-    .dir[data-theme="1"] .btn-primary:hover{background:#ffca1a}
-    .dir[data-theme="1"] .btn-secondary{background:transparent;color:var(--navy);border-color:var(--gray-300)}
-    .dir[data-theme="1"] .btn-secondary:hover{border-color:var(--navy);background:var(--paper)}
-    .dir[data-theme="1"] .btn-ghost{background:var(--navy);color:#fff}
-    .dir[data-theme="1"] .btn-ghost:hover{background:#23356b}
-    .dir[data-theme="1"] .chip{font-family:var(--f-display);font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
-    .dir[data-theme="1"] .card{background:var(--paper);border:1px solid var(--gray-200);border-radius:var(--r-l);box-shadow:var(--shadow-sm)}
-    .dir[data-theme="1"] .ico{width:26px;height:26px;display:block}
-    .dir[data-theme="1"] .swatch{height:62px;border-radius:var(--r);border:1px solid rgba(22,32,58,.08)}
-    .dir[data-theme="1"] .grid{display:grid;gap:18px}
-    .dir[data-theme="1"] a{color:var(--blue-mid);text-decoration:none}
-  </style>
-
-  <!-- ============ HERO (NGO) ============ -->
-  <div style="background:var(--navy);color:#fff;position:relative;overflow:hidden">
-    <div style="position:absolute;inset:0;opacity:.5;background:
-      radial-gradient(520px 360px at 88% -8%, rgba(45,111,224,.32), transparent 60%),
-      radial-gradient(420px 300px at 8% 118%, rgba(242,184,7,.14), transparent 60%)"></div>
-    <svg viewBox="0 0 1200 400" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:.10" aria-hidden="true">
-      <defs><pattern id="t1grid" width="56" height="56" patternUnits="userSpaceOnUse">
-        <path d="M56 0H0V56" fill="none" stroke="#9fb6e6" stroke-width="1"/></pattern></defs>
-      <rect width="1200" height="400" fill="url(#t1grid)"/>
-    </svg>
-    <div class="wrap" style="position:relative;padding:48px 38px 52px">
-      <div style="display:flex;align-items:center;gap:11px;margin-bottom:30px">
-        <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
-          <circle cx="16" cy="16" r="15" fill="none" stroke="var(--yellow)" stroke-width="2"/>
-          <circle cx="16" cy="16" r="3.4" fill="var(--yellow)"/>
-          <g stroke="#fff" stroke-width="2" stroke-linecap="round">
-            <path d="M16 6.5V11"/><path d="M16 21v4.5"/><path d="M6.5 16H11"/><path d="M21 16h4.5"/>
-          </g>
-        </svg>
-        <span style="font-family:var(--f-display);font-weight:700;letter-spacing:.04em;font-size:15px">ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span>
+<div class="concept" id="c1"><section class="dir em" data-theme="1">
+  <div class="screen dark hero" style="overflow:hidden">
+    <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
+    <div class="grid"></div>
+    <div class="hero-in">
+      <div class="kick">Інженерна школа дронів · 13–17</div>
+      <h1 class="em-h">Дрон — це ціла <span class="acc">наука</span>. Пілотування — лише 5–10%.</h1>
+      <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+      <div class="btns">
+        <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
       </div>
-      <span class="chip" style="background:rgba(255,255,255,.12);color:#dfe8fb;border:1px solid rgba(255,255,255,.2)">
-        <svg class="ico" style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
-        Цивільна інженерна школа
-      </span>
-      <h1 style="font-size:50px;font-weight:700;margin:22px 0 0;max-width:18ch">Дрон — це ціла наука. Пілотування — лише 5%.</h1>
-      <p style="font-size:18px;color:#cdd8f1;margin-top:20px;max-width:54ch;line-height:1.55">
-        Інженерія, фізика, радіо та хімія для підлітків 13–17 років. Ми будуємо впевненість і знання — не страх. Наставники-ветерани, цивільні місії: агро, доставка, пошук і порятунок, екологія.
-      </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
-        <button class="btn btn-primary">Записати дитину
-          <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
-        </button>
-        <button class="btn btn-secondary" style="color:#fff;border-color:rgba(255,255,255,.35)">Як це працює</button>
-      </div>
-      <div style="display:flex;gap:34px;flex-wrap:wrap;margin-top:38px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14)">
-        <div><div style="font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--yellow)">90%</div><div style="font-size:13px;color:#aabbe2;margin-top:2px">наука та інженерія</div></div>
-        <div><div style="font-family:var(--f-display);font-size:30px;font-weight:700;color:#fff">4</div><div style="font-size:13px;color:#aabbe2;margin-top:2px">цивільні напрями</div></div>
-        <div><div style="font-family:var(--f-display);font-size:30px;font-weight:700;color:#fff">13–17</div><div style="font-size:13px;color:#aabbe2;margin-top:2px">років, безпечно</div></div>
+      <div class="stats">
+        <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+        <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+        <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ============ TYPE SPECIMEN ============ -->
-  <div class="wrap">
-    <div class="lbl">Типографіка — e-Ukraine Head + Onest</div>
-    <div class="grid" style="grid-template-columns:1.15fr .85fr;align-items:center">
+  <div class="screen light">
+    <div class="wrap split">
       <div>
-        <div class="dsp" style="font-size:62px;font-weight:700;color:var(--navy)">Разом — сила</div>
-        <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:18px;align-items:baseline">
-          <span class="dsp" style="font-size:24px;font-weight:300;color:var(--muted)">Light 300</span>
-          <span class="dsp" style="font-size:24px;font-weight:500;color:var(--ink)">Medium 500</span>
-          <span class="dsp" style="font-size:24px;font-weight:700;color:var(--navy)">Bold 700</span>
-        </div>
-        <p style="margin-top:20px;font-size:16px;color:var(--ink);max-width:46ch">
-          Onest несе основний текст: гуманний, читабельний, теплий. <a href="#">Прозорість і довіра</a> — у кожному абзаці. Цифри для статистики, як <b style="font-weight:600">2 480</b> годин практики, лишаються стрункими.
-        </p>
-        <p style="margin-top:10px;font-size:13.5px;color:var(--muted)">АБВГ ҐДЕЄ ЖЗИІ ЇЙКЛ · абвг ґдеє · 0123456789 · ОБ’ЄДНАНІ</p>
+        <div class="coleyebrow">Програма</div>
+        <h2 class="em-h ink">Шість наук за одним польотом</h2>
+        <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+        <ul class="disc">
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+        </ul>
       </div>
-      <div class="card" style="padding:22px">
-        <div style="font-family:var(--f-display);font-size:13px;letter-spacing:.04em;color:var(--blue-mid);font-weight:700;margin-bottom:6px">DISPLAY</div>
-        <div class="dsp" style="font-size:21px;color:var(--navy);font-weight:600;margin-bottom:18px">e-Ukraine Head</div>
-        <div style="font-family:var(--f-display);font-size:13px;letter-spacing:.04em;color:var(--blue-mid);font-weight:700;margin-bottom:6px">BODY</div>
-        <div style="font-size:21px;color:var(--ink);font-weight:500">Onest</div>
-        <div class="rule" style="margin:18px 0"></div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.7">Урядовий гротеск Дія для заголовків · гуманістичний Onest для тексту — інституційно, але тепло.</div>
-      </div>
+      <div class="shot"><img src="img/components-knoll.jpg" alt="Навчання та компоненти" loading="lazy"><span class="tag">Власні проєкти</span></div>
     </div>
   </div>
 
-  <div class="rule" style="margin:0 38px"></div>
-
-  <!-- ============ COLOR PALETTE ============ -->
-  <div class="wrap">
-    <div class="lbl">Палітра — токени системи</div>
-    <div class="grid" style="grid-template-columns:repeat(6,1fr);gap:14px">
-      <div><div class="swatch" style="background:var(--navy)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Індиго-нейві</div><div style="font-size:11px;color:var(--muted)">--navy</div></div>
-      <div><div class="swatch" style="background:var(--ink)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Чорнило</div><div style="font-size:11px;color:var(--muted)">--ink</div></div>
-      <div><div class="swatch" style="background:var(--yellow)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Золото</div><div style="font-size:11px;color:var(--muted)">--yellow</div></div>
-      <div><div class="swatch" style="background:var(--blue-mid)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Цивільний синій</div><div style="font-size:11px;color:var(--muted)">--blue-mid</div></div>
-      <div><div class="swatch" style="background:var(--yellow-soft)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">М’яке золото</div><div style="font-size:11px;color:var(--muted)">--yellow-soft</div></div>
-      <div><div class="swatch" style="background:var(--blue-light)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Світло-синій</div><div style="font-size:11px;color:var(--muted)">--blue-light</div></div>
-      <div><div class="swatch" style="background:var(--gray-50);border-color:var(--gray-200)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Фон</div><div style="font-size:11px;color:var(--muted)">--gray-50</div></div>
-      <div><div class="swatch" style="background:var(--gray-200)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Межі</div><div style="font-size:11px;color:var(--muted)">--gray-200</div></div>
-      <div><div class="swatch" style="background:var(--cream);border-color:var(--gray-200)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Крем</div><div style="font-size:11px;color:var(--muted)">--cream</div></div>
-      <div><div class="swatch" style="background:var(--green)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Успіх</div><div style="font-size:11px;color:var(--muted)">--green</div></div>
-      <div><div class="swatch" style="background:var(--amber)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Попередження</div><div style="font-size:11px;color:var(--muted)">--amber</div></div>
-      <div><div class="swatch" style="background:var(--danger)"></div><div style="font-size:12px;font-weight:600;margin-top:7px;color:var(--ink)">Тривога</div><div style="font-size:11px;color:var(--muted)">--danger</div></div>
-    </div>
-  </div>
-
-  <div class="rule" style="margin:0 38px"></div>
-
-  <!-- ============ COMPONENTS ============ -->
-  <div class="wrap">
-    <div class="lbl">Компоненти</div>
-    <div class="grid" style="grid-template-columns:1fr 1fr;gap:28px;align-items:start">
+  <div class="screen dark" style="overflow:hidden">
+    <div class="grid"></div>
+    <div class="wrap split" style="position:relative;z-index:2">
+      <div class="shot"><img src="img/teens-collab.jpg" alt="Практика руками" loading="lazy"><span class="tag">З першого заняття</span></div>
       <div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px">
-          <button class="btn btn-primary">Долучитися</button>
-          <button class="btn btn-secondary">Дізнатися більше</button>
-          <button class="btn btn-ghost">Підтримати</button>
-        </div>
-        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px">
-          <span class="chip" style="background:var(--yellow-soft);color:#7a5c00">Інженерія</span>
-          <span class="chip" style="background:var(--blue-light);color:#1b4a93">Радіо</span>
-          <span class="chip" style="background:var(--gray-100);color:var(--navy)">Фізика</span>
-          <span class="chip" style="background:#e3f5ec;color:#0f6e44">Безпечно</span>
-        </div>
-        <div class="card" style="padding:18px 20px;display:flex;gap:16px;align-items:center">
-          <div style="width:54px;height:54px;border-radius:14px;background:var(--yellow-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg class="ico" style="width:28px;height:28px" viewBox="0 0 24 24" fill="none" stroke="#7a5c00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 7h6v6"/></svg>
-          </div>
-          <div>
-            <div style="font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--navy);line-height:1">2 480</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:3px">годин практики за рік</div>
-          </div>
-          <span class="chip" style="margin-left:auto;background:#e3f5ec;color:#0f6e44;font-size:12px">
-            <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg>+18%
-          </span>
-        </div>
-      </div>
-      <!-- two card styles -->
-      <div class="grid" style="gap:16px">
-        <div class="card" style="padding:20px 22px">
-          <div style="width:46px;height:46px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:14px">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg>
-          </div>
-          <h3 style="font-size:18px;color:var(--navy);font-weight:600">Інженерний модуль</h3>
-          <p style="font-size:14px;color:var(--muted);margin-top:8px">Конструкція, аеродинаміка та збірка апарата власноруч — від плати до польоту.</p>
-          <a href="#" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-weight:600;font-size:14px">Програма
-            <svg style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg></a>
-        </div>
-        <div class="card" style="padding:20px 22px;background:var(--cream);border-color:#ece3cf">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-            <svg style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
-            <span style="font-family:var(--f-display);font-size:12px;letter-spacing:.04em;color:var(--amber);font-weight:700">ДЛЯ БАТЬКІВ</span>
-          </div>
-          <h3 style="font-size:18px;color:var(--navy);font-weight:600">Жодної зброї. Лише наука.</h3>
-          <p style="font-size:14px;color:#6a6453;margin-top:8px">Прозора програма, сертифіковані наставники, відкриті дні для родин.</p>
+        <div class="kick">Метод</div>
+        <h2 class="em-h">Руками — з першого дня</h2>
+        <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+        <div class="meta-row">
+          <span class="pill">Симулятори</span><span class="pill">Збірка FPV</span><span class="pill">Реальні польоти</span><span class="pill">Власний проєкт</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="rule" style="margin:0 38px"></div>
-
-  <!-- ============ ICON ROW ============ -->
-  <div class="wrap">
-    <div class="lbl">Іконографіка — пласка, єдиний штрих</div>
-    <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:14px">
-      <!-- drone -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><rect x="9" y="10" width="6" height="4" rx="1.2"/><path d="M6.7 7.7L9.5 10.5M17.3 7.7l-2.8 2.8M6.7 16.3l2.8-2.8M17.3 16.3l-2.8-2.8"/></svg></div>
-      <!-- gear/engineering -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg></div>
-      <!-- graduation cap -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M5 11v5c0 1.4 3.1 3 7 3s7-1.6 7-3v-5"/><path d="M22 9v5"/></svg></div>
-      <!-- shield -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3.5V12c0 5-3.4 8-8 9.2C7.4 20 4 17 4 12V6.5L12 3z"/><path d="M9 12l2 2 4-4"/></svg></div>
-      <!-- unity/hands -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.6"/><circle cx="16" cy="8" r="2.6"/><path d="M3.5 19c0-2.6 2-4.5 4.5-4.5s4.5 1.9 4.5 4.5"/><path d="M11.5 19c0-2.6 2-4.5 4.5-4.5s4.5 1.9 4.5 4.5"/></svg></div>
-      <!-- signal/radio -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M7.8 7.8a6 6 0 000 8.4M16.2 7.8a6 6 0 010 8.4M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg></div>
-      <!-- map-pin -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-      <!-- heart -->
-      <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9.2-9C1.3 8.2 2.6 5 5.8 5 8 5 9.2 6.4 12 9c2.8-2.6 4-4 6.2-4 3.2 0 4.5 3.2 3 6-2.2 4.6-9.2 9-9.2 9z"/></svg></div>
+  <div class="screen feat" style="overflow:hidden;color:#fff">
+    <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
+    <div class="hero-in" style="text-align:center;max-width:760px">
+      <div class="kick" style="justify-content:center">Хто навчає</div>
+      <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+      <div class="num-strip feat-strip">
+        <div><div class="n">2</div><div class="l">наставники вже в команді</div></div>
+        <div><div class="n">50/50</div><div class="l">діти воїнів і цивільних</div></div>
+        <div><div class="n">100<span class="u">%</span></div><div class="l">відкрита програма для батьків</div></div>
+      </div>
     </div>
   </div>
 
-  <div class="rule" style="margin:0 38px"></div>
-
-  <!-- ============ APPLIED: SCHOOL FEATURE BLOCK ============ -->
-  <div class="wrap" style="background:var(--cream)">
-    <div class="lbl" style="color:var(--amber)">Проєкт «Дрони та діти» — змістовий блок</div>
-    <div class="grid" style="grid-template-columns:1.1fr .9fr;gap:30px;align-items:center">
-      <div>
-        <h2 style="font-size:34px;font-weight:700;color:var(--navy);max-width:16ch">Чотири цивільні місії, які надихають</h2>
-        <p style="font-size:16px;color:#6a6453;margin-top:14px;max-width:48ch">Підлітки вчаться застосовувати дрони там, де вони рятують і будують — а не руйнують. Кожен напрям — реальний кейс із наставником.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px">
-          <div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:11px">
-            <svg style="width:22px;height:22px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8M12 8C12 8 9 4 4 4c0 5 4 7 8 7M12 11c4 0 8-2 8-7-5 0-8 4-8 4"/></svg>
-            <span style="font-size:14px;font-weight:600;color:var(--navy)">Агро та екологія</span>
-          </div>
-          <div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:11px">
-            <svg style="width:22px;height:22px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="1.6"/><path d="M16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
-            <span style="font-size:14px;font-weight:600;color:var(--navy)">Доставка</span>
-          </div>
-          <div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:11px">
-            <svg style="width:22px;height:22px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-            <span style="font-size:14px;font-weight:600;color:var(--navy)">Пошук і порятунок</span>
-          </div>
-          <div class="card" style="padding:14px 16px;display:flex;align-items:center;gap:11px">
-            <svg style="width:22px;height:22px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg>
-            <span style="font-size:14px;font-weight:600;color:var(--navy)">Фізика польоту</span>
-          </div>
-        </div>
-        <button class="btn btn-primary" style="margin-top:24px">Програма табору</button>
-      </div>
-      <!-- applied imagery: mentor roster -->
-      <div class="card" style="padding:22px;background:var(--paper);border-color:#ece3cf">
-        <div style="font-family:var(--f-display);font-size:13px;letter-spacing:.04em;color:var(--blue-mid);font-weight:700;margin-bottom:4px">НАСТАВНИКИ-ВЕТЕРАНИ</div>
-        <h3 style="font-size:19px;color:var(--navy);font-weight:600;margin-bottom:16px">Команда, якій довіряють</h3>
-        <div class="grid" style="gap:12px">
-          <div style="display:flex;align-items:center;gap:13px">
-            <span style="width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--blue-light);display:flex;align-items:center;justify-content:center">
-              <img src="../assets/img/valentyn.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=24 height=24 viewBox=\'0 0 24 24\' fill=none stroke=\'%231B2A57\' stroke-width=1.7><circle cx=12 cy=8 r=4/><path d=\'M4 21c0-4 4-6 8-6s8 2 8 6\'/></svg>'">
-            </span>
-            <div><div style="font-size:14.5px;font-weight:600;color:var(--ink)">Валентин</div><div style="font-size:12.5px;color:var(--muted)">Інженерія та збірка</div></div>
-            <span class="chip" style="margin-left:auto;background:#e3f5ec;color:#0f6e44;font-size:11px;padding:5px 10px">Сертифіковано</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:13px">
-            <span style="width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--yellow-soft);display:flex;align-items:center;justify-content:center">
-              <img src="../assets/img/olya.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=24 height=24 viewBox=\'0 0 24 24\' fill=none stroke=\'%231B2A57\' stroke-width=1.7><circle cx=12 cy=8 r=4/><path d=\'M4 21c0-4 4-6 8-6s8 2 8 6\'/></svg>'">
-            </span>
-            <div><div style="font-size:14.5px;font-weight:600;color:var(--ink)">Оля</div><div style="font-size:12.5px;color:var(--muted)">Радіо та зв’язок</div></div>
-            <span class="chip" style="margin-left:auto;background:#e3f5ec;color:#0f6e44;font-size:11px;padding:5px 10px">Сертифіковано</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:13px">
-            <span style="width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--blue-light);display:flex;align-items:center;justify-content:center">
-              <img src="../assets/img/tykhyy.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=24 height=24 viewBox=\'0 0 24 24\' fill=none stroke=\'%231B2A57\' stroke-width=1.7><circle cx=12 cy=8 r=4/><path d=\'M4 21c0-4 4-6 8-6s8 2 8 6\'/></svg>'">
-            </span>
-            <div><div style="font-size:14.5px;font-weight:600;color:var(--ink)">Тихий</div><div style="font-size:12.5px;color:var(--muted)">Безпека та етика</div></div>
-            <span class="chip" style="margin-left:auto;background:#e3f5ec;color:#0f6e44;font-size:11px;padding:5px 10px">Сертифіковано</span>
-          </div>
-        </div>
-        <div class="rule" style="margin:18px 0"></div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)">
-          <svg style="width:17px;height:17px" viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-          Відкриті дні для родин — щомісяця
-        </div>
+  <div class="screen dark cta" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+    <div class="grid"></div>
+    <div class="hero-in" style="text-align:center">
+      <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+      <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+        <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
       </div>
     </div>
   </div>
 </section></div>
-<div class="concept" id="c2" hidden><section class="dir" data-theme="2" style="background:var(--gray-50);color:var(--ink);font-family:var(--f-body);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200);">
-  <style>
-    .dir[data-theme="2"]{line-height:1.5;}
-    .dir[data-theme="2"] *{box-sizing:border-box;}
-    .dir[data-theme="2"] .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
-    .dir[data-theme="2"] h1,.dir[data-theme="2"] h2,.dir[data-theme="2"] h3,.dir[data-theme="2"] .disp{font-family:var(--f-display);letter-spacing:-.01em;}
-    .dir[data-theme="2"] .eyebrow{font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;}
-    .dir[data-theme="2"] .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-body);font-weight:600;font-size:15px;border-radius:var(--r);padding:13px 22px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .12s ease;}
-    .dir[data-theme="2"] .btn:hover{transform:translateY(-1px);}
-    .dir[data-theme="2"] .btn-primary{background:var(--blue-mid);color:#fff;}
-    .dir[data-theme="2"] .btn-accent{background:var(--yellow);color:#3a2a05;}
-    .dir[data-theme="2"] .btn-ghost{background:transparent;color:var(--navy);border-color:var(--gray-300);}
-    .dir[data-theme="2"] .chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;}
-    .dir[data-theme="2"] .card{background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow-sm);}
-    .dir[data-theme="2"] .ico{width:26px;height:26px;display:block;}
-    .dir[data-theme="2"] .ico-lg{width:34px;height:34px;display:block;}
-    .dir[data-theme="2"] .swatch{height:74px;border-radius:var(--r);box-shadow:var(--shadow-sm);}
-  </style>
-
-  <!-- ============ TYPE SPECIMEN ============ -->
-  <div class="wrap" style="padding-top:40px;padding-bottom:14px;">
-    <span class="eyebrow" style="color:var(--blue-mid);">Напрям 02 · Поле і небо</span>
-    <h2 style="font-weight:800;font-size:clamp(30px,5vw,46px);line-height:1.02;color:var(--navy);margin:14px 0 10px;">Небо вчить.<br>Поле тримає.</h2>
-    <p style="font-size:18px;max-width:620px;color:var(--ink);margin:0 0 24px;">Дрон — це ціла наука: інженерія, фізика, радіо, хімія. Пілотування — лише десята частина. Ми вчимо мислити, а не боятися.</p>
-
-    <div class="card" style="padding:26px 28px;border:1px solid var(--gray-200);">
-      <div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--gray-200);padding-bottom:14px;margin-bottom:18px;">
-        <div>
-          <div style="font-size:13px;color:var(--muted);font-weight:600;">Дисплей</div>
-          <div class="disp" style="font-weight:700;font-size:19px;color:var(--navy);">Unbounded</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:13px;color:var(--muted);font-weight:600;">Текст</div>
-          <div style="font-family:var(--f-body);font-weight:600;font-size:19px;color:var(--navy);">Onest</div>
-        </div>
+<div class="concept" id="c2" hidden><section class="dir em" data-theme="2">
+  <div class="screen dark hero" style="overflow:hidden">
+    <div class="hero-bg" style="background-image:url('img/drone-sky.jpg')"></div>
+    <div class="grid"></div>
+    <div class="hero-in">
+      <div class="kick">Літній табір дронів · 13–17</div>
+      <h1 class="em-h">Небо <span class="acc">вчить</span>. Поле тримає.</h1>
+      <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+      <div class="btns">
+        <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
       </div>
-      <div class="disp" style="font-weight:800;font-size:40px;color:var(--navy);line-height:1.05;">ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!</div>
-      <div class="disp" style="font-weight:600;font-size:26px;color:var(--blue-mid);margin-top:4px;">Дрони та діти — школа майбутнього</div>
-      <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:18px;">
-        <div><div style="font-weight:400;font-size:17px;">Onest Regular — спокійний, людяний текст для довгого читання батьками.</div></div>
-      </div>
-      <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:8px;color:var(--ink);">
-        <span style="font-weight:300;font-size:16px;">Light 300</span>
-        <span style="font-weight:400;font-size:16px;">Regular 400</span>
-        <span style="font-weight:600;font-size:16px;">SemiBold 600</span>
-        <span style="font-weight:800;font-size:16px;">Bold 800</span>
+      <div class="stats">
+        <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+        <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+        <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ============ PALETTE ============ -->
-  <div class="wrap" style="padding-top:30px;padding-bottom:14px;">
-    <span class="eyebrow" style="color:var(--muted);">Палітра</span>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:12px;">
-      <div><div class="swatch" style="background:var(--blue-mid);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Небесна синь</div><div style="font-size:12px;color:var(--muted);">#2E86C9 · primary</div></div>
-      <div><div class="swatch" style="background:var(--navy);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Глибоке небо</div><div style="font-size:12px;color:var(--muted);">#15324F · navy</div></div>
-      <div><div class="swatch" style="background:var(--blue-light);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Світла блакить</div><div style="font-size:12px;color:var(--muted);">#CFE7F8</div></div>
-      <div><div class="swatch" style="background:#B79A63;"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Піщано-хакі</div><div style="font-size:12px;color:var(--muted);">#B79A63 · поле</div></div>
-      <div><div class="swatch" style="background:var(--yellow);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Сонячний бурштин</div><div style="font-size:12px;color:var(--muted);">#F4B23E · yellow</div></div>
-      <div><div class="swatch" style="background:var(--cream);border:1px solid var(--gray-200);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Тепла крем</div><div style="font-size:12px;color:var(--muted);">#FBF4E6 · cream</div></div>
-      <div><div class="swatch" style="background:var(--green);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Лугова зелень</div><div style="font-size:12px;color:var(--muted);">#3FA46A · green</div></div>
-      <div><div class="swatch" style="background:var(--ink);"></div><div style="font-weight:600;font-size:13px;margin-top:7px;">Чорнило</div><div style="font-size:12px;color:var(--muted);">#1C2733 · ink</div></div>
+  <div class="screen light">
+    <div class="wrap split">
+      <div>
+        <div class="coleyebrow">Програма</div>
+        <h2 class="em-h ink">Шість наук за одним польотом</h2>
+        <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+        <ul class="disc">
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+        </ul>
+      </div>
+      <div class="shot"><img src="img/components-knoll.jpg" alt="Навчання та компоненти" loading="lazy"><span class="tag">Власні проєкти</span></div>
     </div>
   </div>
 
-  <!-- ============ COMPONENTS ============ -->
-  <div class="wrap" style="padding-top:30px;padding-bottom:14px;">
-    <span class="eyebrow" style="color:var(--muted);">Компоненти</span>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:14px 0 16px;">
-      <a class="btn btn-primary">Записати дитину
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
-      </a>
-      <a class="btn btn-accent">Підтримати школу</a>
-      <a class="btn btn-ghost">Дізнатися більше</a>
-    </div>
-    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px;">
-      <span class="chip" style="background:var(--blue-light);color:#0e3b5e;">Інженерія</span>
-      <span class="chip" style="background:var(--yellow-soft);color:#6b4e07;">Фізика</span>
-      <span class="chip" style="background:#EDE3CC;color:#5c4a25;">Радіо</span>
-      <span class="chip" style="background:#D9EFE1;color:#1d5e3a;">Хімія</span>
-      <span class="chip" style="background:var(--gray-100);color:var(--navy);">Пошук і порятунок</span>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-      <!-- card style A: bordered -->
-      <div class="card" style="padding:22px;border:1px solid var(--gray-200);">
-        <div style="width:48px;height:48px;border-radius:var(--r);background:var(--blue-light);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-          <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="#0e3b5e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="18" r="2.4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.3"/><path d="M8 8l-1.4-1.4M16 8l1.4-1.4M8 16l-1.4 1.4M16 16l1.4 1.4"/></svg>
-        </div>
-        <h3 style="font-weight:600;font-size:18px;color:var(--navy);margin:0 0 6px;">Ціла наука, не зброя</h3>
-        <p style="font-size:14.5px;color:var(--muted);margin:0;">Пілотування — лише 5–10%. Решта — інженерія, фізика, радіо й хімія.</p>
-      </div>
-      <!-- card style B: accent top bar -->
-      <div class="card" style="padding:0;border:1px solid var(--gray-200);overflow:hidden;">
-        <div style="height:6px;background:var(--yellow);"></div>
-        <div style="padding:22px;">
-          <div style="width:48px;height:48px;border-radius:var(--r);background:var(--yellow-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="#6b4e07" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l8-9 8 9"/><path d="M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6"/><path d="M9 20v-5h6v5"/></svg>
-          </div>
-          <h3 style="font-weight:600;font-size:18px;color:var(--navy);margin:0 0 6px;">Спокій для батьків</h3>
-          <p style="font-size:14.5px;color:var(--muted);margin:0;">Агро, доставка, екологія, порятунок — мирне застосування на першому місці.</p>
-        </div>
-      </div>
-      <!-- stat / badge card -->
-      <div class="card" style="padding:22px;border:1px solid var(--gray-200);display:flex;flex-direction:column;justify-content:center;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <span class="chip" style="background:#D9EFE1;color:#1d5e3a;font-size:12px;padding:4px 10px;">Набір відкрито</span>
-        </div>
-        <div class="disp" style="font-weight:800;font-size:46px;line-height:1;color:var(--blue-mid);">90%</div>
-        <div style="font-size:14.5px;color:var(--muted);margin-top:4px;">знань — це інженерія та фізика, а не керування</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ HERO (NGO) ============ -->
-  <div style="margin-top:34px;background:var(--navy);color:#fff;">
-    <div class="wrap" style="padding-top:48px;padding-bottom:48px;position:relative;">
-      <svg viewBox="0 0 1040 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;" aria-hidden="true">
-        <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E86C9" stop-opacity="0.55"/><stop offset="1" stop-color="#15324F" stop-opacity="0"/></linearGradient></defs>
-        <rect width="1040" height="220" fill="url(#sky2)"/>
-        <circle cx="880" cy="56" r="30" fill="#F4B23E" opacity="0.85"/>
-        <path d="M150 92 h36 M168 86 v12 M150 92 a9 9 0 0 1 -9 -9 M186 92 a9 9 0 0 0 9 -9" stroke="#CFE7F8" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.9"/>
-      </svg>
-      <div style="position:relative;max-width:680px;">
-        <span class="eyebrow" style="color:var(--yellow);">Громадська організація</span>
-        <h1 class="disp" style="font-weight:800;font-size:clamp(30px,5.4vw,52px);line-height:1.02;margin:14px 0 16px;">Об’єднані. Сильні.<br><span style="color:var(--yellow);">Разом!</span></h1>
-        <p style="font-size:18px;color:var(--blue-light);max-width:560px;margin:0 0 26px;">Об’єднуємо підлітків, батьків і ветеранів-наставників навколо науки про дрони — з надією і впевненістю, без страху.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-accent">Записатися в табір</a>
-          <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4);">Наша місія</a>
-        </div>
-        <div style="display:flex;gap:30px;flex-wrap:wrap;margin-top:32px;">
-          <div><div class="disp" style="font-weight:800;font-size:30px;color:#fff;">13–17</div><div style="font-size:13px;color:var(--blue-light);">вік учасників</div></div>
-          <div style="width:1px;background:rgba(255,255,255,.18);"></div>
-          <div><div class="disp" style="font-weight:800;font-size:30px;color:#fff;">4</div><div style="font-size:13px;color:var(--blue-light);">наукові напрями</div></div>
-          <div style="width:1px;background:rgba(255,255,255,.18);"></div>
-          <div><div class="disp" style="font-weight:800;font-size:30px;color:#fff;">100%</div><div style="font-size:13px;color:var(--blue-light);">мирне застосування</div></div>
+  <div class="screen dark" style="overflow:hidden">
+    <div class="grid"></div>
+    <div class="wrap split" style="position:relative;z-index:2">
+      <div class="shot"><img src="img/teens-collab.jpg" alt="Практика руками" loading="lazy"><span class="tag">З першого заняття</span></div>
+      <div>
+        <div class="kick">Метод</div>
+        <h2 class="em-h">Руками — з першого дня</h2>
+        <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+        <div class="meta-row">
+          <span class="pill">Симулятори</span><span class="pill">Збірка FPV</span><span class="pill">Реальні польоти</span><span class="pill">Власний проєкт</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============ FEATURE BLOCK (school project) ============ -->
-  <div style="background:var(--cream);">
-    <div class="wrap" style="padding-top:44px;padding-bottom:44px;">
-      <span class="eyebrow" style="color:#9a7d3f;">Проєкт «Дрони та діти»</span>
-      <h2 class="disp" style="font-weight:700;font-size:clamp(24px,4vw,34px);color:var(--navy);margin:12px 0 8px;max-width:640px;">Літня інженерна школа в полі</h2>
-      <p style="font-size:17px;color:var(--ink);max-width:600px;margin:0 0 26px;">Чотири тижні, чотири науки, наставники-ветерани поруч. Дитина повертається додому з проєктом у руках і впевненістю в собі.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-        <div class="card" style="padding:20px;border:1px solid var(--gray-200);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11v4.5c0 1 2.2 2.5 5 2.5s5-1.5 5-2.5V11"/><path d="M21 9v4"/></svg>
-            <span style="font-weight:600;font-size:13px;color:var(--blue-mid);">Тиждень 1</span>
-          </div>
-          <h3 style="font-weight:600;font-size:16px;color:var(--navy);margin:0 0 4px;">Інженерія та збірка</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0;">Від рами до першого зльоту своїми руками.</p>
-        </div>
-        <div class="card" style="padding:20px;border:1px solid var(--gray-200);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2"/></svg>
-            <span style="font-weight:600;font-size:13px;color:var(--blue-mid);">Тиждень 2</span>
-          </div>
-          <h3 style="font-weight:600;font-size:16px;color:var(--navy);margin:0 0 4px;">Фізика польоту й радіо</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0;">Чому дрон тримається в небі та як ним керує сигнал.</p>
-        </div>
-        <div class="card" style="padding:20px;border:1px solid var(--gray-200);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 4-5 5-5 10a5 5 0 0 0 10 0c0-5-5-6-5-10z"/></svg>
-            <span style="font-weight:600;font-size:13px;color:var(--green);">Тиждень 3</span>
-          </div>
-          <h3 style="font-weight:600;font-size:16px;color:var(--navy);margin:0 0 4px;">Хімія та екологія</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0;">Моніторинг полів, лісів і води — наука на користь громаді.</p>
-        </div>
+  <div class="screen feat" style="overflow:hidden;color:#fff">
+    <div class="feature-bg" style="background-image:url('img/community.jpg')"></div>
+    <div class="hero-in" style="text-align:center;max-width:760px">
+      <div class="kick" style="justify-content:center">Хто навчає</div>
+      <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+      <div class="num-strip feat-strip">
+        <div><div class="n">2</div><div class="l">наставники вже в команді</div></div>
+        <div><div class="n">50/50</div><div class="l">діти воїнів і цивільних</div></div>
+        <div><div class="n">100<span class="u">%</span></div><div class="l">відкрита програма для батьків</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ============ ICON ROW ============ -->
-  <div class="wrap" style="padding-top:34px;padding-bottom:20px;">
-    <span class="eyebrow" style="color:var(--muted);">Іконографіка системи</span>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px;margin-top:14px;">
-      <!-- drone -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2.3"/><circle cx="19" cy="5" r="2.3"/><circle cx="5" cy="19" r="2.3"/><circle cx="19" cy="19" r="2.3"/><rect x="9" y="9" width="6" height="6" rx="1.4"/><path d="M6.6 6.6l1.8 1.8M17.4 6.6l-1.8 1.8M6.6 17.4l1.8-1.8M17.4 17.4l-1.8-1.8"/></svg>
-        <span style="font-size:12px;font-weight:600;">Дрон</span>
-      </div>
-      <!-- gear / engineering -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
-        <span style="font-size:12px;font-weight:600;">Інженерія</span>
-      </div>
-      <!-- graduation cap -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11v4.5c0 1.1 2.7 2.5 6 2.5s6-1.4 6-2.5V11"/><path d="M22 9v4.5"/></svg>
-        <span style="font-size:12px;font-weight:600;">Навчання</span>
-      </div>
-      <!-- shield -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span style="font-size:12px;font-weight:600;">Безпека</span>
-      </div>
-      <!-- unity / hands -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l3-3 3 1 3-3 3 3 3-1 3 3"/><path d="M3 13v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3"/><circle cx="12" cy="5.5" r="1.6"/></svg>
-        <span style="font-size:12px;font-weight:600;">Єдність</span>
-      </div>
-      <!-- signal / radio -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="1.8"/><path d="M8.5 9.5a5 5 0 0 1 7 0M5.7 6.7a9 9 0 0 1 12.6 0"/><path d="M12 14.8V20"/></svg>
-        <span style="font-size:12px;font-weight:600;">Радіо</span>
-      </div>
-      <!-- map pin -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4-4.5 7-7.6 7-11a7 7 0 0 0-14 0c0 3.4 3 6.5 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-        <span style="font-size:12px;font-weight:600;">Громада</span>
-      </div>
-      <!-- heart -->
-      <div class="card" style="padding:16px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--navy);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.5A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.5C19 15.6 12 20 12 20z"/></svg>
-        <span style="font-size:12px;font-weight:600;">Підтримка</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ APPLIED IMAGERY ============ -->
-  <div class="wrap" style="padding-top:18px;padding-bottom:44px;">
-    <span class="eyebrow" style="color:var(--muted);">Наставники-ветерани</span>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:14px;">
-      <div class="card" style="padding:18px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;text-align:center;">
-        <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;border:3px solid var(--yellow);background:var(--blue-light);">
-          <img src="../assets/img/valentyn.png" alt="Валентин" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentNode.style.background='var(--blue-mid)';"/>
-        </div>
-        <div style="font-weight:600;font-size:15px;color:var(--navy);margin-top:11px;">Валентин</div>
-        <div style="font-size:13px;color:var(--muted);">Інженер-наставник</div>
-      </div>
-      <div class="card" style="padding:18px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;text-align:center;">
-        <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;border:3px solid var(--yellow);background:var(--blue-light);">
-          <img src="../assets/img/olya.png" alt="Оля" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentNode.style.background='var(--blue-mid)';"/>
-        </div>
-        <div style="font-weight:600;font-size:15px;color:var(--navy);margin-top:11px;">Оля</div>
-        <div style="font-size:13px;color:var(--muted);">Координаторка табору</div>
-      </div>
-      <div class="card" style="padding:18px;border:1px solid var(--gray-200);display:flex;flex-direction:column;align-items:center;text-align:center;">
-        <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;border:3px solid var(--yellow);background:var(--blue-light);">
-          <img src="../assets/img/tykhyy.png" alt="Тихий" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentNode.style.background='var(--blue-mid)';"/>
-        </div>
-        <div style="font-weight:600;font-size:15px;color:var(--navy);margin-top:11px;">Тихий</div>
-        <div style="font-size:13px;color:var(--muted);">Інструктор з радіо</div>
-      </div>
-      <!-- abstract field-and-sky art tile -->
-      <div class="card" style="padding:0;border:1px solid var(--gray-200);overflow:hidden;min-height:130px;">
-        <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;display:block;" aria-label="Поле і небо">
-          <rect width="200" height="150" fill="#CFE7F8"/>
-          <circle cx="150" cy="40" r="22" fill="#F4B23E"/>
-          <path d="M0 100 q50 -16 100 0 t100 0 V150 H0 Z" fill="#B79A63"/>
-          <path d="M0 118 q50 -10 100 0 t100 0 V150 H0 Z" fill="#3FA46A"/>
-          <g stroke="#15324F" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M44 52 h22 M55 47 v11"/><path d="M44 52 a6 6 0 0 1 -6 -6 M66 52 a6 6 0 0 0 6 -6"/></g>
-        </svg>
+  <div class="screen dark cta" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+    <div class="grid"></div>
+    <div class="hero-in" style="text-align:center">
+      <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+      <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+        <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
       </div>
     </div>
   </div>
 </section></div>
 <div class="concept" id="c3" hidden><section class="dir em" data-theme="3">
-<style>
-  .em{ --em-dark:#0E1116; --em-line:rgba(255,255,255,.05); font-family:var(--f-body); color:var(--ink); }
-  .em *{box-sizing:border-box}
-  .em .screen{ min-height:calc(100vh - var(--barh,56px)); display:flex; flex-direction:column; justify-content:center; position:relative; padding:64px 7vw; }
-  .em .dark{ background:var(--em-dark); color:#fff; }
-  .em .grid{ position:absolute; inset:0; pointer-events:none;
-    background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px);
-    background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
-  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; text-shadow:0 1px 10px rgba(0,0,0,.45); }
-  .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
-  .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
-  .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
-  .em .acc{ color:var(--yellow); }
-  .em .lead{ font-size:clamp(15px,1.5vw,18px); line-height:1.65; max-width:54ch; margin:22px 0 0; }
-  .em .dark .lead{ color:#AEB6C2; }
-  .em .light .lead{ color:var(--muted); }
-  .em .btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top:34px; }
-  .em .btn{ font-family:var(--f-body); font-weight:600; font-size:15px; padding:14px 24px; border-radius:var(--r); border:1.5px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:9px; text-decoration:none; transition:.15s; }
-  .em .btn-p{ background:var(--yellow); color:#fff; }
-  .em .btn-p:hover{ filter:brightness(1.08); }
-  .em .btn-g{ background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
-  .em .btn-g:hover{ border-color:#fff; }
-  .em .light .btn-g{ color:var(--ink); border-color:var(--gray-300); }
-  .em .stats{ display:flex; gap:48px; flex-wrap:wrap; margin-top:54px; }
-  .em .stat .n{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3vw,40px); letter-spacing:-.02em; }
-  .em .dark .stat .n{ color:#fff; } .em .stat .n .u{ color:var(--yellow); }
-  .em .stat .l{ font-size:12.5px; color:#8A93A1; margin-top:4px; max-width:16ch; }
-  .em .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
-  .em .hero-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,#0E1116 0%,rgba(14,17,22,.86) 42%,rgba(14,17,22,.42) 100%); }
-  .em .hero-in{ position:relative; z-index:2; max-width:1180px; width:100%; margin:0 auto; }
-  .em .wrap{ max-width:1180px; width:100%; margin:0 auto; }
-  .em .split{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-  .em .shot{ position:relative; border-radius:var(--r-l); overflow:hidden; aspect-ratio:4/3; box-shadow:0 1px 0 rgba(255,255,255,.06), 0 30px 60px -30px rgba(0,0,0,.6); }
-  .em .shot img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .em .shot .tag{ position:absolute; left:14px; bottom:14px; z-index:2; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:rgba(14,17,22,.7); border:1px solid rgba(255,255,255,.16); padding:6px 12px; border-radius:100px; backdrop-filter:blur(4px); }
-  .em .disc{ list-style:none; padding:0; margin:26px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gray-200); border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; }
-  .em .disc li{ background:var(--paper); padding:18px 20px; display:flex; gap:13px; align-items:flex-start; }
-  .em .disc .di{ width:34px; height:34px; border-radius:var(--r-s); background:var(--blue-light); color:var(--yellow); display:flex; align-items:center; justify-content:center; flex:none; }
-  .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
-  .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
-  .em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
-  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:
-    radial-gradient(70% 60% at 50% 46%, rgba(14,17,22,.72), transparent 100%),
-    linear-gradient(180deg, rgba(14,17,22,.6), rgba(14,17,22,.92)); }
-  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; margin:18px auto 0; color:#fff; text-shadow:0 2px 26px rgba(0,0,0,.7); }
-  .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
-  .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); padding:7px 14px; border-radius:100px; }
-  .em .light{ background:var(--gray-50); color:var(--ink); }
-  .em .coleyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
-  .em .num-strip{ display:flex; gap:0; border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; margin-top:6px; background:var(--paper); }
-  .em .num-strip > div{ flex:1; padding:22px 20px; border-left:1px solid var(--gray-200); }
-  .em .num-strip > div:first-child{ border-left:none; }
-  .em .num-strip .n{ font-family:var(--f-display); font-weight:800; font-size:30px; color:var(--ink); letter-spacing:-.02em; }
-  .em .num-strip .n .u{ color:var(--yellow); }
-  .em .num-strip .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
-  @media (max-width:860px){
-    .em .split{ grid-template-columns:1fr; gap:30px; }
-    .em .disc{ grid-template-columns:1fr; }
-    .em .num-strip{ flex-wrap:wrap; } .em .num-strip > div{ flex:1 1 45%; }
-    .em .hero-bg::after{ background:linear-gradient(180deg,rgba(14,17,22,.5),rgba(14,17,22,.92)); }
-    .em .screen{ padding:54px 24px; min-height:auto; }
-  }
-</style>
-
-<!-- ===== HERO ===== -->
-<div class="screen dark" style="overflow:hidden">
-  <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
-  <div class="grid"></div>
-  <div class="hero-in">
-    <div class="kick">Інженерна школа дронів · 13–17</div>
-    <h1 class="em-h">Дрон — це ціла <span class="acc">наука</span>. Пілотування — лише 5–10%.</h1>
-    <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
-    <div class="btns">
-      <a class="btn btn-p" href="#" onclick="return false">Записати дитину
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
-      <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
-      <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
-      <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== ЩО ВИВЧАЮТЬ (split, light) ===== -->
-<div class="screen light">
-  <div class="wrap split">
-    <div>
-      <div class="coleyebrow">Програма</div>
-      <h2 class="em-h" style="color:var(--ink)">Шість наук за одним польотом</h2>
-      <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
-      <ul class="disc">
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
-        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
-      </ul>
-    </div>
-    <div class="shot"><img src="img/components-knoll.jpg" alt="Електронні компоненти та Arduino"><span class="tag">Власні проєкти</span></div>
-  </div>
-</div>
-
-<!-- ===== РУКАМИ (split, dark) ===== -->
-<div class="screen dark" style="overflow:hidden">
-  <div class="grid"></div>
-  <div class="wrap split" style="position:relative;z-index:2">
-    <div class="shot"><img src="img/hands-breadboard.jpg" alt="Підліток збирає схему на макетній платі"><span class="tag">З першого заняття</span></div>
-    <div>
-      <div class="kick">Метод</div>
-      <h2 class="em-h">Руками — з першого дня</h2>
-      <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
-      <div class="meta-row">
-        <span class="pill">Симулятори</span>
-        <span class="pill">Збірка FPV</span>
-        <span class="pill">Реальні польоти</span>
-        <span class="pill">Власний проєкт</span>
+  <div class="screen dark hero" style="overflow:hidden">
+    <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
+    <div class="grid"></div>
+    <div class="hero-in">
+      <div class="kick">Інженерна школа дронів · 13–17</div>
+      <h1 class="em-h">Дрон — це ціла <span class="acc">наука</span>. Пілотування — лише 5–10%.</h1>
+      <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+      <div class="btns">
+        <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== ДРАМАТИЧНИЙ БЛОК (full image, dark) ===== -->
-<div class="screen" style="overflow:hidden;color:#fff">
-  <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
-  <div class="hero-in" style="text-align:center;max-width:760px">
-    <div class="kick" style="justify-content:center">Хто навчає</div>
-    <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
-    <div class="num-strip" style="margin-top:34px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14)">
-      <div><div class="n" style="color:#fff">2</div><div class="l" style="color:#AEB6C2">наставники вже в команді</div></div>
-      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">50/50</div><div class="l" style="color:#AEB6C2">діти воїнів і цивільних</div></div>
-      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">100<span class="u">%</span></div><div class="l" style="color:#AEB6C2">відкрита програма для батьків</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== CTA ===== -->
-<div class="screen dark" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
-  <div class="grid"></div>
-  <div class="hero-in" style="text-align:center">
-    <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
-    <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
-    <div class="btns" style="justify-content:center">
-      <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
-      <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
-    </div>
-  </div>
-</div>
-</section>
-</div>
-<div class="concept" id="c4" hidden><section class="dir" data-theme="4" aria-label="Брендовий напрям 4 — Сила і впевненість">
-  <style>
-    .dir{--maxw:1080px;font-family:var(--f-body);color:var(--ink);background:var(--gray-50);
-      border-radius:var(--r-l);overflow:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-    .dir *{box-sizing:border-box}
-    .dir .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-    .dir h1,.dir h2,.dir h3,.dir h4{font-family:var(--f-display);margin:0;color:var(--navy);line-height:.98;letter-spacing:-.01em}
-    .dir p{margin:0}
-    .dir .acc{color:var(--yellow)}
-    .dir .accY{color:var(--blue-mid)}
-    /* section heads */
-    .dir .lbl{font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.22em;
-      text-transform:uppercase;color:var(--yellow);display:inline-flex;align-items:center;gap:10px}
-    .dir .lbl::before{content:"";width:26px;height:3px;background:var(--yellow);display:inline-block}
-    .dir .block{padding:54px 0;border-bottom:1px solid var(--gray-200)}
-    .dir .block.dark{background:var(--navy);border-bottom:none}
-    .dir .dark h1,.dir .dark h2,.dir .dark h3,.dir .dark h4{color:#fff}
-    .dir .dark .lbl{color:var(--blue-mid)}.dir .dark .lbl::before{background:var(--blue-mid)}
-    .dir .dark p{color:#C9D2E0}
-    /* buttons */
-    .dir .btn{font-family:var(--f-display);font-weight:700;font-size:14px;border-radius:var(--r);
-      padding:14px 26px;border:2px solid transparent;cursor:pointer;display:inline-flex;align-items:center;
-      gap:9px;text-decoration:none;letter-spacing:.01em;transition:transform .12s ease,box-shadow .12s ease;line-height:1}
-    .dir .btn:active{transform:translateY(1px)}
-    .dir .btn-primary{background:var(--yellow);color:var(--navy);box-shadow:var(--shadow-sm)}
-    .dir .btn-primary:hover{box-shadow:0 8px 22px -6px rgba(255,122,26,.55)}
-    .dir .btn-secondary{background:transparent;color:var(--navy);border-color:var(--navy)}
-    .dir .dark .btn-secondary{color:#fff;border-color:rgba(255,255,255,.55)}
-    .dir .btn-ghost{background:var(--navy);color:#fff}
-    /* chips/tags */
-    .dir .chiprow{display:flex;flex-wrap:wrap;gap:10px}
-    .dir .tag{font-family:var(--f-display);font-weight:700;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
-      padding:7px 13px;border-radius:999px;background:var(--yellow-soft);color:#9A3D00;border:1px solid #FFD3AE}
-    .dir .tag.solid{background:var(--navy);color:#fff;border-color:var(--navy)}
-    .dir .tag.y{background:var(--blue-light);color:#7A5A00;border-color:#FFE48A}
-    .dir .tag.line{background:transparent;color:var(--navy);border:1.5px solid var(--gray-300)}
-    /* cards */
-    .dir .grid{display:grid;gap:18px}
-    .dir .card{background:var(--paper);border-radius:var(--r-l);border:1px solid var(--gray-200);
-      padding:24px;box-shadow:var(--shadow-sm)}
-    .dir .card-bold{background:var(--navy);color:#fff;border-radius:var(--r-l);padding:26px;position:relative;overflow:hidden}
-    .dir .card-bold h3{color:#fff}
-    .dir .card-bold .edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--yellow)}
-    .dir .badge{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:12.5px;
-      padding:6px 12px;border-radius:var(--r-s);background:var(--blue-light);color:#7A5A00}
-    .dir .badge.win{background:#E4F6EC;color:#0F6E3B}
-    /* type specimen */
-    .dir .spec-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--gray-100)}
-    .dir .spec-row:last-child{border-bottom:none}
-    .dir .spec-meta{font-size:12px;color:var(--muted);font-weight:600;min-width:148px}
-    /* swatches */
-    .dir .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:12px}
-    .dir .sw{border-radius:var(--r);overflow:hidden;border:1px solid var(--gray-200);background:var(--paper)}
-    .dir .sw .chip{height:62px}.dir .sw .meta{padding:9px 11px}
-    .dir .sw .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
-    .dir .sw .hx{font-size:11px;color:var(--muted);font-family:var(--f-body);letter-spacing:.02em}
-    /* hero */
-    .dir .hero{background:var(--navy);position:relative;overflow:hidden}
-    .dir .hero .wrap{padding-top:60px;padding-bottom:60px;position:relative;z-index:2}
-    .dir .hero-art{position:absolute;right:-40px;top:0;bottom:0;width:48%;z-index:1;opacity:.96}
-    .dir .h-display{font-weight:900;font-size:clamp(40px,6.4vw,78px);color:#fff;letter-spacing:-.02em}
-    .dir .h-sub{color:#C9D2E0;font-size:17px;max-width:46ch;margin-top:20px;line-height:1.55}
-    .dir .statline{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px}
-    .dir .statline .n{font-family:var(--f-display);font-weight:900;font-size:40px;color:var(--blue-mid);line-height:1}
-    .dir .statline .c{font-size:12.5px;color:#9FB0C8;margin-top:6px;max-width:18ch}
-    /* stat strip */
-    .dir .stat-deck{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--paper);
-      border:1px solid var(--gray-200);border-radius:var(--r-l);overflow:hidden}
-    .dir .stat-cell{padding:26px 22px;border-left:1px solid var(--gray-200)}
-    .dir .stat-cell:first-child{border-left:none}
-    .dir .stat-cell .big{font-family:var(--f-display);font-weight:900;font-size:clamp(40px,5vw,58px);color:var(--navy);line-height:.95}
-    .dir .stat-cell .cap{font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--yellow);margin-top:12px}
-    .dir .stat-cell .d{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
-    /* icon row */
-    .dir .icons{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
-    .dir .ic{aspect-ratio:1;border-radius:var(--r);border:1px solid var(--gray-200);background:var(--paper);
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:var(--navy);padding:8px}
-    .dir .ic span{font-size:10.5px;font-weight:600;color:var(--muted);text-align:center;line-height:1.2}
-    .dir .ic svg{width:30px;height:30px}
-    /* feature block */
-    .dir .feat{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-    .dir .feat ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:14px}
-    .dir .feat li{display:flex;gap:13px;align-items:flex-start;font-size:15px;color:var(--ink)}
-    .dir .feat li b{font-family:var(--f-display);font-weight:700;display:block;font-size:15px;color:var(--navy);margin-bottom:2px}
-    .dir .tick{flex:none;width:26px;height:26px;border-radius:7px;background:var(--yellow);display:flex;align-items:center;justify-content:center;margin-top:1px}
-    /* applied imagery */
-    .dir .people{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
-    .dir .person{background:var(--paper);border:1px solid var(--gray-200);border-radius:var(--r-l);overflow:hidden}
-    .dir .person .ph{height:128px;border-bottom:4px solid var(--yellow)}
-    .dir .person .meta{padding:13px 15px}
-    .dir .person .nm{font-family:var(--f-display);font-weight:700;font-size:14.5px;color:var(--navy)}
-    .dir .person .rl{font-size:12.5px;color:var(--muted);margin-top:3px}
-    .dir .mch{display:inline-flex;align-items:center;gap:8px;background:var(--gray-50);border:1px solid var(--gray-200);
-      border-radius:999px;padding:5px 12px 5px 5px;margin-top:12px}
-    .dir .mch .av{width:26px;height:26px;border-radius:50%;overflow:hidden;flex:none}
-    .dir .mch .t1{font-family:var(--f-display);font-weight:700;font-size:11.5px;color:var(--navy)}
-    .dir .mch .t2{font-size:11px;color:var(--muted)}
-    @media(max-width:860px){
-      .dir .stat-deck{grid-template-columns:repeat(2,1fr)}
-      .dir .stat-cell:nth-child(3){border-left:none}
-      .dir .stat-cell:nth-child(n+3){border-top:1px solid var(--gray-200)}
-      .dir .icons{grid-template-columns:repeat(4,1fr)}
-      .dir .feat{grid-template-columns:1fr}
-      .dir .hero-art{display:none}
-    }
-    @media(max-width:520px){.dir .stat-deck{grid-template-columns:1fr}.dir .icons{grid-template-columns:repeat(3,1fr)}}
-  </style>
-
-  <!-- ============ HERO (NGO) ============ -->
-  <header class="hero">
-    <svg class="hero-art" viewBox="0 0 520 520" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-      <circle cx="300" cy="260" r="210" stroke="rgba(255,196,0,.16)" stroke-width="2" stroke-dasharray="3 9"/>
-      <circle cx="300" cy="260" r="150" stroke="rgba(255,122,26,.22)" stroke-width="2" stroke-dasharray="3 9"/>
-      <g transform="translate(300 260)">
-        <g stroke="#FFC400" stroke-width="6" stroke-linecap="round">
-          <line x1="-86" y1="-86" x2="-40" y2="-40"/><line x1="86" y1="-86" x2="40" y2="-40"/>
-          <line x1="-86" y1="86" x2="-40" y2="40"/><line x1="86" y1="86" x2="40" y2="40"/>
-        </g>
-        <g fill="none" stroke="#FFC400" stroke-width="5">
-          <circle cx="-86" cy="-86" r="26"/><circle cx="86" cy="-86" r="26"/>
-          <circle cx="-86" cy="86" r="26"/><circle cx="86" cy="86" r="26"/>
-        </g>
-        <g stroke="rgba(255,255,255,.5)" stroke-width="3"><path d="M-100 -86h-22M100 -86h22M-100 86h-22M100 86h22"/></g>
-        <rect x="-34" y="-34" width="68" height="68" rx="14" fill="#FF7A1A"/>
-        <rect x="-13" y="-13" width="26" height="26" rx="6" fill="#0E1626"/>
-      </g>
-    </svg>
-    <div class="wrap">
-      <span class="lbl">Громадська організація</span>
-      <h1 class="h-display" style="margin-top:18px">ОБ'ЄДНАНІ.<br><span class="acc">СИЛЬНІ.</span> РАЗОМ!</h1>
-      <p class="h-sub">Дрон — це ціла наука: інженерія, фізика, радіо, хімія. Ми вчимо підлітків думати, конструювати й створювати майбутнє — впевнено й безпечно, поруч із наставниками-ветеранами.</p>
-      <div class="chiprow" style="margin-top:26px">
-        <span class="tag y">наука, не зброя</span><span class="tag y">5–10% — це пілотування</span><span class="tag y">цивільне передусім</span>
-      </div>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px">
-        <a class="btn btn-primary" href="#" onclick="return false">Записати дитину <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-secondary" href="#" onclick="return false">Про програму</a>
-      </div>
-      <div class="statline">
-        <div><div class="n">94%</div><div class="c">батьків радять школу друзям</div></div>
-        <div><div class="n">7</div><div class="c">напрямів інженерії в курсі</div></div>
-        <div><div class="n">120+</div><div class="c">підлітків випущено за рік</div></div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ============ TYPE SPECIMEN ============ -->
-  <div class="block">
-    <div class="wrap">
-      <span class="lbl">Типографіка</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Unbounded + Manrope</h2>
-      <p style="color:var(--muted);font-size:14.5px;margin-top:8px;max-width:60ch">Дисплей Unbounded у важких вагах несе маніфестну енергію; Manrope тримає тіло чистим і довірливим.</p>
-      <div style="margin-top:26px;background:var(--paper);border:1px solid var(--gray-200);border-radius:var(--r-l);padding:26px 28px">
-        <div class="spec-row"><span class="spec-meta">Display · Unbounded 900</span><span style="font-family:var(--f-display);font-weight:900;font-size:44px;color:var(--navy);line-height:1">Сміливість рятує</span></div>
-        <div class="spec-row"><span class="spec-meta">Display · Unbounded 700</span><span style="font-family:var(--f-display);font-weight:700;font-size:30px;color:var(--navy)">Інженери з 13 років</span></div>
-        <div class="spec-row"><span class="spec-meta">Accent · Unbounded 800</span><span style="font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--yellow)">Наука, а не зброя</span></div>
-        <div class="spec-row"><span class="spec-meta">Body · Manrope 600</span><span style="font-weight:600;font-size:18px;color:var(--ink)">Ми показуємо, як дрон допомагає в агро, доставці та порятунку людей.</span></div>
-        <div class="spec-row"><span class="spec-meta">Body · Manrope 400</span><span style="font-weight:400;font-size:15px;color:var(--muted);max-width:62ch">Пілотування — лише 5–10% курсу. Решта — фізика польоту, радіозв'язок, основи хімії та інженерне мислення, яке знадобиться будь-де в житті.</span></div>
+      <div class="stats">
+        <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+        <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+        <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ============ COLOR PALETTE ============ -->
-  <div class="block">
-    <div class="wrap">
-      <span class="lbl">Палітра</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Ніч-синій · білий · <span class="acc">вогонь</span></h2>
-      <div class="swatches" style="margin-top:24px">
-        <div class="sw"><div class="chip" style="background:var(--navy)"></div><div class="meta"><div class="nm">Ніч-синій</div><div class="hx">--navy · #0E1626</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><div class="nm">Чорнило</div><div class="hx">--ink · #14213A</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--yellow)"></div><div class="meta"><div class="nm">Бурштин-вогонь</div><div class="hx">--yellow · #FF7A1A</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--blue-mid)"></div><div class="meta"><div class="nm">Хай-віз жовтий</div><div class="hx">--blue-mid · #FFC400</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--yellow-soft)"></div><div class="meta"><div class="nm">М'який бурштин</div><div class="hx">--yellow-soft</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--cream)"></div><div class="meta"><div class="nm">Крем</div><div class="hx">--cream · #FFF6EC</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--gray-50);border-bottom:1px solid var(--gray-200)"></div><div class="meta"><div class="nm">Фон сторінки</div><div class="hx">--gray-50</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--green)"></div><div class="meta"><div class="nm">Перемога</div><div class="hx">--green · #1F9D55</div></div></div>
-        <div class="sw"><div class="chip" style="background:var(--danger)"></div><div class="meta"><div class="nm">Тривога</div><div class="hx">--danger · #E5484D</div></div></div>
+  <div class="screen light">
+    <div class="wrap split">
+      <div>
+        <div class="coleyebrow">Програма</div>
+        <h2 class="em-h ink">Шість наук за одним польотом</h2>
+        <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+        <ul class="disc">
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+        </ul>
       </div>
+      <div class="shot"><img src="img/components-knoll.jpg" alt="Навчання та компоненти" loading="lazy"><span class="tag">Власні проєкти</span></div>
     </div>
   </div>
 
-  <!-- ============ COMPONENTS ============ -->
-  <div class="block">
-    <div class="wrap">
-      <span class="lbl">Компоненти</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Кнопки, чипи, картки</h2>
-
-      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:24px">
-        <button class="btn btn-primary">Долучитися <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <button class="btn btn-secondary">Дізнатися більше</button>
-        <button class="btn btn-ghost">Підтримати</button>
-      </div>
-
-      <div class="chiprow" style="margin-top:22px">
-        <span class="tag solid">Інженерія</span><span class="tag">Фізика польоту</span><span class="tag y">Радіозв'язок</span>
-        <span class="tag">Хімія матеріалів</span><span class="tag line">Пошук і порятунок</span><span class="tag line">Екологія</span>
-      </div>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:26px">
-        <!-- card style A: light -->
-        <div class="card">
-          <div class="badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 18l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg>Напрям</div>
-          <h3 style="font-size:21px;font-weight:800;margin-top:16px">Дрон — це ціла наука</h3>
-          <p style="font-size:14.5px;color:var(--muted);margin-top:10px;line-height:1.6">Інженерія, фізика, радіо й хімія. Пілотування — лише вершина айсберга, а не суть.</p>
-          <div style="margin-top:16px;display:flex;gap:10px;align-items:center"><span class="tag y">основа основ</span><span style="font-size:13px;color:var(--muted)">5–10% — політ</span></div>
-        </div>
-        <!-- card style B: bold navy -->
-        <div class="card-bold"><span class="edge"></span>
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
-            <div class="badge win"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Для батьків</div>
-            <span style="font-family:var(--f-display);font-weight:900;font-size:34px;color:var(--blue-mid);line-height:1">100%</span>
-          </div>
-          <h3 style="font-size:21px;font-weight:800;margin-top:18px;color:#fff">Безпека понад усе</h3>
-          <p style="font-size:14.5px;color:#C9D2E0;margin-top:10px;line-height:1.6">Сертифіковані наставники, прозорі правила, відкриті двері для батьків на кожному занятті.</p>
-          <button class="btn btn-primary" style="margin-top:18px;padding:11px 20px;font-size:13px">Дивитися як це працює</button>
-        </div>
-      </div>
-
-      <!-- stat / badge row -->
-      <div class="stat-deck" style="margin-top:18px">
-        <div class="stat-cell"><div class="big">5–10<span class="acc">%</span></div><div class="cap">це пілотування</div><div class="d">решта курсу — інженерне мислення</div></div>
-        <div class="stat-cell"><div class="big">7</div><div class="cap">наук в одному дроні</div><div class="d">фізика, радіо, хімія, код та більше</div></div>
-        <div class="stat-cell"><div class="big">13<span class="acc">+</span></div><div class="cap">вік учасників</div><div class="d">підлітки 13–17 років</div></div>
-        <div class="stat-cell"><div class="big">0</div><div class="cap">страху</div><div class="d">впевненість, а не тривога</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ ICON ROW ============ -->
-  <div class="block">
-    <div class="wrap">
-      <span class="lbl">Іконографіка</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Пласкі, рішучі, впізнавані</h2>
-      <div class="icons" style="margin-top:24px">
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3.4"/><circle cx="25" cy="7" r="3.4"/><circle cx="7" cy="25" r="3.4"/><circle cx="25" cy="25" r="3.4"/><path d="M9.4 9.4l3.4 3.4M22.6 9.4l-3.4 3.4M9.4 22.6l3.4-3.4M22.6 22.6l-3.4-3.4"/><rect x="12.6" y="12.6" width="6.8" height="6.8" rx="2" fill="var(--yellow)" stroke="none"/></svg><span>Дрон</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="4"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.7 6.7l2.8 2.8M22.5 22.5l2.8 2.8M25.3 6.7l-2.8 2.8M9.5 22.5l-2.8 2.8"/></svg><span>Інженерія</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 5l12 5-12 5L4 10z"/><path d="M9 12.5V18c0 2.5 3.1 4.5 7 4.5s7-2 7-4.5v-5.5"/><path d="M28 10v7"/></svg><span>Освіта</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3l11 4v7c0 7-4.6 11.4-11 14C9.6 25.4 5 21 5 14V7z"/><path d="M11.5 16l3 3 6-6.5" stroke="var(--yellow)"/></svg><span>Безпека</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="11" r="3.4"/><circle cx="22" cy="11" r="3.4"/><path d="M4.5 25c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6M16.5 25c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/></svg><span>Єдність</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="22" r="2.6" fill="var(--yellow)" stroke="none"/><path d="M11 17.5a7 7 0 0110 0M7 13.5a12.6 12.6 0 0118 0M3 9.5a18 18 0 0126 0"/></svg><span>Радіо</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3C10.5 3 6 7.4 6 12.8 6 20 16 29 16 29s10-9 10-16.2C26 7.4 21.5 3 16 3z"/><circle cx="16" cy="12.6" r="3.4" fill="var(--yellow)" stroke="none"/></svg><span>Громада</span></div>
-        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 27S5 20.5 5 12.5A5.5 5.5 0 0116 9a5.5 5.5 0 0111 3.5C27 20.5 16 27 16 27z" fill="var(--yellow)" stroke="none"/></svg><span>Турбота</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ FEATURE BLOCK (school project) ============ -->
-  <div class="block dark">
-    <div class="wrap">
-      <span class="lbl">Проєкт «Дрони та діти»</span>
-      <div class="feat" style="margin-top:22px">
-        <div>
-          <h2 style="font-size:clamp(30px,4.4vw,46px);font-weight:900">НЕ <span style="color:var(--blue-mid)">ЗБРОЯ</span>.<br>А ЦІЛА <span class="acc">НАУКА</span>.</h2>
-          <p style="margin-top:18px;font-size:15.5px;max-width:50ch">Літня інженерна школа-табір для підлітків. Тут вчаться конструювати дрони для агро, доставки, екології та порятунку людей — поруч із наставниками-ветеранами.</p>
-          <ul>
-            <li><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E1626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Інженерія перш за все</b>Фізика польоту, радіо, хімія матеріалів і код — пілотування лише 5–10%.</span></li>
-            <li><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E1626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Цивільне застосування</b>Агро, доставка, пошук і порятунок, моніторинг екології — спокій для батьків.</span></li>
-            <li><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E1626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Ветерани-наставники</b>Місток між цивільними, підлітками та досвідом — впевненість, а не страх.</span></li>
-          </ul>
-          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px">
-            <a class="btn btn-primary" href="#" onclick="return false">Подати заявку на зміну</a>
-            <a class="btn btn-secondary" href="#" onclick="return false">Програма табору</a>
-          </div>
-        </div>
-        <div>
-          <svg viewBox="0 0 440 360" fill="none" aria-hidden="true" style="width:100%;height:auto;border-radius:var(--r-l)">
-            <rect width="440" height="360" rx="16" fill="#0A1120"/>
-            <circle cx="220" cy="180" r="138" stroke="rgba(255,196,0,.14)" stroke-width="2" stroke-dasharray="3 9"/>
-            <circle cx="220" cy="180" r="92" stroke="rgba(255,122,26,.2)" stroke-width="2" stroke-dasharray="3 9"/>
-            <!-- satellites -->
-            <g font-family="var(--f-display)" font-weight="700" font-size="11" fill="#9FB0C8" text-anchor="middle">
-              <g><circle cx="220" cy="42" r="30" fill="rgba(255,255,255,.06)"/><path d="M213 42a7 7 0 1114 0M220 35v-6" stroke="#FFC400" stroke-width="2" fill="none" stroke-linecap="round"/><text x="220" y="88">Радіо</text></g>
-              <g><circle cx="358" cy="135" r="30" fill="rgba(255,255,255,.06)"/><circle cx="358" cy="131" r="6" stroke="#FFC400" stroke-width="2" fill="none"/><path d="M358 122v-4M358 144v-4M349 131h-4M371 131h4" stroke="#FFC400" stroke-width="2" stroke-linecap="round"/><text x="358" y="181">Фізика</text></g>
-              <g><circle cx="330" cy="285" r="30" fill="rgba(255,255,255,.06)"/><path d="M330 274l9 4-9 4-9-4z" stroke="#FFC400" stroke-width="2" fill="none" stroke-linejoin="round"/><text x="330" y="331">Освіта</text></g>
-              <g><circle cx="110" cy="285" r="30" fill="rgba(255,255,255,.06)"/><path d="M104 271v8c0 4 5 6 6 6s6-2 6-6v-8" stroke="#FFC400" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="110" cy="271" r="3" fill="#FFC400"/><text x="110" y="331">Хімія</text></g>
-              <g><circle cx="82" cy="135" r="30" fill="rgba(255,255,255,.06)"/><path d="M73 140a9 9 0 0118 0" stroke="#FFC400" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="78" cy="130" r="2.5" fill="#FFC400"/><circle cx="86" cy="130" r="2.5" fill="#FFC400"/><text x="82" y="181">Єдність</text></g>
-            </g>
-            <!-- center drone (engineering = основа) -->
-            <g transform="translate(220 180)">
-              <g stroke="#FF7A1A" stroke-width="5" stroke-linecap="round"><line x1="-30" y1="-30" x2="-14" y2="-14"/><line x1="30" y1="-30" x2="14" y2="-14"/><line x1="-30" y1="30" x2="-14" y2="14"/><line x1="30" y1="30" x2="14" y2="14"/></g>
-              <g fill="none" stroke="#FF7A1A" stroke-width="4"><circle cx="-30" cy="-30" r="11"/><circle cx="30" cy="-30" r="11"/><circle cx="-30" cy="30" r="11"/><circle cx="30" cy="30" r="11"/></g>
-              <rect x="-15" y="-15" width="30" height="30" rx="8" fill="#FF7A1A"/>
-              <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#0A1120"/>
-            </g>
-            <g transform="translate(220 224)"><rect x="-44" y="-11" width="88" height="22" rx="11" fill="#FFC400"/><text x="0" y="4" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="10.5" fill="#0E1626" letter-spacing=".06em">ОСНОВА ОСНОВ</text></g>
-          </svg>
+  <div class="screen dark" style="overflow:hidden">
+    <div class="grid"></div>
+    <div class="wrap split" style="position:relative;z-index:2">
+      <div class="shot"><img src="img/hands-breadboard.jpg" alt="Практика руками" loading="lazy"><span class="tag">З першого заняття</span></div>
+      <div>
+        <div class="kick">Метод</div>
+        <h2 class="em-h">Руками — з першого дня</h2>
+        <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+        <div class="meta-row">
+          <span class="pill">Симулятори</span><span class="pill">Збірка FPV</span><span class="pill">Реальні польоти</span><span class="pill">Власний проєкт</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============ FEAR -> TRUST (versus) ============ -->
-  <div class="block" style="background:var(--cream)">
-    <div class="wrap">
-      <span class="lbl">Для обережних батьків</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Від <span style="color:var(--danger)">страху</span> — до <span style="color:var(--green)">довіри</span></h2>
-      <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:24px;gap:22px">
-        <div class="card" style="border-left:5px solid var(--danger);border-radius:0 var(--r-l) var(--r-l) 0">
-          <h3 style="font-size:17px;font-weight:800;color:var(--danger)">«А раптом це про війну?»</h3>
-          <p style="font-size:14.5px;color:var(--muted);margin-top:10px;line-height:1.6">Дрон асоціюється лише зі зброєю, а дитину «вчать воювати».</p>
-        </div>
-        <div class="card" style="border-left:5px solid var(--green);border-radius:0 var(--r-l) var(--r-l) 0">
-          <h3 style="font-size:17px;font-weight:800;color:var(--green)">Це про науку і професію</h3>
-          <ul style="list-style:none;padding:0;margin:10px 0 0;display:grid;gap:9px">
-            <li style="display:flex;gap:10px;font-size:14.5px"><span style="color:var(--green);font-weight:800">✓</span>Інженерія, фізика, радіо, хімія — навички на все життя</li>
-            <li style="display:flex;gap:10px;font-size:14.5px"><span style="color:var(--green);font-weight:800">✓</span>Цивільні місії: агро, доставка, порятунок, екологія</li>
-            <li style="display:flex;gap:10px;font-size:14.5px"><span style="color:var(--green);font-weight:800">✓</span>Відкриті заняття та прозорі правила для родин</li>
-          </ul>
-        </div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:22px">
-        <span style="font-size:15px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--danger);text-decoration-thickness:2px">«зброя і страх»</span>
-        <svg width="26" height="18" viewBox="0 0 26 18" fill="none" stroke="var(--yellow)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9h20M16 3l6 6-6 6"/></svg>
-        <span style="font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--navy);background:var(--blue-light);padding:7px 15px;border-radius:var(--r)">«наука і впевненість»</span>
+  <div class="screen feat" style="overflow:hidden;color:#fff">
+    <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
+    <div class="hero-in" style="text-align:center;max-width:760px">
+      <div class="kick" style="justify-content:center">Хто навчає</div>
+      <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+      <div class="num-strip feat-strip">
+        <div><div class="n">2</div><div class="l">наставники вже в команді</div></div>
+        <div><div class="n">50/50</div><div class="l">діти воїнів і цивільних</div></div>
+        <div><div class="n">100<span class="u">%</span></div><div class="l">відкрита програма для батьків</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ============ APPLIED IMAGERY (people) ============ -->
-  <div class="block">
-    <div class="wrap">
-      <span class="lbl">Команда та наставники</span>
-      <h2 style="font-size:30px;font-weight:900;margin-top:16px">Обличчя руху</h2>
-      <div class="people" style="margin-top:24px">
-        <!-- person 1 -->
-        <div class="person">
-          <svg class="ph" viewBox="0 0 150 128" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="150" height="128" fill="#0E1626"/><circle cx="75" cy="50" r="26" fill="#FF7A1A"/><path d="M33 128c0-24 19-40 42-40s42 16 42 40z" fill="#FFC400"/><circle cx="75" cy="50" r="26" fill="none" stroke="#0E1626" stroke-width="3"/></svg>
-          <div class="meta"><div class="nm">Крістіна В.</div><div class="rl">Засновниця · стратегія</div>
-            <div class="mch"><span class="av"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#FF7A1A"/><text x="13" y="18" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="13" fill="#0E1626">К</text></svg></span><span><span class="t1">Кріс</span> <span class="t2">· голова ГО</span></span></div>
-          </div>
-        </div>
-        <!-- person 2 -->
-        <div class="person">
-          <svg class="ph" viewBox="0 0 150 128" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="150" height="128" fill="#14213A"/><circle cx="75" cy="50" r="26" fill="#FFC400"/><path d="M33 128c0-24 19-40 42-40s42 16 42 40z" fill="#FF7A1A"/><circle cx="75" cy="50" r="26" fill="none" stroke="#14213A" stroke-width="3"/></svg>
-          <div class="meta"><div class="nm">Ольга С.</div><div class="rl">Освітні програми</div>
-            <div class="mch"><span class="av"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#FFC400"/><text x="13" y="18" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="13" fill="#0E1626">О</text></svg></span><span><span class="t1">Оля</span> <span class="t2">· методистка</span></span></div>
-          </div>
-        </div>
-        <!-- person 3 -->
-        <div class="person">
-          <svg class="ph" viewBox="0 0 150 128" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="150" height="128" fill="#0E1626"/><circle cx="75" cy="50" r="26" fill="#FFFFFF"/><path d="M33 128c0-24 19-40 42-40s42 16 42 40z" fill="#FF7A1A"/><circle cx="75" cy="50" r="26" fill="none" stroke="#0E1626" stroke-width="3"/></svg>
-          <div class="meta"><div class="nm">Юрій Ф.</div><div class="rl">Інженер-наставник</div>
-            <div class="mch"><span class="av"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#0E1626"/><text x="13" y="18" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="13" fill="#FFC400">Н</text></svg></span><span><span class="t1">Недок</span> <span class="t2">· ветеран</span></span></div>
-          </div>
-        </div>
-        <!-- person 4 -->
-        <div class="person">
-          <svg class="ph" viewBox="0 0 150 128" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="150" height="128" fill="#14213A"/><circle cx="75" cy="50" r="26" fill="#FF7A1A"/><path d="M33 128c0-24 19-40 42-40s42 16 42 40z" fill="#FFFFFF"/><circle cx="75" cy="50" r="26" fill="none" stroke="#14213A" stroke-width="3"/></svg>
-          <div class="meta"><div class="nm">Валентин Т.</div><div class="rl">Безпека та правила</div>
-            <div class="mch"><span class="av"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#FF7A1A"/><text x="13" y="18" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="13" fill="#0E1626">В</text></svg></span><span><span class="t1">Валентин</span> <span class="t2">· куратор</span></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ MANIFESTO FOOTER ============ -->
-  <div class="block dark" style="padding-top:48px;padding-bottom:52px">
-    <div class="wrap" style="text-align:center">
-      <h2 style="font-size:clamp(26px,3.4vw,38px);font-weight:900;max-width:24ch;margin:0 auto">ОБ'ЄДНАНІ. <span class="acc">СИЛЬНІ.</span> <span class="accY">РАЗОМ!</span></h2>
-      <p style="margin:16px auto 0;max-width:54ch;font-size:15.5px">Ми будуємо надію та впевненість — інженерами, які знають, що дрон рятує, годує і шукає людей. Це наша спільна сила.</p>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px">
-        <a class="btn btn-primary" href="#" onclick="return false">Стати наставником</a>
-        <a class="btn btn-secondary" href="#" onclick="return false">Підтримати школу</a>
+  <div class="screen dark cta" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+    <div class="grid"></div>
+    <div class="hero-in" style="text-align:center">
+      <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+      <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+        <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
       </div>
     </div>
   </div>
 </section></div>
-<div class="concept" id="c5" hidden><section class="dir" data-theme="5" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
-  <style>
-    [data-theme="5"] .cc-wrap{padding:0}
-    [data-theme="5"] .cc-disp{font-family:var(--f-display);line-height:1.04;letter-spacing:-.01em;color:var(--navy);margin:0}
-    [data-theme="5"] .cc-eyebrow{font-family:var(--f-body);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin:0}
-    [data-theme="5"] .cc-sec{padding:30px 34px;border-top:1px solid var(--gray-200)}
-    [data-theme="5"] .cc-lab{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
-    [data-theme="5"] .cc-btn{font-family:var(--f-body);font-weight:600;font-size:15px;border-radius:var(--r);padding:13px 24px;border:1.5px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.15s}
-    [data-theme="5"] .cc-btn-pri{background:var(--yellow);color:#2C1E06}
-    [data-theme="5"] .cc-btn-pri:hover{filter:brightness(1.06)}
-    [data-theme="5"] .cc-btn-sec{background:transparent;color:var(--navy);border-color:var(--navy)}
-    [data-theme="5"] .cc-btn-sec:hover{background:var(--navy);color:var(--paper)}
-    [data-theme="5"] .cc-chip{font-weight:500;font-size:13px;padding:7px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--gray-300);background:var(--paper);color:var(--ink)}
-    [data-theme="5"] .cc-card{background:var(--paper);border:1px solid var(--gray-200);border-radius:var(--r-l);box-shadow:var(--shadow-sm)}
-    [data-theme="5"] .cc-grid{display:grid;gap:18px}
-    [data-theme="5"] .cc-ico{width:46px;height:46px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--navy);background:var(--yellow-soft);flex:none}
-    [data-theme="5"] .cc-sw{height:62px;border-radius:var(--r-s);border:1px solid rgba(42,39,35,.10)}
-    [data-theme="5"] .cc-swl{font-size:11px;color:var(--muted);margin:7px 2px 0;display:flex;justify-content:space-between}
-  </style>
-
-  <div class="cc-sec" style="border-top:none;padding:34px 34px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--paper)">
-    <div style="display:flex;align-items:center;gap:13px">
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect width="40" height="40" rx="9" fill="var(--navy)"/><path d="M20 9l3.4 3.4M20 9l-3.4 3.4M20 9v6.5M11 18.5h6.4M11 18.5l2.6 2.6M11 18.5l2.6-2.6M29 18.5h-6.4M29 18.5l-2.6 2.6M29 18.5l-2.6-2.6M20 31l3.4-3.4M20 31l-3.4-3.4M20 31v-6.5" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="var(--yellow)"/></svg>
-      <div style="line-height:1.1">
-        <div style="font-family:var(--f-display);font-weight:700;font-size:16px;letter-spacing:.02em;color:var(--navy)">ОБ'ЄДНАНІ. СИЛЬНІ. РАЗОМ!</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:3px">Громадська організація · напрям «Культурний код»</div>
+<div class="concept" id="c4" hidden><section class="dir em" data-theme="4">
+  <div class="screen dark hero" style="overflow:hidden">
+    <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
+    <div class="grid"></div>
+    <div class="hero-in">
+      <div class="kick">Громадська організація</div>
+      <h1 class="em-h">Не <span class="acc">зброя</span>. А ціла наука.</h1>
+      <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+      <div class="btns">
+        <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
       </div>
-    </div>
-    <div style="display:flex;gap:9px">
-      <span class="cc-chip" style="border-color:var(--blue-light);background:var(--blue-light);color:var(--navy)">Прозорість</span>
-      <button class="cc-btn cc-btn-pri" style="padding:11px 20px;font-size:14px">Підтримати</button>
+      <div class="stats">
+        <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+        <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+        <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
+      </div>
     </div>
   </div>
 
-  <div class="cc-sec" style="background:var(--cream);padding:46px 34px 50px;position:relative;overflow:hidden">
-    <svg viewBox="0 0 120 240" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;right:0;top:0;height:100%;width:120px;opacity:.5"><g fill="none" stroke="var(--yellow)" stroke-width="2"><path d="M30 20l8 8-8 8-8-8z"/><path d="M30 60l8 8-8 8-8-8z"/><path d="M30 100l8 8-8 8-8-8z"/><path d="M30 140l8 8-8 8-8-8z"/><path d="M30 180l8 8-8 8-8-8z"/><path d="M30 220l8 8-8 8-8-8z"/></g><g fill="none" stroke="var(--danger)" stroke-width="2" opacity=".7"><path d="M70 40l8 8-8 8-8-8z"/><path d="M70 120l8 8-8 8-8-8z"/><path d="M70 200l8 8-8 8-8-8z"/></g></svg>
-    <p class="cc-eyebrow">Дрон — це ціла наука</p>
-    <h1 class="cc-disp" style="font-size:44px;max-width:15ch;margin-top:14px">Покоління, що творить майбутнє власними руками</h1>
-    <p style="font-size:17px;line-height:1.6;color:var(--ink);max-width:54ch;margin:18px 0 26px">Інженерна школа дронів для підлітків. Фізика, радіо, хімія, конструювання — а пілотування лише 5–10%. Мирні професії: агро, доставка, пошук і порятунок, екологія.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-      <button class="cc-btn cc-btn-pri">Записати дитину<svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="cc-btn cc-btn-sec">Як влаштована школа</button>
-    </div>
-    <div style="display:flex;gap:34px;margin-top:34px;flex-wrap:wrap">
-      <div><div style="font-family:var(--f-display);font-weight:700;font-size:34px;color:var(--navy)">90%</div><div style="font-size:13px;color:var(--muted);max-width:18ch">наука й інженерія, а не зброя</div></div>
-      <div style="width:1px;background:var(--gray-300)"></div>
-      <div><div style="font-family:var(--f-display);font-weight:700;font-size:34px;color:var(--navy)">240</div><div style="font-size:13px;color:var(--muted);max-width:18ch">підлітків у літніх таборах</div></div>
-      <div style="width:1px;background:var(--gray-300)"></div>
-      <div><div style="font-family:var(--f-display);font-weight:700;font-size:34px;color:var(--navy)">17</div><div style="font-size:13px;color:var(--muted);max-width:18ch">наставників-ветеранів</div></div>
+  <div class="screen light">
+    <div class="wrap split">
+      <div>
+        <div class="coleyebrow">Програма</div>
+        <h2 class="em-h ink">Шість наук за одним польотом</h2>
+        <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+        <ul class="disc">
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+        </ul>
+      </div>
+      <div class="shot"><img src="img/hands-breadboard.jpg" alt="Навчання та компоненти" loading="lazy"><span class="tag">Власні проєкти</span></div>
     </div>
   </div>
 
-  <div class="cc-sec">
-    <p class="cc-lab">Гарнітура</p>
-    <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-end">
-      <div style="flex:1;min-width:260px">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Display · NAMU</div>
-        <div style="font-family:var(--f-display);font-weight:700;font-size:58px;line-height:.95;color:var(--navy)">Об'єднані</div>
-        <div style="font-family:var(--f-display);font-weight:400;font-size:30px;color:var(--ink);margin-top:8px">Сильні. Разом.</div>
-        <div style="font-family:var(--f-display);font-size:22px;color:var(--muted);letter-spacing:.04em;margin-top:10px">АБВГ ҐДЕЄ · 0123456789</div>
-      </div>
-      <div style="flex:1;min-width:260px">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Body · Onest</div>
-        <div style="font-size:21px;font-weight:600;color:var(--ink)">Наука, що дає впевненість.</div>
-        <p style="font-size:15px;line-height:1.65;color:var(--ink);margin:8px 0 0">Ми будуємо міст між цивільними, підлітками та ветеранами-наставниками. Відкрито, з повагою й турботою про кожну родину.</p>
-        <div style="display:flex;gap:18px;margin-top:14px;font-size:13px;color:var(--muted)">
-          <span style="font-weight:300">Light 300</span><span style="font-weight:400">Regular 400</span><span style="font-weight:600">Semibold 600</span><span style="font-weight:800">Extra 800</span>
+  <div class="screen dark" style="overflow:hidden">
+    <div class="grid"></div>
+    <div class="wrap split" style="position:relative;z-index:2">
+      <div class="shot"><img src="img/components-knoll.jpg" alt="Практика руками" loading="lazy"><span class="tag">З першого заняття</span></div>
+      <div>
+        <div class="kick">Метод</div>
+        <h2 class="em-h">Руками — з першого дня</h2>
+        <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+        <div class="meta-row">
+          <span class="pill">Симулятори</span><span class="pill">Збірка FPV</span><span class="pill">Реальні польоти</span><span class="pill">Власний проєкт</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="cc-sec">
-    <p class="cc-lab">Палітра</p>
-    <div class="cc-grid" style="grid-template-columns:repeat(auto-fit,minmax(118px,1fr))">
-      <div><div class="cc-sw" style="background:var(--navy)"></div><div class="cc-swl"><span>Синь</span><span>navy</span></div></div>
-      <div><div class="cc-sw" style="background:var(--ink)"></div><div class="cc-swl"><span>Чорнило</span><span>ink</span></div></div>
-      <div><div class="cc-sw" style="background:var(--yellow)"></div><div class="cc-swl"><span>Вохра</span><span>yellow</span></div></div>
-      <div><div class="cc-sw" style="background:var(--danger)"></div><div class="cc-swl"><span>Теракота</span><span>danger</span></div></div>
-      <div><div class="cc-sw" style="background:var(--blue-mid)"></div><div class="cc-swl"><span>Синь·2</span><span>blue-mid</span></div></div>
-      <div><div class="cc-sw" style="background:var(--green)"></div><div class="cc-swl"><span>Олива</span><span>green</span></div></div>
-      <div><div class="cc-sw" style="background:var(--cream)"></div><div class="cc-swl"><span>Пісковик</span><span>cream</span></div></div>
-      <div><div class="cc-sw" style="background:var(--gray-50);border-color:var(--gray-300)"></div><div class="cc-swl"><span>Полотно</span><span>gray-50</span></div></div>
-    </div>
-  </div>
-
-  <div class="cc-sec">
-    <p class="cc-lab">Компоненти</p>
-    <div style="display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:22px">
-      <button class="cc-btn cc-btn-pri">Долучитися</button>
-      <button class="cc-btn cc-btn-sec">Дізнатися більше</button>
-      <span class="cc-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="var(--green)" stroke-width="2.4"/><path d="M8 12l2.5 2.5L16 9" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Сертифікат</span>
-      <span class="cc-chip" style="background:var(--yellow-soft);border-color:var(--yellow)">Агро</span>
-      <span class="cc-chip" style="background:var(--blue-light);border-color:var(--blue-light);color:var(--navy)">Пошук і порятунок</span>
-      <span style="font-weight:600;font-size:12px;padding:6px 12px;border-radius:100px;background:var(--green);color:#fff">Набір відкрито</span>
-    </div>
-    <div class="cc-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <div class="cc-card" style="padding:20px 22px">
-        <div class="cc-ico" style="margin-bottom:14px">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="5" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="5" cy="19" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="19" r="2.4" stroke="currentColor" stroke-width="1.7"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.7"/><path d="M7 7l2.5 2.5M17 7l-2.5 2.5M7 17l2.5-2.5M17 17l-2.5-2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        </div>
-        <h3 style="font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--navy);margin:0 0 6px">Інженерія дрона</h3>
-        <p style="font-size:14px;line-height:1.55;color:var(--ink);margin:0">Від паяння й аеродинаміки до програмування польотного контролера.</p>
-      </div>
-      <div class="cc-card" style="padding:20px 22px;border-color:var(--yellow);background:var(--yellow-soft)">
-        <div class="cc-ico" style="margin-bottom:14px;background:var(--paper)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10.5L12 5l9 5.5-9 5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7 13v4c0 .9 2.2 2 5 2s5-1.1 5-2v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 11v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        </div>
-        <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A5E12;margin-bottom:4px">Прапорний напрям</div>
-        <h3 style="font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--navy);margin:0 0 6px">Школа «Дрони та діти»</h3>
-        <p style="font-size:14px;line-height:1.55;color:var(--ink);margin:0">Літній табір, де підлітки 13–17 опановують науку безпечно й під опікою наставників.</p>
+  <div class="screen feat" style="overflow:hidden;color:#fff">
+    <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
+    <div class="hero-in" style="text-align:center;max-width:760px">
+      <div class="kick" style="justify-content:center">Хто навчає</div>
+      <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+      <div class="num-strip feat-strip">
+        <div><div class="n">2</div><div class="l">наставники вже в команді</div></div>
+        <div><div class="n">50/50</div><div class="l">діти воїнів і цивільних</div></div>
+        <div><div class="n">100<span class="u">%</span></div><div class="l">відкрита програма для батьків</div></div>
       </div>
     </div>
   </div>
 
-  <div class="cc-sec">
-    <p class="cc-lab">Іконографія</p>
-    <div style="display:flex;flex-wrap:wrap;gap:16px;color:var(--navy)">
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="2.2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="5" r="2.2" stroke="currentColor" stroke-width="1.7"/><circle cx="5" cy="19" r="2.2" stroke="currentColor" stroke-width="1.7"/><circle cx="19" cy="19" r="2.2" stroke="currentColor" stroke-width="1.7"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.7"/><path d="M7 7l2.4 2.4M17 7l-2.4 2.4M7 17l2.4-2.4M17 17l-2.4-2.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4l9 4-9 4-9-4 9-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 10v4.5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 8v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="9" r="3" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="9" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M3 19c0-2.5 2.2-4 5-4s5 1.5 5 4M13 16c.8-.6 1.9-1 3-1 2.8 0 5 1.5 5 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 7.5a6.4 6.4 0 000 9M16.5 7.5a6.4 6.4 0 010 9M4.7 4.7a10.3 10.3 0 000 14.6M19.3 4.7a10.3 10.3 0 010 14.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21c4.5-4 7-7 7-10.5A7 7 0 005 10.5C5 14 7.5 17 12 21z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.7"/></svg></span>
-      <span class="cc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-6.5-4.2-6.5-9.2A6.5 6.5 0 0112 5a6.5 6.5 0 016.5 6.8C18.5 16.8 12 21 12 21z" stroke="currentColor" stroke-width="0" fill="none"/><path d="M12 20.5C9 17.5 6 14.7 6 11a6 6 0 0112 0c0 3.7-3 6.5-6 9.5z" stroke="currentColor" stroke-width="0"/><path d="M12 4.8c2 2 4.2 2 4.2 2s.4 5.4-4.2 8.2c-4.6-2.8-4.2-8.2-4.2-8.2s2.2 0 4.2-2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/></svg></span>
-    </div>
-  </div>
-
-  <div class="cc-sec" style="background:var(--navy);color:var(--paper)">
-    <p class="cc-lab" style="color:var(--yellow)">Темна секція · застосування</p>
-    <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
-      <div style="flex:1;min-width:240px">
-        <h2 class="cc-disp" style="color:var(--paper);font-size:30px;max-width:18ch">Спокій батьків — наша відповідальність</h2>
-        <p style="font-size:15px;line-height:1.6;color:#D8E0EA;max-width:46ch;margin:14px 0 0">Кожне заняття — прозоре. Ми показуємо програму, наставників і правила безпеки до того, як дитина візьме в руки інструмент.</p>
-      </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <div style="background:rgba(255,253,248,.07);border:1px solid rgba(255,253,248,.16);border-radius:var(--r);padding:16px 20px;min-width:130px">
-          <div style="font-family:var(--f-display);font-weight:700;font-size:30px;color:var(--yellow)">100%</div>
-          <div style="font-size:12px;color:#C7D1DD;margin-top:3px">відкрита програма</div>
-        </div>
-        <div style="background:rgba(255,253,248,.07);border:1px solid rgba(255,253,248,.16);border-radius:var(--r);padding:16px 20px;min-width:130px">
-          <div style="font-family:var(--f-display);font-weight:700;font-size:30px;color:var(--yellow)">4</div>
-          <div style="font-size:12px;color:#C7D1DD;margin-top:3px">мирні напрями</div>
-        </div>
+  <div class="screen dark cta" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+    <div class="grid"></div>
+    <div class="hero-in" style="text-align:center">
+      <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+      <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+        <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
       </div>
     </div>
   </div>
+</section></div>
+<div class="concept" id="c5" hidden><section class="dir em" data-theme="5">
+  <div class="screen dark hero" style="overflow:hidden">
+    <div class="hero-bg" style="background-image:url('img/teens-collab.jpg')"></div>
+    <div class="grid"></div>
+    <div class="hero-in">
+      <div class="kick">Покоління майстрів</div>
+      <h1 class="em-h">Творимо майбутнє <span class="acc">власними руками</span>.</h1>
+      <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+      <div class="btns">
+        <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+        <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+        <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
+      </div>
+    </div>
+  </div>
 
-  <div class="cc-sec">
-    <p class="cc-lab">Спадщина в обличчях · наставники</p>
-    <div class="cc-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-      <div class="cc-card" style="padding:18px;text-align:center">
-        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin:0 auto 10px;display:block"><rect width="64" height="64" rx="14" fill="var(--yellow-soft)"/><circle cx="32" cy="25" r="11" fill="var(--navy)"/><path d="M14 56c0-10 8-16 18-16s18 6 18 16" fill="var(--navy)"/><path d="M32 18l2 4 2-4M32 18l-2 4-2-4" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round"/></svg>
-        <div style="font-weight:600;font-size:15px;color:var(--ink)">Валентин</div>
-        <div style="font-size:12px;color:var(--muted)">Інженер-наставник</div>
+  <div class="screen light">
+    <div class="wrap split">
+      <div>
+        <div class="coleyebrow">Програма</div>
+        <h2 class="em-h ink">Шість наук за одним польотом</h2>
+        <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+        <ul class="disc">
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+          <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+        </ul>
       </div>
-      <div class="cc-card" style="padding:18px;text-align:center">
-        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin:0 auto 10px;display:block"><rect width="64" height="64" rx="14" fill="var(--blue-light)"/><circle cx="32" cy="25" r="11" fill="var(--navy)"/><path d="M14 56c0-10 8-16 18-16s18 6 18 16" fill="var(--navy)"/><path d="M26 24l4 4 8-8" stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div style="font-weight:600;font-size:15px;color:var(--ink)">Оля</div>
-        <div style="font-size:12px;color:var(--muted)">Координаторка табору</div>
+      <div class="shot"><img src="img/components-knoll.jpg" alt="Навчання та компоненти" loading="lazy"><span class="tag">Власні проєкти</span></div>
+    </div>
+  </div>
+
+  <div class="screen dark" style="overflow:hidden">
+    <div class="grid"></div>
+    <div class="wrap split" style="position:relative;z-index:2">
+      <div class="shot"><img src="img/hands-breadboard.jpg" alt="Практика руками" loading="lazy"><span class="tag">З першого заняття</span></div>
+      <div>
+        <div class="kick">Метод</div>
+        <h2 class="em-h">Руками — з першого дня</h2>
+        <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+        <div class="meta-row">
+          <span class="pill">Симулятори</span><span class="pill">Збірка FPV</span><span class="pill">Реальні польоти</span><span class="pill">Власний проєкт</span>
+        </div>
       </div>
-      <div class="cc-card" style="padding:18px;text-align:center">
-        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin:0 auto 10px;display:block"><rect width="64" height="64" rx="14" fill="#EFD9CF"/><circle cx="32" cy="25" r="11" fill="var(--navy)"/><path d="M14 56c0-10 8-16 18-16s18 6 18 16" fill="var(--navy)"/><circle cx="32" cy="44" r="4" fill="var(--danger)"/></svg>
-        <div style="font-weight:600;font-size:15px;color:var(--ink)">Кріс</div>
-        <div style="font-size:12px;color:var(--muted)">Радіо й телеметрія</div>
+    </div>
+  </div>
+
+  <div class="screen feat" style="overflow:hidden;color:#fff">
+    <div class="feature-bg" style="background-image:url('img/community.jpg')"></div>
+    <div class="hero-in" style="text-align:center;max-width:760px">
+      <div class="kick" style="justify-content:center">Хто навчає</div>
+      <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+      <div class="num-strip feat-strip">
+        <div><div class="n">2</div><div class="l">наставники вже в команді</div></div>
+        <div><div class="n">50/50</div><div class="l">діти воїнів і цивільних</div></div>
+        <div><div class="n">100<span class="u">%</span></div><div class="l">відкрита програма для батьків</div></div>
       </div>
-      <div class="cc-card" style="padding:18px;text-align:center">
-        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin:0 auto 10px;display:block"><rect width="64" height="64" rx="14" fill="#E3EAD9"/><circle cx="32" cy="25" r="11" fill="var(--navy)"/><path d="M14 56c0-10 8-16 18-16s18 6 18 16" fill="var(--navy)"/><path d="M27 25h10M32 20v10" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round"/></svg>
-        <div style="font-weight:600;font-size:15px;color:var(--ink)">Тихий</div>
-        <div style="font-size:12px;color:var(--muted)">Безпека польотів</div>
+    </div>
+  </div>
+
+  <div class="screen dark cta" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+    <div class="grid"></div>
+    <div class="hero-in" style="text-align:center">
+      <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+      <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+      <div class="btns" style="justify-content:center">
+        <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+        <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
       </div>
     </div>
   </div>
@@ -1276,40 +512,13 @@
   function showConcept(n){
     for(var i=1;i<=5;i++){ var el=document.getElementById('c'+i); if(el) el.hidden=(i!==n); }
     document.querySelectorAll('.cbtn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')==String(n)); });
-    var m=META[n-1]; var cap=document.getElementById('cap'); if(m&&cap) cap.textContent=m.name+'  ·  '+m.fonts;
-    if(window.__fix) window.__fix(document.getElementById('c'+n));
+    var m=META[n-1],cap=document.getElementById('cap'); if(m&&cap) cap.textContent=m.name+'  ·  '+m.fonts;
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.addEventListener('DOMContentLoaded',function(){
     var f=document.querySelector('.cbtn'); if(f) f.classList.add('active');
     var m=META[0],cap=document.getElementById('cap'); if(m&&cap) cap.textContent=m.name+'  ·  '+m.fonts;
   });
-</script>
-<script>
-/* QA contrast corrector — no invisible text in concept mockups. */
-(function(){
-  var parse=function(c){var m=(c||'').match(/rgba?\(([^)]+)\)/);if(!m)return null;var p=m[1].split(',').map(parseFloat);return [p[0],p[1],p[2],p[3]==null?1:p[3]];};
-  var lum=function(a){var f=function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};return .2126*f(a[0])+.7152*f(a[1])+.0722*f(a[2]);};
-  var ratio=function(a,b){var L1=lum(a),L2=lum(b),hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+.05)/(lo+.05);};
-  var effBg=function(el){var e=el;while(e&&e.nodeType===1){var s=getComputedStyle(e);var c=parse(s.backgroundColor);if(c&&c[3]>0)return [c[0],c[1],c[2]];e=e.parentElement;}return [255,255,255];};
-  var hasImgBg=function(el,root){ var a=el; while(a&&a.nodeType===1){ var bi=getComputedStyle(a).backgroundImage; if(bi&&bi!=='none')return true; if(a===root)break; a=a.parentElement; } return false; };
-  /* Concepts authored with photo backgrounds are excluded — they set their own
-     correct colours; a luminance corrector can't see sibling/background images. */
-  var SKIP={c3:1};
-  function fix(root){ if(!root||SKIP[root.id])return;
-    root.querySelectorAll('*').forEach(function(el){
-      if(el.closest('svg'))return;
-      if(hasImgBg(el,root))return; /* can't judge luminance over an image — never auto-recolour */
-      var t='';el.childNodes.forEach(function(n){if(n.nodeType===3)t+=n.textContent;});
-      if(t.trim().length<2)return;
-      var s=getComputedStyle(el);var fg=parse(s.color);if(!fg)return;
-      var bg=effBg(el);var cr=ratio([fg[0],fg[1],fg[2]],bg);
-      if(cr<3){ el.style.setProperty('color', lum(bg)<0.4 ? '#FFFFFF' : '#10203A','important'); }
-    });
-  }
-  window.__fix=fix;
-  document.addEventListener('DOMContentLoaded',function(){ for(var i=1;i<=5;i++){fix(document.getElementById('c'+i));} });
-})();
 </script>
 </body>
 </html>
