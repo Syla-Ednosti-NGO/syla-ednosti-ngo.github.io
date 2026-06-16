@@ -3,79 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Айдентика — 5 напрямів · ГО «Об’єднані. Сильні. Разом!»</title>
+<title>Айдентика — демо концептів · ГО «Об’єднані. Сильні. Разом!»</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Unbounded:wght@400;500;700;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="themes.css">
 <style>
-  :root{ --pg-ink:#16203A; --pg-muted:#6E7380; --pg-bg:#F4F6FB; --pg-line:#DCE3F0; --pg-accent:#2D6FE0;
-    --navy:#1A2B4A; --ink:#0F1A2E; --muted:#6E7380; --paper:#fff; --gray-50:#F7F8FA; --gray-100:#EEF1F5;
-    --gray-200:#DDE2EA; --gray-300:#C3CAD4; --cream:#FFF8E1; --yellow:#FFD93D; --yellow-soft:#FFF3B8;
-    --blue-mid:#5BAFE0; --blue-light:#B7DCF5; --green:#2E9E5B; --amber:#E08A1E; --danger:#D33;
-    --r:10px; --r-s:6px; --r-l:16px; --shadow-sm:0 1px 2px rgba(15,26,46,.06); --shadow:0 6px 24px rgba(15,26,46,.10);
-    --f-display:'Unbounded',sans-serif; --f-body:'Manrope',sans-serif; }
+  :root{ --barh:56px;
+    --navy:#1A2B4A;--ink:#0F1A2E;--muted:#6E7380;--paper:#fff;--gray-50:#F7F8FA;--gray-100:#EEF1F5;
+    --gray-200:#DDE2EA;--gray-300:#C3CAD4;--cream:#FFF8E1;--yellow:#FFD93D;--yellow-soft:#FFF3B8;
+    --blue-mid:#5BAFE0;--blue-light:#B7DCF5;--green:#2E9E5B;--amber:#E08A1E;--danger:#D33;
+    --r:10px;--r-s:6px;--r-l:16px;--shadow-sm:0 1px 2px rgba(15,26,46,.06);--shadow:0 6px 24px rgba(15,26,46,.10);
+    --f-display:'Unbounded',sans-serif;--f-body:'Manrope',sans-serif; }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Onest',system-ui,sans-serif;color:var(--pg-ink);background:var(--pg-bg);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-  .pg-head{max-width:1080px;margin:0 auto;padding:40px 24px 8px}
-  .pg-kicker{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pg-accent)}
-  .pg-head h1{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.1;margin:10px 0 8px}
-  .pg-head p{color:var(--pg-muted);max-width:70ch;margin:0}
-  .switch{position:sticky;top:0;z-index:50;background:rgba(244,246,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--pg-line);margin-top:18px}
-  .switch-inner{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap}
-  .sw-btn{font-family:'Onest',sans-serif;font-size:13.5px;font-weight:600;color:var(--pg-ink);background:#fff;border:1px solid var(--pg-line);border-radius:999px;padding:9px 16px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:8px}
-  .sw-btn b{font-family:'e-Ukraine Head',sans-serif;color:var(--pg-accent)}
-  .sw-btn:hover{border-color:var(--pg-accent)}
-  .sw-btn.active{background:var(--pg-ink);color:#fff;border-color:var(--pg-ink)}
-  .sw-btn.active b{color:#FFD93D}
-  .wrapv{max-width:1080px;margin:0 auto;padding:26px 24px 80px}
-  .vinfo{margin-bottom:22px}
-  .vinfo-head{display:flex;gap:16px;align-items:flex-start}
-  .vnum{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:30px;color:var(--pg-accent);line-height:1}
-  .vinfo h2{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:26px;margin:0 0 4px}
-  .concept{margin:0;color:var(--pg-ink);font-size:15.5px;max-width:80ch}
-  .vmeta{font-size:13px;color:var(--pg-muted);margin:14px 0 6px}
-  .vmeta b{color:var(--pg-ink)}
-  .rationale{font-size:13.5px;color:var(--pg-muted);line-height:1.6;max-width:90ch;margin:0 0 14px}
-  .pal-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
-  .pal{display:inline-flex;align-items:center;gap:8px}
-  .pal-c{width:24px;height:24px;border-radius:6px;border:1px solid rgba(0,0,0,.08);display:block}
-  .pal-t{font-size:11.5px;color:var(--pg-ink);line-height:1.2}
-  .pal-t i{display:block;color:var(--pg-muted);font-style:normal;font-size:10.5px}
-  .showcase{border-radius:var(--r-l)}
-  .pg-foot{max-width:1080px;margin:0 auto;padding:0 24px 70px;color:var(--pg-muted);font-size:13.5px}
-  .pg-foot code{background:#fff;border:1px solid var(--pg-line);border-radius:6px;padding:2px 7px;font-size:12.5px}
+  body{margin:0;font-family:'Onest',system-ui,sans-serif;background:#0E1116;color:#fff;-webkit-font-smoothing:antialiased}
+  .bar{position:sticky;top:0;z-index:100;height:var(--barh);background:#0E1116;border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;align-items:center;gap:14px;padding:0 16px}
+  .brand{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;color:#fff;white-space:nowrap;flex:none}
+  .brand i{color:#0F5BFF;font-style:normal}
+  .cbtns{display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;flex:1;scrollbar-width:none;-ms-overflow-style:none}
+  .cbtns::-webkit-scrollbar{display:none}
+  .cbtn{font-family:'Onest',sans-serif;font-size:13px;font-weight:600;color:#C7CDD6;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;white-space:nowrap;flex:none}
+  .cbtn b{font-family:'e-Ukraine Head',sans-serif;color:#0F5BFF}
+  .cbtn span{opacity:.95}
+  .cbtn:hover{border-color:rgba(255,255,255,.3);color:#fff}
+  .cbtn.active{background:#fff;color:#0E1116;border-color:#fff}
+  .cbtn.active b{color:#0F5BFF}
+  .cap{font-size:11.5px;color:#7A828E;white-space:nowrap;flex:none}
+  #stage{background:#fff}
+  .concept{background:#fff}
+  /* compact-style concepts (1,2,4,5) get breathing room; concept 3 is full-bleed */
+  .concept:not(#c3){padding:30px clamp(16px,4vw,48px) 70px;background:#0E1116}
+  .concept:not(#c3) > .dir{max-width:1100px;margin:0 auto}
+  @media (max-width:820px){ .cap{display:none} }
+  @media (max-width:560px){ .brand{display:none} }
+  @media (max-width:430px){ .cbtn span{display:none} .cbtn{padding:8px 12px} }
 </style>
 </head>
 <body>
-<div class="pg-head">
-  <div class="pg-kicker">Айдентика · робоча сторінка вибору</div>
-  <h1>П’ять напрямів візуальної ідентичності</h1>
-  <p>Кожен напрям — повна система: шрифти, кольори, компоненти, макети, іконки. Усе керується дизайн-токенами (CSS-змінними). Обери один — і його токени стануть основою всього сайту одним свопом. Перемикай напрями кнопками нижче.</p>
-</div>
-<div class="switch"><div class="switch-inner" id="swbar"><button class="sw-btn" data-go="1" onclick="showVar(1)"><b>1</b> Громадянська міць</button>
-<button class="sw-btn" data-go="2" onclick="showVar(2)"><b>2</b> «Поле і небо»</button>
-<button class="sw-btn" data-go="3" onclick="showVar(3)"><b>3</b> «Інженерний мінімалізм»</button>
-<button class="sw-btn" data-go="4" onclick="showVar(4)"><b>4</b> «Сила і впевненість»</button>
-<button class="sw-btn" data-go="5" onclick="showVar(5)"><b>5</b> Культурний код</button></div></div>
-<div class="wrapv">
-
-<section class="variant" id="v1" >
-  <div class="vinfo">
-    <div class="vinfo-head">
-      <span class="vnum">01</span>
-      <div>
-        <h2>Громадянська міць</h2>
-        <p class="concept">Державного ґатунку довіра в цивільному, теплому виконанні: глибокий індиго-нейві як основа, кришталево-білі поверхні та один дисциплінований золотий акцент із делікатним синім напарником. Громадянська впевненість рівня Дія — чесно, сучасно, без мілітарної темряви.</p>
-      </div>
-    </div>
-    <div class="vmeta"><b>Шрифти:</b> display — &#x27;e-Ukraine Head&#x27;, &#x27;Unbounded&#x27;, system-ui, sans-serif · body — &#x27;Onest&#x27;, &#x27;Manrope&#x27;, system-ui, sans-serif</div>
-    <p class="rationale">e-Ukraine Head — це урядовий гротеск бренду Дія, тож він миттєво зчитується як «офіційне, перевірене, українське», а Onest дає гуманістичну теплоту в тілі тексту, аби інституційність не була холодною. Глибокий індиго-нейві (#1B2A57) тримає високий контраст і довіру, як на Army of Drones, тоді як один золотий акцент і стримана синя пара працюють у логіці Superhumans — впевнено, без строкатості. Колір-кодування лишається дисциплінованим: золото лише для дій і ключових цифр, синій — для вторинних підказок, щоб батьки відчували надійність, а підлітки — сучасність.</p>
-    <div class="pal-row"><span class="pal"><span class="pal-c" style="background:#1B2A57"></span><span class="pal-t">Індиго-нейві<i>#1B2A57</i></span></span><span class="pal"><span class="pal-c" style="background:#16203A"></span><span class="pal-t">Чорнило<i>#16203A</i></span></span><span class="pal"><span class="pal-c" style="background:#5B6B8C"></span><span class="pal-t">Сіро-синій<i>#5B6B8C</i></span></span><span class="pal"><span class="pal-c" style="background:#FFFFFF"></span><span class="pal-t">Білий папір<i>#FFFFFF</i></span></span><span class="pal"><span class="pal-c" style="background:#F4F6FB"></span><span class="pal-t">Світло-сірий фон<i>#F4F6FB</i></span></span><span class="pal"><span class="pal-c" style="background:#F2B807"></span><span class="pal-t">Золото<i>#F2B807</i></span></span><span class="pal"><span class="pal-c" style="background:#FBEFC4"></span><span class="pal-t">М&#x27;яке золото<i>#FBEFC4</i></span></span><span class="pal"><span class="pal-c" style="background:#2D6FE0"></span><span class="pal-t">Цивільний синій<i>#2D6FE0</i></span></span><span class="pal"><span class="pal-c" style="background:#E4EDFB"></span><span class="pal-t">Світло-синій<i>#E4EDFB</i></span></span></div>
-  </div>
-  <div class="showcase">
-    <section class="dir" data-theme="1" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
+<header class="bar">
+  <span class="brand">ОБ<i>’</i>ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span>
+  <div class="cbtns"><button class="cbtn" data-go="1" onclick="showConcept(1)"><b>1</b><span>Громадянська міць</span></button>
+<button class="cbtn" data-go="2" onclick="showConcept(2)"><b>2</b><span>«Поле і небо»</span></button>
+<button class="cbtn" data-go="3" onclick="showConcept(3)"><b>3</b><span>«Інженерний мінімалізм»</span></button>
+<button class="cbtn" data-go="4" onclick="showConcept(4)"><b>4</b><span>«Сила і впевненість»</span></button>
+<button class="cbtn" data-go="5" onclick="showConcept(5)"><b>5</b><span>Культурний код</span></button></div>
+  <span class="cap" id="cap"></span>
+</header>
+<main id="stage">
+<div class="concept" id="c1"><section class="dir" data-theme="1" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
   <style>
     .dir[data-theme="1"] *{box-sizing:border-box}
     .dir[data-theme="1"] h1,.dir[data-theme="1"] h2,.dir[data-theme="1"] h3,.dir[data-theme="1"] .dsp{font-family:var(--f-display);letter-spacing:-.01em;line-height:1.06;margin:0}
@@ -332,25 +310,8 @@
       </div>
     </div>
   </div>
-</section>
-  </div>
-</section>
-
-<section class="variant" id="v2" style="display:none">
-  <div class="vinfo">
-    <div class="vinfo-head">
-      <span class="vnum">02</span>
-      <div>
-        <h2>«Поле і небо»</h2>
-        <p class="concept">Тепла, людяна система кольору неба над літнім табором: ясно-блакитний як головний акцент, піщано-хакі як друга барва, сонячний бурштин-іскра та кремові тла. Дрон у синьому небі, діти в полі — впевненість і надія, а не страх.</p>
-      </div>
-    </div>
-    <div class="vmeta"><b>Шрифти:</b> display — &#x27;Unbounded&#x27;, system-ui, sans-serif · body — &#x27;Onest&#x27;, system-ui, -apple-system, sans-serif</div>
-    <p class="rationale">Оптимізм Superhumans тут провідний: багато повітря, живі теплі тони, людський, не мілітарний настрій — найтепліша з п&#x27;яти директив. Ясно-блакитний як primary дає «небо» і довіру (заспокоює обережних мам), а піщано-хакі повертає тему поля й табору без камуфляжної асоціації. Unbounded для заголовків тримає сміливість, узяту в Kraken, але без темряви; Onest робить тіло тексту сучасним, дружнім і чудово читним кирилицею. Сонячний бурштин — одна стримана іскра радості, щоб система не була дитячою.</p>
-    <div class="pal-row"><span class="pal"><span class="pal-c" style="background:#2E86C9"></span><span class="pal-t">Небесна синь<i>#2E86C9</i></span></span><span class="pal"><span class="pal-c" style="background:#15324F"></span><span class="pal-t">Глибоке небо<i>#15324F</i></span></span><span class="pal"><span class="pal-c" style="background:#CFE7F8"></span><span class="pal-t">Світла блакить<i>#CFE7F8</i></span></span><span class="pal"><span class="pal-c" style="background:#B79A63"></span><span class="pal-t">Піщано-хакі<i>#B79A63</i></span></span><span class="pal"><span class="pal-c" style="background:#F4B23E"></span><span class="pal-t">Сонячний бурштин<i>#F4B23E</i></span></span><span class="pal"><span class="pal-c" style="background:#FBF4E6"></span><span class="pal-t">Тепла крем<i>#FBF4E6</i></span></span><span class="pal"><span class="pal-c" style="background:#1C2733"></span><span class="pal-t">Чорнило<i>#1C2733</i></span></span><span class="pal"><span class="pal-c" style="background:#3FA46A"></span><span class="pal-t">Лугова зелень<i>#3FA46A</i></span></span></div>
-  </div>
-  <div class="showcase">
-    <section class="dir" data-theme="2" style="background:var(--gray-50);color:var(--ink);font-family:var(--f-body);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200);">
+</section></div>
+<div class="concept" id="c2" hidden><section class="dir" data-theme="2" style="background:var(--gray-50);color:var(--ink);font-family:var(--f-body);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200);">
   <style>
     .dir[data-theme="2"]{line-height:1.5;}
     .dir[data-theme="2"] *{box-sizing:border-box;}
@@ -470,6 +431,8 @@
       <svg viewBox="0 0 1040 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;" aria-hidden="true">
         <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E86C9" stop-opacity="0.55"/><stop offset="1" stop-color="#15324F" stop-opacity="0"/></linearGradient></defs>
         <rect width="1040" height="220" fill="url(#sky2)"/>
+        <circle cx="880" cy="56" r="30" fill="#F4B23E" opacity="0.85"/>
+        <path d="M150 92 h36 M168 86 v12 M150 92 a9 9 0 0 1 -9 -9 M186 92 a9 9 0 0 0 9 -9" stroke="#CFE7F8" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.9"/>
       </svg>
       <div style="position:relative;max-width:680px;">
         <span class="eyebrow" style="color:var(--yellow);">Громадська організація</span>
@@ -609,383 +572,160 @@
       </div>
     </div>
   </div>
+</section></div>
+<div class="concept" id="c3" hidden><section class="dir em" data-theme="3">
+<style>
+  .em{ --em-dark:#0E1116; --em-line:rgba(255,255,255,.05); font-family:var(--f-body); color:var(--ink); }
+  .em *{box-sizing:border-box}
+  .em .screen{ min-height:calc(100vh - var(--barh,56px)); display:flex; flex-direction:column; justify-content:center; position:relative; padding:64px 7vw; }
+  .em .dark{ background:var(--em-dark); color:#fff; }
+  .em .grid{ position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px);
+    background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
+  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; }
+  .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
+  .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
+  .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
+  .em .acc{ color:var(--yellow); }
+  .em .lead{ font-size:clamp(15px,1.5vw,18px); line-height:1.65; max-width:54ch; margin:22px 0 0; }
+  .em .dark .lead{ color:#AEB6C2; }
+  .em .light .lead{ color:var(--muted); }
+  .em .btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top:34px; }
+  .em .btn{ font-family:var(--f-body); font-weight:600; font-size:15px; padding:14px 24px; border-radius:var(--r); border:1.5px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:9px; text-decoration:none; transition:.15s; }
+  .em .btn-p{ background:var(--yellow); color:#fff; }
+  .em .btn-p:hover{ filter:brightness(1.08); }
+  .em .btn-g{ background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .em .btn-g:hover{ border-color:#fff; }
+  .em .light .btn-g{ color:var(--ink); border-color:var(--gray-300); }
+  .em .stats{ display:flex; gap:48px; flex-wrap:wrap; margin-top:54px; }
+  .em .stat .n{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3vw,40px); letter-spacing:-.02em; }
+  .em .dark .stat .n{ color:#fff; } .em .stat .n .u{ color:var(--yellow); }
+  .em .stat .l{ font-size:12.5px; color:#8A93A1; margin-top:4px; max-width:16ch; }
+  .em .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  .em .hero-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,#0E1116 0%,rgba(14,17,22,.86) 42%,rgba(14,17,22,.42) 100%); }
+  .em .hero-in{ position:relative; z-index:2; max-width:1180px; width:100%; margin:0 auto; }
+  .em .wrap{ max-width:1180px; width:100%; margin:0 auto; }
+  .em .split{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
+  .em .shot{ position:relative; border-radius:var(--r-l); overflow:hidden; aspect-ratio:4/3; box-shadow:0 1px 0 rgba(255,255,255,.06), 0 30px 60px -30px rgba(0,0,0,.6); }
+  .em .shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .em .shot .tag{ position:absolute; left:14px; bottom:14px; z-index:2; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:rgba(14,17,22,.7); border:1px solid rgba(255,255,255,.16); padding:6px 12px; border-radius:100px; backdrop-filter:blur(4px); }
+  .em .disc{ list-style:none; padding:0; margin:26px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gray-200); border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; }
+  .em .disc li{ background:var(--paper); padding:18px 20px; display:flex; gap:13px; align-items:flex-start; }
+  .em .disc .di{ width:34px; height:34px; border-radius:var(--r-s); background:var(--blue-light); color:var(--yellow); display:flex; align-items:center; justify-content:center; flex:none; }
+  .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
+  .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,17,22,.55),rgba(14,17,22,.9)); }
+  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; }
+  .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); padding:7px 14px; border-radius:100px; }
+  .em .light{ background:var(--gray-50); color:var(--ink); }
+  .em .coleyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .em .num-strip{ display:flex; gap:0; border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; margin-top:6px; background:var(--paper); }
+  .em .num-strip > div{ flex:1; padding:22px 20px; border-left:1px solid var(--gray-200); }
+  .em .num-strip > div:first-child{ border-left:none; }
+  .em .num-strip .n{ font-family:var(--f-display); font-weight:800; font-size:30px; color:var(--ink); letter-spacing:-.02em; }
+  .em .num-strip .n .u{ color:var(--yellow); }
+  .em .num-strip .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media (max-width:860px){
+    .em .split{ grid-template-columns:1fr; gap:30px; }
+    .em .disc{ grid-template-columns:1fr; }
+    .em .num-strip{ flex-wrap:wrap; } .em .num-strip > div{ flex:1 1 45%; }
+    .em .hero-bg::after{ background:linear-gradient(180deg,rgba(14,17,22,.5),rgba(14,17,22,.92)); }
+    .em .screen{ padding:54px 24px; min-height:auto; }
+  }
+</style>
+
+<!-- ===== HERO ===== -->
+<div class="screen dark" style="overflow:hidden">
+  <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
+  <div class="grid"></div>
+  <div class="hero-in">
+    <div class="kick">Інженерна школа дронів · 13–17</div>
+    <h1 class="em-h">Дрон — це ціла <span class="acc">наука</span>. Пілотування — лише 5–10%.</h1>
+    <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+    <div class="btns">
+      <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+      <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+      <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ЩО ВИВЧАЮТЬ (split, light) ===== -->
+<div class="screen light">
+  <div class="wrap split">
+    <div>
+      <div class="coleyebrow">Програма</div>
+      <h2 class="em-h" style="color:var(--ink)">Шість наук за одним польотом</h2>
+      <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+      <ul class="disc">
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/components-knoll.jpg" alt="Електронні компоненти та Arduino"><span class="tag">Власні проєкти</span></div>
+  </div>
+</div>
+
+<!-- ===== РУКАМИ (split, dark) ===== -->
+<div class="screen dark" style="overflow:hidden">
+  <div class="grid"></div>
+  <div class="wrap split" style="position:relative;z-index:2">
+    <div class="shot"><img src="img/hands-breadboard.jpg" alt="Підліток збирає схему на макетній платі"><span class="tag">З першого заняття</span></div>
+    <div>
+      <div class="kick">Метод</div>
+      <h2 class="em-h">Руками — з першого дня</h2>
+      <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+      <div class="meta-row">
+        <span class="pill">Симулятори</span>
+        <span class="pill">Збірка FPV</span>
+        <span class="pill">Реальні польоти</span>
+        <span class="pill">Власний проєкт</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ДРАМАТИЧНИЙ БЛОК (full image, dark) ===== -->
+<div class="screen" style="overflow:hidden;color:#fff">
+  <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
+  <div class="hero-in" style="text-align:center;max-width:760px">
+    <div class="kick" style="justify-content:center">Хто навчає</div>
+    <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+    <div class="num-strip" style="margin-top:34px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14)">
+      <div><div class="n" style="color:#fff">2</div><div class="l" style="color:#AEB6C2">наставники вже в команді</div></div>
+      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">50/50</div><div class="l" style="color:#AEB6C2">діти воїнів і цивільних</div></div>
+      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">100<span class="u">%</span></div><div class="l" style="color:#AEB6C2">відкрита програма для батьків</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="screen dark" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+  <div class="grid"></div>
+  <div class="hero-in" style="text-align:center">
+    <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+    <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+      <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
+    </div>
+  </div>
+</div>
 </section>
-  </div>
-</section>
-
-<section class="variant" id="v3" style="display:none">
-  <div class="vinfo">
-    <div class="vinfo-head">
-      <span class="vnum">03</span>
-      <div>
-        <h2>«Інженерний мінімалізм»</h2>
-        <p class="concept">Однотипна, type-driven система на &#x27;Onest&#x27;: майже монохромна графітово-біла палітра, технічні хайрлайни-сітки та один електричний синій акцент. Дрон як ціла наука — подано мовою інженерного креслення: точно, спокійно, без мілітарного пафосу.</p>
-      </div>
-    </div>
-    <div class="vmeta"><b>Шрифти:</b> display — &#x27;Onest&#x27;, system-ui, sans-serif · body — &#x27;Onest&#x27;, system-ui, sans-serif</div>
-    <p class="rationale">Концепцію інформував Promprylad.Renovation: майже монохром (графіт/білий/сірі) + один синій акцент, модульна сітка, хайрлайни, документальна стриманість і «цілеспрямований оптимізм». Один шрифт &#x27;Onest&#x27; у всіх ролях (700–800 для дисплея, 400–500 для тексту) дає максимальну впізнаваність і дешеву масштабованість системи токенів. Технічні підписи з letter-spacing і моно-трактуванням передають інженерну точність — наука, а не зброя — і водночас лишаються теплими й довірливими для обережних батьків.</p>
-    <div class="pal-row"><span class="pal"><span class="pal-c" style="background:#171A1F"></span><span class="pal-t">Графіт<i>#171A1F</i></span></span><span class="pal"><span class="pal-c" style="background:#23272E"></span><span class="pal-t">Чорнило<i>#23272E</i></span></span><span class="pal"><span class="pal-c" style="background:#6B7280"></span><span class="pal-t">Сталь<i>#6B7280</i></span></span><span class="pal"><span class="pal-c" style="background:#FFFFFF"></span><span class="pal-t">Папір<i>#FFFFFF</i></span></span><span class="pal"><span class="pal-c" style="background:#F6F7F8"></span><span class="pal-t">Креслення<i>#F6F7F8</i></span></span><span class="pal"><span class="pal-c" style="background:#E6E8EB"></span><span class="pal-t">Хайрлайн<i>#E6E8EB</i></span></span><span class="pal"><span class="pal-c" style="background:#0F5BFF"></span><span class="pal-t">Електрик<i>#0F5BFF</i></span></span><span class="pal"><span class="pal-c" style="background:#E8F0FF"></span><span class="pal-t">Синій-світлий<i>#E8F0FF</i></span></span><span class="pal"><span class="pal-c" style="background:#C8F02E"></span><span class="pal-t">Лайм-сигнал<i>#C8F02E</i></span></span></div>
-  </div>
-  <div class="showcase">
-    <section class="dir" data-theme="3" style="--navy:#171A1F;--ink:#23272E;--muted:#6B7280;--paper:#FFFFFF;--gray-50:#F6F7F8;--gray-100:#F0F1F3;--gray-200:#E6E8EB;--gray-300:#D3D7DC;--cream:#F4F6F8;--yellow:#0F5BFF;--yellow-soft:#E8F0FF;--blue-mid:#0F5BFF;--blue-light:#E8F0FF;--green:#3BA776;--amber:#C77B12;--danger:#D23B3B;--r:8px;--r-s:4px;--r-l:14px;--f-display:'Onest',system-ui,sans-serif;--f-body:'Onest',system-ui,sans-serif;font-family:var(--f-body);color:var(--ink);background:var(--gray-50);line-height:1.55;-webkit-font-smoothing:antialiased;">
-
-  <style>
-    .dir[data-theme="3"]{box-sizing:border-box;}
-    .dir[data-theme="3"] *{box-sizing:border-box;}
-    .dir[data-theme="3"] .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
-    .dir[data-theme="3"] .mono{font-family:var(--f-body);font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:var(--muted);}
-    .dir[data-theme="3"] .sec-label{display:flex;align-items:center;gap:12px;margin:0 0 22px;}
-    .dir[data-theme="3"] .sec-label .ix{font-family:var(--f-body);font-weight:600;letter-spacing:.16em;font-size:11px;color:var(--blue-mid);}
-    .dir[data-theme="3"] .sec-label .ln{flex:1;height:1px;background:var(--gray-200);}
-    .dir[data-theme="3"] .block{border-top:1px solid var(--gray-200);padding:52px 0;}
-    .dir[data-theme="3"] h1,.dir[data-theme="3"] h2,.dir[data-theme="3"] h3,.dir[data-theme="3"] h4{font-family:var(--f-display);color:var(--navy);margin:0;letter-spacing:-.02em;}
-    .dir[data-theme="3"] .btn{font-family:var(--f-body);font-weight:600;font-size:14px;border-radius:var(--r);padding:13px 22px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.15s;text-decoration:none;}
-    .dir[data-theme="3"] .btn-primary{background:var(--blue-mid);color:#fff;}
-    .dir[data-theme="3"] .btn-primary:hover{background:#0a48cc;}
-    .dir[data-theme="3"] .btn-secondary{background:var(--paper);color:var(--navy);border-color:var(--gray-300);}
-    .dir[data-theme="3"] .btn-secondary:hover{border-color:var(--navy);}
-    .dir[data-theme="3"] .chip{font-family:var(--f-body);font-weight:600;font-size:12px;letter-spacing:.04em;padding:6px 12px;border-radius:100px;border:1px solid var(--gray-200);background:var(--paper);color:var(--ink);display:inline-flex;align-items:center;gap:7px;}
-    .dir[data-theme="3"] .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-mid);}
-    .dir[data-theme="3"] .card{background:var(--paper);border:1px solid var(--gray-200);border-radius:var(--r-l);padding:24px;}
-    .dir[data-theme="3"] .ico{width:40px;height:40px;display:block;color:var(--blue-mid);}
-    .dir[data-theme="3"] .ico-sm{width:26px;height:26px;color:var(--navy);}
-    .dir[data-theme="3"] .grid-bg{background-image:linear-gradient(var(--gray-200) 1px,transparent 1px),linear-gradient(90deg,var(--gray-200) 1px,transparent 1px);background-size:34px 34px;}
-  </style>
-
-  <div class="wrap" style="padding-top:40px;padding-bottom:8px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
-      <div class="mono" style="color:var(--blue-mid);">DIRECTION 03 · ІНЖЕНЕРНИЙ МІНІМАЛІЗМ</div>
-      <div class="mono">ОДНОШРИФТОВА СИСТЕМА · ONEST</div>
-    </div>
-  </div>
-
-  <!-- ============ HERO (NGO) ============ -->
-  <header class="grid-bg" style="background-color:var(--navy);border-radius:var(--r-l);margin:18px 28px 0;overflow:hidden;position:relative;">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,26,31,.0),rgba(23,26,31,.55));"></div>
-    <div style="position:relative;padding:30px 40px 0;">
-      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:18px;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <svg viewBox="0 0 36 36" class="ico" style="width:34px;height:34px;color:var(--blue-mid);" fill="none" aria-hidden="true">
-            <rect x="2" y="2" width="32" height="32" rx="8" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="18" cy="18" r="3.2" fill="currentColor"/>
-            <path d="M18 6v6M18 24v6M6 18h6M24 18h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <circle cx="9" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="9" cy="27" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="27" r="2.4" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-          <div style="color:#fff;font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:-.01em;">Об’єднані. Сильні. Разом!</div>
-        </div>
-        <div style="display:flex;gap:26px;" class="mono">
-          <span style="color:rgba(255,255,255,.65);">ШКОЛА</span>
-          <span style="color:rgba(255,255,255,.65);">НАУКА</span>
-          <span style="color:rgba(255,255,255,.65);">МЕНТОРИ</span>
-        </div>
-      </div>
-
-      <div style="padding:56px 0 60px;max-width:720px;">
-        <div class="chip" style="background:rgba(15,91,255,.16);border-color:rgba(15,91,255,.4);color:#cfe0ff;margin-bottom:24px;">
-          <span class="dot"></span>Дрони та діти · інженерний кемп
-        </div>
-        <h1 style="color:#fff;font-size:54px;line-height:1.02;font-weight:800;letter-spacing:-.035em;">
-          Дрон — це ціла<br>наука. <span style="color:var(--blue-mid);">Пілотування —<br>лише&nbsp;5–10&nbsp;%.</span>
-        </h1>
-        <p style="color:rgba(255,255,255,.74);font-size:18px;line-height:1.6;margin:24px 0 0;max-width:540px;">
-          Інженерія, фізика, радіо та хімія — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Менторами стають ветерани.
-        </p>
-        <div style="display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;">
-          <a href="#" class="btn btn-primary">Записати дитину
-            <svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#" class="btn btn-secondary" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28);">Як влаштована програма</a>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.12);">
-        <div style="padding:22px 22px 26px;border-right:1px solid rgba(255,255,255,.12);">
-          <div style="color:#fff;font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.03em;">90&nbsp;%</div>
-          <div class="mono" style="color:rgba(255,255,255,.55);margin-top:6px;">ІНЖЕНЕРІЯ ТА НАУКА</div>
-        </div>
-        <div style="padding:22px 22px 26px;border-right:1px solid rgba(255,255,255,.12);">
-          <div style="color:#fff;font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.03em;">4</div>
-          <div class="mono" style="color:rgba(255,255,255,.55);margin-top:6px;">ДИСЦИПЛІНИ В ОСНОВІ</div>
-        </div>
-        <div style="padding:22px 22px 26px;border-right:1px solid rgba(255,255,255,.12);">
-          <div style="color:var(--blue-mid);font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.03em;">13–17</div>
-          <div class="mono" style="color:rgba(255,255,255,.55);margin-top:6px;">ВІК УЧАСНИКІВ</div>
-        </div>
-        <div style="padding:22px 22px 26px;">
-          <div style="color:#fff;font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.03em;">100&nbsp;%</div>
-          <div class="mono" style="color:rgba(255,255,255,.55);margin-top:6px;">ПРОЗОРІСТЬ ЗВІТІВ</div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="wrap">
-
-    <!-- ============ TYPE SPECIMEN ============ -->
-    <div class="block">
-      <div class="sec-label"><span class="ix">01 / ТИПОГРАФІКА</span><span class="ln"></span><span class="mono">ONEST · ЄДИНА ГАРНІТУРА</span></div>
-      <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start;">
-        <div>
-          <div class="mono" style="margin-bottom:10px;">DISPLAY · 800</div>
-          <div style="font-family:var(--f-display);font-weight:800;font-size:60px;line-height:.98;letter-spacing:-.04em;color:var(--navy);">Наука,<br>а не зброя</div>
-          <div class="mono" style="margin:30px 0 8px;">DISPLAY · 700</div>
-          <div style="font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--ink);">Інженерна школа для підлітків</div>
-          <div class="mono" style="margin:30px 0 10px;">BODY · 400 / 500</div>
-          <p style="font-size:16px;color:var(--ink);max-width:430px;margin:0;">Ми будуємо <strong style="font-weight:600;color:var(--navy);">довіру через прозорість</strong>: відкрита програма, зрозумілі звіти, ветерани-ментори поруч із дітьми та батьками.</p>
-        </div>
-        <div>
-          <div style="border:1px solid var(--gray-200);border-radius:var(--r-l);overflow:hidden;background:var(--paper);">
-            <div style="padding:18px 20px;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:baseline;">
-              <span style="font-family:var(--f-display);font-weight:800;font-size:46px;letter-spacing:-.03em;color:var(--navy);">Aa</span>
-              <span class="mono">ABCDEFGHIJK</span>
-            </div>
-            <div style="padding:16px 20px;font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--ink);letter-spacing:.01em;">АБВГҐДЕЄЖЗИІЇ<br>КЛМНОПРСТУ</div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--gray-200);">
-              <div style="padding:14px 16px;border-right:1px solid var(--gray-200);"><div style="font-weight:300;font-size:22px;color:var(--ink);">Аа</div><div class="mono" style="margin-top:4px;">300</div></div>
-              <div style="padding:14px 16px;border-right:1px solid var(--gray-200);"><div style="font-weight:500;font-size:22px;color:var(--ink);">Аа</div><div class="mono" style="margin-top:4px;">500</div></div>
-              <div style="padding:14px 16px;"><div style="font-weight:800;font-size:22px;color:var(--ink);">Аа</div><div class="mono" style="margin-top:4px;">800</div></div>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:14px;align-items:center;">
-            <span class="mono" style="color:var(--blue-mid);">TECH-LABEL</span>
-            <span style="flex:1;height:1px;background:var(--gray-200);"></span>
-            <span class="mono">letter-spacing .18em</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ PALETTE ============ -->
-    <div class="block">
-      <div class="sec-label"><span class="ix">02 / ПАЛІТРА</span><span class="ln"></span><span class="mono">МОНОХРОМ + ОДИН ЕЛЕКТРИЧНИЙ АКЦЕНТ</span></div>
-      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px;">
-        <div><div style="height:88px;border-radius:var(--r);background:#171A1F;border:1px solid var(--gray-200);"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Графіт</div><div class="mono" style="margin-top:2px;">#171A1F · NAVY</div></div>
-        <div><div style="height:88px;border-radius:var(--r);background:#23272E;"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Чорнило</div><div class="mono" style="margin-top:2px;">#23272E · INK</div></div>
-        <div><div style="height:88px;border-radius:var(--r);background:#6B7280;"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Сталь</div><div class="mono" style="margin-top:2px;">#6B7280 · MUTED</div></div>
-        <div><div style="height:88px;border-radius:var(--r);background:#F6F7F8;border:1px solid var(--gray-200);"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Креслення</div><div class="mono" style="margin-top:2px;">#F6F7F8 · BG</div></div>
-        <div><div style="height:88px;border-radius:var(--r);background:#0F5BFF;"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Електрик</div><div class="mono" style="margin-top:2px;">#0F5BFF · ACCENT</div></div>
-        <div><div style="height:88px;border-radius:var(--r);background:#C8F02E;"></div><div style="font-weight:600;font-size:13px;margin-top:10px;color:var(--navy);">Лайм-сигнал</div><div class="mono" style="margin-top:2px;">#C8F02E · OK</div></div>
-      </div>
-      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
-        <span style="font-size:12px;font-weight:600;padding:5px 11px;border-radius:var(--r-s);background:var(--blue-light);color:#0a3fb0;">blue-light · #E8F0FF</span>
-        <span style="font-size:12px;font-weight:600;padding:5px 11px;border-radius:var(--r-s);background:var(--gray-100);color:var(--ink);">gray-100 · #F0F1F3</span>
-        <span style="font-size:12px;font-weight:600;padding:5px 11px;border-radius:var(--r-s);background:var(--gray-200);color:var(--ink);">gray-200 · #E6E8EB</span>
-        <span style="font-size:12px;font-weight:600;padding:5px 11px;border-radius:var(--r-s);border:1px solid var(--gray-200);color:var(--muted);background:var(--paper);">cream · #F4F6F8</span>
-      </div>
-    </div>
-
-    <!-- ============ COMPONENTS ============ -->
-    <div class="block">
-      <div class="sec-label"><span class="ix">03 / КОМПОНЕНТИ</span><span class="ln"></span><span class="mono">КНОПКИ · ЧІПИ · КАРТКИ · БЕЙДЖІ</span></div>
-
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px;">
-        <button class="btn btn-primary">Подати заявку
-          <svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn btn-secondary">Завантажити статут</button>
-        <span style="width:1px;height:30px;background:var(--gray-200);"></span>
-        <span class="chip"><span class="dot"></span>Інженерія</span>
-        <span class="chip"><span class="dot" style="background:var(--green);"></span>Набір відкрито</span>
-        <span class="chip" style="border-color:var(--blue-mid);color:var(--blue-mid);"><span class="dot"></span>Радіо&nbsp;&amp;&nbsp;звʼязок</span>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <!-- card style A: technical / outlined -->
-        <div class="card" style="position:relative;">
-          <div style="position:absolute;top:18px;right:18px;" class="mono">МОДУЛЬ 02</div>
-          <svg viewBox="0 0 32 32" class="ico-sm" fill="none" aria-hidden="true">
-            <path d="M5 24V12l11-6 11 6v12l-11 6-11-6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            <path d="M16 6v6m0 0 11 6m-11-6L5 12m11 18V18" stroke="currentColor" stroke-width="1.4"/>
-          </svg>
-          <h3 style="font-size:19px;font-weight:700;margin:16px 0 8px;">Фізика польоту</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0;">Аеродинаміка, тяга, баланс. Як інженерне рішення стає польотом — на макетах і в симуляторі.</p>
-          <div style="display:flex;gap:8px;margin-top:16px;border-top:1px solid var(--gray-200);padding-top:14px;">
-            <span class="mono">12 ЗАНЯТЬ</span><span class="mono" style="color:var(--blue-mid);">· LEVEL A</span>
-          </div>
-        </div>
-        <!-- card style B: filled accent block -->
-        <div class="card grid-bg" style="background-color:var(--navy);border-color:var(--navy);color:#fff;position:relative;overflow:hidden;">
-          <div style="position:relative;">
-            <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(15,91,255,.18);border:1px solid rgba(15,91,255,.4);padding:5px 11px;border-radius:100px;" class="mono"><span style="color:#cfe0ff;">ДЛЯ БАТЬКІВ</span></div>
-            <h3 style="color:#fff;font-size:21px;font-weight:800;margin:16px 0 8px;letter-spacing:-.02em;">Безпека — це інженерія</h3>
-            <p style="font-size:14px;color:rgba(255,255,255,.72);margin:0 0 18px;">Жодних бойових сценаріїв. Тільки цивільне застосування, протоколи та відкритий доступ до програми.</p>
-            <a href="#" style="color:var(--blue-mid);font-weight:600;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;background:#fff;padding:9px 14px;border-radius:var(--r);">Політика безпеки
-              <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
-        <span style="font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;background:var(--blue-light);color:#0a3fb0;">● Активна група</span>
-        <span style="font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;background:#EAF7F0;color:#1c6e49;">✓ Заявку прийнято</span>
-        <span style="font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;background:#FBF1E0;color:#8a5610;">! Очікує підтвердження</span>
-        <span style="font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;background:var(--gray-100);color:var(--muted);">○ Набір закрито</span>
-      </div>
-    </div>
-
-    <!-- ============ FEATURE BLOCK (school project) ============ -->
-    <div class="block">
-      <div class="sec-label"><span class="ix">04 / ПРОЄКТ «ДРОНИ ТА ДІТИ»</span><span class="ln"></span><span class="mono">КОНТЕНТНИЙ БЛОК</span></div>
-      <div style="display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;">
-        <div>
-          <h2 style="font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.06;">Дрон — це чотири науки в одному корпусі</h2>
-          <p style="font-size:16px;color:var(--muted);margin:18px 0 26px;max-width:400px;">Розкладаємо складне на зрозумілі модулі. Кожен напрям веде ментор-практик, кожен результат — вимірюваний.</p>
-          <div style="display:flex;gap:24px;">
-            <div><div style="font-family:var(--f-display);font-weight:800;font-size:30px;color:var(--navy);letter-spacing:-.03em;">5–10&nbsp;%</div><div class="mono" style="margin-top:4px;">ПІЛОТУВАННЯ</div></div>
-            <div style="width:1px;background:var(--gray-200);"></div>
-            <div><div style="font-family:var(--f-display);font-weight:800;font-size:30px;color:var(--blue-mid);letter-spacing:-.03em;">4×</div><div class="mono" style="margin-top:4px;">ДИСЦИПЛІНИ</div></div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);border-radius:var(--r-l);overflow:hidden;">
-          <div style="background:var(--paper);padding:22px;">
-            <svg viewBox="0 0 28 28" class="ico-sm" style="color:var(--blue-mid);" fill="none" aria-hidden="true"><path d="M14 3v5M14 20v5M3 14h5M20 14h5M6 6l3.5 3.5M18.5 18.5 22 22M22 6l-3.5 3.5M9.5 18.5 6 22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="1.6"/></svg>
-            <div style="font-weight:700;font-size:16px;margin-top:14px;color:var(--navy);">Інженерія</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Конструкція, друк, складання.</div>
-          </div>
-          <div style="background:var(--paper);padding:22px;">
-            <svg viewBox="0 0 28 28" class="ico-sm" style="color:var(--blue-mid);" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="1.6"/><ellipse cx="14" cy="14" rx="11" ry="5" stroke="currentColor" stroke-width="1.6"/><ellipse cx="14" cy="14" rx="11" ry="5" stroke="currentColor" stroke-width="1.6" transform="rotate(60 14 14)"/><ellipse cx="14" cy="14" rx="11" ry="5" stroke="currentColor" stroke-width="1.6" transform="rotate(120 14 14)"/></svg>
-            <div style="font-weight:700;font-size:16px;margin-top:14px;color:var(--navy);">Фізика</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Політ, тяга, енергія.</div>
-          </div>
-          <div style="background:var(--paper);padding:22px;">
-            <svg viewBox="0 0 28 28" class="ico-sm" style="color:var(--blue-mid);" fill="none" aria-hidden="true"><path d="M14 14a6 6 0 0 1 6 6M14 14a10 10 0 0 1 10 10M14 14a6 6 0 0 0-6 6M14 14a10 10 0 0 0-10 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="14" cy="11" r="2.4" fill="currentColor"/></svg>
-            <div style="font-weight:700;font-size:16px;margin-top:14px;color:var(--navy);">Радіо</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Звʼязок, частоти, сигнал.</div>
-          </div>
-          <div style="background:var(--paper);padding:22px;">
-            <svg viewBox="0 0 28 28" class="ico-sm" style="color:var(--blue-mid);" fill="none" aria-hidden="true"><path d="M11 3h6M12 3v6l-5.5 9.5A2 2 0 0 0 8.2 22h11.6a2 2 0 0 0 1.7-3.5L16 9V3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 16h10" stroke="currentColor" stroke-width="1.6"/></svg>
-            <div style="font-weight:700;font-size:16px;margin-top:14px;color:var(--navy);">Хімія</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Матеріали, живлення.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ ICON ROW ============ -->
-    <div class="block">
-      <div class="sec-label"><span class="ix">05 / ІКОНКИ</span><span class="ln"></span><span class="mono">FLAT · STROKE 1.6 · CURRENTCOLOR</span></div>
-      <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:14px;">
-        <!-- drone -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--blue-mid);" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="9" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="27" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="27" r="4" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 12 9 9m15 3 3-3M12 24l-3 3m15-3 3 3" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span class="mono" style="font-size:10px;">ДРОН</span>
-        </div>
-        <!-- gear -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--navy);" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M18 4v4M18 28v4M4 18h4M28 18h4M7.5 7.5l2.8 2.8M25.7 25.7l2.8 2.8M28.5 7.5l-2.8 2.8M10.3 25.7l-2.8 2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span class="mono" style="font-size:10px;">ІНЖЕНЕР</span>
-        </div>
-        <!-- grad cap -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--navy);" fill="none" aria-hidden="true"><path d="M18 9 4 15l14 6 14-6-14-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 18v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6M30 16v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span class="mono" style="font-size:10px;">НАВЧАННЯ</span>
-        </div>
-        <!-- shield -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--navy);" fill="none" aria-hidden="true"><path d="M18 4 7 8v9c0 6.6 4.6 11 11 14 6.4-3 11-7.4 11-14V8L18 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m13.5 18 3 3 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="mono" style="font-size:10px;">БЕЗПЕКА</span>
-        </div>
-        <!-- unity hands -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--blue-mid);" fill="none" aria-hidden="true"><path d="M18 30c-7-4.5-11-8.6-11-14a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 5.4-4 9.5-11 14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <span class="mono" style="font-size:10px;">ЄДНІСТЬ</span>
-        </div>
-        <!-- signal -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--navy);" fill="none" aria-hidden="true"><circle cx="18" cy="22" r="2.6" fill="currentColor"/><path d="M12.5 16.5a8 8 0 0 1 11 0M8.5 12.5a14 14 0 0 1 19 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span class="mono" style="font-size:10px;">СИГНАЛ</span>
-        </div>
-        <!-- map pin -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--navy);" fill="none" aria-hidden="true"><path d="M18 31c6-7 9-11.5 9-16a9 9 0 1 0-18 0c0 4.5 3 9 9 16Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="18" cy="15" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span class="mono" style="font-size:10px;">ГРОМАДА</span>
-        </div>
-        <!-- heart -->
-        <div class="card" style="padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <svg viewBox="0 0 36 36" style="width:30px;height:30px;color:var(--blue-mid);" fill="none" aria-hidden="true"><path d="M18 29C9 23 5 18.5 5 13.5A6.5 6.5 0 0 1 18 10a6.5 6.5 0 0 1 13 3.5C31 18.5 27 23 18 29Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <span class="mono" style="font-size:10px;">ПІДТРИМКА</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ APPLIED IMAGERY ============ -->
-    <div class="block" style="padding-bottom:56px;">
-      <div class="sec-label"><span class="ix">06 / ОБРАЗНІСТЬ</span><span class="ln"></span><span class="mono">МЕНТОРИ · АБСТРАКТНІ ПОРТРЕТИ</span></div>
-      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:stretch;">
-        <!-- blueprint-style abstract art -->
-        <div class="grid-bg" style="background-color:var(--navy);border-radius:var(--r-l);position:relative;overflow:hidden;min-height:240px;">
-          <svg viewBox="0 0 480 260" width="100%" height="100%" style="display:block;position:absolute;inset:0;" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <g stroke="#0F5BFF" fill="none" stroke-width="1.4" opacity=".9">
-              <circle cx="120" cy="80" r="34"/><circle cx="360" cy="80" r="34"/><circle cx="120" cy="200" r="34"/><circle cx="360" cy="200" r="34"/>
-              <rect x="200" y="110" width="80" height="60" rx="8"/>
-              <path d="M148 102 200 130M332 102 280 130M148 178 200 150M332 178 280 150" stroke-linecap="round"/>
-              <circle cx="240" cy="140" r="9" fill="#0F5BFF" stroke="none"/>
-            </g>
-            <g stroke="#3a4250" stroke-width="1" opacity=".7">
-              <path d="M120 36v-22M360 36v-22M120 246v22M360 246v22"/>
-              <path d="M40 80h22M438 80h-22"/>
-            </g>
-            <g fill="#6b7686" font-family="monospace" font-size="11" letter-spacing="1.5">
-              <text x="20" y="24">QUAD · X4</text>
-              <text x="372" y="252">SCALE 1:1</text>
-            </g>
-          </svg>
-          <div style="position:absolute;left:24px;bottom:22px;">
-            <div class="mono" style="color:#cfe0ff;">КРЕСЛЕННЯ · BLUEPRINT</div>
-            <div style="color:#fff;font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.02em;margin-top:4px;">Те, що приховано всередині</div>
-          </div>
-        </div>
-        <!-- mentor avatars (abstract inline-SVG) -->
-        <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
-          <div class="mono" style="margin-bottom:16px;">МЕНТОРИ · ВЕТЕРАНИ-ІНСТРУКТОРИ</div>
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div style="display:flex;align-items:center;gap:14px;">
-              <svg viewBox="0 0 48 48" width="48" height="48" style="border-radius:50%;flex:none;" aria-hidden="true"><rect width="48" height="48" fill="#E8F0FF"/><circle cx="24" cy="19" r="8" fill="#0F5BFF"/><path d="M9 44c2-9 8-13 15-13s13 4 15 13" fill="#171A1F"/></svg>
-              <div><div style="font-weight:600;font-size:14px;color:var(--navy);">Валентин</div><div class="mono" style="margin-top:2px;">ФІЗИКА ПОЛЬОТУ</div></div>
-            </div>
-            <div style="height:1px;background:var(--gray-200);"></div>
-            <div style="display:flex;align-items:center;gap:14px;">
-              <svg viewBox="0 0 48 48" width="48" height="48" style="border-radius:50%;flex:none;" aria-hidden="true"><rect width="48" height="48" fill="#171A1F"/><circle cx="24" cy="19" r="8" fill="#C8F02E"/><path d="M9 44c2-9 8-13 15-13s13 4 15 13" fill="#0F5BFF"/></svg>
-              <div><div style="font-weight:600;font-size:14px;color:var(--navy);">Олена</div><div class="mono" style="margin-top:2px;">РАДІО &amp; ЗВ’ЯЗОК</div></div>
-            </div>
-            <div style="height:1px;background:var(--gray-200);"></div>
-            <div style="display:flex;align-items:center;gap:14px;">
-              <svg viewBox="0 0 48 48" width="48" height="48" style="border-radius:50%;flex:none;" aria-hidden="true"><rect width="48" height="48" fill="#F0F1F3"/><circle cx="24" cy="19" r="8" fill="#171A1F"/><path d="M9 44c2-9 8-13 15-13s13 4 15 13" fill="#0F5BFF"/></svg>
-              <div><div style="font-weight:600;font-size:14px;color:var(--navy);">Тихий</div><div class="mono" style="margin-top:2px;">ІНЖЕНЕРІЯ</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- footer brand lockup -->
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:32px;padding-top:24px;border-top:1px solid var(--gray-200);">
-        <div style="font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.02em;color:var(--navy);">ОБ’ЄДНАНІ. <span style="color:var(--blue-mid);">СИЛЬНІ.</span> РАЗОМ!</div>
-        <div class="mono">© 2026 · ГО «ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!» · ІНЖЕНЕРНИЙ МІНІМАЛІЗМ</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-  </div>
-</section>
-
-<section class="variant" id="v4" style="display:none">
-  <div class="vinfo">
-    <div class="vinfo-head">
-      <span class="vnum">04</span>
-      <div>
-        <h2>«Сила і впевненість»</h2>
-        <p class="concept">Маніфест-айдентика максимальної впевненості: майже-чорний флотський синій, чистий білий і ОДИН рішучий помаранчево-бурштиновий акцент. Велика геометрична типографіка Unbounded, монолітні блоки й товсті акцентні лінії — сміливість «Кракена», але цивільна, тепла і обнадійлива.</p>
-      </div>
-    </div>
-    <div class="vmeta"><b>Шрифти:</b> display — &#x27;Unbounded&#x27;, system-ui, sans-serif · body — &#x27;Manrope&#x27;, system-ui, sans-serif</div>
-    <p class="rationale">Напрям бере найсильніший принцип Kraken regiment — безкомпромісну сміливість і високий контраст — але прибирає тактичну темряву: замість тривожного багряного маємо теплий бурштиново-помаранчевий акцент (#FF7A1A), що звучить як енергія та оптимізм, а не загроза. Unbounded у вагах 800–900 дає «маніфестну» подачу заголовків, як великий типографічний удар у Army of Drones, а Manrope тримає тіло чистим і довірливим. Монолітні navy-блоки з єдиним акцентом — це впізнаваність понад багатослів&#x27;я з брендбуку: одне слово жовтим/помаранчевим у заголовку запам&#x27;ятовується миттєво й працює на всіх носіях.</p>
-    <div class="pal-row"><span class="pal"><span class="pal-c" style="background:#0E1626"></span><span class="pal-t">Ніч-синій<i>#0E1626</i></span></span><span class="pal"><span class="pal-c" style="background:#14213A"></span><span class="pal-t">Чорнило<i>#14213A</i></span></span><span class="pal"><span class="pal-c" style="background:#5C6B82"></span><span class="pal-t">Сталь<i>#5C6B82</i></span></span><span class="pal"><span class="pal-c" style="background:#FF7A1A"></span><span class="pal-t">Бурштиновий вогонь<i>#FF7A1A</i></span></span><span class="pal"><span class="pal-c" style="background:#FFC400"></span><span class="pal-t">Хай-віз жовтий<i>#FFC400</i></span></span><span class="pal"><span class="pal-c" style="background:#FFFFFF"></span><span class="pal-t">Папір<i>#FFFFFF</i></span></span><span class="pal"><span class="pal-c" style="background:#F4F5F7"></span><span class="pal-t">Світло-сірий<i>#F4F5F7</i></span></span><span class="pal"><span class="pal-c" style="background:#FFF6EC"></span><span class="pal-t">Крем<i>#FFF6EC</i></span></span><span class="pal"><span class="pal-c" style="background:#1F9D55"></span><span class="pal-t">Перемога<i>#1F9D55</i></span></span></div>
-  </div>
-  <div class="showcase">
-    <section class="dir" data-theme="4" aria-label="Брендовий напрям 4 — Сила і впевненість">
+</div>
+<div class="concept" id="c4" hidden><section class="dir" data-theme="4" aria-label="Брендовий напрям 4 — Сила і впевненість">
   <style>
     .dir{--maxw:1080px;font-family:var(--f-body);color:var(--ink);background:var(--gray-50);
       border-radius:var(--r-l);overflow:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -1269,7 +1009,7 @@
               <rect x="-15" y="-15" width="30" height="30" rx="8" fill="#FF7A1A"/>
               <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#0A1120"/>
             </g>
-            <g transform="translate(220 224)"><rect x="-44" y="-11" width="88" height="22" rx="11" fill="#FFC400"/><text x="0" y="4" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="10.5" fill="#0E1626" letter-spacing=".04em">ОСНОВА</text></g>
+            <g transform="translate(220 224)"><rect x="-44" y="-11" width="88" height="22" rx="11" fill="#FFC400"/><text x="0" y="4" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="10.5" fill="#0E1626" letter-spacing=".06em">ОСНОВА ОСНОВ</text></g>
           </svg>
         </div>
       </div>
@@ -1352,25 +1092,8 @@
       </div>
     </div>
   </div>
-</section>
-  </div>
-</section>
-
-<section class="variant" id="v5" style="display:none">
-  <div class="vinfo">
-    <div class="vinfo-head">
-      <span class="vnum">05</span>
-      <div>
-        <h2>Культурний код</h2>
-        <p class="concept">Бренд, укорінений в українській культурній спадщині: тепле кремове полотно, глибока синь, золота вохра й натяк теракоти, з характерним шрифтом NAMU — гідно, редакційно, з культурною глибиною.</p>
-      </div>
-    </div>
-    <div class="vmeta"><b>Шрифти:</b> display — &#x27;NAMU&#x27;,&#x27;Unbounded&#x27;,sans-serif · body — &#x27;Onest&#x27;,system-ui,sans-serif</div>
-    <p class="rationale">Шрифт NAMU (Національний художній музей) несе автентичний український культурний характер — це робить напрям найвиразнішим і найбільш «нашим», що відрізняє його від технологічних конкурентів. Тепла кремова палітра з вохрою і теракотою відсилає до Promprylad та Superhumans (документальна теплота, людяність, а не воєнна темрява), а гідна редакційна сітка й чистий гуманістичний Onest у тілі тримають довіру батьків. Золота вохра замість кислотно-жовтого звучить шляхетно і дорослий тон, а синь зберігає інституційну надійність — поєднання «класика зустрічає сучасність».</p>
-    <div class="pal-row"><span class="pal"><span class="pal-c" style="background:#1E3A5F"></span><span class="pal-t">Глибока синь<i>#1E3A5F</i></span></span><span class="pal"><span class="pal-c" style="background:#2A2723"></span><span class="pal-t">Чорнило<i>#2A2723</i></span></span><span class="pal"><span class="pal-c" style="background:#C68A2E"></span><span class="pal-t">Золота вохра<i>#C68A2E</i></span></span><span class="pal"><span class="pal-c" style="background:#B5563A"></span><span class="pal-t">Теракота<i>#B5563A</i></span></span><span class="pal"><span class="pal-c" style="background:#FBF6EC"></span><span class="pal-t">Кремове полотно<i>#FBF6EC</i></span></span><span class="pal"><span class="pal-c" style="background:#FFFDF8"></span><span class="pal-t">Папір<i>#FFFDF8</i></span></span><span class="pal"><span class="pal-c" style="background:#F2E8D5"></span><span class="pal-t">Пісковик<i>#F2E8D5</i></span></span><span class="pal"><span class="pal-c" style="background:#3E6B96"></span><span class="pal-t">Приглушена синь<i>#3E6B96</i></span></span><span class="pal"><span class="pal-c" style="background:#5E7A3C"></span><span class="pal-t">Олива-зелень<i>#5E7A3C</i></span></span></div>
-  </div>
-  <div class="showcase">
-    <section class="dir" data-theme="5" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
+</section></div>
+<div class="concept" id="c5" hidden><section class="dir" data-theme="5" style="font-family:var(--f-body);color:var(--ink);background:var(--gray-50);border-radius:var(--r-l);overflow:hidden;border:1px solid var(--gray-200)">
   <style>
     [data-theme="5"] .cc-wrap{padding:0}
     [data-theme="5"] .cc-disp{font-family:var(--f-display);line-height:1.04;letter-spacing:-.01em;color:var(--navy);margin:0}
@@ -1544,33 +1267,30 @@
       </div>
     </div>
   </div>
-</section>
-  </div>
-</section>
-</div>
-<div class="pg-foot">
-  <p><b>Як працює атомарність:</b> файл <code>brand/themes.css</code> містить 5 наборів токенів <code>[data-theme="N"]</code>. Обраний набір переноситься в <code>:root</code> у <code>assets/base.css</code> — і весь сайт (шапка, лендінг, vision, портал документів) перефарбовується автоматично, бо вже використовує ці змінні. Жодних правок розмітки.</p>
-</div>
+</section></div>
+</main>
 <script>
-  function showVar(n){
-    for(var i=1;i<=5;i++){ var el=document.getElementById('v'+i); if(el) el.style.display = (i===n)?'block':'none'; }
-    var btns=document.querySelectorAll('.sw-btn'); btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')==String(n)); });
+  var META=[{name:"Громадянська міць",fonts:"'e-Ukraine Head', 'Unbounded', system-ui, sans-serif · 'Onest', 'Manrope', system-ui, sans-serif"},{name:"«Поле і небо»",fonts:"'Unbounded', system-ui, sans-serif · 'Onest', system-ui, -apple-system, sans-serif"},{name:"«Інженерний мінімалізм»",fonts:"'Onest', system-ui, sans-serif · 'Onest', system-ui, sans-serif"},{name:"«Сила і впевненість»",fonts:"'Unbounded', system-ui, sans-serif · 'Manrope', system-ui, sans-serif"},{name:"Культурний код",fonts:"'NAMU','Unbounded',sans-serif · 'Onest',system-ui,sans-serif"}];
+  function showConcept(n){
+    for(var i=1;i<=5;i++){ var el=document.getElementById('c'+i); if(el) el.hidden=(i!==n); }
+    document.querySelectorAll('.cbtn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')==String(n)); });
+    var m=META[n-1]; var cap=document.getElementById('cap'); if(m&&cap) cap.textContent=m.name+'  ·  '+m.fonts;
+    if(window.__fix) window.__fix(document.getElementById('c'+n));
     window.scrollTo({top:0,behavior:'instant'});
   }
-  document.addEventListener('DOMContentLoaded',function(){ var f=document.querySelector('.sw-btn'); if(f) f.classList.add('active'); });
+  document.addEventListener('DOMContentLoaded',function(){
+    var f=document.querySelector('.cbtn'); if(f) f.classList.add('active');
+    var m=META[0],cap=document.getElementById('cap'); if(m&&cap) cap.textContent=m.name+'  ·  '+m.fonts;
+  });
 </script>
 <script>
-/* QA contrast corrector — guarantees no invisible text in these concept mockups.
-   Any text whose WCAG ratio vs its real background is < 3 (i.e. effectively
-   unreadable) is recoloured light-on-dark or dark-on-light. Decorative SVG is
-   left untouched. Runs on load and on every variant switch. */
+/* QA contrast corrector — no invisible text in concept mockups. */
 (function(){
   var parse=function(c){var m=(c||'').match(/rgba?\(([^)]+)\)/);if(!m)return null;var p=m[1].split(',').map(parseFloat);return [p[0],p[1],p[2],p[3]==null?1:p[3]];};
   var lum=function(a){var f=function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};return .2126*f(a[0])+.7152*f(a[1])+.0722*f(a[2]);};
   var ratio=function(a,b){var L1=lum(a),L2=lum(b),hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+.05)/(lo+.05);};
   var effBg=function(el){var e=el;while(e&&e.nodeType===1){var s=getComputedStyle(e);var c=parse(s.backgroundColor);if(c&&c[3]>0)return [c[0],c[1],c[2]];e=e.parentElement;}return [255,255,255];};
-  function fix(root){
-    if(!root)return;
+  function fix(root){ if(!root)return;
     root.querySelectorAll('*').forEach(function(el){
       if(el.closest('svg'))return;
       var t='';el.childNodes.forEach(function(n){if(n.nodeType===3)t+=n.textContent;});
@@ -1580,11 +1300,8 @@
       if(cr<3){ el.style.setProperty('color', lum(bg)<0.4 ? '#FFFFFF' : '#10203A','important'); }
     });
   }
-  var orig=window.showVar;
-  window.showVar=function(n){ if(orig)orig(n); fix(document.getElementById('v'+n)); };
-  document.addEventListener('DOMContentLoaded',function(){
-    for(var i=1;i<=5;i++){fix(document.getElementById('v'+i));}
-  });
+  window.__fix=fix;
+  document.addEventListener('DOMContentLoaded',function(){ for(var i=1;i<=5;i++){fix(document.getElementById('c'+i));} });
 })();
 </script>
 </body>

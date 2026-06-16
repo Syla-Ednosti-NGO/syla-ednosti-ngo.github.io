@@ -1,8 +1,5 @@
-/* ==========================================================
-   Candidate brand themes — token sets (single source of truth)
-   Each [data-theme="N"] block redefines the FULL token contract.
-   Adopting one = promote its block to :root in assets/base.css.
-   ========================================================== */
+/* Candidate brand themes — token sets (single source of truth).
+   Each [data-theme="N"] block redefines the FULL token contract. */
 
 /* 1. Громадянська міць */
 [data-theme="1"]{

@@ -1,0 +1,151 @@
+<section class="dir em" data-theme="3">
+<style>
+  .em{ --em-dark:#0E1116; --em-line:rgba(255,255,255,.05); font-family:var(--f-body); color:var(--ink); }
+  .em *{box-sizing:border-box}
+  .em .screen{ min-height:calc(100vh - var(--barh,56px)); display:flex; flex-direction:column; justify-content:center; position:relative; padding:64px 7vw; }
+  .em .dark{ background:var(--em-dark); color:#fff; }
+  .em .grid{ position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(var(--em-line) 1px,transparent 1px),linear-gradient(90deg,var(--em-line) 1px,transparent 1px);
+    background-size:54px 54px; mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%); }
+  .em .kick{ font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--yellow); display:flex; align-items:center; gap:12px; }
+  .em .kick::before{ content:""; width:30px; height:2px; background:var(--yellow); }
+  .em h1.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(34px,5.6vw,68px); line-height:1.02; letter-spacing:-.02em; margin:20px 0 0; max-width:16ch; }
+  .em h2.em-h{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.6vw,46px); line-height:1.05; letter-spacing:-.02em; margin:14px 0 0; max-width:18ch; }
+  .em .acc{ color:var(--yellow); }
+  .em .lead{ font-size:clamp(15px,1.5vw,18px); line-height:1.65; max-width:54ch; margin:22px 0 0; }
+  .em .dark .lead{ color:#AEB6C2; }
+  .em .light .lead{ color:var(--muted); }
+  .em .btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top:34px; }
+  .em .btn{ font-family:var(--f-body); font-weight:600; font-size:15px; padding:14px 24px; border-radius:var(--r); border:1.5px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:9px; text-decoration:none; transition:.15s; }
+  .em .btn-p{ background:var(--yellow); color:#fff; }
+  .em .btn-p:hover{ filter:brightness(1.08); }
+  .em .btn-g{ background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .em .btn-g:hover{ border-color:#fff; }
+  .em .light .btn-g{ color:var(--ink); border-color:var(--gray-300); }
+  .em .stats{ display:flex; gap:48px; flex-wrap:wrap; margin-top:54px; }
+  .em .stat .n{ font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3vw,40px); letter-spacing:-.02em; }
+  .em .dark .stat .n{ color:#fff; } .em .stat .n .u{ color:var(--yellow); }
+  .em .stat .l{ font-size:12.5px; color:#8A93A1; margin-top:4px; max-width:16ch; }
+  .em .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  .em .hero-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,#0E1116 0%,rgba(14,17,22,.86) 42%,rgba(14,17,22,.42) 100%); }
+  .em .hero-in{ position:relative; z-index:2; max-width:1180px; width:100%; margin:0 auto; }
+  .em .wrap{ max-width:1180px; width:100%; margin:0 auto; }
+  .em .split{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
+  .em .shot{ position:relative; border-radius:var(--r-l); overflow:hidden; aspect-ratio:4/3; box-shadow:0 1px 0 rgba(255,255,255,.06), 0 30px 60px -30px rgba(0,0,0,.6); }
+  .em .shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .em .shot .tag{ position:absolute; left:14px; bottom:14px; z-index:2; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:rgba(14,17,22,.7); border:1px solid rgba(255,255,255,.16); padding:6px 12px; border-radius:100px; backdrop-filter:blur(4px); }
+  .em .disc{ list-style:none; padding:0; margin:26px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gray-200); border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; }
+  .em .disc li{ background:var(--paper); padding:18px 20px; display:flex; gap:13px; align-items:flex-start; }
+  .em .disc .di{ width:34px; height:34px; border-radius:var(--r-s); background:var(--blue-light); color:var(--yellow); display:flex; align-items:center; justify-content:center; flex:none; }
+  .em .disc b{ font-family:var(--f-display); font-weight:700; font-size:14.5px; color:var(--ink); display:block; }
+  .em .disc span{ font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .em .feature-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
+  .em .feature-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,17,22,.55),rgba(14,17,22,.9)); }
+  .em .qmark{ font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,40px); line-height:1.3; max-width:22ch; }
+  .em .meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .em .pill{ font-size:12.5px; font-weight:600; color:#fff; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); padding:7px 14px; border-radius:100px; }
+  .em .light{ background:var(--gray-50); color:var(--ink); }
+  .em .coleyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .em .num-strip{ display:flex; gap:0; border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; margin-top:6px; background:var(--paper); }
+  .em .num-strip > div{ flex:1; padding:22px 20px; border-left:1px solid var(--gray-200); }
+  .em .num-strip > div:first-child{ border-left:none; }
+  .em .num-strip .n{ font-family:var(--f-display); font-weight:800; font-size:30px; color:var(--ink); letter-spacing:-.02em; }
+  .em .num-strip .n .u{ color:var(--yellow); }
+  .em .num-strip .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media (max-width:860px){
+    .em .split{ grid-template-columns:1fr; gap:30px; }
+    .em .disc{ grid-template-columns:1fr; }
+    .em .num-strip{ flex-wrap:wrap; } .em .num-strip > div{ flex:1 1 45%; }
+    .em .hero-bg::after{ background:linear-gradient(180deg,rgba(14,17,22,.5),rgba(14,17,22,.92)); }
+    .em .screen{ padding:54px 24px; min-height:auto; }
+  }
+</style>
+
+<!-- ===== HERO ===== -->
+<div class="screen dark" style="overflow:hidden">
+  <div class="hero-bg" style="background-image:url('img/fpv-carbon.jpg')"></div>
+  <div class="grid"></div>
+  <div class="hero-in">
+    <div class="kick">Інженерна школа дронів · 13–17</div>
+    <h1 class="em-h">Дрон — це ціла <span class="acc">наука</span>. Пілотування — лише 5–10%.</h1>
+    <p class="lead">Фізика польоту, радіозв’язок, хімія акумуляторів та код — у руках підлітків. Цивільні дрони для агро, доставки, пошуку та екології. Наставниками стають ветерани.</p>
+    <div class="btns">
+      <a class="btn btn-p" href="#" onclick="return false">Записати дитину
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-g" href="#" onclick="return false">Як влаштована програма</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">90<span class="u">%</span></div><div class="l">наука та інженерія, а не зброя</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div>
+      <div class="stat"><div class="n">13–17</div><div class="l">вік учасників</div></div>
+      <div class="stat"><div class="n">0<span class="u">₴</span></div><div class="l">громадські засади</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ЩО ВИВЧАЮТЬ (split, light) ===== -->
+<div class="screen light">
+  <div class="wrap split">
+    <div>
+      <div class="coleyebrow">Програма</div>
+      <h2 class="em-h" style="color:var(--ink)">Шість наук за одним польотом</h2>
+      <p class="lead">Пілотування — верхівка айсберга. Більшість курсу — інженерія й розуміння того, як це працює. Кожне заняття: теорія, показ, практика руками.</p>
+      <ul class="disc">
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.4"/></svg></span><div><b>Фізика польоту</b><span>тяга, баланс, аеродинаміка</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="18" r="2"/><path d="M8 15a6 6 0 018 0"/><path d="M5 12a11 11 0 0114 0"/></svg></span><div><b>Радіозв’язок</b><span>як сигнал летить простором</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="7" y="9" width="10" height="8" rx="2"/><path d="M10 9V7h4v2"/><path d="M10 13h1M14 13h-1"/></svg></span><div><b>Хімія акумуляторів</b><span>типи, заряд, безпека</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><b>Код і автоматика</b><span>політний контролер</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><div><b>Навігація і GPS</b><span>топографія, маршрути</span></div></li>
+        <li><span class="di"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="2.4"/><circle cx="16" cy="7" r="2.4"/><path d="M4 19c0-2.5 2.2-4 5-4M20 19c0-2.5-2.2-4-5-4"/></svg></span><div><b>Робота в команді</b><span>інженер · пілот · збирач</span></div></li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/components-knoll.jpg" alt="Електронні компоненти та Arduino"><span class="tag">Власні проєкти</span></div>
+  </div>
+</div>
+
+<!-- ===== РУКАМИ (split, dark) ===== -->
+<div class="screen dark" style="overflow:hidden">
+  <div class="grid"></div>
+  <div class="wrap split" style="position:relative;z-index:2">
+    <div class="shot"><img src="img/hands-breadboard.jpg" alt="Підліток збирає схему на макетній платі"><span class="tag">З першого заняття</span></div>
+    <div>
+      <div class="kick">Метод</div>
+      <h2 class="em-h">Руками — з першого дня</h2>
+      <p class="lead">Мінімум зубріння, максимум практики. Спершу ознайомчий блок, далі — проєктна робота: команда обирає напрям і веде власний дрон до випробування. Поглиблений рівень — повне конструювання та апґрейд.</p>
+      <div class="meta-row">
+        <span class="pill">Симулятори</span>
+        <span class="pill">Збірка FPV</span>
+        <span class="pill">Реальні польоти</span>
+        <span class="pill">Власний проєкт</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ДРАМАТИЧНИЙ БЛОК (full image, dark) ===== -->
+<div class="screen" style="overflow:hidden;color:#fff">
+  <div class="feature-bg" style="background-image:url('img/fpv-lighttrails.jpg')"></div>
+  <div class="hero-in" style="text-align:center;max-width:760px">
+    <div class="kick" style="justify-content:center">Хто навчає</div>
+    <p class="qmark">«Дрон — це не зброя, а ціла наука. Ми вчимо думати, а не боятися — поруч із наставниками-ветеранами».</p>
+    <div class="num-strip" style="margin-top:34px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14)">
+      <div><div class="n" style="color:#fff">2</div><div class="l" style="color:#AEB6C2">наставники вже в команді</div></div>
+      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">50/50</div><div class="l" style="color:#AEB6C2">діти воїнів і цивільних</div></div>
+      <div style="border-left-color:rgba(255,255,255,.14)"><div class="n" style="color:#fff">100<span class="u">%</span></div><div class="l" style="color:#AEB6C2">відкрита програма для батьків</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="screen dark" style="min-height:auto;padding-top:72px;padding-bottom:72px;overflow:hidden">
+  <div class="grid"></div>
+  <div class="hero-in" style="text-align:center">
+    <h2 class="em-h" style="margin:0 auto">Готові побудувати майбутнє <span class="acc">власними руками</span>?</h2>
+    <p class="lead" style="margin:18px auto 0">Набір на пілотний літній курс відкрито. Розкажемо програму, познайомимо з наставниками й покажемо, як це безпечно.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn btn-p" href="#" onclick="return false">Подати заявку</a>
+      <a class="btn btn-g" href="#" onclick="return false">Завантажити презентацію</a>
+    </div>
+  </div>
+</div>
+</section>
