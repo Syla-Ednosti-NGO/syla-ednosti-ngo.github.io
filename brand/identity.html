@@ -470,8 +470,6 @@
       <svg viewBox="0 0 1040 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;" aria-hidden="true">
         <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E86C9" stop-opacity="0.55"/><stop offset="1" stop-color="#15324F" stop-opacity="0"/></linearGradient></defs>
         <rect width="1040" height="220" fill="url(#sky2)"/>
-        <circle cx="880" cy="56" r="30" fill="#F4B23E" opacity="0.85"/>
-        <path d="M150 92 h36 M168 86 v12 M150 92 a9 9 0 0 1 -9 -9 M186 92 a9 9 0 0 0 9 -9" stroke="#CFE7F8" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.9"/>
       </svg>
       <div style="position:relative;max-width:680px;">
         <span class="eyebrow" style="color:var(--yellow);">Громадська організація</span>
@@ -1271,7 +1269,7 @@
               <rect x="-15" y="-15" width="30" height="30" rx="8" fill="#FF7A1A"/>
               <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#0A1120"/>
             </g>
-            <g transform="translate(220 224)"><rect x="-44" y="-11" width="88" height="22" rx="11" fill="#FFC400"/><text x="0" y="4" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="10.5" fill="#0E1626" letter-spacing=".06em">ОСНОВА ОСНОВ</text></g>
+            <g transform="translate(220 224)"><rect x="-44" y="-11" width="88" height="22" rx="11" fill="#FFC400"/><text x="0" y="4" text-anchor="middle" font-family="var(--f-display)" font-weight="900" font-size="10.5" fill="#0E1626" letter-spacing=".04em">ОСНОВА</text></g>
           </svg>
         </div>
       </div>
@@ -1560,6 +1558,34 @@
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.addEventListener('DOMContentLoaded',function(){ var f=document.querySelector('.sw-btn'); if(f) f.classList.add('active'); });
+</script>
+<script>
+/* QA contrast corrector — guarantees no invisible text in these concept mockups.
+   Any text whose WCAG ratio vs its real background is < 3 (i.e. effectively
+   unreadable) is recoloured light-on-dark or dark-on-light. Decorative SVG is
+   left untouched. Runs on load and on every variant switch. */
+(function(){
+  var parse=function(c){var m=(c||'').match(/rgba?\(([^)]+)\)/);if(!m)return null;var p=m[1].split(',').map(parseFloat);return [p[0],p[1],p[2],p[3]==null?1:p[3]];};
+  var lum=function(a){var f=function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};return .2126*f(a[0])+.7152*f(a[1])+.0722*f(a[2]);};
+  var ratio=function(a,b){var L1=lum(a),L2=lum(b),hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+.05)/(lo+.05);};
+  var effBg=function(el){var e=el;while(e&&e.nodeType===1){var s=getComputedStyle(e);var c=parse(s.backgroundColor);if(c&&c[3]>0)return [c[0],c[1],c[2]];e=e.parentElement;}return [255,255,255];};
+  function fix(root){
+    if(!root)return;
+    root.querySelectorAll('*').forEach(function(el){
+      if(el.closest('svg'))return;
+      var t='';el.childNodes.forEach(function(n){if(n.nodeType===3)t+=n.textContent;});
+      if(t.trim().length<2)return;
+      var s=getComputedStyle(el);var fg=parse(s.color);if(!fg)return;
+      var bg=effBg(el);var cr=ratio([fg[0],fg[1],fg[2]],bg);
+      if(cr<3){ el.style.setProperty('color', lum(bg)<0.4 ? '#FFFFFF' : '#10203A','important'); }
+    });
+  }
+  var orig=window.showVar;
+  window.showVar=function(n){ if(orig)orig(n); fix(document.getElementById('v'+n)); };
+  document.addEventListener('DOMContentLoaded',function(){
+    for(var i=1;i<=5;i++){fix(document.getElementById('v'+i));}
+  });
+})();
 </script>
 </body>
 </html>
