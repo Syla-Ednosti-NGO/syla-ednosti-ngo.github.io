@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Підліткам — Об’єднані. Сильні. Разом! · растр</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ============================================================
+   TEENS — magazine «спецвипуск» | Інженерний мінімалізм
+   All classes prefixed .tp-  (no collision with site.css/base.css)
+   Light text ONLY on dark / photo. Accent = electric blue (#0F5BFF).
+   ============================================================ */
+.tp {
+  --tp-dark: var(--ls-dark,#0E1116);
+  --tp-acc: var(--yellow,#0F5BFF);
+  --tp-line: var(--gray-200,#E6E8EB);
+  --tp-line-d: rgba(255,255,255,.10);
+  font-family: var(--f-body,'Onest',system-ui,sans-serif);
+  color: var(--ink,#23272E);
+}
+.tp *{ box-sizing:border-box; }
+.tp section{ position:relative; overflow:hidden; }
+.tp-wrap{ width:100%; max-width:1180px; margin:0 auto; padding:0 40px; position:relative; z-index:2; }
+
+/* shared editorial atoms ----------------------------------- */
+.tp-kick{
+  font-family: var(--f-display,'Onest',sans-serif);
+  font-weight:700; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:12px; color:var(--muted,#6B7280);
+}
+.tp-kick::before{ content:""; width:30px; height:1px; background:currentColor; opacity:.6; }
+.tp-kick.tp-on-dark{ color:#9AA4B2; }
+.tp-kick.tp-on-dark b,.tp-kick b{ color:var(--tp-acc); font-weight:700; }
+
+.tp-h2{
+  font-family: var(--f-display,'Onest',sans-serif);
+  font-weight:800; letter-spacing:-.02em; line-height:1.04;
+  font-size:clamp(30px,4.6vw,52px); color:var(--navy,#171A1F);
+  margin:18px 0 0; max-width:18ch;
+}
+.tp-h2.tp-on-dark{ color:#fff; }
+.tp-h2 .tp-acc{ color:var(--tp-acc); }
+
+.tp-lead{ font-size:18px; line-height:1.75; color:var(--ink,#23272E); max-width:54ch; margin:22px 0 0; }
+.tp-lead.tp-on-dark{ color:#C4CCD6; }
+
+.tp-micro{
+  font-family:var(--f-display,'Onest',sans-serif);
+  font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted,#6B7280);
+}
+.tp-micro.tp-on-dark{ color:#7E8A99; }
+
+.tp-folio{
+  position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:700;
+  font-size:11px; letter-spacing:.22em; color:rgba(35,39,46,.32);
+  display:flex; align-items:center; gap:10px; white-space:nowrap; z-index:3;
+}
+.tp-folio::before{ content:""; width:22px; height:1px; background:currentColor; }
+.tp-on-dark .tp-folio,.tp-sec-dark .tp-folio{ color:rgba(255,255,255,.34); }
+
+/* blueprint grid — VERY low contrast, masked, never noisy */
+.tp-bp{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 0%, transparent 78%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 0%, transparent 78%);
+}
+.tp-bp.tp-light{
+  background-image:
+    linear-gradient(rgba(23,26,31,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,26,31,.04) 1px, transparent 1px);
+}
+
+/* photo scrim utility */
+.tp-photo{ position:absolute; inset:0; z-index:0; background-size:cover; background-position:center; }
+.tp-scrim{ position:absolute; inset:0; z-index:1; }
+
+/* buttons ---------------------------------------------------- */
+.tp-btns{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+.tp-btn{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none; cursor:pointer;
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:700; font-size:15px;
+  padding:14px 24px; border-radius:var(--r,8px); letter-spacing:-.01em; border:1.5px solid transparent;
+  transition:transform .15s ease, background .15s ease;
+}
+.tp-btn:hover{ transform:translateY(-2px); }
+.tp-btn-p{ background:var(--tp-acc); color:#0E1116; }   /* accent → DARK text */
+.tp-btn-p svg{ stroke:#0E1116; }
+.tp-btn-g{ background:transparent; color:#fff; border-color:rgba(255,255,255,.32); }
+.tp-btn-g.tp-on-light{ color:var(--navy,#171A1F); border-color:var(--tp-line); }
+
+/* ============================================================
+   01 — COVER HERO (dark photo + bespoke drone SVG)
+   ============================================================ */
+.tp-hero{ background:var(--tp-dark); padding:128px 0 124px; }
+.tp-hero .tp-scrim{
+  background:
+    linear-gradient(105deg, rgba(14,17,22,.94) 0%, rgba(14,17,22,.80) 46%, rgba(14,17,22,.55) 100%),
+    linear-gradient(0deg, rgba(14,17,22,.75), rgba(14,17,22,.10));
+}
+.tp-hero-art{
+  position:absolute; top:50%; right:-40px; transform:translateY(-50%);
+  width:50%; max-width:620px; z-index:1; pointer-events:none; opacity:.96;
+}
+.tp-hero-art svg{ width:100%; height:auto; display:block; }
+.tp-hero .tp-wrap{ z-index:3; }
+.tp-hero-over{ color:#9AA4B2; }
+.tp-hero h1{
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:800; letter-spacing:-.025em;
+  line-height:1.0; font-size:clamp(40px,7.2vw,88px); color:#fff; margin:22px 0 0; max-width:14ch;
+  text-shadow:0 2px 28px rgba(0,0,0,.5);
+}
+.tp-hero h1 .tp-acc{ color:var(--tp-acc); }
+.tp-hero .tp-lead{ max-width:48ch; text-shadow:0 1px 16px rgba(0,0,0,.5); }
+.tp-statline{
+  display:flex; flex-wrap:wrap; gap:0; margin-top:48px;
+  border-top:1px solid var(--tp-line-d); padding-top:30px; max-width:760px;
+}
+.tp-stat{ padding-right:38px; margin-right:38px; border-right:1px solid var(--tp-line-d); }
+.tp-stat:last-child{ border-right:none; margin-right:0; padding-right:0; }
+.tp-stat .tp-n{
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:800; letter-spacing:-.03em;
+  font-size:clamp(34px,4.4vw,54px); line-height:1; color:#fff;
+}
+.tp-stat .tp-n em{ color:var(--tp-acc); font-style:normal; }
+.tp-stat .tp-l{ font-size:12.5px; line-height:1.45; color:#9AA4B2; margin-top:8px; max-width:18ch; }
+
+/* ============================================================
+   02 — ICEBERG (light, 5–10% above / 90% below)
+   ============================================================ */
+.tp-ice{ background:#fff; padding:104px 0; }
+.tp-ice-grid{ display:grid; grid-template-columns:1fr 1.02fr; gap:64px; align-items:center; margin-top:40px; }
+.tp-ice-art svg{ width:100%; max-width:520px; height:auto; display:block; margin:0 auto;
+  filter:drop-shadow(0 14px 40px rgba(15,91,255,.12)); }
+.tp-ice-pts{ list-style:none; padding:0; margin:26px 0 0; }
+.tp-ice-pts li{
+  display:flex; gap:16px; align-items:flex-start; padding:16px 0;
+  border-top:1px solid var(--tp-line); font-size:15.5px; line-height:1.6; color:var(--ink,#23272E);
+}
+.tp-ice-pts li:first-child{ border-top:none; }
+.tp-ice-pts .tp-b+ b,.tp-ice-pts b{ color:var(--navy,#171A1F); }
+.tp-ice-tag{
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:800; font-size:13px;
+  color:var(--tp-acc); flex:none; width:34px; padding-top:1px;
+}
+.tp-ice-cap{ font-size:13px; color:var(--muted,#6B7280); margin-top:24px; max-width:40ch; line-height:1.6; }
+
+/* ============================================================
+   03 — PHOTO SPLIT FEATURE (editorial, drop cap)
+   ============================================================ */
+.tp-split{ background:var(--gray-50,#F6F7F8); padding:104px 0; }
+.tp-split-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:60px; align-items:center; }
+.tp-split-shot{ position:relative; border-radius:var(--r-l,14px); overflow:hidden; aspect-ratio:4/5;
+  box-shadow:0 24px 60px rgba(23,26,31,.18); }
+.tp-split-shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+.tp-split-shot .tp-shot-tag{
+  position:absolute; left:16px; bottom:16px; z-index:2;
+  background:rgba(14,17,22,.74); color:#fff; backdrop-filter:blur(3px);
+  font-family:var(--f-display,'Onest',sans-serif); font-size:11px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; padding:8px 14px; border-radius:var(--r-s,4px);
+}
+.tp-split-shot::after{ content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(0deg, rgba(14,17,22,.34), transparent 46%); }
+.tp-split-body .tp-drop{ font-size:17px; line-height:1.8; color:var(--ink,#23272E); margin:24px 0 0; }
+.tp-split-body .tp-drop::first-letter{
+  float:left; font-family:var(--f-display,'Onest',sans-serif); font-weight:800;
+  font-size:62px; line-height:.82; color:#fff; background:var(--tp-acc);
+  padding:10px 14px; margin:6px 16px 0 0; border-radius:var(--r,8px);
+}
+.tp-split-body p+p{ margin-top:16px; }
+.tp-chiprow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.tp-chip{
+  font-size:13px; font-weight:600; color:var(--navy,#171A1F);
+  background:#fff; border:1px solid var(--tp-line); border-radius:999px; padding:8px 16px;
+}
+
+/* ============================================================
+   04 — ORBIT: SIX SCIENCES (dark, bespoke diagram)
+   ============================================================ */
+.tp-orbit{ background:var(--tp-dark); padding:110px 0 120px; }
+.tp-orbit .tp-wrap{ text-align:center; }
+.tp-orbit .tp-kick,.tp-orbit .tp-h2,.tp-orbit .tp-lead{ margin-left:auto; margin-right:auto; }
+.tp-orbit .tp-h2{ max-width:20ch; }
+.tp-orbit .tp-lead{ max-width:56ch; }
+.tp-orbit-wrap{ position:relative; width:100%; max-width:680px; height:600px; margin:44px auto 0; }
+.tp-ring{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  border:1.5px dashed rgba(255,255,255,.14); border-radius:50%; }
+.tp-ring.r1{ width:320px; height:320px; } .tp-ring.r2{ width:560px; height:560px; }
+.tp-core{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:150px; z-index:2; }
+.tp-core svg{ width:100%; height:auto; display:block; }
+.tp-sat{ position:absolute; width:122px; text-align:center; transform:translate(-50%,-50%); z-index:2; }
+.tp-sat .tp-sc{
+  width:96px; height:96px; border-radius:50%; margin:0 auto 10px;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  display:flex; align-items:center; justify-content:center;
+}
+.tp-sat .tp-sc svg{ width:40px; height:40px; }
+.tp-sat h4{ font-family:var(--f-display,'Onest',sans-serif); font-weight:700; font-size:13.5px; color:#fff; margin:0; }
+.tp-sat .tp-sb{ font-size:11px; color:#7E8A99; margin:3px 0 0; }
+.tp-sat-badge{
+  display:inline-block; margin-top:6px; font-family:var(--f-display,'Onest',sans-serif);
+  font-weight:700; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase;
+  background:var(--tp-acc); color:#0E1116; border-radius:999px; padding:3px 9px;
+}
+.tp-orbit-note{ font-size:13px; color:#7E8A99; margin:18px 0 0; }
+
+/* ============================================================
+   05 — VERSUS (light: страх→довіра / симулятор→небо)
+   ============================================================ */
+.tp-vs{ background:#fff; padding:104px 0; }
+.tp-vs-grid{ display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; margin-top:46px; }
+.tp-vs-card{ padding:38px 36px; border:1px solid var(--tp-line); }
+.tp-vs-card.tp-from{ background:var(--gray-50,#F6F7F8); border-radius:var(--r-l,14px) 0 0 var(--r-l,14px); }
+.tp-vs-card.tp-to{ background:var(--tp-dark); border-color:var(--tp-dark);
+  border-radius:0 var(--r-l,14px) var(--r-l,14px) 0; }
+.tp-vs-ic{ height:56px; margin-bottom:18px; } .tp-vs-ic svg{ height:56px; width:auto; display:block; }
+.tp-vs-lab{ font-family:var(--f-display,'Onest',sans-serif); font-weight:800; font-size:11px;
+  letter-spacing:.16em; text-transform:uppercase; }
+.tp-from .tp-vs-lab{ color:var(--muted,#6B7280); } .tp-to .tp-vs-lab{ color:var(--tp-acc); }
+.tp-vs-card h4{ font-family:var(--f-display,'Onest',sans-serif); font-weight:800; letter-spacing:-.01em;
+  font-size:23px; margin:12px 0 12px; }
+.tp-from h4{ color:var(--navy,#171A1F); } .tp-to h4{ color:#fff; }
+.tp-vs-card p{ font-size:15px; line-height:1.65; margin:0; }
+.tp-from p{ color:var(--ink,#23272E); } .tp-to p{ color:#C4CCD6; }
+.tp-vs-mid{ display:flex; align-items:center; justify-content:center; padding:0 4px; }
+.tp-vs-arrow{ width:64px; height:64px; border-radius:50%; background:var(--tp-acc);
+  display:flex; align-items:center; justify-content:center; box-shadow:0 10px 28px rgba(15,91,255,.32); }
+.tp-vs-arrow svg{ stroke:#0E1116; }
+
+/* ============================================================
+   06 — SERPENTINE TIMELINE (8 lessons, paper)
+   ============================================================ */
+.tp-prog{ background:var(--gray-50,#F6F7F8); padding:104px 0; }
+.tp-prog-steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px 22px; margin-top:48px; position:relative; }
+.tp-prog-line{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.tp-prog-line svg{ width:100%; height:100%; }
+.tp-step{ position:relative; z-index:1; background:#fff; border:1px solid var(--tp-line);
+  border-radius:var(--r-l,14px); padding:24px 22px 22px; }
+.tp-step .tp-num{
+  display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px;
+  border-radius:50%; background:var(--navy,#171A1F); color:#fff;
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:800; font-size:15px; margin-bottom:14px;
+}
+.tp-step.tp-fin .tp-num{ background:var(--tp-acc); color:#0E1116; }
+.tp-step h4{ font-family:var(--f-display,'Onest',sans-serif); font-weight:700; font-size:16px;
+  color:var(--navy,#171A1F); margin:0 0 7px; letter-spacing:-.01em; }
+.tp-step p{ font-size:13.5px; line-height:1.55; color:var(--muted,#6B7280); margin:0; }
+.tp-prog-foot{ display:flex; align-items:center; gap:18px; justify-content:center; margin-top:46px;
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:700; font-size:14.5px; color:var(--navy,#171A1F); }
+.tp-prog-foot::before,.tp-prog-foot::after{ content:""; height:1px; flex:0 0 56px; background:var(--tp-line); }
+
+/* ============================================================
+   07 — TEAM ROLES MOSAIC (dark)
+   ============================================================ */
+.tp-team{ background:var(--tp-dark); padding:110px 0; }
+.tp-team-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:46px; }
+.tp-role{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-l,14px); padding:30px 28px 28px; position:relative; overflow:hidden; }
+.tp-role::before{ content:""; position:absolute; top:0; left:0; right:0; height:4px; background:var(--tp-acc); opacity:.85; }
+.tp-role-glyph{ width:54px; height:54px; border-radius:var(--r,8px); background:rgba(15,91,255,.16);
+  display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+.tp-role-glyph svg{ width:30px; height:30px; }
+.tp-role-tag{ font-family:var(--f-display,'Onest',sans-serif); font-weight:800; font-size:10.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--tp-acc); }
+.tp-role h4{ font-family:var(--f-display,'Onest',sans-serif); font-weight:800; letter-spacing:-.01em;
+  font-size:22px; color:#fff; margin:10px 0 12px; }
+.tp-role p{ font-size:14.5px; line-height:1.65; color:#C4CCD6; margin:0; }
+.tp-team-note{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:34px;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-l,14px); padding:22px 26px;
+}
+.tp-team-note .tp-bignum{ font-family:var(--f-display,'Onest',sans-serif); font-weight:800;
+  font-size:46px; line-height:1; color:var(--tp-acc); letter-spacing:-.03em; }
+.tp-team-note p{ font-size:15px; line-height:1.6; color:#C4CCD6; margin:0; flex:1 1 320px; }
+
+/* ============================================================
+   08 — FULL-BLEED PHOTO FEATURE + CTA
+   ============================================================ */
+.tp-cta{ background:var(--tp-dark); padding:130px 0; }
+.tp-cta .tp-scrim{
+  background:
+    linear-gradient(0deg, rgba(14,17,22,.86), rgba(14,17,22,.62) 55%, rgba(14,17,22,.80)),
+    radial-gradient(ellipse 70% 70% at 50% 40%, rgba(15,91,255,.12), transparent 70%);
+}
+.tp-cta .tp-wrap{ text-align:center; z-index:3; }
+.tp-cta .tp-kick{ justify-content:center; }
+.tp-cta-q{
+  font-family:var(--f-display,'Onest',sans-serif); font-weight:800; letter-spacing:-.02em;
+  font-size:clamp(28px,4.6vw,52px); line-height:1.12; color:#fff; margin:24px auto 0; max-width:20ch;
+  text-shadow:0 2px 26px rgba(0,0,0,.5);
+}
+.tp-cta-q .tp-acc{ color:var(--tp-acc); }
+.tp-cta .tp-lead{ margin-left:auto; margin-right:auto; color:#C4CCD6; max-width:56ch;
+  text-shadow:0 1px 14px rgba(0,0,0,.5); }
+.tp-cta .tp-btns{ justify-content:center; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:860px){
+  .tp-wrap{ padding:0 22px; }
+  .tp-hero{ padding:96px 0 90px; }
+  .tp-hero-art{ position:relative; top:auto; right:auto; transform:none; width:78%; max-width:380px;
+    margin:0 auto 8px; opacity:.9; }
+  .tp-ice-grid,.tp-split-grid{ grid-template-columns:1fr; gap:40px; }
+  .tp-ice-art{ order:-1; }
+  .tp-split-shot{ aspect-ratio:3/2; }
+  .tp-vs-grid{ grid-template-columns:1fr; }
+  .tp-vs-card.tp-from{ border-radius:var(--r-l,14px) var(--r-l,14px) 0 0; }
+  .tp-vs-card.tp-to{ border-radius:0 0 var(--r-l,14px) var(--r-l,14px); }
+  .tp-vs-mid{ padding:14px 0; }
+  .tp-vs-arrow{ transform:rotate(90deg); }
+  .tp-prog-steps{ grid-template-columns:1fr 1fr; }
+  .tp-prog-line{ display:none; }
+  .tp-team-grid{ grid-template-columns:1fr; }
+  .tp-orbit-wrap{ height:auto; max-width:none; display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .tp-ring{ display:none; }
+  .tp-core{ position:static; transform:none; grid-column:1/-1; margin:0 auto 6px; width:120px; }
+  .tp-sat{ position:static !important; transform:none; width:auto; }
+  .tp-folio{ display:none; }
+}
+@media (max-width:520px){
+  .tp-prog-steps{ grid-template-columns:1fr; }
+  .tp-orbit-wrap{ grid-template-columns:1fr 1fr; }
+  .tp-statline{ gap:18px; }
+  .tp-stat{ border-right:none; margin-right:0; padding-right:0; flex:1 1 40%; }
+}
+
+/* ===== QA corrective layer - contrast & overflow (audit 2026-06-17) ===== */
+.tp-btn-p, .tp-sat-badge { color:#fff !important; }
+.tp-btn-p svg { stroke:#fff !important; color:#fff !important; }
+/* accent labels on dark sections -> accessible blue tint (cr 6+) */
+.tp-dark .tp-kick, .tp-sec-dark .tp-kick,
+.tp-dark .tp-vs-lab, .tp-sec-dark .tp-vs-lab,
+.tp-dark .tp-role-tag, .tp-sec-dark .tp-role-tag { color:#6C97FF !important; }
+/* folios: default = subdued dark-gray (covers every light section,
+   whatever its functional class name); re-lighten only on dark/photo */
+.tp-folio { color:#62646B !important; }
+.tp-dark .tp-folio, .tp-sec-dark .tp-folio,
+.tp-feature .tp-folio, .tp-sec-feature .tp-folio { color:rgba(255,255,255,.55) !important; }
+/* decorative hero art bleed must not create page horizontal scroll */
+.tp-hero { position:relative; overflow:hidden; }
+.tp-to .tp-vs-lab { color:#6C97FF !important; }
+
+</style>
+</head>
+<body class="ls">
+<header class="lnav">
+  <a class="lnav-brand" href="../" title="На головну"><i>‹</i> <span class="tx">ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span></a>
+  <nav class="lnav-links"><a href="index-raster.html">Головна</a><a href="parents-raster.html">Батькам</a><a href="teens-raster.html" class="active">Підліткам</a><a href="communities-raster.html">Громадам</a></nav>
+</header>
+<main>
+<div class="tp-page">
+<section class="tp tp-hero tp-sec-dark">
+  <div class="tp-photo" style="background-image:url('../brand/img/fpv-carbon.jpg')"></div>
+  <div class="tp-scrim"></div>
+  <div class="tp-bp"></div>
+  <div class="tp-hero-art" aria-hidden="true">
+    <svg viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg">
+      <g opacity=".9">
+        <path d="M40,300 C120,250 180,230 240,210" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-dasharray="7 7" stroke-linecap="round"/>
+        <circle cx="40" cy="300" r="4" fill="#fff" opacity=".5"/>
+        <circle cx="140" cy="262" r="4" fill="#fff" opacity=".5"/>
+        <circle cx="240" cy="210" r="5" fill="#0F5BFF"/>
+      </g>
+      <g transform="translate(300 200)">
+        <g fill="#2A3140">
+          <rect x="-6" y="-7" width="170" height="14" rx="7" transform="rotate(-26)"/>
+          <rect x="-6" y="-7" width="170" height="14" rx="7" transform="rotate(26)"/>
+          <rect x="-164" y="-7" width="170" height="14" rx="7" transform="rotate(26)"/>
+          <rect x="-164" y="-7" width="170" height="14" rx="7" transform="rotate(-26)"/>
+        </g>
+        <rect x="-72" y="-26" width="144" height="58" rx="14" fill="#171A1F" stroke="#3A4252" stroke-width="1.5"/>
+        <rect x="-58" y="-18" width="116" height="3" rx="1.5" fill="#0F5BFF" opacity=".6"/>
+        <rect x="-58" y="-8" width="80" height="2.5" rx="1.25" fill="#fff" opacity=".10"/>
+        <rect x="-48" y="14" width="42" height="9" rx="4.5" fill="#0F5BFF"/>
+        <circle cx="48" cy="6" r="13" fill="#0B0E13"/>
+        <circle cx="48" cy="6" r="6.5" fill="#3D7BFF"/>
+        <circle cx="50" cy="3.5" r="2" fill="#fff" opacity=".9"/>
+        <g fill="#0F5BFF">
+          <ellipse cx="-148" cy="-78" rx="46" ry="11"/>
+          <ellipse cx="148" cy="-78" rx="46" ry="11"/>
+          <ellipse cx="-148" cy="90" rx="46" ry="11"/>
+          <ellipse cx="148" cy="90" rx="46" ry="11"/>
+        </g>
+        <g fill="#fff" opacity=".22">
+          <ellipse cx="-148" cy="-78" rx="24" ry="5.5"/>
+          <ellipse cx="148" cy="-78" rx="24" ry="5.5"/>
+          <ellipse cx="-148" cy="90" rx="24" ry="5.5"/>
+          <ellipse cx="148" cy="90" rx="24" ry="5.5"/>
+        </g>
+        <g fill="#0B0E13">
+          <circle cx="-148" cy="-78" r="5"/><circle cx="148" cy="-78" r="5"/>
+          <circle cx="-148" cy="90" r="5"/><circle cx="148" cy="90" r="5"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="tp-wrap">
+    <span class="tp-kick tp-hero-over">13–17 років <b>·</b> 8 занять <b>·</b> 0 грн</span>
+    <h1>Збери дрон. Підніми в небо. <span class="tp-acc">Це твоя наука.</span></h1>
+    <p class="tp-lead tp-on-dark">Тут ти не граєш у пілота — ти стаєш інженером. Паяєш плату, пишеш код, налаштовуєш радіо і запускаєш машину, яку зібрав власними руками. Пілотування — це лише фінал. Решта — справжня фізика, електроніка й командна робота.</p>
+    <div class="tp-btns">
+      <a class="tp-btn tp-btn-p" href="#" onclick="return false">Записатися на курс <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="tp-btn tp-btn-g" href="#" onclick="return false">Подивитись програму</a>
+    </div>
+    <div class="tp-statline">
+      <div class="tp-stat"><div class="tp-n">90<em>%</em></div><div class="tp-l">інженерії та науки, не пілотування</div></div>
+      <div class="tp-stat"><div class="tp-n">8</div><div class="tp-l">занять у базовому курсі</div></div>
+      <div class="tp-stat"><div class="tp-n">6</div><div class="tp-l">напрямів: фізика, код, радіо, хімія…</div></div>
+      <div class="tp-stat"><div class="tp-n">1</div><div class="tp-l">власний дрон, який ти забереш у небо</div></div>
+    </div>
+  </div>
+  <div class="tp-folio">01 / 08</div>
+</section>
+
+<section class="tp tp-ice">
+  <div class="tp-bp tp-light"></div>
+  <div class="tp-wrap">
+    <span class="tp-kick">Що таке дрон насправді</span>
+    <h2 class="tp-h2">Пілотування — це лише <span class="tp-acc">верхівка айсберга</span></h2>
+    <div class="tp-ice-grid">
+      <div class="tp-ice-art" aria-hidden="true">
+        <svg viewBox="0 0 460 500" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,176 q30,-12 60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 v18 q-30,12 -60,0 t-60,0 t-60,0 t-60,0 t-60,0 t-60,0 t-60,0 z" fill="#0F5BFF" opacity=".16"/>
+          <polygon points="178,40 246,40 268,150 192,150" fill="#0F5BFF"/>
+          <g fill="#171A1F" transform="translate(207 64)">
+            <rect x="0" y="0" width="22" height="7" rx="3.5"/>
+            <circle cx="2" cy="3.5" r="4"/><circle cx="20" cy="3.5" r="4"/>
+            <rect x="9" y="6" width="4" height="10" rx="2"/>
+          </g>
+          <text x="290" y="98" font-family="Onest, sans-serif" font-size="14" font-weight="700" fill="#23272E">пілотування</text>
+          <text x="290" y="118" font-family="Onest, sans-serif" font-size="13" font-weight="600" fill="#0F5BFF">5–10 %</text>
+          <path d="M268,100 H284" stroke="#C7CCD3" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <polygon points="130,168 330,168 392,322 320,470 196,494 84,330" fill="#171A1F"/>
+          <polygon points="330,168 392,322 320,470 280,410 300,250" fill="#fff" opacity=".06"/>
+          <g font-family="Onest, sans-serif" font-weight="700" font-size="16" fill="#fff" text-anchor="middle">
+            <text x="232" y="232">інженерія</text>
+            <text x="236" y="300" opacity=".85">фізика</text>
+            <text x="240" y="368" opacity=".7">радіозв'язок</text>
+            <text x="232" y="436" opacity=".55">хімія</text>
+          </g>
+          <path d="M414,186 v292" stroke="#C7CCD3" stroke-width="1.5"/>
+          <path d="M406,186 h8 M406,478 h8" stroke="#C7CCD3" stroke-width="1.5"/>
+          <text x="430" y="328" font-family="Onest, sans-serif" font-weight="800" font-size="40" fill="#171A1F">90%</text>
+          <text x="431" y="352" font-family="Onest, sans-serif" font-size="12" font-weight="600" fill="#6B7280">під водою</text>
+        </svg>
+      </div>
+      <div class="tp-ice-side">
+        <p class="tp-lead" style="margin-top:0">Джойстик — це найпростіше. Усе цікаве сховано під поверхнею: те, як машина взагалі тримається в повітрі. Саме там ти й працюєш.</p>
+        <ul class="tp-ice-pts">
+          <li><span class="tp-ice-tag">01</span><span>Над водою — <b>пілотування</b>: фінальні 5–10%, які стають можливими завдяки всьому іншому.</span></li>
+          <li><span class="tp-ice-tag">02</span><span>Під водою — <b>інженерія й паяння</b>: читаєш схему, з'єднуєш мотори, регулятори, контролер.</span></li>
+          <li><span class="tp-ice-tag">03</span><span><b>Фізика та хімія</b>: тяга, вага, центр мас, аеродинаміка — і Li-Po, з якого треба видобути максимум безпечно.</span></li>
+          <li><span class="tp-ice-tag">04</span><span><b>Радіозв'язок</b>: частоти, канали, відеолінк — як сигнал доходить і чому іноді ні.</span></li>
+        </ul>
+        <p class="tp-ice-cap">Ці навички працюють далеко за межами польоту — у робототехніці, інженерії, IT.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tp-folio">02 / 08</div>
+</section>
+
+<section class="tp tp-split">
+  <div class="tp-wrap">
+    <div class="tp-split-grid">
+      <div class="tp-split-shot">
+        <img src="../brand/img/hands-breadboard.jpg" alt="Руки на платі під час збірки" loading="lazy">
+        <span class="tp-shot-tag">Руки на платі з першого дня</span>
+      </div>
+      <div class="tp-split-body">
+        <span class="tp-kick">Що ти реально зробиш</span>
+        <h2 class="tp-h2">Не презентація. Твоя машина — до останнього дроту.</h2>
+        <p class="tp-drop">Забудь про нудну теорію на годину. Коротко пояснюємо принцип — і одразу береш у руки інструмент. За курс ти збереш FPV-дрон з нуля: розпаяєш контролер, з'єднаєш мотори й регулятори, налаштуєш політний контролер і прив'яжеш апаратуру керування.</p>
+        <p>Потренуєшся на симуляторі, де розбити дрон не страшно, а потім вийдеш у реальний політ із тим апаратом, що зібрав сам. Це не іграшка з коробки — це твоя машина, яку ти розумієш повністю.</p>
+        <div class="tp-chiprow">
+          <span class="tp-chip">паяння контролера</span>
+          <span class="tp-chip">мотори + регулятори</span>
+          <span class="tp-chip">прошивка</span>
+          <span class="tp-chip">симулятор → політ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tp-folio">03 / 08</div>
+</section>
+
+<section class="tp tp-orbit tp-sec-dark">
+  <div class="tp-bp"></div>
+  <div class="tp-wrap">
+    <span class="tp-kick tp-on-dark">Скіли, які лишаються з тобою</span>
+    <h2 class="tp-h2 tp-on-dark">Дрон — це <span class="tp-acc">шість наук</span> в одному корпусі</h2>
+    <p class="tp-lead tp-on-dark">Поки одні думають, що дрон — це джойстик, ти розбираєшся в тому, як він тримається в повітрі. Навколо одного польоту обертається ціла фізика, код, радіо й хімія.</p>
+    <div class="tp-orbit-wrap">
+      <div class="tp-ring r1" aria-hidden="true"></div>
+      <div class="tp-ring r2" aria-hidden="true"></div>
+      <div class="tp-core" aria-hidden="true">
+        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#2A3140"><rect x="10" y="66" width="130" height="16" rx="8" transform="rotate(45 75 75)"/><rect x="10" y="66" width="130" height="16" rx="8" transform="rotate(-45 75 75)"/></g>
+          <g fill="#0F5BFF"><circle cx="30" cy="30" r="18"/><circle cx="120" cy="30" r="18"/><circle cx="30" cy="120" r="18"/><circle cx="120" cy="120" r="18"/></g>
+          <g fill="#fff" opacity=".25"><circle cx="30" cy="30" r="8"/><circle cx="120" cy="30" r="8"/><circle cx="30" cy="120" r="8"/><circle cx="120" cy="120" r="8"/></g>
+          <circle cx="75" cy="75" r="22" fill="#0B0E13" stroke="#3A4252" stroke-width="1.5"/>
+          <circle cx="75" cy="75" r="10" fill="#3D7BFF"/><circle cx="78" cy="72" r="3" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="tp-sat" style="left:50%; top:7%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8,30 L22,8 L36,30 Z" fill="none" stroke="#0F5BFF" stroke-width="2.5" stroke-linejoin="round"/><circle cx="22" cy="22" r="3.5" fill="#fff"/></svg></div>
+        <h4>Фізика польоту</h4>
+      </div>
+      <div class="tp-sat" style="left:90%; top:30%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8" y="14" width="22" height="20" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M14,14 v-4 h10 v4" stroke="#fff" stroke-width="2.2" fill="none"/><path d="M30,20 h6 m-6,8 h6" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="24" r="3.5" fill="#0F5BFF"/></svg></div>
+        <h4>Електроніка</h4>
+      </div>
+      <div class="tp-sat" style="left:90%; top:73%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="12" width="24" height="20" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="18" y="7" width="8" height="5" rx="1.5" fill="#fff"/><path d="M16 26 l4-8 4 8" stroke="#0F5BFF" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M26 18 v8" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <h4>Хімія Li-Po</h4>
+      </div>
+      <div class="tp-sat" style="left:50%; top:93%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="22" cy="32" r="3.5" fill="#0F5BFF"/><path d="M14,28 a12,12 0 0 1 16,0" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M9,23 a19,19 0 0 1 26,0" stroke="#fff" stroke-width="2.2" fill="none" opacity=".65" stroke-linecap="round"/><path d="M4,18 a26,26 0 0 1 36,0" stroke="#fff" stroke-width="2.2" fill="none" opacity=".35" stroke-linecap="round"/></svg></div>
+        <h4>Радіозв'язок</h4>
+      </div>
+      <div class="tp-sat" style="left:10%; top:73%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="14" width="24" height="16" rx="2" fill="none" stroke="#0F5BFF" stroke-width="2.2"/><path d="M14,20 h6 M14,24 h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M26,18 l4,3 -4,3" stroke="#0F5BFF" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Код</h4>
+        <span class="tp-sat-badge">прошивка</span>
+      </div>
+      <div class="tp-sat" style="left:10%; top:30%;">
+        <div class="tp-sc"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="22" cy="22" r="6" fill="#0F5BFF"/><g stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M22,6 v6 M22,32 v6 M6,22 h6 M32,22 h6 M11,11 l4,4 M29,29 l4,4 M33,11 l-4,4 M15,29 l-4,4"/></g></svg></div>
+        <h4>Інженерія</h4>
+        <span class="tp-sat-badge">основа</span>
+      </div>
+    </div>
+    <p class="tp-orbit-note">Симулятор, потім реальне небо — фінальні 5–10%, що стають можливими завдяки всьому іншому.</p>
+  </div>
+  <div class="tp-folio">04 / 08</div>
+</section>
+
+<section class="tp tp-vs">
+  <div class="tp-bp tp-light"></div>
+  <div class="tp-wrap">
+    <span class="tp-kick">Як це працює для тебе</span>
+    <h2 class="tp-h2">Від «страшно й незрозуміло» — до <span class="tp-acc">«я це зібрав»</span></h2>
+    <div class="tp-vs-grid">
+      <div class="tp-vs-card tp-from">
+        <div class="tp-vs-ic" aria-hidden="true"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><circle cx="28" cy="28" r="22" fill="none" stroke="#C7CCD3" stroke-width="3"/><text x="28" y="38" font-family="Onest, sans-serif" font-weight="800" font-size="30" fill="#9AA0A8" text-anchor="middle">?</text></svg></div>
+        <span class="tp-vs-lab">До курсу</span>
+        <h4>Дрон — це магія в коробці</h4>
+        <p>Незрозуміло, як воно літає. Розбити страшно, полагодити нічим. Залишається лише дивитися чужі відео й гадати, що там усередині.</p>
+      </div>
+      <div class="tp-vs-mid">
+        <div class="tp-vs-arrow" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </div>
+      <div class="tp-vs-card tp-to">
+        <div class="tp-vs-ic" aria-hidden="true"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><circle cx="28" cy="28" r="22" fill="none" stroke="#0F5BFF" stroke-width="3"/><path d="M18 28l7 7 13-14" stroke="#0F5BFF" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="tp-vs-lab">Після курсу</span>
+        <h4>Машина, яку ти розумієш</h4>
+        <p>Ти знаєш, куди йде струм, чому гріється регулятор і як налаштувати політ. На симуляторі вже не страшно — а потім піднімаєш у небо свій апарат.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tp-folio">05 / 08</div>
+</section>
+
+<section class="tp tp-prog">
+  <div class="tp-wrap">
+    <span class="tp-kick">Базовий курс <b>·</b> 8 занять</span>
+    <h2 class="tp-h2">Від першого паяння — до власного польоту</h2>
+    <p class="tp-lead">На кожному занятті є теорія, показ і робота руками — щоб не ставало нудно. Вісім кроків, і дрон у небі — твій.</p>
+    <div class="tp-prog-steps">
+      <div class="tp-prog-line" aria-hidden="true">
+        <svg viewBox="0 0 1000 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M125,70 H875 M875,70 V225 H125 M125,225 V380 H875" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-dasharray="6 8" opacity=".4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tp-step"><span class="tp-num">1</span><h4>Знайомство й сенс</h4><p>Що таке безпілотні системи й навіщо їх розуміти. Класи дронів, безпека.</p></div>
+      <div class="tp-step"><span class="tp-num">2</span><h4>Електроніка</h4><p>Читаємо схему, беремо паяльник. Куди йде струм і чому щось гріється.</p></div>
+      <div class="tp-step"><span class="tp-num">3</span><h4>Мотори й рама</h4><p>Збираємо каркас, ставимо мотори та регулятори, балансуємо.</p></div>
+      <div class="tp-step"><span class="tp-num">4</span><h4>Політний контролер</h4><p>Прошивка, режими польоту, перші налаштування на стенді.</p></div>
+      <div class="tp-step"><span class="tp-num">5</span><h4>Радіо й відеолінк</h4><p>Частоти, канали, прив'язка апаратури. Як сигнал доходить.</p></div>
+      <div class="tp-step"><span class="tp-num">6</span><h4>Живлення й Li-Po</h4><p>Хімія акумулятора: як видобути максимум заряду й не вбити батарею.</p></div>
+      <div class="tp-step"><span class="tp-num">7</span><h4>Симулятор</h4><p>Перші польоти там, де розбити дрон не страшно. Відпрацьовуємо рефлекси.</p></div>
+      <div class="tp-step tp-fin"><span class="tp-num">8</span><h4>Реальний політ</h4><p>Виходимо в небо з апаратом, який ти зібрав сам. Це фінал.</p></div>
+    </div>
+    <div class="tp-prog-foot">Вісім занять — один дрон, який летить</div>
+  </div>
+  <div class="tp-folio">06 / 08</div>
+</section>
+
+<section class="tp tp-team tp-sec-dark">
+  <div class="tp-bp"></div>
+  <div class="tp-wrap">
+    <span class="tp-kick tp-on-dark">Ти не сам</span>
+    <h2 class="tp-h2 tp-on-dark">Команда: інженер, пілот, збирач. <span class="tp-acc">Знайди своє.</span></h2>
+    <p class="tp-lead tp-on-dark">Класний дрон не збирає одна людина — це робота екіпажу. На курсі ти пробуєш різні ролі й знаходиш ту, де ти найсильніший.</p>
+    <div class="tp-team-grid">
+      <div class="tp-role">
+        <div class="tp-role-glyph" aria-hidden="true"><svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path d="M4,20 l9,-9 m-3,-3 l6,6" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><rect x="14" y="2" width="6" height="6" rx="1.5" transform="rotate(45 17 5)" fill="#0F5BFF"/><circle cx="22" cy="22" r="5" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M22,17 v-3 m0,16 v-3 m5,-5 h3 m-16,0 h3" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <span class="tp-role-tag">Роль А</span>
+        <h4>Інженер</h4>
+        <p>Ведеш електроніку: паяєш з'єднання, прошиваєш контролер, шукаєш, де коротить. Твоя стихія — схема й код.</p>
+      </div>
+      <div class="tp-role">
+        <div class="tp-role-glyph" aria-hidden="true"><svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="18" height="10" rx="5" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><circle cx="11" cy="17" r="2" fill="#fff"/><circle cx="19" cy="17" r="2" fill="#fff"/><path d="M10,12 l-4,-5 m14,5 l4,-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <span class="tp-role-tag">Роль Б</span>
+        <h4>Пілот</h4>
+        <p>Доводиш політ: відпрацьовуєш на симуляторі, налаштовуєш режими, виводиш машину в реальне небо впевнено.</p>
+      </div>
+      <div class="tp-role">
+        <div class="tp-role-glyph" aria-hidden="true"><svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><circle cx="15" cy="15" r="5" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><g stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M15,3 v4 M15,23 v4 M3,15 h4 M23,15 h4 M6.5,6.5 l3,3 M20.5,20.5 l3,3 M23.5,6.5 l-3,3 M9.5,20.5 l-3,3"/></g></svg></div>
+        <span class="tp-role-tag">Роль В</span>
+        <h4>Збирач</h4>
+        <p>Тримаєш збірку: рама, мотори, баланс, чистий монтаж. Усе має сидіти міцно й летіти рівно — це на тобі.</p>
+      </div>
+    </div>
+    <div class="tp-team-note">
+      <span class="tp-bignum">50/50</span>
+      <p>Поруч — наставники, які реально літали й паяли: ветерани, інженери, педагоги. Вони працюють пліч-о-пліч, а не читають лекцій згори. Половина групи — діти військових, половина — цивільних. Тут ти знаходиш своїх.</p>
+    </div>
+  </div>
+  <div class="tp-folio">07 / 08</div>
+</section>
+
+<section class="tp tp-cta tp-sec-dark">
+  <div class="tp-photo" style="background-image:url('../brand/img/fpv-lighttrails.jpg')"></div>
+  <div class="tp-scrim"></div>
+  <div class="tp-wrap">
+    <span class="tp-kick tp-on-dark">Навіщо це тобі</span>
+    <p class="tp-cta-q">Ти не просто запускаєш дрон. Ти доводиш собі, що можеш зібрати складне з нуля — <span class="tp-acc">і воно полетить.</span></p>
+    <p class="tp-lead tp-on-dark">Базовий курс — 8 занять, вік 13–17, безкоштовно на громадських засадах. Місць у групі обмежено: формат руками вимагає, щоб наставник дійшов до кожного. Залишай заявку — і починаємо.</p>
+    <div class="tp-btns">
+      <a class="tp-btn tp-btn-p" href="#" onclick="return false">Записатися зараз <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="tp-btn tp-btn-g" href="#" onclick="return false">Подивитись повну програму</a>
+    </div>
+  </div>
+  <div class="tp-folio">08 / 08</div>
+</section>
+</div>
+</main>
+<footer class="lfoot"><div class="wrap"><span>© <span id="yr"></span> ГО «Об’єднані. Сильні. Разом!»</span><div class="lfoot-links"><a href="index-raster.html">Головна</a><a href="parents-raster.html">Батькам</a><a href="teens-raster.html">Підліткам</a><a href="communities-raster.html">Громадам</a><a href="../documents/">Документи</a><a href="../">На головну</a></div></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Громадам — Об’єднані. Сильні. Разом! · растр</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ====================================================================
+   COMMUNITIES — редакторський «спецвипуск» для громад / ОТГ / шкіл
+   Айдентика «Інженерний мінімалізм». Усі класи з префіксом cp-.
+   Палітра через токени base.css: --yellow=#0F5BFF (електрик-синій),
+   --navy=#171A1F, --ink, --muted, --gray-200, радіуси --r/--r-s/--r-l.
+   ==================================================================== */
+
+.cp-page { font-family: var(--f-body); color: var(--ink); }
+.cp-page * { box-sizing: border-box; }
+
+/* ---- спільні елементи редакторської верстки ---- */
+.cp-sec {
+  position: relative;
+  overflow: hidden;
+  padding: 104px 40px;
+}
+.cp-wrap { max-width: 1120px; margin: 0 auto; position: relative; z-index: 2; }
+
+.cp-dark  { background: var(--ls-dark, #0E1116); color: #fff; }
+.cp-light { background: var(--gray-50, #F6F7F8); }
+.cp-paper { background: #fff; }
+
+/* кікер / технічний підпис */
+.cp-kick {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 12px; text-transform: uppercase; letter-spacing: .2em;
+  color: var(--yellow, #0F5BFF);
+  margin: 0 0 22px;
+}
+.cp-kick::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+.cp-dark .cp-kick { color: #5C8DFF; }
+
+/* заголовки */
+.cp-h2 {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(30px, 4.4vw, 50px);
+  line-height: 1.06; letter-spacing: -.02em;
+  color: var(--navy, #171A1F); margin: 0 0 26px; max-width: 19ch;
+}
+.cp-dark .cp-h2 { color: #fff; }
+.cp-acc { color: var(--yellow, #0F5BFF); }
+
+.cp-lead {
+  font-size: 18px; line-height: 1.75; color: var(--ink, #23272E);
+  max-width: 56ch; margin: 0 0 30px;
+}
+.cp-dark .cp-lead { color: #C6CCD6; }
+
+/* фоліо внизу секції */
+.cp-folio {
+  position: absolute; bottom: 26px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 11px; letter-spacing: .26em;
+  color: rgba(23,26,31,.32);
+  display: flex; align-items: center; gap: 12px; white-space: nowrap; z-index: 2;
+}
+.cp-folio::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.cp-dark .cp-folio { color: rgba(255,255,255,.3); }
+
+/* делікатна blueprint-сітка (тільки на темному) */
+.cp-grid-overlay {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 0%, transparent 78%);
+          mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 0%, transparent 78%);
+}
+
+/* кнопки в стилі айдентики */
+.cp-btns { display: flex; flex-wrap: wrap; gap: 14px; }
+.cp-btn {
+  font-family: var(--f-body); font-weight: 700; font-size: 15px;
+  border-radius: var(--r, 8px); padding: 14px 22px;
+  text-decoration: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 9px;
+  border: 2px solid transparent;
+  transition: transform 80ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+.cp-btn:active { transform: translateY(1px); }
+.cp-btn-p { background: var(--yellow, #0F5BFF); color: #0E1116; border-color: var(--yellow, #0F5BFF); }
+.cp-btn-p:hover { box-shadow: 0 8px 26px rgba(15,91,255,.35); }
+.cp-btn-g { background: transparent; color: #fff; border-color: rgba(255,255,255,.32); }
+.cp-btn-g:hover { border-color: #fff; }
+.cp-light .cp-btn-g, .cp-paper .cp-btn-g { color: var(--navy, #171A1F); border-color: var(--gray-300, #D3D7DC); }
+.cp-light .cp-btn-g:hover, .cp-paper .cp-btn-g:hover { border-color: var(--navy, #171A1F); }
+
+/* ====================================================================
+   01 — ОБКЛАДИНКА-ГЕРОЙ (темна, inline-SVG дрон + blueprint)
+   ==================================================================== */
+.cp-cover { padding-top: 92px; padding-bottom: 120px; min-height: 92vh; display: flex; align-items: center; }
+.cp-cover-grid {
+  display: grid; grid-template-columns: 1.05fr .95fr;
+  gap: 56px; align-items: center; width: 100%;
+}
+.cp-cover-over {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: #9AA4B2; margin-bottom: 26px;
+}
+.cp-cover-over i { font-style: normal; color: var(--yellow, #0F5BFF); }
+.cp-cover-mast {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: .98; letter-spacing: -.025em; color: #fff; margin: 0 0 26px;
+}
+.cp-cover-mast .cp-acc { display: block; }
+.cp-cover-lead { font-size: 18.5px; line-height: 1.7; color: #C6CCD6; max-width: 48ch; margin: 0 0 34px; }
+.cp-cover-art { position: relative; }
+.cp-cover-art svg { width: 100%; max-width: 520px; height: auto; display: block; margin-left: auto; }
+
+/* стат-стрічка під героєм */
+.cp-cover-lines {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border-top: 1px solid rgba(255,255,255,.14);
+  margin-top: 40px; padding-top: 26px;
+}
+.cp-cl { padding: 0 22px; border-left: 1px solid rgba(255,255,255,.1); }
+.cp-cl:first-child { border-left: none; padding-left: 0; }
+.cp-cl-n {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(26px, 3vw, 38px); line-height: 1; color: #fff;
+  letter-spacing: -.02em; display: block; margin-bottom: 8px;
+}
+.cp-cl-n .cp-acc { color: #5C8DFF; }
+.cp-cl-l { font-size: 12.5px; line-height: 1.45; color: #9AA4B2; }
+
+/* ====================================================================
+   02 — АЙСБЕРГ (темна; характер проєкту: 90% наука / 5–10% політ)
+   ==================================================================== */
+.cp-ice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.cp-ice-art svg { width: 100%; max-width: 470px; height: auto; display: block; margin: 0 auto; }
+.cp-ice-quote {
+  font-family: var(--f-display); font-weight: 500;
+  font-size: clamp(22px, 2.7vw, 30px); line-height: 1.4;
+  color: #fff; margin: 0 0 26px; position: relative; padding-left: 26px;
+  border-left: 4px solid var(--yellow, #0F5BFF);
+}
+.cp-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.cp-chip {
+  font-size: 13px; font-weight: 600; color: #D7DCE4;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px; padding: 8px 16px;
+}
+.cp-ice-note {
+  margin-top: 28px; padding: 18px 22px;
+  background: rgba(92,141,255,.1); border: 1px solid rgba(92,141,255,.28);
+  border-radius: var(--r, 8px); font-size: 14.5px; line-height: 1.65; color: #C6CCD6;
+}
+.cp-ice-note b { color: #fff; }
+
+/* ====================================================================
+   03 — СТАТ-ДЕК (світла; гігантські числа)
+   ==================================================================== */
+.cp-deck { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 44px; }
+.cp-cell {
+  padding: 4px 26px 0; border-left: 1px solid var(--gray-200, #E6E8EB);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.cp-cell:first-child { border-left: none; padding-left: 0; }
+.cp-cell-ic { height: 44px; }
+.cp-cell-ic svg { height: 44px; width: auto; display: block; }
+.cp-cell-n {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(46px, 5.4vw, 76px); line-height: 1;
+  color: var(--navy, #171A1F); letter-spacing: -.03em;
+}
+.cp-cell-n .cp-u { color: var(--yellow, #0F5BFF); font-size: .5em; }
+.cp-cell-l {
+  font-family: var(--f-display); font-weight: 700; font-size: 12.5px;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--navy, #171A1F);
+}
+.cp-cell-p { font-size: 13.5px; line-height: 1.6; color: var(--muted, #6B7280); margin: 0; }
+.cp-deck-foot {
+  display: flex; align-items: center; gap: 18px; justify-content: center;
+  margin-top: 48px; font-family: var(--f-display); font-weight: 700;
+  font-size: 14.5px; color: var(--navy, #171A1F);
+}
+.cp-deck-foot::before, .cp-deck-foot::after {
+  content: ""; height: 1px; flex: 0 0 60px; background: var(--gray-300, #D3D7DC);
+}
+
+/* ====================================================================
+   04 — VERSUS «громада дає / ми привозимо» (паперова, спліт)
+   ==================================================================== */
+.cp-vs { display: grid; grid-template-columns: 1fr 70px 1.25fr; margin-top: 42px; align-items: start; }
+.cp-vs-h {
+  font-family: var(--f-display); font-weight: 800; font-size: 23px;
+  letter-spacing: -.01em; margin: 0 0 6px; color: var(--navy, #171A1F);
+}
+.cp-vs-sub { font-size: 13px; color: var(--muted, #6B7280); margin: 0 0 22px; }
+.cp-vs-ic { height: 56px; margin-bottom: 16px; }
+.cp-vs-ic svg { height: 56px; width: auto; display: block; }
+.cp-give { list-style: none; margin: 0; padding: 0; }
+.cp-give li {
+  border-left: 3px solid var(--gray-300, #D3D7DC);
+  background: #fff; border-radius: 0 var(--r-s,4px) var(--r-s,4px) 0;
+  padding: 13px 18px; margin-bottom: 11px;
+  font-size: 14.5px; line-height: 1.55; color: var(--ink, #23272E);
+}
+.cp-give li b { color: var(--navy, #171A1F); }
+.cp-bring { list-style: none; margin: 0; padding: 0; }
+.cp-bring li {
+  display: flex; gap: 13px; margin-bottom: 13px;
+  font-size: 14.5px; line-height: 1.55; color: var(--ink, #23272E);
+}
+.cp-bring li::before {
+  content: "✓"; flex: none; width: 24px; height: 24px; border-radius: var(--r-s,4px);
+  background: var(--yellow, #0F5BFF); color: #fff;
+  font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.cp-bring li b { color: var(--navy, #171A1F); }
+.cp-vs-div { position: relative; align-self: stretch; }
+.cp-vs-div::before {
+  content: ""; position: absolute; top: 6px; bottom: 6px; left: 50%;
+  width: 1px; background: var(--gray-200, #E6E8EB);
+}
+.cp-vs-arc { position: absolute; top: 86px; left: 50%; transform: translateX(-50%); width: 64px; }
+.cp-vs-arc svg { width: 100%; height: auto; display: block; }
+.cp-vs-foot {
+  grid-column: 1 / -1; margin-top: 40px;
+  display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.cp-vs-foot .cp-zero {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(34px,5vw,54px);
+  color: var(--yellow, #0F5BFF); line-height: 1; letter-spacing: -.02em;
+}
+.cp-vs-foot p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink,#23272E); max-width: 40ch; }
+
+/* ====================================================================
+   05 — СЕРПАНТИН «три кроки» (світла; крок 1→2→3)
+   ==================================================================== */
+.cp-steps { position: relative; margin-top: 48px; }
+.cp-steps-line { position: absolute; inset: 24px 8% auto 8%; height: 200px; z-index: 0; pointer-events: none; }
+.cp-steps-line svg { width: 100%; height: 100%; }
+.cp-steps-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.cp-step {
+  background: #fff; border: 1px solid var(--gray-200, #E6E8EB);
+  border-radius: var(--r-l, 14px); padding: 28px 26px 24px; box-shadow: var(--shadow-sm);
+}
+.cp-step-n {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--navy, #171A1F); color: #fff;
+  font-family: var(--f-display); font-weight: 800; font-size: 20px;
+  display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.cp-step:last-child .cp-step-n { background: var(--yellow, #0F5BFF); color: #fff; }
+.cp-step h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: 18px;
+  color: var(--navy, #171A1F); margin: 0 0 10px;
+}
+.cp-step p { font-size: 14.5px; line-height: 1.65; color: var(--ink, #23272E); margin: 0; }
+.cp-step .cp-step-tag {
+  display: inline-block; margin-top: 14px; font-family: var(--f-display);
+  font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted, #6B7280);
+}
+.cp-step-flag {
+  display: inline-flex; align-items: center; gap: 12px; margin-top: 38px;
+  background: var(--yellow, #0F5BFF); color: #fff;
+  border-radius: var(--r, 8px); padding: 14px 22px;
+  font-weight: 700; font-size: 14.5px; line-height: 1.5; max-width: 60ch;
+}
+.cp-step-flag svg { width: 22px; height: 22px; flex: none; }
+
+/* ====================================================================
+   06 — ПОВНОЕКРАННЕ ФОТО-FEATURE з цитатою по центру
+   ==================================================================== */
+.cp-feature {
+  min-height: 78vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 40px;
+}
+.cp-feature-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+}
+.cp-feature-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(8,10,14,.72) 0%, rgba(8,10,14,.58) 45%, rgba(8,10,14,.8) 100%);
+}
+.cp-feature .cp-wrap { max-width: 880px; }
+.cp-feature .cp-kick { color: #7FA4FF; justify-content: center; }
+.cp-feature-q {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(26px, 4vw, 46px); line-height: 1.22; letter-spacing: -.02em;
+  color: #fff; margin: 0 auto 24px; max-width: 20ch;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
+}
+.cp-feature-q .cp-acc { color: #7FA4FF; }
+.cp-feature-sub {
+  font-size: 17px; line-height: 1.7; color: #E4E7EC; max-width: 52ch; margin: 0 auto;
+  text-shadow: 0 1px 10px rgba(0,0,0,.6);
+}
+
+/* ====================================================================
+   07 — ДОШКА НОТАТОК «прозорість і звітність» (темна, pinboard)
+   ==================================================================== */
+.cp-board { display: grid; grid-template-columns: repeat(12, 1fr); gap: 28px 24px; margin-top: 44px; }
+.cp-note {
+  background: #fff; color: var(--navy, #171A1F);
+  border-radius: var(--r, 8px); padding: 26px 24px 22px; position: relative;
+  box-shadow: 0 16px 38px rgba(0,0,0,.4);
+}
+.cp-note:nth-child(1) { grid-column: span 5; transform: rotate(-1.4deg); }
+.cp-note:nth-child(2) { grid-column: span 4; transform: rotate(1.1deg); }
+.cp-note:nth-child(3) { grid-column: span 3; transform: rotate(-.7deg); }
+.cp-note:nth-child(4) { grid-column: span 7; transform: rotate(1deg); }
+.cp-note:nth-child(5) { grid-column: span 5; transform: rotate(-1deg); }
+.cp-note-pin {
+  position: absolute; top: -11px; left: 50%;
+  width: 84px; height: 22px; background: var(--yellow, #0F5BFF); opacity: .85;
+  transform: translateX(-50%) rotate(-4deg); border-radius: 2px;
+}
+.cp-note:nth-child(even) .cp-note-pin { transform: translateX(-50%) rotate(4deg); }
+.cp-note h4 {
+  font-family: var(--f-display); font-weight: 800; font-size: 16px;
+  color: var(--navy, #171A1F); margin: 0 0 10px;
+}
+.cp-note p { font-size: 14px; line-height: 1.6; color: #4A4F58; margin: 0 0 12px; }
+.cp-note p:last-child { margin-bottom: 0; }
+.cp-note-counts { display: flex; gap: 22px; flex-wrap: wrap; margin: 4px 0 0; }
+.cp-count { display: flex; align-items: center; gap: 11px; }
+.cp-count b {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--yellow, #0F5BFF); color: #fff;
+  font-family: var(--f-display); font-weight: 800; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+.cp-count span { font-size: 12.5px; line-height: 1.5; color: var(--muted, #6B7280); max-width: 20ch; }
+.cp-stamp {
+  position: absolute; top: 16px; right: -12px;
+  background: var(--yellow, #0F5BFF); color: #fff;
+  font-family: var(--f-display); font-weight: 700; font-size: 11.5px;
+  letter-spacing: .1em; padding: 7px 14px; transform: rotate(-7deg);
+  border-radius: var(--r-s, 4px); box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+
+/* ====================================================================
+   08 — РОАДМЕП-ГОРИЗОНТ + CTA (темна, фінал)
+   ==================================================================== */
+.cp-road { margin-top: 36px; }
+.cp-road-svg { width: 100%; height: auto; display: block; }
+.cp-road-notes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 26px; }
+.cp-rn {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-l, 14px); padding: 20px 22px 16px;
+}
+.cp-rn .cp-rn-k {
+  font-family: var(--f-display); font-weight: 700; font-size: 12px;
+  text-transform: uppercase; letter-spacing: .08em; color: #5C8DFF; margin: 0 0 8px;
+}
+.cp-rn h4 { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: #fff; margin: 0 0 8px; }
+.cp-rn p { font-size: 13px; line-height: 1.6; color: #B4BBC6; margin: 0; }
+.cp-cta {
+  margin-top: 64px; text-align: center;
+  border-top: 1px solid rgba(255,255,255,.12); padding-top: 56px;
+}
+.cp-cta .cp-h2 { margin-left: auto; margin-right: auto; max-width: 22ch; }
+.cp-cta .cp-lead { margin-left: auto; margin-right: auto; }
+.cp-cta .cp-btns { justify-content: center; }
+
+/* ====================================================================
+   АДАПТИВ
+   ==================================================================== */
+@media (max-width: 1000px) {
+  .cp-road-notes { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .cp-sec { padding: 72px 24px; }
+  .cp-cover-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cp-cover-art { order: -1; }
+  .cp-cover-art svg { margin: 0 auto; max-width: 380px; }
+  .cp-cover-lines { grid-template-columns: 1fr 1fr; gap: 22px 0; }
+  .cp-cl:nth-child(3) { border-left: none; padding-left: 0; }
+  .cp-cl:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.12); padding-top: 22px; }
+  .cp-ice-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cp-ice-art { order: -1; }
+  .cp-deck { grid-template-columns: 1fr 1fr; gap: 36px 0; }
+  .cp-cell:nth-child(3) { border-left: none; padding-left: 0; }
+  .cp-cell:nth-child(n+3) { border-top: 1px solid var(--gray-200, #E6E8EB); padding-top: 28px; }
+  .cp-vs { grid-template-columns: 1fr; }
+  .cp-vs-div { display: none; }
+  .cp-vs-bring { margin-top: 36px; }
+  .cp-steps-line { display: none; }
+  .cp-steps-grid { grid-template-columns: 1fr; gap: 22px; }
+  .cp-board { display: flex; flex-direction: column; gap: 30px; }
+  .cp-note { grid-column: auto !important; }
+  .cp-note:nth-child(odd) { transform: rotate(-.8deg); }
+  .cp-note:nth-child(even) { transform: rotate(.8deg); }
+  .cp-folio { display: none; }
+}
+@media (max-width: 560px) {
+  .cp-deck { grid-template-columns: 1fr; }
+  .cp-cell { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-200, #E6E8EB); padding-top: 24px; }
+  .cp-cell:first-child { border-top: none; padding-top: 0; }
+  .cp-cover-lines { grid-template-columns: 1fr; }
+  .cp-cl { border-left: none; padding-left: 0; }
+  .cp-road-notes { grid-template-columns: 1fr; }
+}
+
+/* ===== QA corrective layer - contrast & overflow (audit 2026-06-17) ===== */
+.cp-btn-p { color:#fff !important; }
+.cp-btn-p svg { stroke:#fff !important; color:#fff !important; }
+/* accent labels on dark sections -> accessible blue tint (cr 6+) */
+.cp-dark .cp-kick, .cp-sec-dark .cp-kick,
+.cp-dark .cp-vs-lab, .cp-sec-dark .cp-vs-lab,
+.cp-dark .cp-role-tag, .cp-sec-dark .cp-role-tag { color:#6C97FF !important; }
+/* folios: default = subdued dark-gray (covers every light section,
+   whatever its functional class name); re-lighten only on dark/photo */
+.cp-folio { color:#62646B !important; }
+.cp-dark .cp-folio, .cp-sec-dark .cp-folio,
+.cp-feature .cp-folio, .cp-sec-feature .cp-folio { color:rgba(255,255,255,.55) !important; }
+/* decorative hero art bleed must not create page horizontal scroll */
+.cp-hero { position:relative; overflow:hidden; }
+
+</style>
+</head>
+<body class="ls">
+<header class="lnav">
+  <a class="lnav-brand" href="../" title="На головну"><i>‹</i> <span class="tx">ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span></a>
+  <nav class="lnav-links"><a href="index-raster.html">Головна</a><a href="parents-raster.html">Батькам</a><a href="teens-raster.html">Підліткам</a><a href="communities-raster.html" class="active">Громадам</a></nav>
+</header>
+<main>
+<div class="cp-page">
+<!-- ════════════ 01 — ОБКЛАДИНКА-ГЕРОЙ ════════════ -->
+<section class="cp-sec cp-dark cp-cover">
+  <div class="cp-grid-overlay" aria-hidden="true"></div>
+  <div class="cp-wrap">
+    <div class="cp-cover-grid">
+      <div class="cp-cover-text">
+        <div class="cp-cover-over">Для громад <i>·</i> ОТГ <i>·</i> шкіл</div>
+        <h1 class="cp-cover-mast">Інженерна школа дронів<span class="cp-acc">під ключ і без бюджету громади</span></h1>
+        <p class="cp-cover-lead">Ми привозимо у вашу громаду інженерну школу безпілотних систем для підлітків 13–17 років: програму, наставників і методику. Громада дає приміщення — ми робимо решту. Найчастіше це коштує вам 0 грн.</p>
+        <div class="cp-btns">
+          <a class="cp-btn cp-btn-p" href="#cp-cta" onclick="return false">Запросити в громаду
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cp-btn cp-btn-g" href="#" onclick="return false">Завантажити презентацію</a>
+        </div>
+      </div>
+      <div class="cp-cover-art" aria-hidden="true">
+        <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="cp-body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1B2740"/><stop offset="1" stop-color="#121826"/>
+            </linearGradient>
+          </defs>
+          <!-- delicate blueprint frame -->
+          <g stroke="#2B3550" stroke-width="1" fill="none" opacity=".9">
+            <circle cx="260" cy="230" r="186" stroke-dasharray="2 8"/>
+            <circle cx="260" cy="230" r="140" stroke-dasharray="2 8"/>
+            <line x1="40" y1="230" x2="480" y2="230"/>
+            <line x1="260" y1="20" x2="260" y2="440"/>
+          </g>
+          <!-- drone -->
+          <g transform="translate(260 226)">
+            <g fill="#26314D">
+              <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(-24)"/>
+              <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(24)"/>
+              <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(24)"/>
+              <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(-24)"/>
+            </g>
+            <rect x="-74" y="-26" width="148" height="56" rx="22" fill="url(#cp-body)"/>
+            <rect x="-58" y="-36" width="116" height="20" rx="10" fill="#26314D"/>
+            <rect x="-48" y="8" width="40" height="9" rx="4.5" fill="#0F5BFF"/>
+            <circle cx="56" cy="2" r="14" fill="#0F1622"/>
+            <circle cx="56" cy="2" r="7.5" fill="#5C8DFF"/>
+            <circle cx="58.5" cy="-0.5" r="2.4" fill="#fff" opacity=".9"/>
+            <!-- propellers -->
+            <ellipse cx="-152" cy="-66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
+            <ellipse cx="-152" cy="-66" rx="24" ry="6" fill="#5C8DFF"/>
+            <ellipse cx="152" cy="-66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
+            <ellipse cx="152" cy="-66" rx="24" ry="6" fill="#5C8DFF"/>
+            <ellipse cx="-152" cy="66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
+            <ellipse cx="-152" cy="66" rx="24" ry="6" fill="#5C8DFF"/>
+            <ellipse cx="152" cy="66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
+            <ellipse cx="152" cy="66" rx="24" ry="6" fill="#5C8DFF"/>
+          </g>
+          <!-- corner ticks -->
+          <g stroke="none" stroke-width="0"></g>
+          <circle cx="74" cy="44" r="3.5" fill="#5C8DFF"/>
+          <circle cx="446" cy="44" r="3.5" fill="#fff" opacity=".4"/>
+          <circle cx="74" cy="416" r="3.5" fill="#fff" opacity=".4"/>
+          <circle cx="446" cy="416" r="3.5" fill="#5C8DFF"/>
+        </svg>
+      </div>
+    </div>
+    <div class="cp-cover-lines">
+      <div class="cp-cl"><span class="cp-cl-n"><span class="cp-acc">0</span>&nbsp;грн</span><span class="cp-cl-l">для громади на базі школи чи партнерства</span></div>
+      <div class="cp-cl"><span class="cp-cl-n">13–17</span><span class="cp-cl-l">вік учасників</span></div>
+      <div class="cp-cl"><span class="cp-cl-n">8</span><span class="cp-cl-l">занять у базовому курсі</span></div>
+      <div class="cp-cl"><span class="cp-cl-n">6</span><span class="cp-cl-l">напрямів науки в одній програмі</span></div>
+    </div>
+  </div>
+  <div class="cp-folio">ГРОМАДАМ · 01 / 08</div>
+</section>
+
+<!-- ════════════ 02 — АЙСБЕРГ: ХАРАКТЕР ПРОЄКТУ ════════════ -->
+<section class="cp-sec cp-dark">
+  <div class="cp-grid-overlay" aria-hidden="true"></div>
+  <div class="cp-wrap">
+    <div class="cp-kick">Безпека і характер проєкту</div>
+    <h2 class="cp-h2">Ми будуємо інженерів, <span class="cp-acc">а не операторів</span></h2>
+    <div class="cp-ice-grid">
+      <div class="cp-ice-text">
+        <p class="cp-ice-quote">~90% курсу — це наука й інженерія. Пілотування — лише 5–10%.</p>
+        <p class="cp-lead">Пілотування — це верхівка айсберга. Під водою — інженерія, фізика, радіозв'язок, хімія акумуляторів і код. Фокус курсу цивільний: агросектор, доставка, пошук і порятунок, екомоніторинг. Це техніка, що рятує врожай, шукає людей і стежить за довкіллям.</p>
+        <div class="cp-chips">
+          <span class="cp-chip">агросектор</span>
+          <span class="cp-chip">доставка</span>
+          <span class="cp-chip">пошук і порятунок</span>
+          <span class="cp-chip">екомоніторинг</span>
+        </div>
+        <div class="cp-ice-note"><b>Чого проєкт не робить:</b> не готує операторів для бойового застосування. Чіткий цивільний меседж і прозора програма — щоб батькам і раді громади було спокійно.</div>
+      </div>
+      <div class="cp-ice-art" aria-hidden="true">
+        <svg viewBox="0 0 440 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- waterline -->
+          <path d="M0,150 q30,-10 62,0 t62,0 t62,0 t62,0 t62,0 t62,0 t62,0 v14 q-30,10 -62,0 t-62,0 t-62,0 t-62,0 t-62,0 t-62,0 t-62,0 z" fill="#1F3A6B" opacity=".6"/>
+          <!-- tip above water -->
+          <polygon points="170,42 270,42" fill="none"/>
+          <polygon points="186,150 254,150 232,52 208,52" fill="#0F5BFF"/>
+          <text x="296" y="86" font-family="Onest, sans-serif" font-size="14" font-weight="700" fill="#5C8DFF">пілотування</text>
+          <text x="296" y="106" font-family="Onest, sans-serif" font-size="13" fill="#9AA4B2">5–10 %</text>
+          <path d="M258,90 H290" stroke="none" stroke-width="0"/>
+          <path d="M258,86 H290" stroke="#46506A" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <!-- submerged mass -->
+          <polygon points="130,162 310,162 360,300 286,438 168,470 80,318" fill="#16203A"/>
+          <polygon points="310,162 360,300 286,438 250,380 286,256" fill="#fff" opacity=".05"/>
+          <g font-family="Onest, sans-serif" font-weight="700" font-size="16" fill="#E4E7EC" text-anchor="middle">
+            <text x="220" y="220">інженерія</text>
+            <text x="220" y="282" opacity=".88">фізика</text>
+            <text x="220" y="344" opacity=".7">радіозв'язок</text>
+            <text x="220" y="406" opacity=".55">хімія · код</text>
+          </g>
+          <!-- depth bracket -->
+          <path d="M392,168 v300" stroke="#46506A" stroke-width="1.4"/>
+          <path d="M384,168 h8 M384,468 h8" stroke="#46506A" stroke-width="1.4"/>
+          <text x="404" y="312" font-family="Onest, sans-serif" font-weight="800" font-size="40" fill="#fff">90%</text>
+          <text x="406" y="334" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2">під водою</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="cp-folio">ХАРАКТЕР · 02 / 08</div>
+</section>
+
+<!-- ════════════ 03 — СТАТ-ДЕК: КОРИСТЬ ДЛЯ ГРОМАДИ ════════════ -->
+<section class="cp-sec cp-light">
+  <div class="cp-wrap">
+    <div class="cp-kick">Користь для громади</div>
+    <h2 class="cp-h2">Зайняті влітку підлітки. Сучасна громада на мапі.</h2>
+    <p class="cp-lead">Літо — місяці, коли підлітки найбільше потребують осмисленого заняття, а громада найменше може його запропонувати. Ми закриваємо цю прогалину технічною освітою рівня, який зазвичай доступний лише у великих містах.</p>
+    <div class="cp-deck">
+      <div class="cp-cell">
+        <span class="cp-cell-ic"><svg viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="30" cy="14" r="9" fill="#0F5BFF"/><path d="M14,44 v-6 c0,-9 7,-15 16,-15 s16,6 16,15 v6 z" fill="#0F5BFF"/></svg></span>
+        <span class="cp-cell-n"><span class="cp-u">0</span>&nbsp;грн</span>
+        <span class="cp-cell-l">для громади</span>
+        <p class="cp-cell-p">На базі школи або партнерства — найчастіше повністю безкоштовно.</p>
+      </div>
+      <div class="cp-cell">
+        <span class="cp-cell-ic"><svg viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8" y="10" width="44" height="26" rx="4" fill="none" stroke="#171A1F" stroke-width="3"/><path d="M8 18 H52" stroke="#171A1F" stroke-width="3"/><circle cx="18" cy="28" r="3" fill="#0F5BFF"/></svg></span>
+        <span class="cp-cell-n">13–17</span>
+        <span class="cp-cell-l">вік учасників</span>
+        <p class="cp-cell-p">Групи по 8–12 осіб для індивідуальної уваги наставника.</p>
+      </div>
+      <div class="cp-cell">
+        <span class="cp-cell-ic"><svg viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="6" width="40" height="32" rx="4" fill="none" stroke="#171A1F" stroke-width="3"/><path d="M18 16 H42 M18 24 H36" stroke="#0F5BFF" stroke-width="3" stroke-linecap="round"/></svg></span>
+        <span class="cp-cell-n">8</span>
+        <span class="cp-cell-l">занять у курсі</span>
+        <p class="cp-cell-p">Два рівні — базовий і поглиблений. Власний проєкт у фіналі.</p>
+      </div>
+      <div class="cp-cell">
+        <span class="cp-cell-ic"><svg viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="30" cy="22" r="6" fill="#0F5BFF"/><g stroke="#171A1F" stroke-width="2.6" fill="none"><circle cx="30" cy="22" r="16"/><circle cx="30" cy="22" r="16" transform="rotate(60 30 22)" stroke-dasharray="50 50"/></g><circle cx="46" cy="22" r="3" fill="#171A1F"/><circle cx="14" cy="22" r="3" fill="#171A1F"/></svg></span>
+        <span class="cp-cell-n">6</span>
+        <span class="cp-cell-l">напрямів науки</span>
+        <p class="cp-cell-p">Інженерія, фізика, радіозв'язок, хімія, код і пілотування — в одній програмі.</p>
+      </div>
+    </div>
+    <div class="cp-deck-foot">Молодь при ділі. Батьки спокійні. Громада — сучасна.</div>
+  </div>
+  <div class="cp-folio">ЦИФРИ · 03 / 08</div>
+</section>
+
+<!-- ════════════ 04 — VERSUS: ГРОМАДА ДАЄ / МИ ПРИВОЗИМО ════════════ -->
+<section class="cp-sec cp-paper">
+  <div class="cp-wrap">
+    <div class="cp-kick">Що ми привозимо</div>
+    <h2 class="cp-h2">Усе для запуску — наше. Від вас — приміщення.</h2>
+    <p class="cp-lead">Громаді не потрібно шукати викладачів, купувати обладнання чи писати програму. Ми приїжджаємо з готовим рішенням і всім необхідним.</p>
+    <div class="cp-vs">
+      <div class="cp-vs-give">
+        <div class="cp-vs-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 24 L28 8 L48 24 V50 H8 Z" fill="none" stroke="#171A1F" stroke-width="3" stroke-linejoin="round"/><rect x="22" y="34" width="12" height="16" fill="#D3D7DC"/></svg></div>
+        <h3 class="cp-vs-h">Громада дає</h3>
+        <p class="cp-vs-sub">мінімум — одну позицію</p>
+        <ul class="cp-give">
+          <li><b>Приміщення</b> — аудиторія школи, центру дозвілля чи бібліотеки</li>
+          <li>Електрика, столи та інтернет</li>
+          <li>Безпечний простір для запусків — спортзал чи огороджена ділянка</li>
+        </ul>
+      </div>
+      <div class="cp-vs-div" aria-hidden="true">
+        <div class="cp-vs-arc"><svg viewBox="0 0 64 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14,18 q40,42 0,84" fill="none" stroke="#0F5BFF" stroke-width="3" stroke-linecap="round"/><polygon points="6,96 22,100 12,110" fill="#0F5BFF"/></svg></div>
+      </div>
+      <div class="cp-vs-bring">
+        <div class="cp-vs-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="20" width="36" height="26" rx="3" fill="none" stroke="#171A1F" stroke-width="3"/><path d="M22 20 V14 a6 6 0 0 1 12 0 V20" fill="none" stroke="#0F5BFF" stroke-width="3"/><circle cx="28" cy="33" r="3" fill="#0F5BFF"/></svg></div>
+        <h3 class="cp-vs-h">Ми привозимо</h3>
+        <p class="cp-vs-sub">під ключ — усе решта</p>
+        <ul class="cp-bring">
+          <li><b>Програму курсу</b> — 8 структурованих занять, теорія коротко, практика руками з першого дня</li>
+          <li><b>Наставників</b> — ветерани, інженери та педагоги, що працюють поруч із підлітком за столом</li>
+          <li><b>Методику та супровід</b> — перевірена методика плюс психолого-педагогічний супровід групи</li>
+          <li><b>Обладнання</b> — симулятори, комплекти для збірки FPV, компоненти й інструменти</li>
+          <li><b>6 напрямів науки</b> — інженерія, фізика, радіозв'язок, хімія акумуляторів, код і пілотування</li>
+          <li><b>Звітність</b> — прозорий звіт громаді за результатами курсу</li>
+        </ul>
+      </div>
+      <div class="cp-vs-foot">
+        <span class="cp-zero">0&nbsp;грн</span>
+        <p>Найчастіше для громади все на базі школи або партнерства. Вам достатньо дати простір — решту беремо на себе.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cp-folio">ПІД КЛЮЧ · 04 / 08</div>
+</section>
+
+<!-- ════════════ 05 — СЕРПАНТИН: ТРИ КРОКИ ════════════ -->
+<section class="cp-sec cp-light">
+  <div class="cp-wrap">
+    <div class="cp-kick">Як це працює</div>
+    <h2 class="cp-h2">Від запиту до першого польоту — три кроки</h2>
+    <p class="cp-lead">Жодної бюрократії з боку громади. Ми беремо на себе підготовку, обладнання й проведення — ви бачите кожен крок.</p>
+    <div class="cp-steps">
+      <div class="cp-steps-line" aria-hidden="true">
+        <svg viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M120,40 C320,40 360,160 500,160 C640,160 680,40 880,40" fill="none" stroke="#0F5BFF" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round" opacity=".55"/>
+        </svg>
+      </div>
+      <div class="cp-steps-grid">
+        <div class="cp-step">
+          <span class="cp-step-n">1</span>
+          <h4>Запит і узгодження</h4>
+          <p>Ви залишаєте запит — ми узгоджуємо дати та формат під вашу громаду: денний курс чи табір, кількість груп, вік учасників.</p>
+          <span class="cp-step-tag">Беремо на себе: планування</span>
+        </div>
+        <div class="cp-step">
+          <span class="cp-step-n">2</span>
+          <h4>Громада надає простір</h4>
+          <p>Підійде аудиторія школи, центру дозвілля чи бібліотеки з електрикою і столами, плюс безпечне місце для запусків.</p>
+          <span class="cp-step-tag">Від громади: приміщення</span>
+        </div>
+        <div class="cp-step">
+          <span class="cp-step-n">3</span>
+          <h4>Курс і перший політ</h4>
+          <p>Ми привозимо наставників, обладнання й програму та проводимо курс. Кожен учасник власноруч складає й запускає апарат.</p>
+          <span class="cp-step-tag">Беремо на себе: проведення</span>
+        </div>
+      </div>
+    </div>
+    <span class="cp-step-flag">
+      <svg viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l5 5L18 6"/></svg>
+      Найчастіше для громади це 0 грн — усе на базі школи чи партнерства.
+    </span>
+  </div>
+  <div class="cp-folio">ПРОЦЕС · 05 / 08</div>
+</section>
+
+<!-- ════════════ 06 — ФОТО-FEATURE: ПРОЗОРІСТЬ ════════════ -->
+<section class="cp-sec cp-feature">
+  <div class="cp-feature-bg" style="background-image:url('../brand/img/teens-collab.jpg')" aria-hidden="true"></div>
+  <div class="cp-feature-scrim" aria-hidden="true"></div>
+  <div class="cp-wrap">
+    <div class="cp-kick">Прозорість і довіра</div>
+    <p class="cp-feature-q">Ми не чекаємо на державу — <span class="cp-acc">приходимо й робимо</span>, а ви бачите кожен крок.</p>
+    <p class="cp-feature-sub">Кожна група формується за принципом 50/50 — порівну діти воїнів і цивільних, бо саме так будується міст між людьми в громаді. Команда має ім'я і обличчя: голова, керівник програми, методисти, наставники-ветерани.</p>
+  </div>
+  <div class="cp-folio" style="color:rgba(255,255,255,.55)">ДОВІРА · 06 / 08</div>
+</section>
+
+<!-- ════════════ 07 — ДОШКА НОТАТОК: ЗВІТНІСТЬ ════════════ -->
+<section class="cp-sec cp-dark">
+  <div class="cp-grid-overlay" aria-hidden="true"></div>
+  <div class="cp-wrap">
+    <div class="cp-kick">Звітність і безпека</div>
+    <h2 class="cp-h2">Робимо самі — <span class="cp-acc">і показуємо як</span></h2>
+    <p class="cp-lead">Після курсу громада отримує зрозумілий звіт про результати. Працюємо відкрито: прозорий кошторис, зрозумілі правила, документальна звітність.</p>
+    <div class="cp-board">
+      <div class="cp-note">
+        <span class="cp-note-pin" aria-hidden="true"></span>
+        <h4>Звіт для громади</h4>
+        <p>Хто навчався, що опанували, які роботи зібрали. Відкрито і документально — придатно для ради чи дирекції школи.</p>
+      </div>
+      <div class="cp-note">
+        <span class="cp-note-pin" aria-hidden="true"></span>
+        <h4>Прозорий кошторис</h4>
+        <p>Видно, що частину статей закриваємо партнерством за 0 грн. Після проєкту — короткий фінансовий звіт: скільки зібрали, на що витратили.</p>
+      </div>
+      <div class="cp-note">
+        <span class="cp-note-pin" aria-hidden="true"></span>
+        <span class="cp-stamp" aria-hidden="true">БЕЗ ПДн</span>
+        <h4>Захист даних</h4>
+        <p>Жодних персональних даних неповнолітніх у публічному доступі. Згоди на фото — загальні кадри.</p>
+      </div>
+      <div class="cp-note">
+        <span class="cp-note-pin" aria-hidden="true"></span>
+        <h4>Безпека на практиці</h4>
+        <p>Інструктажі, засоби індивідуального захисту, координатор з безпеки, аптечка й чіткий протокол дій на випадок інциденту.</p>
+        <div class="cp-note-counts">
+          <div class="cp-count"><b>50/50</b><span>формула групи: діти воїнів і цивільних</span></div>
+          <div class="cp-count"><b>≈10%</b><span>резерв у кошторисі на техніку</span></div>
+        </div>
+      </div>
+      <div class="cp-note">
+        <span class="cp-note-pin" aria-hidden="true"></span>
+        <h4>Команда з обличчям</h4>
+        <p>Голова проєкту, автор програми, методисти та наставники-ветерани. Імена й ролі — відкрито.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cp-folio">ЗВІТНІСТЬ · 07 / 08</div>
+</section>
+
+<!-- ════════════ 08 — РОАДМЕП-ГОРИЗОНТ + CTA ════════════ -->
+<section class="cp-sec cp-dark" id="cp-cta">
+  <div class="cp-grid-overlay" aria-hidden="true"></div>
+  <div class="cp-wrap">
+    <div class="cp-kick">Куди ростемо разом</div>
+    <h2 class="cp-h2">Гурток → курс → табір → мережа громад</h2>
+    <div class="cp-road" aria-hidden="true">
+      <svg class="cp-road-svg" viewBox="0 0 1040 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="40" y1="150" x2="1000" y2="150" stroke="#2B3550" stroke-width="2"/>
+        <line x1="40" y1="150" x2="820" y2="150" stroke="#0F5BFF" stroke-width="3"/>
+        <!-- node 1 -->
+        <circle cx="120" cy="150" r="9" fill="#0F5BFF"/>
+        <text x="120" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Гурток</text>
+        <text x="120" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">старт на базі школи</text>
+        <!-- node 2 -->
+        <circle cx="400" cy="150" r="9" fill="#0F5BFF"/>
+        <text x="400" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Курс</text>
+        <text x="400" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">8 занять, власний дрон</text>
+        <!-- node 3 -->
+        <circle cx="680" cy="150" r="9" fill="#0F5BFF"/>
+        <text x="680" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Табір</text>
+        <text x="680" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">поглиблені модулі</text>
+        <!-- node 4 — horizon -->
+        <circle cx="940" cy="150" r="9" fill="none" stroke="#5C8DFF" stroke-width="3"/>
+        <text x="940" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#5C8DFF" text-anchor="middle">Мережа</text>
+        <text x="940" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">сусідні громади</text>
+      </svg>
+    </div>
+    <div class="cp-road-notes">
+      <div class="cp-rn"><p class="cp-rn-k">Етап 1</p><h4>Гурток</h4><p>Запуск на базі школи як факультатив — мінімальний поріг входу для громади.</p></div>
+      <div class="cp-rn"><p class="cp-rn-k">Етап 2</p><h4>Базовий курс</h4><p>8 занять, кожен учасник власноруч складає й запускає навчальний апарат.</p></div>
+      <div class="cp-rn"><p class="cp-rn-k">Етап 3</p><h4>Табір</h4><p>Поглиблені модулі: агро, пошук і порятунок, екомоніторинг.</p></div>
+      <div class="cp-rn"><p class="cp-rn-k">Горизонт</p><h4>Мережа</h4><p>Розширення на сусідні громади й мережа наставників, зокрема ветеранів.</p></div>
+    </div>
+
+    <div class="cp-cta">
+      <h2 class="cp-h2">Привезімо інженерну школу у <span class="cp-acc">вашу громаду</span></h2>
+      <p class="cp-lead">Залиште запит — ми зв'яжемося, узгодимо дати й формат і надішлемо детальну презентацію для ради чи дирекції школи. Від вас потрібне лише приміщення. Усе інше — наше.</p>
+      <div class="cp-btns">
+        <a class="cp-btn cp-btn-p" href="#" onclick="return false">Запросити в громаду
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="cp-btn cp-btn-g" href="#" onclick="return false">Завантажити презентацію</a>
+      </div>
+    </div>
+  </div>
+  <div class="cp-folio">МАЙБУТНЄ · 08 / 08</div>
+</section>
+</div>
+</main>
+<footer class="lfoot"><div class="wrap"><span>© <span id="yr"></span> ГО «Об’єднані. Сильні. Разом!»</span><div class="lfoot-links"><a href="index-raster.html">Головна</a><a href="parents-raster.html">Батькам</a><a href="teens-raster.html">Підліткам</a><a href="communities-raster.html">Громадам</a><a href="../documents/">Документи</a><a href="../">На головну</a></div></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
