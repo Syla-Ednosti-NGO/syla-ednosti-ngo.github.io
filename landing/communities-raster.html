@@ -432,6 +432,20 @@
 .cp-hero { position:relative; overflow:hidden; }
 
 </style>
+<style id="gen-raster">
+.cp-cover-art img{width:100%;max-width:520px;height:auto;display:block;margin-left:auto;filter:drop-shadow(0 0 42px rgba(15,91,255,.38));}
+@media(max-width:900px){.cp-cover-art img{margin:0 auto;max-width:380px;}}
+.cp-ice-wrap{position:relative;max-width:430px;margin:0 auto;}
+.cp-ice-wrap img{width:100%;height:auto;display:block;}
+.cp-ice-tip{position:absolute;top:6%;left:60%;font-size:12px;font-weight:700;color:#C6CCD6;line-height:1.25;white-space:nowrap;}
+.cp-ice-tip b{color:#5C8DFF;display:block;font-size:13px;}
+.cp-ice-list{position:absolute;top:42%;left:0;right:0;margin:0;padding:0;list-style:none;text-align:center;display:flex;flex-direction:column;gap:11%;}
+.cp-ice-list li{font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.7);}
+.cp-ice-90{position:absolute;top:60%;right:-2%;font-size:11px;font-weight:700;color:#C6CCD6;line-height:1.2;text-align:left;}
+.cp-ice-90 b{color:#fff;font-size:22px;display:block;letter-spacing:-.02em;}
+.cp-road{display:flex;flex-direction:column;align-items:center;}
+.cp-road-img{width:100%;max-width:720px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 8px 30px rgba(15,91,255,.3));}
+</style>
 </head>
 <body class="ls">
 <header class="lnav">
@@ -456,50 +470,7 @@
         </div>
       </div>
       <div class="cp-cover-art" aria-hidden="true">
-        <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="cp-body" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#1B2740"/><stop offset="1" stop-color="#121826"/>
-            </linearGradient>
-          </defs>
-          <!-- delicate blueprint frame -->
-          <g stroke="#2B3550" stroke-width="1" fill="none" opacity=".9">
-            <circle cx="260" cy="230" r="186" stroke-dasharray="2 8"/>
-            <circle cx="260" cy="230" r="140" stroke-dasharray="2 8"/>
-            <line x1="40" y1="230" x2="480" y2="230"/>
-            <line x1="260" y1="20" x2="260" y2="440"/>
-          </g>
-          <!-- drone -->
-          <g transform="translate(260 226)">
-            <g fill="#26314D">
-              <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(-24)"/>
-              <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(24)"/>
-              <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(24)"/>
-              <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(-24)"/>
-            </g>
-            <rect x="-74" y="-26" width="148" height="56" rx="22" fill="url(#cp-body)"/>
-            <rect x="-58" y="-36" width="116" height="20" rx="10" fill="#26314D"/>
-            <rect x="-48" y="8" width="40" height="9" rx="4.5" fill="#0F5BFF"/>
-            <circle cx="56" cy="2" r="14" fill="#0F1622"/>
-            <circle cx="56" cy="2" r="7.5" fill="#5C8DFF"/>
-            <circle cx="58.5" cy="-0.5" r="2.4" fill="#fff" opacity=".9"/>
-            <!-- propellers -->
-            <ellipse cx="-152" cy="-66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
-            <ellipse cx="-152" cy="-66" rx="24" ry="6" fill="#5C8DFF"/>
-            <ellipse cx="152" cy="-66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
-            <ellipse cx="152" cy="-66" rx="24" ry="6" fill="#5C8DFF"/>
-            <ellipse cx="-152" cy="66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
-            <ellipse cx="-152" cy="66" rx="24" ry="6" fill="#5C8DFF"/>
-            <ellipse cx="152" cy="66" rx="46" ry="12" fill="#0F5BFF" opacity=".9"/>
-            <ellipse cx="152" cy="66" rx="24" ry="6" fill="#5C8DFF"/>
-          </g>
-          <!-- corner ticks -->
-          <g stroke="none" stroke-width="0"></g>
-          <circle cx="74" cy="44" r="3.5" fill="#5C8DFF"/>
-          <circle cx="446" cy="44" r="3.5" fill="#fff" opacity=".4"/>
-          <circle cx="74" cy="416" r="3.5" fill="#fff" opacity=".4"/>
-          <circle cx="446" cy="416" r="3.5" fill="#5C8DFF"/>
-        </svg>
+        <img class="gen-img" src="../brand/img/gen-mp-hero-drone.png" alt="">
       </div>
     </div>
     <div class="cp-cover-lines">
@@ -531,31 +502,12 @@
         <div class="cp-ice-note"><b>Чого проєкт не робить:</b> не готує операторів для бойового застосування. Чіткий цивільний меседж і прозора програма — щоб батькам і раді громади було спокійно.</div>
       </div>
       <div class="cp-ice-art" aria-hidden="true">
-        <svg viewBox="0 0 440 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- waterline -->
-          <path d="M0,150 q30,-10 62,0 t62,0 t62,0 t62,0 t62,0 t62,0 t62,0 v14 q-30,10 -62,0 t-62,0 t-62,0 t-62,0 t-62,0 t-62,0 t-62,0 z" fill="#1F3A6B" opacity=".6"/>
-          <!-- tip above water -->
-          <polygon points="170,42 270,42" fill="none"/>
-          <polygon points="186,150 254,150 232,52 208,52" fill="#0F5BFF"/>
-          <text x="296" y="86" font-family="Onest, sans-serif" font-size="14" font-weight="700" fill="#5C8DFF">пілотування</text>
-          <text x="296" y="106" font-family="Onest, sans-serif" font-size="13" fill="#9AA4B2">5–10 %</text>
-          <path d="M258,90 H290" stroke="none" stroke-width="0"/>
-          <path d="M258,86 H290" stroke="#46506A" stroke-width="1.4" stroke-dasharray="4 4"/>
-          <!-- submerged mass -->
-          <polygon points="130,162 310,162 360,300 286,438 168,470 80,318" fill="#16203A"/>
-          <polygon points="310,162 360,300 286,438 250,380 286,256" fill="#fff" opacity=".05"/>
-          <g font-family="Onest, sans-serif" font-weight="700" font-size="16" fill="#E4E7EC" text-anchor="middle">
-            <text x="220" y="220">інженерія</text>
-            <text x="220" y="282" opacity=".88">фізика</text>
-            <text x="220" y="344" opacity=".7">радіозв'язок</text>
-            <text x="220" y="406" opacity=".55">хімія · код</text>
-          </g>
-          <!-- depth bracket -->
-          <path d="M392,168 v300" stroke="#46506A" stroke-width="1.4"/>
-          <path d="M384,168 h8 M384,468 h8" stroke="#46506A" stroke-width="1.4"/>
-          <text x="404" y="312" font-family="Onest, sans-serif" font-weight="800" font-size="40" fill="#fff">90%</text>
-          <text x="406" y="334" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2">під водою</text>
-        </svg>
+        <div class="cp-ice-wrap">
+          <img class="gen-img" src="../brand/img/gen-mp-iceberg.png" alt="Айсберг: пілотування над водою, інженерія під водою">
+          <span class="cp-ice-tip"><b>пілотування</b> 5–10 %</span>
+          <ul class="cp-ice-list"><li>інженерія</li><li>фізика</li><li>радіозв’язок</li><li>хімія</li></ul>
+          <span class="cp-ice-90"><b>90 %</b> під водою</span>
+        </div>
       </div>
     </div>
   </div>
@@ -744,26 +696,7 @@
     <div class="cp-kick">Куди ростемо разом</div>
     <h2 class="cp-h2">Гурток → курс → табір → мережа громад</h2>
     <div class="cp-road" aria-hidden="true">
-      <svg class="cp-road-svg" viewBox="0 0 1040 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <line x1="40" y1="150" x2="1000" y2="150" stroke="#2B3550" stroke-width="2"/>
-        <line x1="40" y1="150" x2="820" y2="150" stroke="#0F5BFF" stroke-width="3"/>
-        <!-- node 1 -->
-        <circle cx="120" cy="150" r="9" fill="#0F5BFF"/>
-        <text x="120" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Гурток</text>
-        <text x="120" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">старт на базі школи</text>
-        <!-- node 2 -->
-        <circle cx="400" cy="150" r="9" fill="#0F5BFF"/>
-        <text x="400" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Курс</text>
-        <text x="400" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">8 занять, власний дрон</text>
-        <!-- node 3 -->
-        <circle cx="680" cy="150" r="9" fill="#0F5BFF"/>
-        <text x="680" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#fff" text-anchor="middle">Табір</text>
-        <text x="680" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">поглиблені модулі</text>
-        <!-- node 4 — horizon -->
-        <circle cx="940" cy="150" r="9" fill="none" stroke="#5C8DFF" stroke-width="3"/>
-        <text x="940" y="120" font-family="Onest, sans-serif" font-weight="800" font-size="17" fill="#5C8DFF" text-anchor="middle">Мережа</text>
-        <text x="940" y="182" font-family="Onest, sans-serif" font-size="12" fill="#9AA4B2" text-anchor="middle">сусідні громади</text>
-      </svg>
+      <img class="gen-img cp-road-img" src="../brand/img/gen-mp-horizon.png" alt="Шлях розвитку громадської мережі">
     </div>
     <div class="cp-road-notes">
       <div class="cp-rn"><p class="cp-rn-k">Етап 1</p><h4>Гурток</h4><p>Запуск на базі школи як факультатив — мінімальний поріг входу для громади.</p></div>
