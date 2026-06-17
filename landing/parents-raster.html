@@ -289,6 +289,18 @@
 .pp-hero { position:relative; overflow:hidden; }
 
 </style>
+<style id="gen-raster">
+.pp-cover-art img{width:100%;height:100%;object-fit:contain;object-position:center right;display:block;filter:drop-shadow(0 0 42px rgba(15,91,255,.38));}
+@media(max-width:900px){.pp-cover-art img{object-position:center;opacity:.5;}}
+.pp-ice-wrap{position:relative;max-width:430px;margin:0 auto;}
+.pp-ice-wrap img{width:100%;height:auto;display:block;}
+.pp-ice-tip{position:absolute;top:6%;left:60%;font-size:12px;font-weight:700;color:#23272E;line-height:1.25;white-space:nowrap;}
+.pp-ice-tip b{color:#0F5BFF;display:block;font-size:13px;}
+.pp-ice-list{position:absolute;top:42%;left:0;right:0;margin:0;padding:0;list-style:none;text-align:center;display:flex;flex-direction:column;gap:11%;}
+.pp-ice-list li{font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);}
+.pp-ice-90{position:absolute;top:60%;right:-2%;font-size:11px;font-weight:700;color:#171A1F;line-height:1.2;text-align:left;}
+.pp-ice-90 b{color:#171A1F;font-size:22px;display:block;letter-spacing:-.02em;}
+</style>
 </head>
 <body class="ls">
 <header class="lnav">
@@ -300,45 +312,7 @@
 <section class="pp-mag pp-s pp-dark pp-cover">
   <div class="pp-grid" aria-hidden="true"></div>
   <div class="pp-cover-art" aria-hidden="true">
-    <svg viewBox="0 0 760 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="pp-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#2A3340"/><stop offset="1" stop-color="#161B22"/>
-        </linearGradient>
-      </defs>
-      <!-- delicate flight-path arc -->
-      <path d="M40,470 C170,440 250,360 330,300 C400,248 450,236 500,238" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-dasharray="8 7" stroke-linecap="round" opacity=".75"/>
-      <circle cx="40" cy="470" r="5" fill="#fff" opacity=".5"/>
-      <circle cx="180" cy="402" r="5" fill="#fff" opacity=".5"/>
-      <circle cx="330" cy="300" r="5" fill="#fff" opacity=".5"/>
-      <circle cx="500" cy="238" r="7" fill="#0F5BFF"/>
-      <!-- contour rings -->
-      <circle cx="500" cy="238" r="118" fill="none" stroke="#fff" stroke-width="1" opacity=".06"/>
-      <circle cx="500" cy="238" r="172" fill="none" stroke="#fff" stroke-width="1" opacity=".045"/>
-      <!-- quadcopter, flat -->
-      <g transform="translate(500 238)">
-        <g fill="#2A3340">
-          <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(-28)"/>
-          <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(-152)"/>
-          <rect x="-150" y="-7" width="150" height="14" rx="7" transform="rotate(28)"/>
-          <rect x="0" y="-7" width="150" height="14" rx="7" transform="rotate(152)"/>
-        </g>
-        <ellipse cx="-118" cy="-62" rx="42" ry="11" fill="#0F5BFF" opacity=".9"/>
-        <ellipse cx="118" cy="-62" rx="42" ry="11" fill="#0F5BFF" opacity=".9"/>
-        <ellipse cx="-118" cy="62" rx="42" ry="11" fill="#0F5BFF" opacity=".9"/>
-        <ellipse cx="118" cy="62" rx="42" ry="11" fill="#0F5BFF" opacity=".9"/>
-        <ellipse cx="-118" cy="-62" rx="22" ry="6" fill="#fff" opacity=".22"/>
-        <ellipse cx="118" cy="-62" rx="22" ry="6" fill="#fff" opacity=".22"/>
-        <ellipse cx="-118" cy="62" rx="22" ry="6" fill="#fff" opacity=".22"/>
-        <ellipse cx="118" cy="62" rx="22" ry="6" fill="#fff" opacity=".22"/>
-        <rect x="-64" y="-24" width="128" height="50" rx="22" fill="url(#pp-body)"/>
-        <rect x="-50" y="-32" width="100" height="18" rx="9" fill="#2A3340"/>
-        <rect x="-40" y="6" width="34" height="9" rx="4.5" fill="#0F5BFF"/>
-        <circle cx="48" cy="1" r="12" fill="#0E1116"/>
-        <circle cx="48" cy="1" r="6.5" fill="#6FA0FF"/>
-        <circle cx="50" cy="-1.5" r="2" fill="#fff" opacity=".9"/>
-      </g>
-    </svg>
+    <img class="gen-img" src="../brand/img/gen-mp-hero-drone.png" alt="">
   </div>
   <div class="pp-wrap">
     <div class="pp-overline">Спецвипуск для батьків <i>·</i> ГО «Об'єднані. Сильні. Разом!» <i>·</i> Інженерна школа дронів</div>
@@ -426,33 +400,12 @@
         </div>
       </div>
       <div class="pp-ice-art" aria-hidden="true">
-        <svg viewBox="0 0 460 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- tip above water = piloting -->
-          <polygon points="186,118 226,40 266,118" fill="#0F5BFF"/>
-          <g fill="#171A1F">
-            <rect x="216" y="70" width="20" height="7" rx="3.5"/>
-            <circle cx="216" cy="70" r="4"/><circle cx="236" cy="70" r="4"/>
-          </g>
-          <path d="M300,74 H352" stroke="#9AA2AE" stroke-width="1.5" stroke-dasharray="4 4"/>
-          <text x="358" y="78" font-family="Onest, sans-serif" font-size="13" font-weight="700" fill="#23272E">пілотування</text>
-          <text x="358" y="96" font-family="Onest, sans-serif" font-size="12" font-weight="600" fill="#6B7280">5–10 %</text>
-          <!-- waterline -->
-          <path d="M0,128 q30,-9 60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 v14 q-30,9 -60,0 t-60,0 t-60,0 t-60,0 t-60,0 t-60,0 t-60,0 z" fill="#0F5BFF" opacity=".18"/>
-          <!-- submerged body -->
-          <polygon points="144,148 308,148 366,300 296,452 168,496 78,308" fill="#171A1F" opacity=".94"/>
-          <polygon points="308,148 366,300 296,452 252,398 282,232" fill="#fff" opacity=".07"/>
-          <g font-family="Onest, sans-serif" font-weight="700" font-size="15" fill="#fff" text-anchor="middle">
-            <text x="226" y="206">інженерія</text>
-            <text x="228" y="272" opacity=".88">фізика</text>
-            <text x="230" y="338" opacity=".72">радіозв'язок</text>
-            <text x="222" y="404" opacity=".56">хімія · код</text>
-          </g>
-          <!-- 90% bracket -->
-          <path d="M396,168 v280" stroke="#9AA2AE" stroke-width="1.5"/>
-          <path d="M388,168 h8 M388,448 h8" stroke="#9AA2AE" stroke-width="1.5"/>
-          <text x="410" y="302" font-family="Onest, sans-serif" font-weight="800" font-size="40" fill="#171A1F">90 %</text>
-          <text x="411" y="324" font-family="Onest, sans-serif" font-size="12" font-weight="600" fill="#6B7280">під водою</text>
-        </svg>
+        <div class="pp-ice-wrap">
+          <img class="gen-img" src="../brand/img/gen-mp-iceberg.png" alt="Айсберг безпілотних систем: пілотування над водою, інженерні науки під водою">
+          <span class="pp-ice-tip"><b>пілотування</b> 5–10 %</span>
+          <ul class="pp-ice-list"><li>інженерія</li><li>фізика</li><li>радіозв’язок</li><li>хімія · код</li></ul>
+          <span class="pp-ice-90"><b>90 %</b> під водою</span>
+        </div>
       </div>
     </div>
   </div>
