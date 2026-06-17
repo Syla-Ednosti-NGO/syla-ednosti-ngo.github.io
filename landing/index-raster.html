@@ -460,6 +460,38 @@
 .mp-node-ic svg{width:56px;height:56px;display:block;}
 @media(max-width:760px){.mp-conn{display:none!important;}.mp-path-grid{gap:28px!important;}}
 </style>
+<style id="gen-redesign">
+/* §2 orbit -> tight feature grid */
+.mp-sci-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0 0;}
+.mp-sci{display:flex;flex-direction:column;align-items:flex-start;padding:24px;background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);}
+.mp-sci-ic{width:48px;height:48px;margin-bottom:14px;}
+.mp-sci-ic svg{width:48px;height:48px;display:block;}
+.mp-sci h4{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--navy);margin:0 0 6px;}
+.mp-sci p{font-size:14px;line-height:1.55;color:var(--muted);margin:0;}
+.mp-orbit-foot{margin-top:40px !important;}
+/* §3 fear/trust -> paired objection->answer rows */
+.mp-trust-rows{margin-top:48px;display:flex;flex-direction:column;gap:24px;}
+.mp-tr{display:grid;grid-template-columns:1fr 40px 1.2fr;gap:24px;align-items:stretch;}
+.mp-tr-fear{background:var(--gray-50);border:1px solid var(--gray-200);border-left:4px solid #9AA2AF;border-radius:var(--r);padding:18px 20px;font-size:15px;line-height:1.6;color:var(--ink);}
+.mp-tr-fear .mp-tr-tag{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.mp-tr-arrow{align-self:center;text-align:center;font-weight:800;font-size:20px;color:#0F5BFF;}
+.mp-tr-answer{background:#fff;border:1px solid var(--gray-200);border-left:4px solid #0F5BFF;border-radius:var(--r);padding:18px 20px;display:flex;flex-direction:column;}
+.mp-tr-answer p{margin:0 0 12px;font-size:15px;line-height:1.6;color:var(--ink);position:relative;padding-left:34px;}
+.mp-tr-answer p i{font-style:italic;color:var(--muted);}
+.mp-tr-answer p::before{content:"";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:var(--r-s);background-color:#0F5BFF;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5L19 7'/></svg>");background-size:15px;background-repeat:no-repeat;background-position:center;}
+.mp-proof{margin-top:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);border-top:1px solid var(--gray-200);padding-top:10px;}
+.mp-proof b{color:var(--navy);font-weight:700;}
+.mp-noyes{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;margin-top:32px;}
+@media(max-width:760px){.mp-tr{grid-template-columns:1fr;gap:10px;}.mp-tr-arrow{transform:rotate(90deg);}}
+/* §4 team — tighten + tags on all cards */
+.mp-team{gap:48px !important;}
+.mp-team-mosaic{gap:24px !important;}
+.mp-person{padding:24px !important;}
+.mp-person-role{font-size:14px !important;}
+.mp-person-tag{top:20px;right:20px;}
+@media(max-width:860px){.mp-sci-grid{grid-template-columns:repeat(2,1fr);gap:16px;}}
+@media(max-width:560px){.mp-sci-grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body class="ls">
 <header class="lnav">
@@ -565,14 +597,13 @@
     <div class="mp-kick">Що ми робимо</div>
     <h2 class="mp-h2">Шість наук за&nbsp;одним польотом</h2>
     <div class="mp-orbit-triad">пілотувати <i>·</i> розуміти <i>·</i> інженерити</div>
-    <div class="mp-orbit-r"><img class="gen-img" src="../brand/img/gen-mp-orbit.png" alt="Дрон і шість наук довкола нього"></div>
-    <div class="mp-orbit-legend">
-      <div><b>Фізика польоту</b><span>аеродинаміка, тяга</span></div>
-      <div><b>Радіозв’язок</b><span>частоти, антени</span></div>
-      <div><b>Хімія</b><span>акумулятори, безпека</span></div>
-      <div><b>Код і автоматика</b><span>польотні контролери</span></div>
-      <div><b>Інженерія та збірка</b><span>основа основ</span></div>
-      <div><b>Цивільне застосування</b><span>агро, доставка, SAR</span></div>
+        <div class="mp-sci-grid">
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M5 30 C15 25 31 25 43 28" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><path d="M5 30 C15 33 29 34 43 28" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><path d="M15 22 v-8 M15 14 l-3 3 M15 14 l3 3" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 20 v-7 M27 13 l-3 3 M27 13 l3 3" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></span><h4>Фізика польоту</h4><p>аеродинаміка, тяга</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M24 30 v8 M18 40 h12" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="26" r="3" fill="#0F5BFF"/><path d="M17 19 a10 10 0 0 1 14 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><path d="M12.5 13.5 a17 17 0 0 1 23 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" opacity=".5"/></svg></span><h4>Радіозв’язок</h4><p>частоти, антени</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="13" width="24" height="24" rx="3" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><rect x="19" y="8" width="10" height="5" rx="1.5" fill="#0F5BFF"/><path d="M25 18 l-5 9 h4.5 l-1.5 6 6 -10 h-4.5 l1.5 -5 z" fill="#0F5BFF"/></svg></span><h4>Хімія</h4><p>акумулятори, безпека</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="13" y="13" width="22" height="22" rx="3" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><path d="M13 19 h-4 M13 24 h-4 M13 29 h-4 M35 19 h4 M35 24 h4 M35 29 h4 M19 13 v-4 M24 13 v-4 M29 13 v-4 M19 35 v4 M24 35 v4 M29 35 v4" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><path d="M22 20 c-2.2 0 -1.6 3.5 -3.4 4 c1.8 .5 1.2 4 3.4 4 M26 20 c2.2 0 1.6 3.5 3.4 4 c-1.8 .5 -1.2 4 -3.4 4" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h4>Код і автоматика</h4><p>польотні контролери</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M30.5 9.5 a6 6 0 0 0 -8 8 l-13 13 a2 2 0 0 0 0 2.8 l1.2 1.2 a2 2 0 0 0 2.8 0 l13 -13 a6 6 0 0 0 8 -8 l-3.8 3.8 -2.8 -.8 -.8 -2.8 z" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linejoin="round"/></svg></span><h4>Інженерія та збірка</h4><p>основа основ</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M9 15 h22" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="15" r="2.6" fill="#0F5BFF"/><path d="M12 15 v-3 M28 15 v-3" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="12" cy="11" rx="4" ry="1.6" fill="none" stroke="#0F5BFF" stroke-width="1.8"/><ellipse cx="28" cy="11" rx="4" ry="1.6" fill="none" stroke="#0F5BFF" stroke-width="1.8"/><path d="M20 17 v4" stroke="#0F5BFF" stroke-width="1.8"/><rect x="14.5" y="21" width="11" height="10" rx="1.5" fill="none" stroke="#0F5BFF" stroke-width="2.2"/><path d="M14.5 25.5 h11 M20 21 v10" stroke="#0F5BFF" stroke-width="1.6" opacity=".5"/></svg></span><h4>Цивільне застосування</h4><p>агро, доставка, SAR</p></div>
     </div>
     <p class="mp-orbit-foot">«Розуміння безпілотних систем — це глибока концепція: і&nbsp;інженерія, і&nbsp;фізика, і&nbsp;зв’язок, і&nbsp;хімія». Кожен завершує курс власним проєктом.</p>
   </div>
@@ -616,32 +647,27 @@
     <div class="mp-kick">Наші цінності</div>
     <h2 class="mp-h2">Не зброя. Довіра.</h2>
     <p class="mp-lead">Найбільший бар’єр&nbsp;— страх батьків. Ми&nbsp;відповідаємо на&nbsp;нього не&nbsp;словами, а&nbsp;прозорістю: цивільний акцент, відкритий план занять і&nbsp;наставники-ветерани поруч із&nbsp;дітьми.</p>
-    <div class="mp-versus">
-      <div class="mp-vhalf mp-vhalf--fear">
-        <span class="mp-vic" aria-hidden="true"><img class="gen-ico" src="../brand/img/gen-ic-warn.png" alt=""></span>
-        <h3>Страх</h3>
-        <div class="mp-fear-item">«Дрон&nbsp;— це&nbsp;зброя. Школа дронів&nbsp;= мілітаризація дитини».</div>
-        <div class="mp-fear-item">Невідомість: що насправді відбувається на&nbsp;курсі?</div>
-        <div class="mp-fear-item">Тривога: «технології небезпечні для підлітка».</div>
+        <div class="mp-trust-rows">
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>«Дрон&nbsp;— це&nbsp;зброя. Школа дронів&nbsp;= мілітаризація дитини».</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Так, дрон <i>може</i> бути зброєю. Але тут діти <b>проєктують, паяють і&nbsp;програмують</b>&nbsp;— це інженерія, як робототехніка чи&nbsp;авіамоделювання.</p><span class="mp-proof"><b>Цивільний акцент:</b>&nbsp;агро, доставка, пошук</span></div>
       </div>
-      <div class="mp-vdiv" aria-hidden="true">
-        <span class="mp-varc"><svg viewBox="0 0 110 56" xmlns="http://www.w3.org/2000/svg"><path d="M6,50 C30,10 80,10 98,38" fill="none" stroke="#0F5BFF" stroke-width="4" stroke-linecap="round"/><polygon points="106,48 88,44 98,32" fill="#0F5BFF"/></svg></span>
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>Невідомість: що насправді відбувається на&nbsp;курсі?</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Прозорий план занять наперед, <b>без сюрпризів</b>. Ви&nbsp;завжди знаєте, що&nbsp;і&nbsp;навіщо роблять діти.</p><span class="mp-proof"><b>Відкриті двері:</b>&nbsp;можна прийти на&nbsp;будь-яке заняття</span></div>
       </div>
-      <div class="mp-vhalf mp-vhalf--trust">
-        <span class="mp-vic" aria-hidden="true"><img class="gen-ico" src="../brand/img/gen-ic-shield.png" alt=""></span>
-        <h3>Довіра</h3>
-        <ul class="mp-check">
-          <li>Цивільний акцент: не&nbsp;«школа зброї», а&nbsp;інженерія, наука й&nbsp;сенс.</li>
-          <li>Прозорий план занять&nbsp;— наперед, без сюрпризів.</li>
-          <li>Відповідальні наставники-ветерани поруч із&nbsp;дітьми.</li>
-          <li>Через фізику й&nbsp;інженерію дитина починає краще вчитися.</li>
-        </ul>
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>«Технології небезпечні для&nbsp;підлітка».</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Поруч&nbsp;— <b>відповідальні наставники-ветерани</b>; а&nbsp;через фізику й&nbsp;інженерію дитина починає краще вчитися.</p><span class="mp-proof"><b>8 занять</b>&nbsp;· власний проєкт наприкінці</span></div>
       </div>
-      <div class="mp-noyes">
-        <span class="mp-no">«ваші діти будуть воювати»</span>
-        <span class="mp-ar">→</span>
-        <span class="mp-yes">розвиток · технологія · професія · майбутнє</span>
-      </div>
+    </div>
+    <div class="mp-noyes">
+      <span class="mp-no">«ваші діти будуть воювати»</span>
+      <span class="mp-ar">&rarr;</span>
+      <span class="mp-yes">розвиток · технологія · професія · майбутнє</span>
     </div>
   </div>
   <div class="mp-folio">06 / 08 · довіра</div>
@@ -663,22 +689,22 @@
           <span class="mp-person-tag">голова</span>
         </div>
         <div class="mp-person">
-          <span class="mp-person-init">Ю</span>
+          <span class="mp-person-init">Ю</span><span class="mp-person-tag">програма</span>
           <h4>Юрій «Недок»</h4>
           <p class="mp-person-role">навчальна програма й&nbsp;методика, автор курсу</p>
         </div>
         <div class="mp-person">
-          <span class="mp-person-init">В</span>
+          <span class="mp-person-init">В</span><span class="mp-person-tag">продукт</span>
           <h4>Валентин</h4>
           <p class="mp-person-role">UI/UX, систематизація та&nbsp;впровадження ШІ</p>
         </div>
         <div class="mp-person">
-          <span class="mp-person-init">С</span>
+          <span class="mp-person-init">С</span><span class="mp-person-tag">комунікації</span>
           <h4>Сергій «Тихий»</h4>
           <p class="mp-person-role">філософія проєкту й&nbsp;комунікація в&nbsp;соцмережах</p>
         </div>
         <div class="mp-person">
-          <span class="mp-person-init">О</span>
+          <span class="mp-person-init">О</span><span class="mp-person-tag">спільнота</span>
           <h4>Оля</h4>
           <p class="mp-person-role">аудиторія та&nbsp;зв’язок зі&nbsp;спільнотою</p>
         </div>
