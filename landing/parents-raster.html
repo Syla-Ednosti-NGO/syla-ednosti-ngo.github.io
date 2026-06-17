@@ -308,6 +308,16 @@
 .pp-ice-90{position:absolute;top:60%;right:-2%;font-size:11px;font-weight:700;color:#171A1F;line-height:1.2;text-align:left;}
 .pp-ice-90 b{color:#171A1F;font-size:22px;display:block;letter-spacing:-.02em;}
 </style>
+<style id="gen-prog2">
+.pp-path-grid{gap:70px 30px!important;position:relative;}
+.pp-conn{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.pp-conn svg{width:100%;height:100%;display:block;}
+.pp-node{position:relative;z-index:1;min-height:150px;}
+.pp-node-num{display:none!important;}
+.pp-node-ic{position:static!important;top:auto!important;right:auto!important;width:auto!important;height:auto!important;margin:0 0 16px!important;opacity:1!important;}
+.pp-node-ic svg{width:56px!important;height:56px!important;display:block;}
+@media(max-width:760px){.pp-conn{display:none!important;}.pp-path-grid{gap:26px!important;}}
+</style>
 </head>
 <body class="ls">
 <header class="lnav">
@@ -461,42 +471,34 @@
     <h2 class="pp-h2">Шлях від схеми до робочого апарата</h2>
     <p class="pp-lead">За час курсу підліток власноруч пройде дорогу від першої схеми до дрона, що злітає — і по дорозі опанує шість напрямів науки. Це не гурток «погратися», а перший реальний інженерний досвід.</p>
     <div class="pp-path">
-      <div class="pp-path-bg" aria-hidden="true">
-        <img class="gen-img" src="../brand/img/gen-mp-serpentine.png" alt="">
-      </div>
       <div class="pp-path-grid">
+        <div class="pp-conn" aria-hidden="true"><svg viewBox="0 0 1000 460" preserveAspectRatio="none"><path d="M167,42 H819 Q833,42 833,56 V214 Q833,228 819,228 H181 Q167,228 167,242 V326 Q167,340 181,340 H833" fill="none" stroke="#6FA0FF" stroke-width="2.4" stroke-dasharray="7 10" opacity=".55" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="pp-node">
-          <span class="pp-node-num">1</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 6 v6 M22 10 L34 32 M22 10 L10 32" stroke="#6FA0FF" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="34" cy="34" r="5" fill="#0F5BFF"/></svg></span>
           <h4>Фізика в дії</h4>
           <p>Чому апарат злітає, як працює підйомна сила, баланс і центр ваги.</p>
         </div>
         <div class="pp-node">
-          <span class="pp-node-num">2</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8" y="14" width="28" height="18" rx="3" fill="none" stroke="#6FA0FF" stroke-width="2.5"/><path d="M14 14 v-4 M30 14 v-4 M14 32 v4 M30 32 v4" stroke="#0F5BFF" stroke-width="2.5" stroke-linecap="round"/></svg></span>
           <h4>Інженерія та електроніка</h4>
           <p>Складання, пайка, читання схем — як з'єднані компоненти й чому це важливо.</p>
         </div>
         <div class="pp-node">
-          <span class="pp-node-num">3</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="22" cy="34" r="4" fill="#0F5BFF"/><path d="M13 28 a13 13 0 0 1 18 0" stroke="#6FA0FF" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M8 22 a20 20 0 0 1 28 0" stroke="#6FA0FF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/></svg></span>
           <h4>Радіозв'язок</h4>
           <p>Як передається сигнал, що таке частоти й завади — основа всієї сучасної техніки.</p>
         </div>
         <div class="pp-node">
-          <span class="pp-node-num">4</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="14" width="24" height="20" rx="4" fill="none" stroke="#6FA0FF" stroke-width="2.5"/><rect x="18" y="9" width="8" height="5" rx="2" fill="#0F5BFF"/><path d="M16 26 h5 M23 26 h5" stroke="#0F5BFF" stroke-width="2.5" stroke-linecap="round"/></svg></span>
           <h4>Основи хімії</h4>
           <p>Як влаштовані й як безпечно поводитися з акумуляторами — окрема тема безпеки.</p>
         </div>
         <div class="pp-node">
-          <span class="pp-node-num">5</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 14 l-8 8 8 8 M28 14 l8 8 -8 8" stroke="#6FA0FF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 10 l-4 24" stroke="#0F5BFF" stroke-width="2.5" stroke-linecap="round"/></svg></span>
           <h4>Програмування й логіка</h4>
           <p>Базовий код, який «оживляє» апарат і вчить мислити структурно.</p>
         </div>
         <div class="pp-node">
-          <span class="pp-node-num">6</span>
           <span class="pp-node-ic" aria-hidden="true"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="15" cy="18" r="6" fill="none" stroke="#6FA0FF" stroke-width="2.5"/><circle cx="29" cy="18" r="6" fill="none" stroke="#6FA0FF" stroke-width="2.5"/><path d="M7 36 v-3 c0 -5 4 -8 8 -8 s8 3 8 8 v3 M21 36 v-3 c0 -5 4 -8 8 -8 s8 3 8 8 v3" stroke="#0F5BFF" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></span>
           <h4>М'які навички</h4>
           <p>Робота в команді, доведення справи до результату, спокій у складній задачі.</p>
