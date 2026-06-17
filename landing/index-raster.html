@@ -421,6 +421,14 @@
 
 </style>
 <style id="gen-raster">
+/* horizon raster + roadsteps */
+.mp-horizon-r{max-width:760px;margin:30px auto 4px;}
+.mp-horizon-r img{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 30px rgba(15,91,255,.3));}
+.mp-roadsteps{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:6px;}
+.mp-roadsteps>div{text-align:center;}
+.mp-roadsteps b{font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;display:block;}
+.mp-roadsteps span{font-size:11.5px;color:#9FB4D6;}
+.mp-rs-arr{color:#5B9BFF;font-weight:800;font-size:18px;}
 /* orbit raster + legend */
 .mp-orbit-r{max-width:540px;margin:24px auto 0;}
 .mp-orbit-r img{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 40px rgba(15,91,255,.22));}
@@ -690,29 +698,15 @@
   <div class="mp-inner">
     <div class="mp-kick">Куди ми рухаємось</div>
     <h2 class="mp-h2">Від гуртка — до&nbsp;мережі по&nbsp;всій Україні</h2>
-    <div class="mp-horizon" aria-hidden="true">
-      <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" aria-label="Шлях: гурток, курс, табір, мережа">
-        <line x1="0" y1="110" x2="1000" y2="110" stroke="#fff" opacity=".12"/>
-        <circle cx="730" cy="68" r="52" fill="#0F5BFF" opacity=".12"/>
-        <circle cx="730" cy="68" r="30" fill="#0F5BFF"/>
-        <path d="M30,330 C200,318 330,292 440,242 C530,202 590,164 648,120" fill="none" stroke="#5B9BFF" stroke-width="2.4" stroke-dasharray="9 7" stroke-linecap="round" opacity=".9"/>
-        <text x="44" y="306" font-family="Onest,sans-serif" font-size="12" font-weight="700" fill="#9FB4D6">0 грн — громадські засади</text>
-        <circle cx="130" cy="316" r="8" fill="#fff" opacity=".85"/>
-        <text x="130" y="292" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Гурток</text>
-        <text x="130" y="274" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">старт · MVP</text>
-        <circle cx="320" cy="282" r="8" fill="#fff" opacity=".85"/>
-        <text x="320" y="258" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Курс</text>
-        <text x="320" y="240" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">8 занять · 1 місяць</text>
-        <circle cx="480" cy="232" r="8" fill="#fff" opacity=".85"/>
-        <text x="480" y="208" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Табір</text>
-        <text x="480" y="190" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">практика в&nbsp;природі</text>
-        <circle cx="648" cy="120" r="12" fill="#0F5BFF"/>
-        <text x="648" y="158" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#5B9BFF" text-anchor="middle">Мережа</text>
-        <text x="648" y="176" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">вся Україна</text>
-        <g stroke="#0F5BFF" stroke-width="1" stroke-dasharray="3 4" opacity=".4"><line x1="880" y1="220" x2="810" y2="200"/><line x1="880" y1="220" x2="840" y2="280"/><line x1="880" y1="220" x2="910" y2="180"/><line x1="880" y1="220" x2="930" y2="260"/><line x1="880" y1="220" x2="820" y2="240"/><line x1="880" y1="220" x2="950" y2="210"/></g>
-        <g fill="#5B9BFF" opacity=".85"><circle cx="810" cy="200" r="4"/><circle cx="840" cy="280" r="4"/><circle cx="910" cy="180" r="4"/><circle cx="930" cy="260" r="4"/><circle cx="820" cy="240" r="4"/><circle cx="950" cy="210" r="4"/></g>
-        <circle cx="880" cy="220" r="7" fill="#0F5BFF"/>
-      </svg>
+    <div class="mp-horizon-r"><img class="gen-img" src="../brand/img/gen-mp-horizon.png" alt="Шлях розвитку: гурток, курс, табір, мережа по всій Україні"></div>
+    <div class="mp-roadsteps">
+      <div><b>Гурток</b><span>старт · MVP</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Курс</b><span>8 занять · 1 місяць</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Табір</b><span>практика в природі</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Мережа</b><span>вся Україна · 0 грн</span></div>
     </div>
     <div class="mp-hz-notes">
       <div class="mp-hz-note">
