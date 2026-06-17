@@ -14,7 +14,9 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:'Onest',system-ui,sans-serif;background:#0E1116;color:#fff;-webkit-font-smoothing:antialiased}
   .bar{position:sticky;top:0;z-index:100;height:var(--barh);background:#0E1116;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:14px;padding:0 16px}
-  .brand{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;color:#fff;white-space:nowrap;flex:none}
+  .brand{font-family:'e-Ukraine Head','Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;color:#fff;white-space:nowrap;flex:none;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+  .brand:hover{color:#0F5BFF}
+  .brand .bk{color:#7A828E;font-weight:400}
   .brand i{color:#0F5BFF;font-style:normal}
   .cbtns{display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;flex:1;scrollbar-width:none;-ms-overflow-style:none}
   .cbtns::-webkit-scrollbar{display:none}
@@ -92,7 +94,7 @@
 </head>
 <body>
 <header class="bar">
-  <span class="brand">ОБ<i>’</i>ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span>
+  <a class="brand" href="../" title="На головну сторінку"><span class="bk">‹</span> ОБ<i>’</i>ЄДНАНІ. СИЛЬНІ. РАЗОМ!</a>
   <div class="cbtns"><button class="cbtn" data-go="1" onclick="showConcept(1)"><b>1</b><span>Громадянська міць</span></button>
 <button class="cbtn" data-go="2" onclick="showConcept(2)"><b>2</b><span>«Поле і небо»</span></button>
 <button class="cbtn" data-go="3" onclick="showConcept(3)"><b>3</b><span>«Інженерний мінімалізм»</span></button>
