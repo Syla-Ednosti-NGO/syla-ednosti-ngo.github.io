@@ -9,6 +9,417 @@
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="site.css">
+<style>
+/* ============================================================
+   ГОЛОВНА ВІЗИТІВКА — магазинний «спецвипуск»
+   Айдентика: Інженерний мінімалізм (Onest, електрик-синій акцент)
+   Усі класи з префіксом mp-
+   ============================================================ */
+.mp-page{
+  --ls-dark:#0E1116; --navy:#171A1F; --ink:#23272E; --muted:#6B7280;
+  --yellow:#0F5BFF; --gray-50:#F6F7F8; --gray-200:#E6E8EB;
+  --r:8px; --r-s:4px; --r-l:14px;
+  --f-display:'Onest',system-ui,-apple-system,sans-serif;
+  --f-body:'Onest',system-ui,-apple-system,sans-serif;
+  font-family:var(--f-body);
+  color:var(--ink);
+}
+.mp-page *{box-sizing:border-box;}
+.mp-section{position:relative;overflow:hidden;padding:118px 48px;}
+.mp-inner{width:100%;max-width:1140px;margin:0 auto;position:relative;z-index:2;}
+
+/* surfaces */
+.mp-dark{background:var(--ls-dark);color:#fff;}
+.mp-paper{background:#fff;color:var(--ink);}
+.mp-gray{background:var(--gray-50);color:var(--ink);}
+
+/* ---- shared editorial bits ---- */
+.mp-kick{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;color:var(--yellow);margin-bottom:22px;
+}
+.mp-kick::before{content:"";width:26px;height:1px;background:currentColor;display:block;}
+.mp-dark .mp-kick{color:#5B9BFF;}
+.mp-h2{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(34px,4.6vw,54px);line-height:1.04;
+  letter-spacing:-.02em;color:var(--navy);margin:0 0 26px;max-width:20ch;
+}
+.mp-dark .mp-h2{color:#fff;}
+.mp-lead{
+  font-size:18px;line-height:1.78;color:var(--ink);max-width:56ch;margin:0 0 40px;
+}
+.mp-dark .mp-lead{color:#C3CBD6;}
+.mp-folio{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-size:11px;font-weight:700;letter-spacing:.24em;
+  color:rgba(35,39,46,.34);display:flex;align-items:center;gap:10px;
+  white-space:nowrap;z-index:3;text-transform:uppercase;
+}
+.mp-folio::before{content:"";width:22px;height:1px;background:currentColor;}
+.mp-dark .mp-folio{color:rgba(255,255,255,.4);}
+.mp-micro{
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* blueprint grid — delicate */
+.mp-blueprint{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 0%,transparent 78%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 0%,transparent 78%);
+}
+.mp-blueprint--light{
+  background-image:
+    linear-gradient(rgba(23,26,31,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(23,26,31,.04) 1px,transparent 1px);
+}
+
+/* ============================================================
+   01 — ОБКЛАДИНКА-ГЕРОЙ (photo + inline-SVG)
+   ============================================================ */
+.mp-hero{min-height:92vh;display:flex;align-items:center;padding-top:110px;padding-bottom:120px;}
+.mp-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('../brand/img/fpv-carbon.jpg') center/cover no-repeat;
+}
+.mp-hero-scrim{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(100deg,rgba(8,10,14,.94) 0%,rgba(8,10,14,.8) 42%,rgba(8,10,14,.42) 72%,rgba(8,10,14,.66) 100%);
+}
+.mp-hero .mp-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+.mp-hero-overline{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#9FB4D6;margin-bottom:28px;
+}
+.mp-hero-overline i{font-style:normal;color:var(--yellow);}
+.mp-hero h1{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(42px,6.4vw,82px);line-height:.98;letter-spacing:-.025em;
+  color:#fff;margin:0 0 26px;text-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+.mp-hero h1 .mp-acc{color:#5B9BFF;}
+.mp-hero-lead{
+  font-size:18.5px;line-height:1.74;color:#DDE3EC;max-width:48ch;margin:0 0 36px;
+  text-shadow:0 1px 12px rgba(0,0,0,.6);
+}
+.mp-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:46px;}
+.mp-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-display);font-weight:700;font-size:15px;
+  padding:14px 24px;border-radius:var(--r);text-decoration:none;
+  transition:transform 160ms ease,background 160ms ease;
+}
+.mp-btn:hover{transform:translateY(-2px);}
+.mp-btn-p{background:var(--yellow);color:#0E1116;}
+.mp-btn-p:hover{background:#2D72FF;}
+.mp-btn-g{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.26);}
+.mp-btn-g:hover{background:rgba(255,255,255,.16);}
+.mp-hero-lines{
+  display:flex;flex-wrap:wrap;gap:10px 18px;
+  border-top:1px solid rgba(255,255,255,.16);padding-top:24px;
+  font-size:13px;font-weight:700;color:#9FB4D6;max-width:640px;
+}
+.mp-hero-lines b{color:#fff;font-weight:800;}
+.mp-hero-lines .mp-dot{color:var(--yellow);}
+.mp-hero-art{position:relative;}
+.mp-hero-art svg{width:100%;max-width:440px;height:auto;display:block;margin-left:auto;
+  filter:drop-shadow(0 18px 50px rgba(15,91,255,.28));}
+
+/* ============================================================
+   02 — АЙСБЕРГ (SVG + editorial split, drop-cap)
+   ============================================================ */
+.mp-iceberg{display:grid;grid-template-columns:6fr 5fr;gap:68px;align-items:center;margin-top:8px;}
+.mp-iceberg-body .mp-pull{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(24px,3vw,34px);line-height:1.32;letter-spacing:-.015em;
+  color:var(--navy);margin:18px 0 26px;position:relative;
+}
+.mp-iceberg-body .mp-pull::before{
+  content:"«";position:absolute;top:-46px;left:-8px;
+  font-family:var(--f-display);font-weight:800;font-size:104px;line-height:1;
+  color:var(--yellow);opacity:.16;pointer-events:none;
+}
+.mp-drop::first-letter{
+  float:left;font-family:var(--f-display);font-weight:800;
+  font-size:62px;line-height:.86;color:#fff;background:var(--yellow);
+  padding:10px 16px;margin:6px 16px 0 0;border-radius:var(--r-s);
+}
+.mp-iceberg-body p{font-size:16.5px;line-height:1.82;color:var(--ink);margin:0 0 16px;}
+.mp-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+.mp-chip{
+  font-size:13px;font-weight:600;color:var(--navy);
+  background:rgba(15,91,255,.07);border:1px solid rgba(15,91,255,.18);
+  border-radius:999px;padding:8px 16px;
+}
+.mp-iceberg-art svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto;}
+.mp-iceberg-cap{margin-top:20px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.04em;}
+
+/* ============================================================
+   03 — СТАТДЕК (giant numbers broadsheet)
+   ============================================================ */
+.mp-statdeck{
+  display:grid;grid-template-columns:repeat(4,1fr);margin-top:50px;position:relative;z-index:2;
+}
+.mp-stat{
+  padding:8px 30px 0;border-left:1px solid rgba(255,255,255,.14);
+  display:flex;flex-direction:column;gap:14px;
+}
+.mp-stat:first-child{border-left:none;padding-left:0;}
+.mp-stat-n{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(56px,6.6vw,94px);line-height:.94;letter-spacing:-.03em;color:#fff;
+}
+.mp-stat-n .mp-y{color:#5B9BFF;}
+.mp-stat-t{
+  font-family:var(--f-display);font-weight:700;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.08em;color:#E6E8EB;
+}
+.mp-stat-s{font-size:13.5px;line-height:1.6;color:#9AA2AF;margin:0;}
+.mp-deck-foot{
+  display:flex;align-items:center;gap:18px;justify-content:center;
+  margin-top:54px;font-family:var(--f-display);font-weight:700;font-size:15px;color:#C3CBD6;
+}
+.mp-deck-foot::before,.mp-deck-foot::after{content:"";height:1px;flex:0 0 60px;background:rgba(255,255,255,.2);}
+.mp-deck-foot b{color:#5B9BFF;}
+
+/* ============================================================
+   04 — ОРБІТА 6 НАУК (inline-SVG orbit)
+   ============================================================ */
+.mp-orbit-triad{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:var(--f-display);font-weight:700;font-size:14px;
+  color:var(--yellow);margin:6px 0 0;letter-spacing:.02em;
+}
+.mp-orbit-triad i{font-style:normal;color:var(--muted);}
+.mp-orbit{
+  position:relative;width:100%;max-width:680px;height:580px;margin:34px auto 0;
+}
+.mp-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border:1.5px dashed rgba(23,26,31,.16);border-radius:50%;
+}
+.mp-ring.r1{width:300px;height:300px;}
+.mp-ring.r2{width:520px;height:520px;}
+.mp-orbit-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:150px;z-index:2;}
+.mp-orbit-core svg{width:100%;height:auto;display:block;}
+.mp-sat{position:absolute;width:128px;text-align:center;transform:translate(-50%,-50%);z-index:1;}
+.mp-sat .mp-sat-c{
+  width:98px;height:98px;border-radius:50%;margin:0 auto 10px;
+  background:#fff;border:1px solid var(--gray-200);
+  box-shadow:0 6px 22px rgba(23,26,31,.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.mp-sat .mp-sat-c svg{width:42px;height:42px;}
+.mp-sat h4{font-family:var(--f-display);font-weight:700;font-size:14px;color:var(--navy);margin:0 0 3px;}
+.mp-sat span{font-size:11.5px;color:var(--muted);display:block;line-height:1.4;}
+.mp-sat-badge{
+  display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;background:var(--yellow);color:#0E1116;
+  border-radius:999px;padding:3px 10px;margin-top:6px;
+}
+.mp-orbit-foot{text-align:center;margin-top:36px;color:var(--muted);font-size:14px;line-height:1.7;max-width:60ch;margin-left:auto;margin-right:auto;}
+
+/* ============================================================
+   05 — СЕРПАНТИН-ТАЙМЛАЙН (8 занять)
+   ============================================================ */
+.mp-path{position:relative;margin-top:50px;}
+.mp-path-bg{position:absolute;inset:-26px 0 -10px;z-index:0;pointer-events:none;}
+.mp-path-bg svg{width:100%;height:100%;display:block;}
+.mp-path-grid{
+  position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:58px 30px;
+}
+.mp-node-num{
+  width:52px;height:52px;border-radius:50%;background:var(--yellow);color:#0E1116;
+  font-family:var(--f-display);font-weight:800;font-size:18px;
+  display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(15,91,255,.28);
+}
+.mp-node-num.wide{width:auto;padding:0 18px;border-radius:999px;}
+.mp-node h4{font-family:var(--f-display);font-weight:700;font-size:15.5px;color:var(--navy);margin:0 0 6px;}
+.mp-node p{font-size:13px;line-height:1.56;color:var(--muted);margin:0;max-width:26ch;}
+.mp-flag{
+  display:inline-flex;align-items:flex-start;gap:12px;
+  background:var(--navy);color:#fff;border-radius:var(--r);
+  padding:14px 20px;margin-top:46px;max-width:58ch;
+  font-size:14px;line-height:1.55;font-weight:500;
+}
+.mp-flag svg{width:22px;height:24px;flex:none;margin-top:1px;}
+.mp-flag b{color:#5B9BFF;}
+.mp-roles{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:36px;
+  border-top:1px solid var(--gray-200);padding-top:26px;}
+.mp-roles>span.mp-roles-t{font-family:var(--f-display);font-weight:700;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;}
+.mp-role{display:flex;align-items:center;gap:11px;}
+.mp-role-c{
+  width:46px;height:46px;border-radius:50%;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.mp-role-c svg{width:22px;height:22px;}
+.mp-role span{font-family:var(--f-display);font-weight:700;font-size:13px;color:var(--navy);}
+
+/* ============================================================
+   06 — VERSUS «страх → довіра»
+   ============================================================ */
+.mp-versus{display:grid;grid-template-columns:1fr 70px 1fr;margin-top:48px;align-items:start;}
+.mp-vhalf h3{
+  font-family:var(--f-display);font-weight:800;font-size:28px;margin:0 0 18px;letter-spacing:-.01em;
+}
+.mp-vhalf--fear h3{color:#C2410C;}
+.mp-vhalf--trust h3{color:var(--yellow);}
+.mp-vic{height:72px;margin-bottom:18px;}
+.mp-vic svg{height:72px;width:auto;display:block;}
+.mp-fear-item{
+  border-left:4px solid #C2410C;background:#FBF3EE;border-radius:0 var(--r) var(--r) 0;
+  padding:13px 18px;margin-bottom:12px;font-size:14.5px;line-height:1.6;color:var(--ink);
+}
+.mp-fear-item .mp-who{color:var(--muted);font-size:13px;}
+.mp-check{list-style:none;margin:0;padding:0;}
+.mp-check li{display:flex;gap:12px;margin-bottom:15px;font-size:14.5px;line-height:1.6;color:var(--ink);}
+.mp-check li::before{
+  content:"";flex:none;width:22px;height:22px;border-radius:var(--r-s);
+  background:var(--yellow);margin-top:1px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5L19 7'/></svg>");
+  background-size:15px;background-repeat:no-repeat;background-position:center;
+}
+.mp-vdiv{position:relative;align-self:stretch;}
+.mp-vdiv::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--gray-200);}
+.mp-varc{position:absolute;top:92px;left:50%;transform:translateX(-50%);width:120px;}
+.mp-varc svg{width:100%;height:auto;display:block;}
+.mp-noyes{
+  grid-column:1 / -1;display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;margin-top:46px;
+}
+.mp-no{font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:#C2410C;text-decoration-thickness:2.5px;}
+.mp-ar{color:var(--navy);font-weight:800;font-size:18px;}
+.mp-yes{font-family:var(--f-display);font-weight:700;font-size:14.5px;background:var(--yellow);color:#0E1116;padding:9px 16px;border-radius:var(--r);}
+
+/* ============================================================
+   07 — КОМАНДА (mosaic + photo)
+   ============================================================ */
+.mp-team{display:grid;grid-template-columns:7fr 5fr;gap:56px;align-items:start;margin-top:8px;}
+.mp-team-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.mp-person{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);
+  padding:26px 26px 22px;position:relative;overflow:hidden;
+  transition:transform 180ms ease,box-shadow 200ms ease;
+}
+.mp-dark .mp-person{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
+.mp-person:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(23,26,31,.1);}
+.mp-person--lead{grid-column:1 / -1;display:flex;align-items:center;gap:22px;}
+.mp-person-init{
+  width:54px;height:54px;border-radius:50%;flex:none;
+  background:var(--yellow);color:#0E1116;
+  font-family:var(--f-display);font-weight:800;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+}
+.mp-person--lead .mp-person-init{width:72px;height:72px;font-size:28px;}
+.mp-person h4{font-family:var(--f-display);font-weight:800;font-size:18px;color:#fff;margin:14px 0 4px;}
+.mp-person--lead h4{margin:0 0 4px;font-size:22px;}
+.mp-person-role{font-size:13.5px;line-height:1.55;color:#9AA2AF;margin:0;}
+.mp-person-tag{
+  position:absolute;top:18px;right:18px;font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#5B9BFF;
+}
+.mp-team-aside{position:relative;}
+.mp-team-shot{
+  position:relative;border-radius:var(--r-l);overflow:hidden;
+  border-bottom:4px solid var(--yellow);box-shadow:0 18px 48px rgba(0,0,0,.4);
+}
+.mp-team-shot img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;}
+.mp-team-shot .mp-shot-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,10,14,.85) 0%,transparent 55%);
+}
+.mp-team-shot figcaption{
+  position:absolute;left:20px;right:20px;bottom:18px;
+  color:#fff;font-size:14px;line-height:1.5;text-shadow:0 1px 10px rgba(0,0,0,.7);
+}
+.mp-team-shot figcaption b{display:block;font-family:var(--f-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5B9BFF;margin-bottom:6px;}
+.mp-team-note{
+  margin-top:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-l);padding:22px 24px;
+}
+.mp-team-note p{font-family:var(--f-display);font-weight:500;font-size:16px;line-height:1.6;color:#fff;margin:0;}
+
+/* ============================================================
+   08 — РОАДМЕП-ГОРИЗОНТ + CTA (over photo finale)
+   ============================================================ */
+.mp-finale-bg{position:absolute;inset:0;z-index:0;background:url('../brand/img/community.jpg') center/cover no-repeat;}
+.mp-finale-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,10,14,.9) 0%,rgba(8,10,14,.8) 50%,rgba(8,10,14,.94) 100%);}
+.mp-horizon{margin-top:34px;}
+.mp-horizon svg{width:100%;height:auto;display:block;}
+.mp-hz-notes{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;margin-top:18px;}
+.mp-hz-note{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-l);padding:22px 26px 18px;}
+.mp-hz-note h4{font-family:var(--f-display);font-weight:700;font-size:13px;color:#5B9BFF;margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em;}
+.mp-hz-note p{font-size:14px;line-height:1.65;color:#C3CBD6;margin:0;}
+.mp-cta{margin:64px auto 0;max-width:60ch;text-align:center;}
+.mp-cta h3{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 20px;}
+.mp-cta h3 .mp-acc{color:#5B9BFF;}
+.mp-cta p{font-size:17px;line-height:1.74;color:#C3CBD6;margin:0 0 30px;}
+.mp-cta .mp-btns{justify-content:center;margin-bottom:0;}
+.mp-cta .mp-btn-free{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;font-weight:700;letter-spacing:.04em;color:#9FB4D6;}
+.mp-cta .mp-btn-free b{color:#fff;}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width:860px){
+  .mp-section{padding:74px 24px;}
+  .mp-hero{min-height:auto;}
+  .mp-hero .mp-inner{grid-template-columns:1fr;gap:38px;}
+  .mp-hero-art{order:-1;max-width:300px;}
+  .mp-hero-art svg{margin:0 auto;}
+  .mp-iceberg{grid-template-columns:1fr;gap:40px;}
+  .mp-iceberg-art{order:-1;}
+  .mp-statdeck{grid-template-columns:1fr 1fr;gap:34px 0;}
+  .mp-stat:nth-child(3){border-left:none;padding-left:0;}
+  .mp-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.14);padding-top:28px;}
+  .mp-orbit{height:auto;max-width:none;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .mp-ring{display:none;}
+  .mp-orbit-core{position:static;transform:none;grid-column:1 / -1;margin:0 auto 6px;width:120px;}
+  .mp-sat{position:static !important;transform:none;width:auto;}
+  .mp-path-bg{display:none;}
+  .mp-path-grid{grid-template-columns:1fr;gap:28px;border-left:2px dashed var(--gray-200);padding-left:24px;}
+  .mp-path-grid>.mp-node{grid-column:auto !important;grid-row:auto !important;}
+  .mp-versus{grid-template-columns:1fr;}
+  .mp-vdiv{display:none;}
+  .mp-vhalf--trust{margin-top:36px;}
+  .mp-team{grid-template-columns:1fr;gap:36px;}
+  .mp-team-mosaic{grid-template-columns:1fr;}
+  .mp-team-shot img{aspect-ratio:16/10;}
+  .mp-hz-notes{grid-template-columns:1fr;}
+}
+@media (max-width:520px){
+  .mp-orbit{grid-template-columns:1fr 1fr;}
+  .mp-statdeck{grid-template-columns:1fr;}
+  .mp-stat{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,.14);padding-top:24px;}
+  .mp-stat:first-child{border-top:none;padding-top:0;}
+  .mp-folio{display:none;}
+}
+
+/* ===== QA corrective layer - contrast & overflow (audit 2026-06-17) ===== */
+.mp-btn-p, .mp-sat-badge, .mp-node-num, .mp-yes { color:#fff !important; }
+.mp-btn-p svg { stroke:#fff !important; color:#fff !important; }
+/* accent labels on dark sections -> accessible blue tint (cr 6+) */
+.mp-dark .mp-kick, .mp-sec-dark .mp-kick,
+.mp-dark .mp-vs-lab, .mp-sec-dark .mp-vs-lab,
+.mp-dark .mp-role-tag, .mp-sec-dark .mp-role-tag { color:#6C97FF !important; }
+/* folios: default = subdued dark-gray (covers every light section,
+   whatever its functional class name); re-lighten only on dark/photo */
+.mp-folio { color:#62646B !important; }
+.mp-dark .mp-folio, .mp-sec-dark .mp-folio,
+.mp-feature .mp-folio, .mp-sec-feature .mp-folio { color:rgba(255,255,255,.55) !important; }
+/* decorative hero art bleed must not create page horizontal scroll */
+.mp-hero { position:relative; overflow:hidden; }
+
+</style>
 </head>
 <body class="ls">
 <header class="lnav">
@@ -16,25 +427,376 @@
   <nav class="lnav-links"><a href="index.html" class="active">Головна</a><a href="parents.html">Батькам</a><a href="teens.html">Підліткам</a><a href="communities.html">Громадам</a></nav>
 </header>
 <main>
-<section class="section hero dark">
-  <div class="hero-bg" style="background-image:url('../brand/img/fpv-carbon.jpg')"></div>
-  <div class="grid-overlay"></div>
-  <div class="wrap">
-    <div class="kick">Громадська організація «Об’єднані. Сильні. Разом!»</div>
-    <h1 class="h1">Інженерна <span class="acc">школа дронів</span> для підлітків</h1>
-    <p class="lead">Ми вчимо підлітків 13–17 років бачити в дроні науку, а не зброю: фізику, радіозв’язок, електроніку й код. Практика руками з першого дня, реальні польоти й власний проєкт — щоб технології служили життю.</p>
-    <div class="btns"><a class="btn btn-p" href="#" onclick="return false">Долучитися <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-g" href="#" onclick="return false">Дізнатися більше</a></div>
-    <div class="stats"><div class="stat"><div class="n">90%</div><div class="l">науки та інженерії проти 5–10% пілотування</div></div><div class="stat"><div class="n">8</div><div class="l">занять у базовому курсі</div></div><div class="stat"><div class="n">6</div><div class="l">напрямів науки про дрони</div></div><div class="stat"><div class="n">13–17</div><div class="l">вік учасників школи</div></div></div>
+<div class="mp-page">
+<section class="mp-section mp-dark mp-hero">
+  <div class="mp-hero-bg" aria-hidden="true"></div>
+  <div class="mp-hero-scrim" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-hero-text">
+      <div class="mp-hero-overline">Громадська організація «Об’єднані. Сильні. Разом!» <i>·</i> Інженерна школа дронів</div>
+      <h1>Дрон — це <span class="mp-acc">наука</span>,<br>а не зброя</h1>
+      <p class="mp-hero-lead">Ми вчимо підлітків 13–17&nbsp;років бачити в&nbsp;дроні фізику, радіозв’язок, електроніку й&nbsp;код. Практика руками з&nbsp;першого дня, реальні польоти й&nbsp;власний проєкт&nbsp;— щоб технології служили життю.</p>
+      <div class="mp-btns">
+        <a class="mp-btn mp-btn-p" href="#" onclick="return false">Долучитися
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="mp-btn mp-btn-g" href="#" onclick="return false">Дізнатися більше</a>
+      </div>
+      <div class="mp-hero-lines">
+        <span><b>90&nbsp;%</b> науки та інженерії</span><span class="mp-dot">·</span>
+        <span><b>8</b> занять у курсі</span><span class="mp-dot">·</span>
+        <span><b>6</b> напрямів науки</span><span class="mp-dot">·</span>
+        <span><b>0&nbsp;грн</b> для учасників</span>
+      </div>
+    </div>
+    <div class="mp-hero-art" aria-hidden="true">
+      <svg viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="220" cy="220" r="206" fill="none" stroke="#5B9BFF" stroke-width="1.2" stroke-dasharray="3 7" opacity=".4"/>
+        <circle cx="220" cy="220" r="150" fill="none" stroke="#5B9BFF" stroke-width="1.2" stroke-dasharray="3 7" opacity=".55"/>
+        <path d="M40,330 C120,318 168,288 206,238 C232,204 254,176 286,150" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-dasharray="9 7" stroke-linecap="round" opacity=".9"/>
+        <circle cx="64" cy="318" r="5" fill="#fff" opacity=".55"/>
+        <circle cx="150" cy="276" r="5" fill="#fff" opacity=".55"/>
+        <circle cx="216" cy="222" r="5" fill="#fff" opacity=".55"/>
+        <g transform="translate(300 138) rotate(-8)">
+          <g fill="#2A3340">
+            <rect x="-2" y="-7" width="150" height="14" rx="7" transform="rotate(-158)"/>
+            <rect x="-2" y="-7" width="150" height="14" rx="7" transform="rotate(-22)"/>
+            <rect x="-2" y="-7" width="168" height="14" rx="7" transform="rotate(162)"/>
+            <rect x="-2" y="-7" width="168" height="14" rx="7" transform="rotate(18)"/>
+          </g>
+          <rect x="-62" y="-24" width="124" height="52" rx="24" fill="#1B2330"/>
+          <rect x="-50" y="-33" width="100" height="19" rx="9" fill="#2A3340"/>
+          <rect x="-40" y="9" width="34" height="9" rx="4.5" fill="#0F5BFF"/>
+          <circle cx="50" cy="2" r="12" fill="#0E1116"/>
+          <circle cx="50" cy="2" r="6.5" fill="#5B9BFF"/>
+          <circle cx="52.5" cy="-0.5" r="2" fill="#fff" opacity=".9"/>
+          <ellipse cx="-138" cy="-74" rx="42" ry="11" fill="#0F5BFF"/>
+          <ellipse cx="-138" cy="-74" rx="22" ry="6" fill="#fff" opacity=".25"/>
+          <ellipse cx="138" cy="-74" rx="42" ry="11" fill="#0F5BFF"/>
+          <ellipse cx="138" cy="-74" rx="22" ry="6" fill="#fff" opacity=".25"/>
+          <ellipse cx="-164" cy="32" rx="54" ry="14" fill="#0F5BFF"/>
+          <ellipse cx="-164" cy="32" rx="28" ry="7.5" fill="#fff" opacity=".25"/>
+          <ellipse cx="164" cy="32" rx="54" ry="14" fill="#0F5BFF"/>
+          <ellipse cx="164" cy="32" rx="28" ry="7.5" fill="#fff" opacity=".25"/>
+        </g>
+        <circle cx="286" cy="150" r="9" fill="#0F5BFF" opacity=".25"/>
+      </svg>
+    </div>
   </div>
+  <div class="mp-folio">01 / 08 · головна</div>
 </section>
-<section class="section light"><div class="wrap split"><div class="split-text"><div class="eyebrow">Хто ми</div><h2 class="h2">Вчимо інженерії, а не страху</h2><p class="lead">Ми — громадська організація «Об’єднані. Сильні. Разом!». Створюємо інженерну школу дронів для підлітків 13–17 років, де дрон постає таким, яким він є насправді: складною наукою, а не зброєю. Пілотування — лише 5–10% того, що ми робимо. Решта — фізика польоту, радіозв’язок, хімія акумуляторів, електроніка та код. Ми даємо підліткам навички й упевненість, щоб технології служили життю: агро, доставці, екомоніторингу, пошуку й порятунку.</p></div><div class="split-media"><div class="shot"><img src="../brand/img/teens-collab.jpg" alt="" loading="lazy"><span class="tag">Хто ми</span></div></div></div></section>
-<section class="section paper"><div class="wrap"><div class="eyebrow">Що ми робимо</div><h2 class="h2">Шість напрямів однієї науки</h2><p class="lead">Базовий курс — це 8 занять, де теорія коротка, а практика руками починається з першого дня. Підлітки збирають власний FPV-дрон, тренуються на симуляторах і виходять на реальні польоти. Кожен завершує курс своїм проєктом — і двома рівнями на вибір: базовим і поглибленим.</p><div class="cards"><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Інженерія та збірка</h3><p>Від макетної плати до готового FPV — паяння, монтаж, налаштування своїми руками.</p></div><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Фізика польоту</h3><p>Аеродинаміка, тяга, баланс — чому апарат тримається в повітрі й слухається пілота.</p></div><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Радіозв’язок</h3><p>Частоти, антени, передавання сигналу — як дрон і пульт «чують» одне одного.</p></div><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Хімія акумуляторів</h3><p>Енергія, заряд і безпека живлення — основа кожного польоту.</p></div><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Код і автоматика</h3><p>Програмування польотних контролерів, логіка й автономні сценарії.</p></div><div class="card"><span class="ci"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg></span><h3>Цивільне застосування</h3><p>Агро, доставка, екомоніторинг, пошук і порятунок — наука на службі життя.</p></div></div></div></section>
-<section class="section feature">
-  <div class="feature-bg" style="background-image:url('../brand/img/community.jpg')"></div>
-  <div class="wrap"><div class="kick" style="justify-content:center">Наші цінності</div><p class="qmark">Дрон — це наука, а не зброя. Ми вчимо підлітків будувати майбутнє, а не боятися його.</p></div>
+
+<section class="mp-section mp-paper">
+  <div class="mp-blueprint mp-blueprint--light" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Хто ми</div>
+    <h2 class="mp-h2">Вчимо інженерії, а&nbsp;не страху</h2>
+    <div class="mp-iceberg">
+      <div class="mp-iceberg-body">
+        <p class="mp-pull">Пілотування — це лише 5–10&nbsp;% того, що є&nbsp;безпілотні системи»</p>
+        <p class="mp-drop">Ми&nbsp;— громадська організація «Об’єднані. Сильні. Разом!». Створюємо інженерну школу дронів для підлітків, де дрон постає таким, яким він є&nbsp;насправді: складною наукою, а&nbsp;не зброєю. Те, що видно над водою&nbsp;— пілотування. Решта айсберга під водою: фізика польоту, радіозв’язок, хімія акумуляторів, електроніка та&nbsp;код.</p>
+        <p>Ми&nbsp;даємо підліткам навички й&nbsp;упевненість, щоб технології служили життю. Адже дрони вже працюють у&nbsp;мирних професіях:</p>
+        <div class="mp-chips">
+          <span class="mp-chip">агросектор</span>
+          <span class="mp-chip">доставка</span>
+          <span class="mp-chip">екомоніторинг</span>
+          <span class="mp-chip">пошук і&nbsp;порятунок</span>
+        </div>
+      </div>
+      <div class="mp-iceberg-art" aria-hidden="true">
+        <svg viewBox="0 0 440 480" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="150" x2="440" y2="150" stroke="#0F5BFF" stroke-width="1.2" stroke-dasharray="6 6" opacity=".4"/>
+          <path d="M0,150 q34,-12 68,0 t68,0 t68,0 t68,0 t68,0 t68,0 v16 q-34,12 -68,0 t-68,0 t-68,0 t-68,0 t-68,0 t-68,0 z" fill="#5B9BFF" opacity=".2"/>
+          <polygon points="160,16 200,108 245,16" fill="#0F5BFF"/>
+          <g fill="#171A1F"><rect x="192" y="50" width="20" height="8" rx="4"/><circle cx="192" cy="50" r="4.5"/><circle cx="212" cy="50" r="4.5"/></g>
+          <text x="258" y="58" font-family="Onest,sans-serif" font-size="13" font-weight="700" fill="#6B7280">пілотування</text>
+          <text x="258" y="76" font-family="Onest,sans-serif" font-size="13" font-weight="800" fill="#0F5BFF">5–10 %</text>
+          <polygon points="120,150 320,150 380,300 308,440 168,470 70,290" fill="#171A1F"/>
+          <polygon points="320,150 380,300 308,440 270,376 296,232" fill="#fff" opacity=".06"/>
+          <g font-family="Onest,sans-serif" font-weight="700" font-size="16" fill="#fff" text-anchor="middle">
+            <text x="216" y="206">фізика</text>
+            <text x="218" y="270" opacity=".88">радіозв’язок</text>
+            <text x="220" y="334" opacity=".72">хімія</text>
+            <text x="210" y="398" opacity=".58">електроніка · код</text>
+          </g>
+          <path d="M404,178 v244" stroke="#C7CDD4" stroke-width="1.4"/>
+          <path d="M398,178 h12 M398,422 h12" stroke="#C7CDD4" stroke-width="1.4"/>
+          <text x="350" y="300" font-family="Onest,sans-serif" font-weight="800" font-size="40" fill="#171A1F">90&nbsp;%</text>
+          <text x="351" y="322" font-family="Onest,sans-serif" font-size="12" font-weight="700" fill="#6B7280">під водою</text>
+        </svg>
+        <p class="mp-iceberg-cap">Над водою — те, що бачать. Під водою — те, чого ми навчаємо.</p>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">02 / 08 · айсберг</div>
 </section>
-<section class="section light"><div class="wrap split rev"><div class="split-text"><div class="eyebrow">Команда</div><h2 class="h2">Люди, які роблять це реальним</h2><p class="lead">За проєктом стоїть команда, що поєднує інженерію, педагогіку й щиру турботу про підлітків. Кріс — голова організації, тримає курс. Юрій «Недок» відповідає за навчальну програму. Валентин веде UI/UX, систематизацію та впровадження ШІ. Сергій «Тихий» формує філософію й комунікацію в соцмережах. Оля працює з аудиторією та зв’язком зі спільнотою. Разом ми будуємо міст між цивільними, підлітками та ветеранами-наставниками.</p><ul class="blist"><li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Кріс</b><span>голова організації, стратегія й напрям</span></div></li><li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Юрій «Недок»</b><span>навчальна програма й методика</span></div></li><li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Валентин</b><span>UI/UX, систематизація, ШІ</span></div></li><li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Сергій «Тихий»</b><span>філософія проєкту та SMM</span></div></li><li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Оля</b><span>аудиторія та комунікація</span></div></li></ul></div><div class="split-media"><div class="shot"><img src="../brand/img/electronics-bench.jpg" alt="" loading="lazy"><span class="tag">Команда</span></div></div></div></section>
-<section class="section cta dark"><div class="grid-overlay"></div><div class="wrap"><h2 class="h2">Долучайтеся до тих, хто <span class="acc">будує майбутнє</span></h2><p class="lead">Ми відкриті до підлітків, батьків, наставників і партнерів. Навчання — на громадських засадах, 0 грн для учасників. Підтримайте школу, станьте наставником або просто дізнайтеся більше — кожен крок наближає нас до покоління, що володіє технологіями впевнено й гідно.</p><div class="btns"><a class="btn btn-p" href="#" onclick="return false">Долучитися <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-g" href="#" onclick="return false">Підтримати проєкт</a></div></div></section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-blueprint" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Школа в цифрах</div>
+    <h2 class="mp-h2">Що означає «інженерна школа»</h2>
+    <p class="mp-lead">Базовий курс&nbsp;— це&nbsp;8&nbsp;занять, де теорія коротка, а&nbsp;практика руками починається з&nbsp;першого дня. Підлітки збирають власний FPV-дрон, тренуються на&nbsp;симуляторах і&nbsp;виходять на&nbsp;реальні польоти.</p>
+    <div class="mp-statdeck">
+      <div class="mp-stat">
+        <span class="mp-stat-n">90<span class="mp-y">%</span></span>
+        <span class="mp-stat-t">наука та інженерія</span>
+        <p class="mp-stat-s">і лише 5–10&nbsp;% — пілотування</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">8</span>
+        <span class="mp-stat-t">занять у базовому курсі</span>
+        <p class="mp-stat-s">від макетної плати до власного проєкту</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">6</span>
+        <span class="mp-stat-t">напрямів однієї науки</span>
+        <p class="mp-stat-s">фізика, зв’язок, хімія, інженерія, код, застосування</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">13<span class="mp-y">–</span>17</span>
+        <span class="mp-stat-t">вік учасників школи</span>
+        <p class="mp-stat-s">два рівні на вибір: базовий і&nbsp;поглиблений</p>
+      </div>
+    </div>
+    <div class="mp-deck-foot">Навчання — <b>на&nbsp;громадських засадах, 0&nbsp;грн</b> для учасників</div>
+  </div>
+  <div class="mp-folio">03 / 08 · статдек</div>
+</section>
+
+<section class="mp-section mp-gray">
+  <div class="mp-inner">
+    <div class="mp-kick">Що ми робимо</div>
+    <h2 class="mp-h2">Шість наук за&nbsp;одним польотом</h2>
+    <div class="mp-orbit-triad">пілотувати <i>·</i> розуміти <i>·</i> інженерити</div>
+    <div class="mp-orbit">
+      <div class="mp-ring r1" aria-hidden="true"></div>
+      <div class="mp-ring r2" aria-hidden="true"></div>
+      <div class="mp-orbit-core" aria-hidden="true">
+        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#2A3340">
+            <rect x="10" y="66" width="130" height="18" rx="9" transform="rotate(45 75 75)"/>
+            <rect x="10" y="66" width="130" height="18" rx="9" transform="rotate(-45 75 75)"/>
+          </g>
+          <circle cx="30" cy="30" r="19" fill="#0F5BFF"/><circle cx="30" cy="30" r="8" fill="#fff" opacity=".3"/>
+          <circle cx="120" cy="30" r="19" fill="#0F5BFF"/><circle cx="120" cy="30" r="8" fill="#fff" opacity=".3"/>
+          <circle cx="30" cy="120" r="19" fill="#0F5BFF"/><circle cx="30" cy="120" r="8" fill="#fff" opacity=".3"/>
+          <circle cx="120" cy="120" r="19" fill="#0F5BFF"/><circle cx="120" cy="120" r="8" fill="#fff" opacity=".3"/>
+          <circle cx="75" cy="75" r="22" fill="#0E1116"/>
+          <circle cx="75" cy="75" r="10" fill="#5B9BFF"/>
+          <circle cx="78" cy="72" r="3" fill="#fff" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="mp-sat" style="left:50%;top:7%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22,5 v6" stroke="#171A1F" stroke-width="2.5" stroke-linecap="round"/><path d="M22,9 L34,31" stroke="#171A1F" stroke-width="2.5" stroke-linecap="round"/><path d="M22,9 L10,31" stroke="#9AA2AF" stroke-width="2.5" stroke-dasharray="3 4" stroke-linecap="round"/><circle cx="34" cy="33" r="6" fill="#0F5BFF"/><circle cx="10" cy="33" r="6" fill="#E6E8EB"/></svg></div>
+        <h4>Фізика польоту</h4><span>аеродинаміка, тяга</span>
+      </div>
+      <div class="mp-sat" style="left:90%;top:30%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="22" cy="34" r="4" fill="#0F5BFF"/><path d="M13,28 a13,13 0 0 1 18,0" stroke="#171A1F" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M8,22 a20,20 0 0 1 28,0" stroke="#171A1F" stroke-width="2.5" fill="none" opacity=".6" stroke-linecap="round"/><path d="M3,16 a27,27 0 0 1 38,0" stroke="#171A1F" stroke-width="2.5" fill="none" opacity=".32" stroke-linecap="round"/></svg></div>
+        <h4>Радіозв’язок</h4><span>частоти, антени</span>
+      </div>
+      <div class="mp-sat" style="left:90%;top:72%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8" y="13" width="28" height="22" rx="5" fill="#0F5BFF"/><rect x="16" y="8" width="12" height="6" rx="2" fill="#171A1F" opacity=".5"/><path d="M16,24 h6 M19,21 v6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M26,24 h6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <h4>Хімія</h4><span>акумулятори, безпека</span>
+      </div>
+      <div class="mp-sat" style="left:50%;top:94%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16,13 l-8,9 8,9" stroke="#171A1F" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M28,13 l8,9 -8,9" stroke="#0F5BFF" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M25,11 l-6,22" stroke="#9AA2AF" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        <h4>Код і&nbsp;автоматика</h4><span>польотні контролери</span>
+      </div>
+      <div class="mp-sat" style="left:10%;top:72%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="#0F5BFF"><rect x="19" y="4" width="6" height="8" rx="2"/><rect x="19" y="32" width="6" height="8" rx="2"/><rect x="4" y="19" width="8" height="6" rx="2"/><rect x="32" y="19" width="8" height="6" rx="2"/></g><circle cx="22" cy="22" r="11" fill="#0F5BFF"/><circle cx="22" cy="22" r="5" fill="#fff"/></svg></div>
+        <h4>Інженерія та&nbsp;збірка</h4><span class="mp-sat-badge">основа основ</span>
+      </div>
+      <div class="mp-sat" style="left:10%;top:30%;">
+        <div class="mp-sat-c"><svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22,7 L36,22 22,37 8,22 z" fill="#0F5BFF" opacity=".18"/><path d="M22,7 L36,22 22,22 z" fill="#0F5BFF"/><path d="M22,7 L8,22 22,22 z" fill="#0F5BFF" opacity=".55"/><circle cx="22" cy="22" r="3" fill="#171A1F"/></svg></div>
+        <h4>Цивільне застосування</h4><span>агро, доставка, SAR</span>
+      </div>
+    </div>
+    <p class="mp-orbit-foot">«Розуміння безпілотних систем — це глибока концепція: і&nbsp;інженерія, і&nbsp;фізика, і&nbsp;зв’язок, і&nbsp;хімія». Кожен завершує курс власним проєктом.</p>
+  </div>
+  <div class="mp-folio">04 / 08 · орбіта</div>
+</section>
+
+<section class="mp-section mp-paper">
+  <div class="mp-inner">
+    <div class="mp-kick">Програма</div>
+    <h2 class="mp-h2">8 занять, один місяць</h2>
+    <p class="mp-lead">Теорія коротко, показ, залучення до&nbsp;дій&nbsp;— щоб не&nbsp;ставало нудно. Перший курс&nbsp;— збірка FPV, бо це&nbsp;найзрозуміліший старт. А&nbsp;щоб зрозуміти, що ти&nbsp;збираєш, треба вміти підняти це&nbsp;в&nbsp;повітря.</p>
+    <div class="mp-path">
+      <div class="mp-path-bg" aria-hidden="true">
+        <svg viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M-20,60 H840 C975,60 975,300 840,300 H120" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-dasharray="10 9" opacity=".28"/>
+          <rect x="96" y="278" width="4" height="44" fill="#171A1F" opacity=".4"/>
+          <polygon points="100,278 150,288 100,300" fill="#0F5BFF"/>
+        </svg>
+      </div>
+      <div class="mp-path-grid">
+        <div class="mp-node"><span class="mp-node-num">01</span><h4>Вступ</h4><p>лекція, демонстрація дронів і&nbsp;пультів, демо-політ інструктора</p></div>
+        <div class="mp-node"><span class="mp-node-num">02</span><h4>Класифікація</h4><p>типи дронів, складові FPV, перші симулятори</p></div>
+        <div class="mp-node"><span class="mp-node-num">03</span><h4>Пульти й&nbsp;радіохвилі</h4><p>як сигнал передається простором</p></div>
+        <div class="mp-node"><span class="mp-node-num">04</span><h4>Топографія і&nbsp;GPS</h4><p>пошук дрона за&nbsp;знімком на&nbsp;карті</p></div>
+        <div class="mp-node" style="grid-column:4;grid-row:2;"><span class="mp-node-num">05</span><h4>Перші зльоти</h4><p>підняти, посадити, пролетіти по&nbsp;прямій у&nbsp;приміщенні</p></div>
+        <div class="mp-node" style="grid-column:3;grid-row:2;"><span class="mp-node-num">06</span><h4>Застосування</h4><p>цивільні задачі: вибір позиції, сценарії</p></div>
+        <div class="mp-node" style="grid-column:1 / span 2;grid-row:2;"><span class="mp-node-num wide">07–08</span><h4>Польоти</h4><p>практика на&nbsp;різних локаціях, власний проєкт</p></div>
+      </div>
+      <div class="mp-flag">
+        <svg viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="3" height="24" rx="1.5" fill="#5B9BFF"/><polygon points="5,2 21,7 5,12" fill="#0F5BFF"/></svg>
+        <span><b>Поглиблений курс:</b> щоб дитина могла повністю сконструювати, зібрати, обґрейдити й&nbsp;покращити свій дрон.</span>
+      </div>
+      <div class="mp-roles">
+        <span class="mp-roles-t">Ролі в&nbsp;команді:</span>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14,3 a6,6 0 1 0 5,9 l-4,-1 -1,-4 z" fill="#0F5BFF"/><rect x="2" y="12" width="12" height="4" rx="2" fill="#fff" transform="rotate(45 8 14)"/></svg></span><span>інженер</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="9" width="16" height="9" rx="4" fill="#fff"/><rect x="6" y="3" width="2.5" height="7" rx="1.25" fill="#0F5BFF"/><rect x="13.5" y="3" width="2.5" height="7" rx="1.25" fill="#0F5BFF"/></svg></span><span>пілот</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="9" width="13" height="4" rx="2" fill="#fff" transform="rotate(-35 8 11)"/><polygon points="14,4 20,2 16,8" fill="#0F5BFF"/></svg></span><span>збирач</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="8" width="14" height="10" rx="2" fill="#fff"/><path d="M4,12 h14 M11,8 v10" stroke="#171A1F" stroke-width="1.5"/><rect x="8" y="3" width="6" height="5" rx="1" fill="#0F5BFF"/></svg></span><span>логіст</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">05 / 08 · програма</div>
+</section>
+
+<section class="mp-section mp-paper" style="border-top:1px solid var(--gray-200);">
+  <div class="mp-inner">
+    <div class="mp-kick">Наші цінності</div>
+    <h2 class="mp-h2">Не зброя. Довіра.</h2>
+    <p class="mp-lead">Найбільший бар’єр&nbsp;— страх батьків. Ми&nbsp;відповідаємо на&nbsp;нього не&nbsp;словами, а&nbsp;прозорістю: цивільний акцент, відкритий план занять і&nbsp;наставники-ветерани поруч із&nbsp;дітьми.</p>
+    <div class="mp-versus">
+      <div class="mp-vhalf mp-vhalf--fear">
+        <span class="mp-vic" aria-hidden="true"><svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg"><g fill="#C2410C" opacity=".5"><polygon points="18,2 22,10 14,10"/><polygon points="44,0 48,8 40,8"/><polygon points="72,4 76,12 68,12"/><polygon points="94,0 98,8 90,8"/></g><path d="M22,46 a33,30 0 0 1 66,0 z" fill="#C2410C"/><rect x="53" y="46" width="4" height="14" rx="2" fill="#fff"/><circle cx="55" cy="60" r="4.5" fill="#fff"/></svg></span>
+        <h3>Страх</h3>
+        <div class="mp-fear-item">«Дрон&nbsp;— це&nbsp;зброя. Школа дронів&nbsp;= мілітаризація дитини».</div>
+        <div class="mp-fear-item">Невідомість: що насправді відбувається на&nbsp;курсі?</div>
+        <div class="mp-fear-item">Тривога: «технології небезпечні для підлітка».</div>
+      </div>
+      <div class="mp-vdiv" aria-hidden="true">
+        <span class="mp-varc"><svg viewBox="0 0 110 56" xmlns="http://www.w3.org/2000/svg"><path d="M6,50 C30,10 80,10 98,38" fill="none" stroke="#0F5BFF" stroke-width="4" stroke-linecap="round"/><polygon points="106,48 88,44 98,32" fill="#0F5BFF"/></svg></span>
+      </div>
+      <div class="mp-vhalf mp-vhalf--trust">
+        <span class="mp-vic" aria-hidden="true"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="8" width="52" height="60" rx="6" fill="#171A1F"/><rect x="24" y="2" width="24" height="12" rx="4" fill="#0F5BFF"/><g><rect x="18" y="22" width="10" height="10" rx="2" fill="#0F5BFF"/><path d="M20,27 l3,3 5,-6" stroke="#fff" stroke-width="2" fill="none"/><rect x="18" y="38" width="10" height="10" rx="2" fill="#0F5BFF"/><path d="M20,43 l3,3 5,-6" stroke="#fff" stroke-width="2" fill="none"/><rect x="18" y="54" width="10" height="10" rx="2" fill="#0F5BFF"/><path d="M20,59 l3,3 5,-6" stroke="#fff" stroke-width="2" fill="none"/><rect x="33" y="25" width="22" height="4" rx="2" fill="#fff" opacity=".6"/><rect x="33" y="41" width="22" height="4" rx="2" fill="#fff" opacity=".6"/><rect x="33" y="57" width="22" height="4" rx="2" fill="#fff" opacity=".6"/></g></svg></span>
+        <h3>Довіра</h3>
+        <ul class="mp-check">
+          <li>Цивільний акцент: не&nbsp;«школа зброї», а&nbsp;інженерія, наука й&nbsp;сенс.</li>
+          <li>Прозорий план занять&nbsp;— наперед, без сюрпризів.</li>
+          <li>Відповідальні наставники-ветерани поруч із&nbsp;дітьми.</li>
+          <li>Через фізику й&nbsp;інженерію дитина починає краще вчитися.</li>
+        </ul>
+      </div>
+      <div class="mp-noyes">
+        <span class="mp-no">«ваші діти будуть воювати»</span>
+        <span class="mp-ar">→</span>
+        <span class="mp-yes">розвиток · технологія · професія · майбутнє</span>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">06 / 08 · довіра</div>
+</section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-blueprint" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Команда</div>
+    <h2 class="mp-h2">Люди, які роблять це&nbsp;реальним</h2>
+    <div class="mp-team">
+      <div class="mp-team-mosaic">
+        <div class="mp-person mp-person--lead">
+          <span class="mp-person-init">К</span>
+          <div>
+            <h4>Кріс</h4>
+            <p class="mp-person-role">голова організації — тримає курс, стратегія й&nbsp;напрям проєкту</p>
+          </div>
+          <span class="mp-person-tag">голова</span>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">Ю</span>
+          <h4>Юрій «Недок»</h4>
+          <p class="mp-person-role">навчальна програма й&nbsp;методика, автор курсу</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">В</span>
+          <h4>Валентин</h4>
+          <p class="mp-person-role">UI/UX, систематизація та&nbsp;впровадження ШІ</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">С</span>
+          <h4>Сергій «Тихий»</h4>
+          <p class="mp-person-role">філософія проєкту й&nbsp;комунікація в&nbsp;соцмережах</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">О</span>
+          <h4>Оля</h4>
+          <p class="mp-person-role">аудиторія та&nbsp;зв’язок зі&nbsp;спільнотою</p>
+        </div>
+      </div>
+      <div class="mp-team-aside">
+        <figure class="mp-team-shot">
+          <img src="../brand/img/teens-collab.jpg" alt="Підлітки навчаються разом" loading="lazy">
+          <span class="mp-shot-scrim" aria-hidden="true"></span>
+          <figcaption><b>Міст між поколіннями</b>Цивільні, підлітки та&nbsp;ветерани-наставники — за&nbsp;однією справою.</figcaption>
+        </figure>
+        <div class="mp-team-note">
+          <p>Команда поєднує інженерію, педагогіку й&nbsp;щиру турботу про&nbsp;підлітків. Разом ми&nbsp;будуємо середовище, де&nbsp;підлітки бачать у&nbsp;ветеранах особливих і&nbsp;цікавих людей.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">07 / 08 · команда</div>
+</section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-finale-bg" aria-hidden="true"></div>
+  <div class="mp-finale-scrim" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Куди ми рухаємось</div>
+    <h2 class="mp-h2">Від гуртка — до&nbsp;мережі по&nbsp;всій Україні</h2>
+    <div class="mp-horizon" aria-hidden="true">
+      <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" aria-label="Шлях: гурток, курс, табір, мережа">
+        <line x1="0" y1="110" x2="1000" y2="110" stroke="#fff" opacity=".12"/>
+        <circle cx="730" cy="68" r="52" fill="#0F5BFF" opacity=".12"/>
+        <circle cx="730" cy="68" r="30" fill="#0F5BFF"/>
+        <path d="M30,330 C200,318 330,292 440,242 C530,202 590,164 648,120" fill="none" stroke="#5B9BFF" stroke-width="2.4" stroke-dasharray="9 7" stroke-linecap="round" opacity=".9"/>
+        <text x="44" y="306" font-family="Onest,sans-serif" font-size="12" font-weight="700" fill="#9FB4D6">0 грн — громадські засади</text>
+        <circle cx="130" cy="316" r="8" fill="#fff" opacity=".85"/>
+        <text x="130" y="292" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Гурток</text>
+        <text x="130" y="274" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">старт · MVP</text>
+        <circle cx="320" cy="282" r="8" fill="#fff" opacity=".85"/>
+        <text x="320" y="258" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Курс</text>
+        <text x="320" y="240" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">8 занять · 1 місяць</text>
+        <circle cx="480" cy="232" r="8" fill="#fff" opacity=".85"/>
+        <text x="480" y="208" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">Табір</text>
+        <text x="480" y="190" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">практика в&nbsp;природі</text>
+        <circle cx="648" cy="120" r="12" fill="#0F5BFF"/>
+        <text x="648" y="158" font-family="Onest,sans-serif" font-weight="700" font-size="14" fill="#5B9BFF" text-anchor="middle">Мережа</text>
+        <text x="648" y="176" font-family="Onest,sans-serif" font-size="11" fill="#9FB4D6" text-anchor="middle">вся Україна</text>
+        <g stroke="#0F5BFF" stroke-width="1" stroke-dasharray="3 4" opacity=".4"><line x1="880" y1="220" x2="810" y2="200"/><line x1="880" y1="220" x2="840" y2="280"/><line x1="880" y1="220" x2="910" y2="180"/><line x1="880" y1="220" x2="930" y2="260"/><line x1="880" y1="220" x2="820" y2="240"/><line x1="880" y1="220" x2="950" y2="210"/></g>
+        <g fill="#5B9BFF" opacity=".85"><circle cx="810" cy="200" r="4"/><circle cx="840" cy="280" r="4"/><circle cx="910" cy="180" r="4"/><circle cx="930" cy="260" r="4"/><circle cx="820" cy="240" r="4"/><circle cx="950" cy="210" r="4"/></g>
+        <circle cx="880" cy="220" r="7" fill="#0F5BFF"/>
+      </svg>
+    </div>
+    <div class="mp-hz-notes">
+      <div class="mp-hz-note">
+        <h4>Чому мережа</h4>
+        <p>«В обласних центрах ще&nbsp;більш-менш щось є. У&nbsp;регіонах&nbsp;— нічого». Висновок: треба створювати такі гуртки не&nbsp;один, а&nbsp;по&nbsp;всій Україні.</p>
+      </div>
+      <div class="mp-hz-note">
+        <h4>Наша формула</h4>
+        <p>Наука понад хайп. Робити самим, не&nbsp;чекаючи. Спершу сенс, потім техніка. Не&nbsp;рамки, а&nbsp;політ мислі.</p>
+      </div>
+    </div>
+    <div class="mp-cta">
+      <h3>Долучайтеся до&nbsp;тих, хто <span class="mp-acc">будує майбутнє</span></h3>
+      <p>Ми&nbsp;відкриті до&nbsp;підлітків, батьків, наставників і&nbsp;партнерів. Підтримайте школу, станьте наставником або&nbsp;просто дізнайтеся більше&nbsp;— кожен крок наближає нас до&nbsp;покоління, що&nbsp;володіє технологіями впевнено й&nbsp;гідно.</p>
+      <div class="mp-btns">
+        <a class="mp-btn mp-btn-p" href="#" onclick="return false">Долучитися
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="mp-btn mp-btn-g" href="#" onclick="return false">Підтримати проєкт</a>
+      </div>
+      <div class="mp-btn-free">Навчання — <b>на&nbsp;громадських засадах, 0&nbsp;грн</b> для учасників</div>
+    </div>
+  </div>
+  <div class="mp-folio">08 / 08 · горизонт</div>
+</section>
+</div>
 </main>
 <footer class="lfoot"><div class="wrap"><span>© <span id="yr"></span> ГО «Об’єднані. Сильні. Разом!»</span><div class="lfoot-links"><a href="index.html">Головна</a><a href="parents.html">Батькам</a><a href="teens.html">Підліткам</a><a href="communities.html">Громадам</a><a href="../documents/">Документи</a><a href="../">На головну</a></div></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
 </body>
