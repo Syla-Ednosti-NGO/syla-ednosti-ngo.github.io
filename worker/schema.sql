@@ -31,3 +31,18 @@ CREATE TABLE IF NOT EXISTS signatures (
   created_at  TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_signatures_doc ON signatures(document_id);
+
+-- users — Firebase-authenticated team members with admin-approval gate.
+-- Auth itself is Firebase (email/password); this table holds approval status + role.
+CREATE TABLE IF NOT EXISTS users (
+  uid          TEXT PRIMARY KEY,                 -- Firebase UID
+  email        TEXT NOT NULL,
+  display_name TEXT,
+  status       TEXT NOT NULL DEFAULT 'pending',  -- 'pending' | 'approved' | 'declined'
+  role         TEXT NOT NULL DEFAULT 'member',   -- 'member' | 'admin'
+  created_at   TEXT NOT NULL,
+  decided_at   TEXT,
+  decided_by   TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);

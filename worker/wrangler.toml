@@ -6,6 +6,15 @@ compatibility_date = "2024-10-01"
 # Origins allowed to call this API (comma-separated). Add your custom domain here later.
 ALLOWED_ORIGINS = "https://syla-ednosti-ngo.github.io,http://127.0.0.1:8765,http://localhost:8765"
 
+# --- Firebase Auth (team accounts) ---
+# projectId from your Firebase web config (public, not a secret). REQUIRED for login.
+FIREBASE_PROJECT_ID = "syla-ednosti-ngo"
+# Emails auto-approved with the 'admin' role on first sign-in (comma-separated). The first admin.
+ADMIN_EMAILS = "culaednocti@gmail.com"
+# Optional: email a notification on each new registration (via MailChannels). Needs a verified sender domain.
+NOTIFY_TO = "culaednocti@gmail.com"
+NOTIFY_FROM = ""
+
 # D1 database binding.
 # Create once:  wrangler d1 create documents-db
 # then paste the printed database_id below.

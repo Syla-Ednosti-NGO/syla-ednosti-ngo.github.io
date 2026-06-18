@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вхід · ГО «Об'єднані. Сильні. Разом!»</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  body{font-family:var(--f-body);background:var(--gray-50);color:var(--ink);margin:0;min-height:100vh;display:flex;flex-direction:column;}
+  .hdr{background:var(--navy);color:#fff;padding:15px 24px;}
+  .hdr a{color:#fff;text-decoration:none;display:inline-flex;flex-direction:column;}
+  .hdr .mark{font-family:var(--f-display);font-weight:800;letter-spacing:.05em;font-size:14px;}
+  .hdr .sub{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9AA7BD;margin-top:3px;}
+  .wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+  .card{width:100%;max-width:430px;background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);padding:34px 32px;box-shadow:0 14px 44px rgba(23,26,31,.07);}
+  .card h1{font-family:var(--f-display);font-weight:800;font-size:23px;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em;}
+  .card .lead{font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.5;}
+  .tabs{display:flex;gap:6px;background:var(--gray-100);border-radius:var(--r);padding:4px;margin-bottom:24px;}
+  .tabs button{flex:1;border:0;background:none;padding:10px;border-radius:var(--r-s);font-family:var(--f-display);font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;transition:.15s;}
+  .tabs button.on{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm);}
+  form{margin:0;}
+  label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin:0 0 6px;}
+  input{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--gray-300);border-radius:var(--r);font-size:15px;font-family:var(--f-body);color:var(--ink);margin-bottom:16px;background:#fff;}
+  input:focus{outline:none;border-color:var(--yellow);box-shadow:0 0 0 3px rgba(15,91,255,.14);}
+  .btn{width:100%;padding:12px;border:0;border-radius:var(--r);background:var(--yellow);color:#fff;font-family:var(--f-display);font-weight:700;font-size:15px;cursor:pointer;transition:.15s;}
+  .btn:hover{filter:brightness(.95);}
+  .btn:disabled{opacity:.55;cursor:default;filter:none;}
+  .link{background:none;border:0;color:var(--yellow);font-size:13px;cursor:pointer;padding:6px 0 0;font-family:var(--f-body);}
+  .link:hover{text-decoration:underline;}
+  .msg{margin-top:18px;padding:12px 14px;border-radius:var(--r);font-size:13.5px;line-height:1.55;}
+  .msg.err{background:#FDECEC;color:#B3261E;border:1px solid #F3C7C5;}
+  .msg.ok{background:#E7F4EE;color:#1C7A4A;border:1px solid #BFE3CE;}
+  .msg.info{background:var(--blue-light);color:#0A47CC;border:1px solid #C2D6FF;}
+  .hide{display:none!important;}
+  .si-email{font-weight:700;color:var(--navy);}
+  .si-foot{margin-top:18px;display:flex;justify-content:space-between;align-items:center;}
+  .btn-link{display:block;text-align:center;text-decoration:none;margin-top:14px;}
+  .note{font-size:12px;color:var(--muted);margin-top:20px;text-align:center;}
+  .note a{color:var(--yellow);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="/">
+    <span class="mark">ОБ'ЄДНАНІ.&nbsp;СИЛЬНІ.&nbsp;РАЗОМ!</span>
+    <span class="sub">кабінет команди</span>
+  </a>
+</header>
+
+<div class="wrap">
+  <div class="card">
+
+    <!-- AUTH (login / register) -->
+    <div id="auth">
+      <h1 id="title">Вхід у кабінет</h1>
+      <p class="lead" id="lead">Доступ для команди організації. Якщо акаунту ще немає — зареєструйтесь, і адміністратор підтвердить ваш доступ.</p>
+
+      <div class="tabs">
+        <button id="tab-login" class="on" type="button">Вхід</button>
+        <button id="tab-reg" type="button">Реєстрація</button>
+      </div>
+
+      <form id="form-login">
+        <label for="li-email">Електронна пошта</label>
+        <input type="email" id="li-email" required autocomplete="email" placeholder="you@example.com">
+        <label for="li-pass">Пароль</label>
+        <input type="password" id="li-pass" required autocomplete="current-password" placeholder="••••••••">
+        <button class="btn" type="submit" id="li-btn">Увійти</button>
+        <button class="link" type="button" id="li-forgot">Забули пароль?</button>
+      </form>
+
+      <form id="form-reg" class="hide">
+        <label for="rg-name">Ім'я та прізвище</label>
+        <input type="text" id="rg-name" required autocomplete="name" placeholder="Ваше імʼя">
+        <label for="rg-email">Електронна пошта</label>
+        <input type="email" id="rg-email" required autocomplete="email" placeholder="you@example.com">
+        <label for="rg-pass">Пароль (мінімум 6 символів)</label>
+        <input type="password" id="rg-pass" required minlength="6" autocomplete="new-password" placeholder="••••••••">
+        <button class="btn" type="submit" id="rg-btn">Зареєструватися</button>
+      </form>
+
+      <div id="msg" class="msg hide"></div>
+    </div>
+
+    <!-- SIGNED-IN state -->
+    <div id="signed" class="hide">
+      <h1>Кабінет</h1>
+      <p class="lead">Ви увійшли як <span class="si-email" id="si-email"></span>.</p>
+      <div id="st-approved" class="hide">
+        <div class="msg ok">Доступ підтверджено. Вітаємо!</div>
+        <a class="btn btn-link" href="admin.html">Перейти в адміністрування →</a>
+      </div>
+      <div id="st-pending" class="hide">
+        <div class="msg info">Заявку на доступ надіслано. Адміністратор отримає сповіщення й підтвердить або відхилить її. Спробуйте увійти трохи пізніше.</div>
+      </div>
+      <div id="st-declined" class="hide">
+        <div class="msg err">На жаль, доступ відхилено. Якщо це помилка — звʼяжіться з адміністратором.</div>
+      </div>
+      <div class="si-foot">
+        <button class="link" id="si-refresh" type="button">Оновити статус</button>
+        <button class="link" id="si-logout" type="button">Вийти</button>
+      </div>
+    </div>
+
+    <div class="note">← <a href="/">На головну сайту</a></div>
+  </div>
+</div>
+
+<script type="module">
+import { register, login, me, logout, resetPassword, onAuthStateChanged, auth, errText } from "./assets/firebase-auth.js";
+
+const $ = (id) => document.getElementById(id);
+const msg = $("msg");
+function showMsg(text, kind){ msg.textContent = text; msg.className = "msg " + kind; }
+function clearMsg(){ msg.className = "msg hide"; }
+
+// Tabs
+function setTab(which){
+  const login = which === "login";
+  $("tab-login").classList.toggle("on", login);
+  $("tab-reg").classList.toggle("on", !login);
+  $("form-login").classList.toggle("hide", !login);
+  $("form-reg").classList.toggle("hide", login);
+  $("title").textContent = login ? "Вхід у кабінет" : "Реєстрація";
+  clearMsg();
+}
+$("tab-login").onclick = () => setTab("login");
+$("tab-reg").onclick = () => setTab("reg");
+
+// Render the signed-in state by status
+function renderStatus(info){
+  $("auth").classList.add("hide");
+  $("signed").classList.remove("hide");
+  $("si-email").textContent = auth.currentUser ? auth.currentUser.email : "";
+  const st = (info && info.status) || "unknown";
+  $("st-approved").classList.toggle("hide", st !== "approved");
+  $("st-pending").classList.toggle("hide", !(st === "pending" || st === "unknown" || st === "none"));
+  $("st-declined").classList.toggle("hide", st !== "declined");
+}
+
+// Login
+$("form-login").onsubmit = async (e) => {
+  e.preventDefault(); clearMsg();
+  const btn = $("li-btn"); btn.disabled = true; btn.textContent = "Входимо…";
+  try {
+    const info = await login($("li-email").value.trim(), $("li-pass").value);
+    renderStatus(info);
+  } catch (err) { showMsg(errText(err), "err"); }
+  finally { btn.disabled = false; btn.textContent = "Увійти"; }
+};
+
+// Register
+$("form-reg").onsubmit = async (e) => {
+  e.preventDefault(); clearMsg();
+  const btn = $("rg-btn"); btn.disabled = true; btn.textContent = "Реєструємо…";
+  try {
+    const info = await register($("rg-email").value.trim(), $("rg-pass").value, $("rg-name").value.trim());
+    renderStatus(info);
+  } catch (err) { showMsg(errText(err), "err"); }
+  finally { btn.disabled = false; btn.textContent = "Зареєструватися"; }
+};
+
+// Forgot password
+$("li-forgot").onclick = async () => {
+  const email = $("li-email").value.trim();
+  if (!email) { showMsg("Введіть пошту вище, і ми надішлемо лист для відновлення.", "info"); return; }
+  try { await resetPassword(email); showMsg("Лист для відновлення пароля надіслано на " + email + ".", "ok"); }
+  catch (err) { showMsg(errText(err), "err"); }
+};
+
+// Signed-in controls
+$("si-logout").onclick = async () => { await logout(); location.reload(); };
+$("si-refresh").onclick = async () => { renderStatus(await me()); };
+
+// On load: if already signed in, show status
+onAuthStateChanged(auth, async (user) => {
+  if (user) renderStatus(await me());
+});
+</script>
+</body>
+</html>

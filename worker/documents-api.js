@@ -59,11 +59,30 @@ export default {
         if (seg[3] && seg[4] === 'file' && m === 'GET') return servePublicPdf(seg[3], env, cors);
       }
 
+      /* ---------- AUTH (Firebase email/password) ---------- */
+      if (seg[1] === 'auth') {
+        if (seg[2] === 'register' && m === 'POST') return authRegister(request, env, cors);
+        if (seg[2] === 'me' && m === 'GET') return authMe(request, env, cors);
+      }
+
       /* ---------- ADMIN ---------- */
       if (seg[1] === 'admin') {
-        if (!checkAuth(request, env)) return json({ error: 'Unauthorized' }, 401, cors);
+        const ctx = await authContext(request, env);
+        const approved = ctx.kind === 'token' || (ctx.kind === 'user' && ctx.user.status === 'approved');
+        if (!approved) {
+          return json({ error: 'Unauthorized', status: ctx.kind === 'user' ? ctx.user.status : 'none' }, 401, cors);
+        }
+        const isAdmin = ctx.kind === 'token' || ctx.user.role === 'admin';
 
-        if (seg[2] === 'ping' && m === 'GET') return json({ ok: true }, 200, cors);
+        if (seg[2] === 'ping' && m === 'GET') return json({ ok: true, role: isAdmin ? 'admin' : 'member' }, 200, cors);
+
+        /* user management — admins only */
+        if (seg[2] === 'users') {
+          if (!isAdmin) return json({ error: 'Forbidden' }, 403, cors);
+          if (!seg[3] && m === 'GET') return listUsers(env, cors);
+          if (seg[3] && seg[4] === 'approve' && m === 'POST') return decideUser(seg[3], 'approved', ctx, env, cors);
+          if (seg[3] && seg[4] === 'decline' && m === 'POST') return decideUser(seg[3], 'declined', ctx, env, cors);
+        }
 
         if (seg[2] === 'documents') {
           if (!seg[3]) {
@@ -416,6 +435,145 @@ async function bufToBase64(buf) {
     bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
   }
   return btoa(bin);
+}
+
+/* =====================================================================
+   AUTH — Firebase ID-token verification + team accounts (approval gate)
+   The frontend signs in with Firebase (email/password). It sends the
+   Firebase ID token as `Authorization: Bearer <token>`. We verify the
+   token against Google's public keys and gate access by a D1 `users` row.
+   ===================================================================== */
+
+let _fbKeys = { keys: null, exp: 0 };
+async function firebaseJWKs() {
+  const now = Date.now();
+  if (_fbKeys.keys && now < _fbKeys.exp) return _fbKeys.keys;
+  const res = await fetch('https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com');
+  const data = await res.json();
+  const cc = res.headers.get('Cache-Control') || '';
+  const mm = /max-age=(\d+)/.exec(cc);
+  const ttl = (mm ? parseInt(mm[1], 10) : 3600) * 1000;
+  const keys = {};
+  for (const k of (data.keys || [])) keys[k.kid] = k;
+  _fbKeys = { keys, exp: now + ttl };
+  return keys;
+}
+
+function b64urlBytes(s) {
+  s = String(s || '').replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+async function verifyFirebaseIdToken(token, env) {
+  const projectId = env.FIREBASE_PROJECT_ID;
+  if (!projectId) throw new Error('FIREBASE_PROJECT_ID не налаштовано');
+  const parts = String(token || '').split('.');
+  if (parts.length !== 3) throw new Error('Malformed token');
+  const header = JSON.parse(new TextDecoder().decode(b64urlBytes(parts[0])));
+  const payload = JSON.parse(new TextDecoder().decode(b64urlBytes(parts[1])));
+  if (header.alg !== 'RS256') throw new Error('Bad alg');
+  const jwk = (await firebaseJWKs())[header.kid];
+  if (!jwk) throw new Error('Unknown key id');
+  const key = await crypto.subtle.importKey(
+    'jwk', { kty: jwk.kty, n: jwk.n, e: jwk.e, alg: 'RS256', ext: true },
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+  const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key,
+    b64urlBytes(parts[2]), new TextEncoder().encode(parts[0] + '.' + parts[1]));
+  if (!ok) throw new Error('Bad signature');
+  const now = Math.floor(Date.now() / 1000);
+  if (!payload.exp || payload.exp <= now) throw new Error('Token expired');
+  if (payload.iat && payload.iat > now + 300) throw new Error('Token from the future');
+  if (payload.aud !== projectId) throw new Error('Wrong audience');
+  if (payload.iss !== `https://securetoken.google.com/${projectId}`) throw new Error('Wrong issuer');
+  if (!payload.sub) throw new Error('No subject');
+  return { uid: payload.sub, email: String(payload.email || '').toLowerCase(), name: payload.name || '', emailVerified: !!payload.email_verified };
+}
+
+function bearer(request) {
+  const mm = /^Bearer\s+(.+)$/.exec(request.headers.get('Authorization') || '');
+  return mm ? mm[1] : '';
+}
+
+async function authContext(request, env) {
+  const tok = bearer(request);
+  if (!tok) return { kind: 'none' };
+  if (env.ADMIN_TOKEN && timingSafeEqual(tok, env.ADMIN_TOKEN)) return { kind: 'token' };
+  try {
+    const fb = await verifyFirebaseIdToken(tok, env);
+    const row = await env.DB.prepare('SELECT uid, email, display_name, status, role FROM users WHERE uid = ?').bind(fb.uid).first();
+    if (!row) return { kind: 'user', user: { uid: fb.uid, email: fb.email, role: 'member', status: 'none' } };
+    return { kind: 'user', user: row };
+  } catch (_) {
+    return { kind: 'none' };
+  }
+}
+
+async function authRegister(request, env, cors) {
+  const tok = bearer(request);
+  if (!tok) return json({ error: 'Немає токена' }, 401, cors);
+  let fb;
+  try { fb = await verifyFirebaseIdToken(tok, env); }
+  catch (e) { return json({ error: 'Невірний токен: ' + e.message }, 401, cors); }
+
+  const existing = await env.DB.prepare('SELECT status, role FROM users WHERE uid = ?').bind(fb.uid).first();
+  if (existing) return json({ status: existing.status, role: existing.role }, 200, cors);
+
+  const adminEmails = (env.ADMIN_EMAILS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  const isAdmin = adminEmails.includes(fb.email);
+  const status = isAdmin ? 'approved' : 'pending';
+  const role = isAdmin ? 'admin' : 'member';
+
+  let body = {};
+  try { body = await request.json(); } catch (_) {}
+  const name = str(body.name) || fb.name || '';
+
+  await env.DB.prepare('INSERT INTO users (uid, email, display_name, status, role, created_at) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(fb.uid, fb.email, name, status, role, nowIso()).run();
+
+  if (status === 'pending') { try { await notifyAdminNewUser(env, { email: fb.email, name }); } catch (_) {} }
+  return json({ status, role }, 200, cors);
+}
+
+async function authMe(request, env, cors) {
+  const ctx = await authContext(request, env);
+  if (ctx.kind === 'token') return json({ status: 'approved', role: 'admin', via: 'token' }, 200, cors);
+  if (ctx.kind === 'user') return json({ status: ctx.user.status, role: ctx.user.role, email: ctx.user.email }, 200, cors);
+  return json({ error: 'Unauthorized', status: 'none' }, 401, cors);
+}
+
+async function listUsers(env, cors) {
+  const { results } = await env.DB.prepare(
+    `SELECT uid, email, display_name, status, role, created_at, decided_at
+       FROM users ORDER BY (status = 'pending') DESC, created_at DESC`
+  ).all();
+  return json({ users: results || [] }, 200, cors);
+}
+
+async function decideUser(uid, status, ctx, env, cors) {
+  const who = ctx.kind === 'token' ? 'admin-token' : ((ctx.user && ctx.user.email) || 'admin');
+  const row = await env.DB.prepare('SELECT uid FROM users WHERE uid = ?').bind(uid).first();
+  if (!row) return json({ error: 'Користувача не знайдено' }, 404, cors);
+  await env.DB.prepare('UPDATE users SET status = ?, decided_at = ?, decided_by = ? WHERE uid = ?')
+    .bind(status, nowIso(), who, uid).run();
+  return json({ ok: true, uid, status }, 200, cors);
+}
+
+async function notifyAdminNewUser(env, user) {
+  const to = str(env.NOTIFY_TO), from = str(env.NOTIFY_FROM);
+  if (!to || !from) return; // email is best-effort; the pending user always appears in the admin list
+  const payload = {
+    personalizations: [{ to: [{ email: to }] }],
+    from: { email: from, name: 'Сайт ГО «Об’єднані. Сильні. Разом!»' },
+    subject: 'Нова заявка на доступ',
+    content: [{ type: 'text/plain', value: `Нова заявка на доступ: ${user.name || ''} <${user.email}>.\nЗатвердити або відхилити — у адмінці, розділ «Користувачі».` }],
+  };
+  await fetch('https://api.mailchannels.net/tx/v1/send', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+  });
 }
 
 function extFromMime(mime) {
