@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Адміністрування · ГО «Об'єднані. Сильні. Разом!»</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  body{font-family:var(--f-body);background:var(--gray-50);color:var(--ink);margin:0;min-height:100vh;}
+  .hdr{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .hdr .left{display:flex;flex-direction:column;}
+  .hdr .mark{font-family:var(--f-display);font-weight:800;letter-spacing:.05em;font-size:14px;}
+  .hdr .sub{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9AA7BD;margin-top:3px;}
+  .hdr .right{display:flex;align-items:center;gap:14px;font-size:13px;color:#C3CBD6;}
+  .hdr .right b{color:#fff;font-weight:600;}
+  .hdr .out{background:rgba(255,255,255,.1);border:0;color:#fff;padding:7px 12px;border-radius:var(--r);font-size:13px;cursor:pointer;font-family:var(--f-body);}
+  .wrap{max-width:1080px;margin:0 auto;padding:34px 24px 60px;}
+  h1{font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--navy);margin:0 0 4px;letter-spacing:-.02em;}
+  .h1sub{color:var(--muted);font-size:15px;margin:0 0 30px;}
+  .center{display:flex;align-items:center;justify-content:center;min-height:60vh;padding:24px;}
+  .state{max-width:440px;text-align:center;}
+  .state h2{font-family:var(--f-display);font-weight:700;color:var(--navy);font-size:20px;margin:0 0 10px;}
+  .state p{color:var(--muted);line-height:1.6;margin:0 0 18px;}
+  .btn{display:inline-block;padding:11px 20px;border-radius:var(--r);background:var(--yellow);color:#fff;font-family:var(--f-display);font-weight:700;font-size:14px;text-decoration:none;border:0;cursor:pointer;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
+  .panel{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);padding:24px;text-decoration:none;color:inherit;display:block;}
+  a.panel{transition:.15s;}
+  a.panel:hover{border-color:var(--yellow);box-shadow:0 10px 30px rgba(15,91,255,.08);}
+  .panel h2{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--navy);margin:0 0 6px;display:flex;align-items:center;gap:9px;}
+  .panel p{font-size:14px;color:var(--muted);line-height:1.55;margin:0;}
+  .panel.soon{opacity:.62;}
+  .panel.soon h2::after{content:"скоро";font-family:var(--f-body);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--gray-100);padding:2px 8px;border-radius:999px;margin-left:auto;}
+  .panel.wide{grid-column:1 / -1;}
+  .pico{width:30px;height:30px;color:var(--yellow);flex:none;}
+  .badge{display:inline-block;min-width:18px;text-align:center;background:var(--yellow);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:1px 7px;margin-left:auto;}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px;}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--gray-200);vertical-align:middle;}
+  th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .stat{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .stat.pending{background:#FFF4E0;color:#9A6206;}
+  .stat.approved{background:#E7F4EE;color:#1C7A4A;}
+  .stat.declined{background:#FDECEC;color:#B3261E;}
+  .role{font-size:11.5px;color:var(--muted);}
+  .act{display:inline-flex;gap:6px;}
+  .mini{border:1px solid var(--gray-300);background:#fff;border-radius:var(--r-s);padding:5px 10px;font-size:12.5px;cursor:pointer;font-family:var(--f-body);}
+  .mini.ok{border-color:#0F5BFF;color:#0F5BFF;}
+  .mini.no{border-color:#E2B6B4;color:#B3261E;}
+  .muted{color:var(--muted);font-size:13.5px;}
+  .hide{display:none!important;}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="left">
+    <span class="mark">ОБ'ЄДНАНІ.&nbsp;СИЛЬНІ.&nbsp;РАЗОМ!</span>
+    <span class="sub">адміністрування</span>
+  </div>
+  <div class="right">
+    <span id="who" class="hide"><b id="who-email"></b> · <span id="who-role"></span></span>
+    <button class="out hide" id="logout">Вийти</button>
+  </div>
+</header>
+
+<!-- loading -->
+<div id="loading" class="center"><p class="muted">Завантаження…</p></div>
+
+<!-- denied / pending -->
+<div id="denied" class="center hide">
+  <div class="state">
+    <h2 id="denied-h">Доступ обмежено</h2>
+    <p id="denied-p"></p>
+    <a class="btn" href="account.html">До кабінету</a>
+  </div>
+</div>
+
+<!-- admin -->
+<main id="admin" class="wrap hide">
+  <h1>Адміністрування</h1>
+  <p class="h1sub">Внутрішня частина організації — доступна лише підтвердженій команді.</p>
+
+  <div class="grid">
+    <section class="panel wide" id="users-panel">
+      <h2>Користувачі <span id="pending-badge" class="badge hide">0</span></h2>
+      <p class="muted" id="users-hint">Заявки на доступ та ролі команди.</p>
+      <div id="users-box"></div>
+    </section>
+
+    <a class="panel" href="documents/admin.html">
+      <h2><svg class="pico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg> Документи та протоколи</h2>
+      <p>Завантаження документів, збір підписів, публікація протоколів організації.</p>
+    </a>
+
+    <div class="panel soon">
+      <h2><svg class="pico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Члени організації</h2>
+      <p>Реєстр членів, заяви на вступ, статуси.</p>
+    </div>
+
+    <div class="panel soon">
+      <h2><svg class="pico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Наради й рішення</h2>
+      <p>Протоколи нарад, порядок денний, архів.</p>
+    </div>
+
+    <div class="panel soon">
+      <h2><svg class="pico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Фінанси й звітність</h2>
+      <p>Внески, гранти, прозорі звіти.</p>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { me, logout, workerFetch, onAuthStateChanged, auth } from "./assets/firebase-auth.js";
+
+const $ = (id) => document.getElementById(id);
+function show(id){ $(id).classList.remove("hide"); }
+function hide(id){ $(id).classList.add("hide"); }
+
+function denied(status){
+  hide("loading"); hide("admin"); show("denied");
+  if (status === "declined"){
+    $("denied-h").textContent = "Доступ відхилено";
+    $("denied-p").textContent = "Адміністратор відхилив вашу заявку. Якщо це помилка — звʼяжіться з ним.";
+  } else {
+    $("denied-h").textContent = "Очікує підтвердження";
+    $("denied-p").textContent = "Ваша заявка ще не підтверджена адміністратором. Спробуйте трохи пізніше.";
+  }
+}
+
+async function loadUsers(){
+  const box = $("users-box");
+  try {
+    const r = await workerFetch("/api/admin/users");
+    if (!r.ok){ box.innerHTML = '<p class="muted">Не вдалося завантажити список (можливо, бекенд ще не задеплоєно).</p>'; return; }
+    const { users } = await r.json();
+    const pending = users.filter(u => u.status === "pending");
+    $("pending-badge").textContent = pending.length;
+    $("pending-badge").classList.toggle("hide", pending.length === 0);
+    if (!users.length){ box.innerHTML = '<p class="muted">Поки що немає зареєстрованих користувачів.</p>'; return; }
+    const rows = users.map(u => `
+      <tr>
+        <td><div>${esc(u.display_name || "—")}</div><div class="role">${esc(u.email)}</div></td>
+        <td><span class="stat ${u.status}">${ ({pending:"очікує",approved:"підтверджено",declined:"відхилено"})[u.status] || u.status }</span></td>
+        <td class="role">${ u.role === "admin" ? "адмін" : "учасник" }</td>
+        <td>${ u.status === "pending"
+          ? `<div class="act"><button class="mini ok" data-a="approve" data-u="${u.uid}">Підтвердити</button><button class="mini no" data-a="decline" data-u="${u.uid}">Відхилити</button></div>`
+          : (u.status === "approved" && u.role !== "admin"
+              ? `<div class="act"><button class="mini no" data-a="decline" data-u="${u.uid}">Заблокувати</button></div>`
+              : "") }</td>
+      </tr>`).join("");
+    box.innerHTML = `<table><thead><tr><th>Користувач</th><th>Статус</th><th>Роль</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+    box.querySelectorAll("button[data-a]").forEach(b => b.onclick = () => decide(b.dataset.u, b.dataset.a, b));
+  } catch (_) {
+    box.innerHTML = '<p class="muted">Бекенд недоступний.</p>';
+  }
+}
+async function decide(uid, action, btn){
+  btn.disabled = true;
+  try { await workerFetch("/api/admin/users/" + uid + "/" + action, { method: "POST" }); }
+  catch (_) {}
+  loadUsers();
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+$("logout").onclick = async () => { await logout(); location.href = "account.html"; };
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user){ location.href = "account.html"; return; }
+  $("who-email").textContent = user.email;
+  show("who"); show("logout");
+  const info = await me();
+  if (info.status !== "approved"){ denied(info.status); return; }
+  $("who-role").textContent = info.role === "admin" ? "адміністратор" : "учасник";
+  hide("loading"); show("admin");
+  if (info.role === "admin") loadUsers();
+  else { hide("users-panel"); }
+});
+</script>
+</body>
+</html>
