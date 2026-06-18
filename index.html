@@ -3,85 +3,773 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ГО «Об’єднані. Сильні. Разом!»</title>
-<meta name="description" content="Громадська організація «Об’єднані. Сильні. Разом!» — членство та документи організації.">
+<title>Об’єднані. Сильні. Разом! — інженерна школа дронів для підлітків</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/base.css">
-<link rel="stylesheet" href="assets/landing.css">
-</head>
-<body>
+<link rel="stylesheet" href="landing/site.css">
+<style>
+/* ============================================================
+   ГОЛОВНА ВІЗИТІВКА — магазинний «спецвипуск»
+   Айдентика: Інженерний мінімалізм (Onest, електрик-синій акцент)
+   Усі класи з префіксом mp-
+   ============================================================ */
+.mp-page{
+  --ls-dark:#0E1116; --navy:#171A1F; --ink:#23272E; --muted:#6B7280;
+  --yellow:#0F5BFF; --gray-50:#F6F7F8; --gray-200:#E6E8EB;
+  --r:8px; --r-s:4px; --r-l:14px;
+  --f-display:'Onest',system-ui,-apple-system,sans-serif;
+  --f-body:'Onest',system-ui,-apple-system,sans-serif;
+  font-family:var(--f-body);
+  color:var(--ink);
+}
+.mp-page *{box-sizing:border-box;}
+.mp-section{position:relative;overflow:hidden;padding:118px 48px;}
+.mp-inner{width:100%;max-width:1140px;margin:0 auto;position:relative;z-index:2;}
 
-<header class="app-header">
-  <div class="app-header-inner">
-    <div class="app-title">
-      <span class="brand-mark">ОБ’ЄДНАНІ.&nbsp;СИЛЬНІ.&nbsp;РАЗОМ!</span>
-      <span class="app-sub">громадська організація</span>
+/* surfaces */
+.mp-dark{background:var(--ls-dark);color:#fff;}
+.mp-paper{background:#fff;color:var(--ink);}
+.mp-gray{background:var(--gray-50);color:var(--ink);}
+
+/* ---- shared editorial bits ---- */
+.mp-kick{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;color:var(--yellow);margin-bottom:22px;
+}
+.mp-kick::before{content:"";width:26px;height:1px;background:currentColor;display:block;}
+.mp-dark .mp-kick{color:#5B9BFF;}
+.mp-h2{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(34px,4.6vw,54px);line-height:1.04;
+  letter-spacing:-.02em;color:var(--navy);margin:0 0 26px;max-width:20ch;
+}
+.mp-dark .mp-h2{color:#fff;}
+.mp-lead{
+  font-size:18px;line-height:1.78;color:var(--ink);max-width:56ch;margin:0 0 40px;
+}
+.mp-dark .mp-lead{color:#C3CBD6;}
+.mp-folio{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-size:11px;font-weight:700;letter-spacing:.24em;
+  color:rgba(35,39,46,.34);display:flex;align-items:center;gap:10px;
+  white-space:nowrap;z-index:3;text-transform:uppercase;
+}
+.mp-folio::before{content:"";width:22px;height:1px;background:currentColor;}
+.mp-dark .mp-folio{color:rgba(255,255,255,.4);}
+.mp-micro{
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* blueprint grid — delicate */
+.mp-blueprint{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 0%,transparent 78%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 0%,transparent 78%);
+}
+.mp-blueprint--light{
+  background-image:
+    linear-gradient(rgba(23,26,31,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(23,26,31,.04) 1px,transparent 1px);
+}
+
+/* ============================================================
+   01 — ОБКЛАДИНКА-ГЕРОЙ (photo + inline-SVG)
+   ============================================================ */
+.mp-hero{min-height:92vh;display:flex;align-items:center;padding-top:110px;padding-bottom:120px;}
+.mp-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('brand/img/fpv-carbon.jpg') center/cover no-repeat;
+}
+.mp-hero-scrim{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(100deg,rgba(8,10,14,.94) 0%,rgba(8,10,14,.8) 42%,rgba(8,10,14,.42) 72%,rgba(8,10,14,.66) 100%);
+}
+.mp-hero .mp-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+.mp-hero-overline{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#9FB4D6;margin-bottom:28px;
+}
+.mp-hero-overline i{font-style:normal;color:var(--yellow);}
+.mp-hero h1{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(42px,6.4vw,82px);line-height:.98;letter-spacing:-.025em;
+  color:#fff;margin:0 0 26px;text-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+.mp-hero h1 .mp-acc{color:#5B9BFF;}
+.mp-hero-lead{
+  font-size:18.5px;line-height:1.74;color:#DDE3EC;max-width:48ch;margin:0 0 36px;
+  text-shadow:0 1px 12px rgba(0,0,0,.6);
+}
+.mp-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:46px;}
+.mp-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-display);font-weight:700;font-size:15px;
+  padding:14px 24px;border-radius:var(--r);text-decoration:none;
+  transition:transform 160ms ease,background 160ms ease;
+}
+.mp-btn:hover{transform:translateY(-2px);}
+.mp-btn-p{background:var(--yellow);color:#0E1116;}
+.mp-btn-p:hover{background:#2D72FF;}
+.mp-btn-g{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.26);}
+.mp-btn-g:hover{background:rgba(255,255,255,.16);}
+.mp-hero-lines{
+  display:flex;flex-wrap:wrap;gap:10px 18px;
+  border-top:1px solid rgba(255,255,255,.16);padding-top:24px;
+  font-size:13px;font-weight:700;color:#9FB4D6;max-width:640px;
+}
+.mp-hero-lines b{color:#fff;font-weight:800;}
+.mp-hero-lines .mp-dot{color:var(--yellow);}
+.mp-hero-art{position:relative;}
+.mp-hero-art svg{width:100%;max-width:440px;height:auto;display:block;margin-left:auto;
+  filter:drop-shadow(0 18px 50px rgba(15,91,255,.28));}
+
+/* ============================================================
+   02 — АЙСБЕРГ (SVG + editorial split, drop-cap)
+   ============================================================ */
+.mp-iceberg{display:grid;grid-template-columns:6fr 5fr;gap:68px;align-items:center;margin-top:8px;}
+.mp-iceberg-body .mp-pull{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(24px,3vw,34px);line-height:1.32;letter-spacing:-.015em;
+  color:var(--navy);margin:18px 0 26px;position:relative;
+}
+.mp-iceberg-body .mp-pull::before{
+  content:"«";position:absolute;top:-46px;left:-8px;
+  font-family:var(--f-display);font-weight:800;font-size:104px;line-height:1;
+  color:var(--yellow);opacity:.16;pointer-events:none;
+}
+.mp-drop::first-letter{
+  float:left;font-family:var(--f-display);font-weight:800;
+  font-size:62px;line-height:.86;color:#fff;background:var(--yellow);
+  padding:10px 16px;margin:6px 16px 0 0;border-radius:var(--r-s);
+}
+.mp-iceberg-body p{font-size:16.5px;line-height:1.82;color:var(--ink);margin:0 0 16px;}
+.mp-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+.mp-chip{
+  font-size:13px;font-weight:600;color:var(--navy);
+  background:rgba(15,91,255,.07);border:1px solid rgba(15,91,255,.18);
+  border-radius:999px;padding:8px 16px;
+}
+.mp-iceberg-art svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto;}
+.mp-iceberg-cap{margin-top:20px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.04em;}
+
+/* ============================================================
+   03 — СТАТДЕК (giant numbers broadsheet)
+   ============================================================ */
+.mp-statdeck{
+  display:grid;grid-template-columns:repeat(4,1fr);margin-top:50px;position:relative;z-index:2;
+}
+.mp-stat{
+  padding:8px 30px 0;border-left:1px solid rgba(255,255,255,.14);
+  display:flex;flex-direction:column;gap:14px;
+}
+.mp-stat:first-child{border-left:none;padding-left:0;}
+.mp-stat-n{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(56px,6.6vw,94px);line-height:.94;letter-spacing:-.03em;color:#fff;
+}
+.mp-stat-n .mp-y{color:#5B9BFF;}
+.mp-stat-t{
+  font-family:var(--f-display);font-weight:700;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.08em;color:#E6E8EB;
+}
+.mp-stat-s{font-size:13.5px;line-height:1.6;color:#9AA2AF;margin:0;}
+.mp-deck-foot{
+  display:flex;align-items:center;gap:18px;justify-content:center;
+  margin-top:54px;font-family:var(--f-display);font-weight:700;font-size:15px;color:#C3CBD6;
+}
+.mp-deck-foot::before,.mp-deck-foot::after{content:"";height:1px;flex:0 0 60px;background:rgba(255,255,255,.2);}
+.mp-deck-foot b{color:#5B9BFF;}
+
+/* ============================================================
+   04 — ОРБІТА 6 НАУК (inline-SVG orbit)
+   ============================================================ */
+.mp-orbit-triad{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:var(--f-display);font-weight:700;font-size:14px;
+  color:var(--yellow);margin:6px 0 0;letter-spacing:.02em;
+}
+.mp-orbit-triad i{font-style:normal;color:var(--muted);}
+.mp-orbit{
+  position:relative;width:100%;max-width:680px;height:580px;margin:34px auto 0;
+}
+.mp-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border:1.5px dashed rgba(23,26,31,.16);border-radius:50%;
+}
+.mp-ring.r1{width:300px;height:300px;}
+.mp-ring.r2{width:520px;height:520px;}
+.mp-orbit-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:150px;z-index:2;}
+.mp-orbit-core svg{width:100%;height:auto;display:block;}
+.mp-sat{position:absolute;width:128px;text-align:center;transform:translate(-50%,-50%);z-index:1;}
+.mp-sat .mp-sat-c{
+  width:98px;height:98px;border-radius:50%;margin:0 auto 10px;
+  background:#fff;border:1px solid var(--gray-200);
+  box-shadow:0 6px 22px rgba(23,26,31,.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.mp-sat .mp-sat-c svg{width:42px;height:42px;}
+.mp-sat h4{font-family:var(--f-display);font-weight:700;font-size:14px;color:var(--navy);margin:0 0 3px;}
+.mp-sat span{font-size:11.5px;color:var(--muted);display:block;line-height:1.4;}
+.mp-sat-badge{
+  display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;background:var(--yellow);color:#0E1116;
+  border-radius:999px;padding:3px 10px;margin-top:6px;
+}
+.mp-orbit-foot{text-align:center;margin-top:36px;color:var(--muted);font-size:14px;line-height:1.7;max-width:60ch;margin-left:auto;margin-right:auto;}
+
+/* ============================================================
+   05 — СЕРПАНТИН-ТАЙМЛАЙН (8 занять)
+   ============================================================ */
+.mp-path{position:relative;margin-top:50px;}
+.mp-path-bg{position:absolute;inset:-26px 0 -10px;z-index:0;pointer-events:none;}
+.mp-path-bg svg{width:100%;height:100%;display:block;}
+.mp-path-grid{
+  position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:58px 30px;
+}
+.mp-node-num{
+  width:52px;height:52px;border-radius:50%;background:var(--yellow);color:#0E1116;
+  font-family:var(--f-display);font-weight:800;font-size:18px;
+  display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(15,91,255,.28);
+}
+.mp-node-num.wide{width:auto;padding:0 18px;border-radius:999px;}
+.mp-node h4{font-family:var(--f-display);font-weight:700;font-size:15.5px;color:var(--navy);margin:0 0 6px;}
+.mp-node p{font-size:13px;line-height:1.56;color:var(--muted);margin:0;max-width:26ch;}
+.mp-flag{
+  display:inline-flex;align-items:flex-start;gap:12px;
+  background:var(--navy);color:#fff;border-radius:var(--r);
+  padding:14px 20px;margin-top:46px;max-width:58ch;
+  font-size:14px;line-height:1.55;font-weight:500;
+}
+.mp-flag svg{width:22px;height:24px;flex:none;margin-top:1px;}
+.mp-flag b{color:#5B9BFF;}
+.mp-roles{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:36px;
+  border-top:1px solid var(--gray-200);padding-top:26px;}
+.mp-roles>span.mp-roles-t{font-family:var(--f-display);font-weight:700;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;}
+.mp-role{display:flex;align-items:center;gap:11px;}
+.mp-role-c{
+  width:46px;height:46px;border-radius:50%;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.mp-role-c svg{width:22px;height:22px;}
+.mp-role span{font-family:var(--f-display);font-weight:700;font-size:13px;color:var(--navy);}
+
+/* ============================================================
+   06 — VERSUS «страх → довіра»
+   ============================================================ */
+.mp-versus{display:grid;grid-template-columns:1fr 70px 1fr;margin-top:48px;align-items:start;}
+.mp-vhalf h3{
+  font-family:var(--f-display);font-weight:800;font-size:28px;margin:0 0 18px;letter-spacing:-.01em;
+}
+.mp-vhalf--fear h3{color:#C2410C;}
+.mp-vhalf--trust h3{color:var(--yellow);}
+.mp-vic{height:72px;margin-bottom:18px;}
+.mp-vic svg{height:72px;width:auto;display:block;}
+.mp-fear-item{
+  border-left:4px solid #C2410C;background:#FBF3EE;border-radius:0 var(--r) var(--r) 0;
+  padding:13px 18px;margin-bottom:12px;font-size:14.5px;line-height:1.6;color:var(--ink);
+}
+.mp-fear-item .mp-who{color:var(--muted);font-size:13px;}
+.mp-check{list-style:none;margin:0;padding:0;}
+.mp-check li{display:flex;gap:12px;margin-bottom:15px;font-size:14.5px;line-height:1.6;color:var(--ink);}
+.mp-check li::before{
+  content:"";flex:none;width:22px;height:22px;border-radius:var(--r-s);
+  background:var(--yellow);margin-top:1px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5L19 7'/></svg>");
+  background-size:15px;background-repeat:no-repeat;background-position:center;
+}
+.mp-vdiv{position:relative;align-self:stretch;}
+.mp-vdiv::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--gray-200);}
+.mp-varc{position:absolute;top:92px;left:50%;transform:translateX(-50%);width:120px;}
+.mp-varc svg{width:100%;height:auto;display:block;}
+.mp-noyes{
+  grid-column:1 / -1;display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;margin-top:46px;
+}
+.mp-no{font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:#C2410C;text-decoration-thickness:2.5px;}
+.mp-ar{color:var(--navy);font-weight:800;font-size:18px;}
+.mp-yes{font-family:var(--f-display);font-weight:700;font-size:14.5px;background:var(--yellow);color:#0E1116;padding:9px 16px;border-radius:var(--r);}
+
+/* ============================================================
+   07 — КОМАНДА (mosaic + photo)
+   ============================================================ */
+.mp-team{display:grid;grid-template-columns:7fr 5fr;gap:56px;align-items:start;margin-top:8px;}
+.mp-team-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.mp-person{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);
+  padding:26px 26px 22px;position:relative;overflow:hidden;
+  transition:transform 180ms ease,box-shadow 200ms ease;
+}
+.mp-dark .mp-person{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
+.mp-person:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(23,26,31,.1);}
+.mp-person--lead{grid-column:1 / -1;display:flex;align-items:center;gap:22px;}
+.mp-person-init{
+  width:54px;height:54px;border-radius:50%;flex:none;
+  background:var(--yellow);color:#0E1116;
+  font-family:var(--f-display);font-weight:800;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+}
+.mp-person--lead .mp-person-init{width:72px;height:72px;font-size:28px;}
+.mp-person h4{font-family:var(--f-display);font-weight:800;font-size:18px;color:#fff;margin:14px 0 4px;}
+.mp-person--lead h4{margin:0 0 4px;font-size:22px;}
+.mp-person-role{font-size:13.5px;line-height:1.55;color:#9AA2AF;margin:0;}
+.mp-person-tag{
+  position:absolute;top:18px;right:18px;font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#5B9BFF;
+}
+.mp-team-aside{position:relative;}
+.mp-team-shot{
+  position:relative;border-radius:var(--r-l);overflow:hidden;
+  border-bottom:4px solid var(--yellow);box-shadow:0 18px 48px rgba(0,0,0,.4);
+}
+.mp-team-shot img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;}
+.mp-team-shot .mp-shot-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,10,14,.85) 0%,transparent 55%);
+}
+.mp-team-shot figcaption{
+  position:absolute;left:20px;right:20px;bottom:18px;
+  color:#fff;font-size:14px;line-height:1.5;text-shadow:0 1px 10px rgba(0,0,0,.7);
+}
+.mp-team-shot figcaption b{display:block;font-family:var(--f-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5B9BFF;margin-bottom:6px;}
+.mp-team-note{
+  margin-top:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-l);padding:22px 24px;
+}
+.mp-team-note p{font-family:var(--f-display);font-weight:500;font-size:16px;line-height:1.6;color:#fff;margin:0;}
+
+/* ============================================================
+   08 — РОАДМЕП-ГОРИЗОНТ + CTA (over photo finale)
+   ============================================================ */
+.mp-finale-bg{position:absolute;inset:0;z-index:0;background:url('brand/img/community.jpg') center/cover no-repeat;}
+.mp-finale-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,10,14,.9) 0%,rgba(8,10,14,.8) 50%,rgba(8,10,14,.94) 100%);}
+.mp-horizon{margin-top:34px;}
+.mp-horizon svg{width:100%;height:auto;display:block;}
+.mp-hz-notes{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;margin-top:18px;}
+.mp-hz-note{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-l);padding:22px 26px 18px;}
+.mp-hz-note h4{font-family:var(--f-display);font-weight:700;font-size:13px;color:#5B9BFF;margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em;}
+.mp-hz-note p{font-size:14px;line-height:1.65;color:#C3CBD6;margin:0;}
+.mp-cta{margin:64px auto 0;max-width:60ch;text-align:center;}
+.mp-cta h3{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 20px;}
+.mp-cta h3 .mp-acc{color:#5B9BFF;}
+.mp-cta p{font-size:17px;line-height:1.74;color:#C3CBD6;margin:0 0 30px;}
+.mp-cta .mp-btns{justify-content:center;margin-bottom:0;}
+.mp-cta .mp-btn-free{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;font-weight:700;letter-spacing:.04em;color:#9FB4D6;}
+.mp-cta .mp-btn-free b{color:#fff;}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width:860px){
+  .mp-section{padding:74px 24px;}
+  .mp-hero{min-height:auto;}
+  .mp-hero .mp-inner{grid-template-columns:1fr;gap:38px;}
+  .mp-hero-art{order:-1;max-width:300px;}
+  .mp-hero-art svg{margin:0 auto;}
+  .mp-iceberg{grid-template-columns:1fr;gap:40px;}
+  .mp-iceberg-art{order:-1;}
+  .mp-statdeck{grid-template-columns:1fr 1fr;gap:34px 0;}
+  .mp-stat:nth-child(3){border-left:none;padding-left:0;}
+  .mp-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.14);padding-top:28px;}
+  .mp-orbit{height:auto;max-width:none;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .mp-ring{display:none;}
+  .mp-orbit-core{position:static;transform:none;grid-column:1 / -1;margin:0 auto 6px;width:120px;}
+  .mp-sat{position:static !important;transform:none;width:auto;}
+  .mp-path-bg{display:none;}
+  .mp-path-grid{grid-template-columns:1fr;gap:28px;border-left:2px dashed var(--gray-200);padding-left:24px;}
+  .mp-path-grid>.mp-node{grid-column:auto !important;grid-row:auto !important;}
+  .mp-versus{grid-template-columns:1fr;}
+  .mp-vdiv{display:none;}
+  .mp-vhalf--trust{margin-top:36px;}
+  .mp-team{grid-template-columns:1fr;gap:36px;}
+  .mp-team-mosaic{grid-template-columns:1fr;}
+  .mp-team-shot img{aspect-ratio:16/10;}
+  .mp-hz-notes{grid-template-columns:1fr;}
+}
+@media (max-width:520px){
+  .mp-orbit{grid-template-columns:1fr 1fr;}
+  .mp-statdeck{grid-template-columns:1fr;}
+  .mp-stat{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,.14);padding-top:24px;}
+  .mp-stat:first-child{border-top:none;padding-top:0;}
+  .mp-folio{display:none;}
+}
+
+/* ===== QA corrective layer - contrast & overflow (audit 2026-06-17) ===== */
+.mp-btn-p, .mp-sat-badge, .mp-node-num, .mp-yes { color:#fff !important; }
+.mp-btn-p svg { stroke:#fff !important; color:#fff !important; }
+/* accent labels on dark sections -> accessible blue tint (cr 6+) */
+.mp-dark .mp-kick, .mp-sec-dark .mp-kick,
+.mp-dark .mp-vs-lab, .mp-sec-dark .mp-vs-lab,
+.mp-dark .mp-role-tag, .mp-sec-dark .mp-role-tag { color:#6C97FF !important; }
+/* folios: default = subdued dark-gray (covers every light section,
+   whatever its functional class name); re-lighten only on dark/photo */
+.mp-folio { color:#62646B !important; }
+.mp-dark .mp-folio, .mp-sec-dark .mp-folio,
+.mp-feature .mp-folio, .mp-sec-feature .mp-folio { color:rgba(255,255,255,.55) !important; }
+/* decorative hero art bleed must not create page horizontal scroll */
+.mp-hero { position:relative; overflow:hidden; }
+
+</style>
+<style id="gen-raster">
+.mp-vic img{height:72px;width:auto;display:block;}
+.mp-path-bg{display:flex;align-items:center;justify-content:center;}
+.mp-path-bg img{width:100%;height:auto;opacity:.6;}
+/* horizon raster + roadsteps */
+.mp-horizon-r{max-width:760px;margin:30px auto 4px;}
+.mp-horizon-r img{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 30px rgba(15,91,255,.3));}
+.mp-roadsteps{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:6px;}
+.mp-roadsteps>div{text-align:center;}
+.mp-roadsteps b{font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;display:block;}
+.mp-roadsteps span{font-size:11.5px;color:#9FB4D6;}
+.mp-rs-arr{color:#5B9BFF;font-weight:800;font-size:18px;}
+/* orbit raster + legend */
+.mp-orbit-r{max-width:540px;margin:24px auto 0;}
+.mp-orbit-r img{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 40px rgba(15,91,255,.22));}
+.mp-orbit-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 22px;max-width:740px;margin:28px auto 0;}
+.mp-orbit-legend>div{text-align:center;}
+.mp-orbit-legend b{font-family:var(--f-display);font-weight:700;font-size:14.5px;color:var(--navy);display:block;margin-bottom:2px;}
+.mp-orbit-legend span{font-size:12px;color:var(--muted);}
+@media(max-width:640px){.mp-orbit-legend{grid-template-columns:1fr 1fr;}}
+/* iceberg raster + label overlay */
+.mp-ice-wrap{position:relative;max-width:430px;margin:0 auto;}
+.mp-ice-wrap img{width:100%;height:auto;display:block;}
+.mp-ice-tip{position:absolute;top:6%;left:60%;font-size:12px;font-weight:700;color:#6B7280;line-height:1.25;white-space:nowrap;}
+.mp-ice-tip b{color:#0F5BFF;display:block;font-size:13px;}
+.mp-ice-list{position:absolute;top:42%;left:0;right:0;margin:0;padding:0;list-style:none;text-align:center;display:flex;flex-direction:column;gap:11%;}
+.mp-ice-list li{font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);}
+.mp-ice-90{position:absolute;top:60%;right:-2%;font-size:11px;font-weight:700;color:#171A1F;line-height:1.2;text-align:left;}
+.mp-ice-90 b{color:#171A1F;font-size:22px;display:block;letter-spacing:-.02em;}
+.mp-hero-art img{width:100%;max-width:470px;height:auto;display:block;margin-left:auto;filter:drop-shadow(0 18px 50px rgba(15,91,255,.30));}
+</style>
+<style id="gen-prog2">
+.mp-path-grid{gap:74px 30px!important;}
+.mp-conn{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.mp-conn svg{width:100%;height:100%;display:block;}
+.mp-node{position:relative;z-index:1;}
+.mp-node-ic{display:block;margin:0 0 12px;}
+.mp-node-ic svg{width:56px;height:56px;display:block;}
+@media(max-width:760px){.mp-conn{display:none!important;}.mp-path-grid{gap:28px!important;}}
+</style>
+<style id="gen-redesign">
+/* §2 orbit -> tight feature grid */
+.mp-sci-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0 0;}
+.mp-sci{display:flex;flex-direction:column;align-items:flex-start;padding:24px;background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);}
+.mp-sci-ic{width:48px;height:48px;margin-bottom:14px;}
+.mp-sci-ic svg{width:48px;height:48px;display:block;}
+.mp-sci h4{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--navy);margin:0 0 6px;}
+.mp-sci p{font-size:14px;line-height:1.55;color:var(--muted);margin:0;}
+.mp-orbit-foot{margin-top:40px !important;}
+/* §3 fear/trust -> paired objection->answer rows */
+.mp-trust-rows{margin-top:48px;display:flex;flex-direction:column;gap:24px;}
+.mp-tr{display:grid;grid-template-columns:1fr 40px 1.2fr;gap:24px;align-items:stretch;}
+.mp-tr-fear{background:var(--gray-50);border:1px solid var(--gray-200);border-left:4px solid #9AA2AF;border-radius:var(--r);padding:18px 20px;font-size:15px;line-height:1.6;color:var(--ink);}
+.mp-tr-fear .mp-tr-tag{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.mp-tr-arrow{align-self:center;text-align:center;font-weight:800;font-size:20px;color:#0F5BFF;}
+.mp-tr-answer{background:#fff;border:1px solid var(--gray-200);border-left:4px solid #0F5BFF;border-radius:var(--r);padding:18px 20px;display:flex;flex-direction:column;}
+.mp-tr-answer p{margin:0 0 12px;font-size:15px;line-height:1.6;color:var(--ink);position:relative;padding-left:34px;}
+.mp-tr-answer p i{font-style:italic;color:var(--muted);}
+.mp-tr-answer p::before{content:"";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:var(--r-s);background-color:#0F5BFF;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5L19 7'/></svg>");background-size:15px;background-repeat:no-repeat;background-position:center;}
+.mp-proof{margin-top:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);border-top:1px solid var(--gray-200);padding-top:10px;}
+.mp-proof b{color:var(--navy);font-weight:700;}
+.mp-noyes{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;margin-top:32px;}
+@media(max-width:760px){.mp-tr{grid-template-columns:1fr;gap:10px;}.mp-tr-arrow{transform:rotate(90deg);}}
+/* §4 team — tighten + tags on all cards */
+.mp-team{gap:48px !important;}
+.mp-team-mosaic{gap:24px !important;}
+.mp-person{padding:24px !important;}
+.mp-person-role{font-size:14px !important;}
+.mp-person-tag{top:20px;right:20px;}
+@media(max-width:860px){.mp-sci-grid{grid-template-columns:repeat(2,1fr);gap:16px;}}
+@media(max-width:560px){.mp-sci-grid{grid-template-columns:1fr;}}
+</style>
+<style id="gen-cards">
+.mp-node{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l,14px);padding:22px 20px 20px;box-shadow:0 6px 20px rgba(23,26,31,.05);}
+.mp-path-grid{gap:54px 26px!important;}
+</style>
+</head>
+<body class="ls">
+<header class="lnav">
+  <a class="lnav-brand" href="menu.html" title="На головну"><i>‹</i> <span class="tx">ОБ’ЄДНАНІ. СИЛЬНІ. РАЗОМ!</span></a>
+  <nav class="lnav-links"><a href="/" class="active">Головна</a><a href="landing/parents-raster.html">Батькам</a><a href="landing/teens-raster.html">Підліткам</a><a href="landing/communities-raster.html">Громадам</a><a href="account.html" class="lnav-cab">Кабінет</a></nav>
+</header>
+<main>
+<div class="mp-page">
+<section class="mp-section mp-dark mp-hero">
+  <div class="mp-hero-bg" aria-hidden="true"></div>
+  <div class="mp-hero-scrim" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-hero-text">
+      <div class="mp-hero-overline">Громадська організація «Об’єднані. Сильні. Разом!» <i>·</i> Інженерна школа дронів</div>
+      <h1>Дрон — це <span class="mp-acc">наука</span>,<br>а не зброя</h1>
+      <p class="mp-hero-lead">Ми вчимо підлітків 13–17&nbsp;років бачити в&nbsp;дроні фізику, радіозв’язок, електроніку й&nbsp;код. Практика руками з&nbsp;першого дня, реальні польоти й&nbsp;власний проєкт&nbsp;— щоб технології служили життю.</p>
+      <div class="mp-btns">
+        <a class="mp-btn mp-btn-p" href="#" onclick="return false">Долучитися
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="mp-btn mp-btn-g" href="#" onclick="return false">Дізнатися більше</a>
+      </div>
+      <div class="mp-hero-lines">
+        <span><b>90&nbsp;%</b> науки та інженерії</span><span class="mp-dot">·</span>
+        <span><b>8</b> занять у курсі</span><span class="mp-dot">·</span>
+        <span><b>6</b> напрямів науки</span><span class="mp-dot">·</span>
+        <span><b>0&nbsp;грн</b> для учасників</span>
+      </div>
+    </div>
+    <div class="mp-hero-art" aria-hidden="true">
+      <img class="gen-img" src="brand/img/gen-mp-hero-drone.png" alt="" loading="lazy">
     </div>
   </div>
-</header>
+  <div class="mp-folio">01 / 08 · головна</div>
+</section>
 
-<main class="landing">
-  <section class="hero">
-    <h1 class="hero-title">Громадська організація<br>«Об’єднані. Сильні. Разом!»</h1>
-    <p class="hero-sub">Оберіть розділ нижче.</p>
-  </section>
-
-  <div class="tiles">
-    <a class="tile" href="landing/">
-      <div class="tile-icon" aria-hidden="true">🚀</div>
-      <div class="tile-body">
-        <h2 class="tile-title">Про організацію та проєкт</h2>
-        <p class="tile-text">Презентація: хто ми, що створюємо й навіщо. Окремі сторінки для батьків, підлітків і громад.</p>
+<section class="mp-section mp-paper">
+  <div class="mp-blueprint mp-blueprint--light" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Хто ми</div>
+    <h2 class="mp-h2">Вчимо інженерії, а&nbsp;не страху</h2>
+    <div class="mp-iceberg">
+      <div class="mp-iceberg-body">
+        <p class="mp-pull">Пілотування — це лише 5–10&nbsp;% того, що є&nbsp;безпілотні системи»</p>
+        <p class="mp-drop">Ми&nbsp;— громадська організація «Об’єднані. Сильні. Разом!». Створюємо інженерну школу дронів для підлітків, де дрон постає таким, яким він є&nbsp;насправді: складною наукою, а&nbsp;не зброєю. Те, що видно над водою&nbsp;— пілотування. Решта айсберга під водою: фізика польоту, радіозв’язок, хімія акумуляторів, електроніка та&nbsp;код.</p>
+        <p>Ми&nbsp;даємо підліткам навички й&nbsp;упевненість, щоб технології служили життю. Адже дрони вже працюють у&nbsp;мирних професіях:</p>
+        <div class="mp-chips">
+          <span class="mp-chip">агросектор</span>
+          <span class="mp-chip">доставка</span>
+          <span class="mp-chip">екомоніторинг</span>
+          <span class="mp-chip">пошук і&nbsp;порятунок</span>
+        </div>
       </div>
-      <span class="tile-cta">Відкрити →</span>
-    </a>
-
-    <a class="tile" href="membership-form/">
-      <div class="tile-icon" aria-hidden="true">📝</div>
-      <div class="tile-body">
-        <h2 class="tile-title">Вступ до організації</h2>
-        <p class="tile-text">Заповніть заяву на членство — покроково, з підписом, і надішліть на пошту організації.</p>
+      <div class="mp-iceberg-art" aria-hidden="true">
+        <div class="mp-ice-wrap">
+          <img class="gen-img" src="brand/img/gen-mp-iceberg.png" alt="Айсберг безпілотних систем: пілотування над водою, інженерні науки під водою">
+          <span class="mp-ice-tip"><b>пілотування</b> 5–10 %</span>
+          <ul class="mp-ice-list"><li>фізика</li><li>радіозв’язок</li><li>хімія</li><li>електроніка · код</li></ul>
+          <span class="mp-ice-90"><b>90 %</b> під водою</span>
+        </div>
+        <p class="mp-iceberg-cap">Над водою — те, що бачать. Під водою — те, чого ми навчаємо.</p>
       </div>
-      <span class="tile-cta">Подати заяву →</span>
-    </a>
-
-    <a class="tile" href="documents/">
-      <div class="tile-icon" aria-hidden="true">📄</div>
-      <div class="tile-body">
-        <h2 class="tile-title">Документи та протоколи</h2>
-        <p class="tile-text">Протоколи й документи, пов'язані з діяльністю організації, та їх підписання.</p>
-      </div>
-      <span class="tile-cta">Перейти →</span>
-    </a>
-
-    <a class="tile" href="vision/">
-      <div class="tile-icon" aria-hidden="true">🧭</div>
-      <div class="tile-body">
-        <h2 class="tile-title">Бачення розвитку</h2>
-        <p class="tile-text">Як учасники бачать розвиток організації та проєкту «Дрони та діти».</p>
-      </div>
-      <span class="tile-cta">Дивитися →</span>
-    </a>
-
-    <a class="tile" href="brand/identity.html">
-      <div class="tile-icon" aria-hidden="true">🎨</div>
-      <div class="tile-body">
-        <h2 class="tile-title">Айдентика — концепти</h2>
-        <p class="tile-text">Демо концептів візуального стилю організації. Робоча сторінка для вибору напряму.</p>
-      </div>
-      <span class="tile-cta">Переглянути →</span>
-    </a>
+    </div>
   </div>
+  <div class="mp-folio">02 / 08 · айсберг</div>
+</section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-blueprint" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Школа в цифрах</div>
+    <h2 class="mp-h2">Що означає «інженерна школа»</h2>
+    <p class="mp-lead">Базовий курс&nbsp;— це&nbsp;8&nbsp;занять, де теорія коротка, а&nbsp;практика руками починається з&nbsp;першого дня. Підлітки збирають власний FPV-дрон, тренуються на&nbsp;симуляторах і&nbsp;виходять на&nbsp;реальні польоти.</p>
+    <div class="mp-statdeck">
+      <div class="mp-stat">
+        <span class="mp-stat-n">90<span class="mp-y">%</span></span>
+        <span class="mp-stat-t">наука та інженерія</span>
+        <p class="mp-stat-s">і лише 5–10&nbsp;% — пілотування</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">8</span>
+        <span class="mp-stat-t">занять у базовому курсі</span>
+        <p class="mp-stat-s">від макетної плати до власного проєкту</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">6</span>
+        <span class="mp-stat-t">напрямів однієї науки</span>
+        <p class="mp-stat-s">фізика, зв’язок, хімія, інженерія, код, застосування</p>
+      </div>
+      <div class="mp-stat">
+        <span class="mp-stat-n">13<span class="mp-y">–</span>17</span>
+        <span class="mp-stat-t">вік учасників школи</span>
+        <p class="mp-stat-s">два рівні на вибір: базовий і&nbsp;поглиблений</p>
+      </div>
+    </div>
+    <div class="mp-deck-foot">Навчання — <b>на&nbsp;громадських засадах, 0&nbsp;грн</b> для учасників</div>
+  </div>
+  <div class="mp-folio">03 / 08 · статдек</div>
+</section>
+
+<section class="mp-section mp-gray">
+  <div class="mp-inner">
+    <div class="mp-kick">Що ми робимо</div>
+    <h2 class="mp-h2">Шість наук за&nbsp;одним польотом</h2>
+    <div class="mp-orbit-triad">пілотувати <i>·</i> розуміти <i>·</i> інженерити</div>
+        <div class="mp-sci-grid">
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M5 30 C15 25 31 25 43 28" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><path d="M5 30 C15 33 29 34 43 28" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><path d="M15 22 v-8 M15 14 l-3 3 M15 14 l3 3" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 20 v-7 M27 13 l-3 3 M27 13 l3 3" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></span><h4>Фізика польоту</h4><p>аеродинаміка, тяга</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M24 30 v8 M18 40 h12" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="26" r="3" fill="#0F5BFF"/><path d="M17 19 a10 10 0 0 1 14 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><path d="M12.5 13.5 a17 17 0 0 1 23 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" opacity=".5"/></svg></span><h4>Радіозв’язок</h4><p>частоти, антени</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="13" width="24" height="24" rx="3" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><rect x="19" y="8" width="10" height="5" rx="1.5" fill="#0F5BFF"/><path d="M25 18 l-5 9 h4.5 l-1.5 6 6 -10 h-4.5 l1.5 -5 z" fill="#0F5BFF"/></svg></span><h4>Хімія</h4><p>акумулятори, безпека</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="13" y="13" width="22" height="22" rx="3" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><path d="M13 19 h-4 M13 24 h-4 M13 29 h-4 M35 19 h4 M35 24 h4 M35 29 h4 M19 13 v-4 M24 13 v-4 M29 13 v-4 M19 35 v4 M24 35 v4 M29 35 v4" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><path d="M22 20 c-2.2 0 -1.6 3.5 -3.4 4 c1.8 .5 1.2 4 3.4 4 M26 20 c2.2 0 1.6 3.5 3.4 4 c-1.8 .5 -1.2 4 -3.4 4" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h4>Код і автоматика</h4><p>польотні контролери</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M30.5 9.5 a6 6 0 0 0 -8 8 l-13 13 a2 2 0 0 0 0 2.8 l1.2 1.2 a2 2 0 0 0 2.8 0 l13 -13 a6 6 0 0 0 8 -8 l-3.8 3.8 -2.8 -.8 -.8 -2.8 z" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linejoin="round"/></svg></span><h4>Інженерія та збірка</h4><p>основа основ</p></div>
+      <div class="mp-sci"><span class="mp-sci-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M9 15 h22" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="15" r="2.6" fill="#0F5BFF"/><path d="M12 15 v-3 M28 15 v-3" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="12" cy="11" rx="4" ry="1.6" fill="none" stroke="#0F5BFF" stroke-width="1.8"/><ellipse cx="28" cy="11" rx="4" ry="1.6" fill="none" stroke="#0F5BFF" stroke-width="1.8"/><path d="M20 17 v4" stroke="#0F5BFF" stroke-width="1.8"/><rect x="14.5" y="21" width="11" height="10" rx="1.5" fill="none" stroke="#0F5BFF" stroke-width="2.2"/><path d="M14.5 25.5 h11 M20 21 v10" stroke="#0F5BFF" stroke-width="1.6" opacity=".5"/></svg></span><h4>Цивільне застосування</h4><p>агро, доставка, SAR</p></div>
+    </div>
+    <p class="mp-orbit-foot">«Розуміння безпілотних систем — це глибока концепція: і&nbsp;інженерія, і&nbsp;фізика, і&nbsp;зв’язок, і&nbsp;хімія». Кожен завершує курс власним проєктом.</p>
+  </div>
+  <div class="mp-folio">04 / 08 · орбіта</div>
+</section>
+
+<section class="mp-section mp-paper">
+  <div class="mp-inner">
+    <div class="mp-kick">Програма</div>
+    <h2 class="mp-h2">8 занять, один місяць</h2>
+    <p class="mp-lead">Теорія коротко, показ, залучення до&nbsp;дій&nbsp;— щоб не&nbsp;ставало нудно. Перший курс&nbsp;— збірка FPV, бо це&nbsp;найзрозуміліший старт. А&nbsp;щоб зрозуміти, що ти&nbsp;збираєш, треба вміти підняти це&nbsp;в&nbsp;повітря.</p>
+    <div class="mp-path">
+      <div class="mp-path-grid">
+        <div class="mp-conn" aria-hidden="true"><svg viewBox="0 0 1000 340" preserveAspectRatio="none"><path d="M125,40 H861 Q875,40 875,54 V146 Q875,160 861,160 H139 Q125,160 125,174 V286 Q125,300 139,300 H625" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-dasharray="7 10" opacity=".4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="mp-node"><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="9" width="32" height="22" rx="2.5" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><path d="M24 31 v6 M18 40 h12" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><path d="M21 15.5 l8 4.5 -8 4.5 z" fill="#0F5BFF"/></svg></span><h4>Вступ</h4><p>лекція, демонстрація дронів і&nbsp;пультів, демо-політ інструктора</p></div>
+        <div class="mp-node"><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="10" width="20" height="14" rx="2" fill="none" stroke="#0F5BFF" stroke-width="2.2" opacity=".45"/><rect x="17" y="20" width="22" height="16" rx="2" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><path d="M21 27 h14 M21 31 h8" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg></span><h4>Класифікація</h4><p>типи дронів, складові FPV, перші симулятори</p></div>
+        <div class="mp-node"><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M24 30 v8 M18 40 h12" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="26" r="3" fill="#0F5BFF"/><path d="M17 19 a10 10 0 0 1 14 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/><path d="M12.5 13.5 a17 17 0 0 1 23 0" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" opacity=".5"/></svg></span><h4>Пульти й&nbsp;радіохвилі</h4><p>як сигнал передається простором</p></div>
+        <div class="mp-node"><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M24 7 c-7.2 0 -12 5 -12 12 c0 9 12 21 12 21 s12 -12 12 -21 c0 -7 -4.8 -12 -12 -12 z" fill="none" stroke="#0F5BFF" stroke-width="2.4" stroke-linejoin="round"/><circle cx="24" cy="19.5" r="4.6" fill="#0F5BFF"/></svg></span><h4>Топографія і&nbsp;GPS</h4><p>пошук дрона за&nbsp;знімком на&nbsp;карті</p></div>
+        <div class="mp-node" ><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M10 18 h28" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="18" r="3" fill="#0F5BFF"/><path d="M12 18 v-4 M36 18 v-4" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="13" r="2.6" fill="none" stroke="#0F5BFF" stroke-width="2"/><circle cx="36" cy="13" r="2.6" fill="none" stroke="#0F5BFF" stroke-width="2"/><path d="M24 39 V26 M24 26 l-4 4 M24 26 l4 4" fill="none" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></span><h4>Перші зльоти</h4><p>підняти, посадити, пролетіти по&nbsp;прямій у&nbsp;приміщенні</p></div>
+        <div class="mp-node" ><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="13" fill="none" stroke="#0F5BFF" stroke-width="2.4"/><circle cx="24" cy="24" r="5" fill="#0F5BFF"/><path d="M24 4 v7 M24 37 v7 M4 24 h7 M37 24 h7" stroke="#0F5BFF" stroke-width="2.2" stroke-linecap="round"/></svg></span><h4>Застосування</h4><p>цивільні задачі: вибір позиції, сценарії</p></div>
+        <div class="mp-node" ><span class="mp-node-ic" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M12 24 h24" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="#0F5BFF"/><path d="M14 24 v-3 M34 24 v-3" stroke="#0F5BFF" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="14" cy="19" rx="5.5" ry="2" fill="none" stroke="#0F5BFF" stroke-width="2"/><ellipse cx="34" cy="19" rx="5.5" ry="2" fill="none" stroke="#0F5BFF" stroke-width="2"/><path d="M9 33 q5 -3 10 0 M29 35 q5 -3 10 0" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg></span><h4>Польоти</h4><p>практика на&nbsp;різних локаціях, власний проєкт</p></div>
+      </div>
+      <div class="mp-flag">
+        <svg viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="3" height="24" rx="1.5" fill="#5B9BFF"/><polygon points="5,2 21,7 5,12" fill="#0F5BFF"/></svg>
+        <span><b>Поглиблений курс:</b> щоб дитина могла повністю сконструювати, зібрати, обґрейдити й&nbsp;покращити свій дрон.</span>
+      </div>
+      <div class="mp-roles">
+        <span class="mp-roles-t">Ролі в&nbsp;команді:</span>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14,3 a6,6 0 1 0 5,9 l-4,-1 -1,-4 z" fill="#0F5BFF"/><rect x="2" y="12" width="12" height="4" rx="2" fill="#fff" transform="rotate(45 8 14)"/></svg></span><span>інженер</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="9" width="16" height="9" rx="4" fill="#fff"/><rect x="6" y="3" width="2.5" height="7" rx="1.25" fill="#0F5BFF"/><rect x="13.5" y="3" width="2.5" height="7" rx="1.25" fill="#0F5BFF"/></svg></span><span>пілот</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="9" width="13" height="4" rx="2" fill="#fff" transform="rotate(-35 8 11)"/><polygon points="14,4 20,2 16,8" fill="#0F5BFF"/></svg></span><span>збирач</span></div>
+        <div class="mp-role"><span class="mp-role-c"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="8" width="14" height="10" rx="2" fill="#fff"/><path d="M4,12 h14 M11,8 v10" stroke="#171A1F" stroke-width="1.5"/><rect x="8" y="3" width="6" height="5" rx="1" fill="#0F5BFF"/></svg></span><span>логіст</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">05 / 08 · програма</div>
+</section>
+
+<section class="mp-section mp-paper" style="border-top:1px solid var(--gray-200);">
+  <div class="mp-inner">
+    <div class="mp-kick">Наші цінності</div>
+    <h2 class="mp-h2">Не зброя. Довіра.</h2>
+    <p class="mp-lead">Найбільший бар’єр&nbsp;— страх батьків. Ми&nbsp;відповідаємо на&nbsp;нього не&nbsp;словами, а&nbsp;прозорістю: цивільний акцент, відкритий план занять і&nbsp;наставники-ветерани поруч із&nbsp;дітьми.</p>
+        <div class="mp-trust-rows">
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>«Дрон&nbsp;— це&nbsp;зброя. Школа дронів&nbsp;= мілітаризація дитини».</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Так, дрон <i>може</i> бути зброєю. Але тут діти <b>проєктують, паяють і&nbsp;програмують</b>&nbsp;— це інженерія, як робототехніка чи&nbsp;авіамоделювання.</p><span class="mp-proof"><b>Цивільний акцент:</b>&nbsp;агро, доставка, пошук</span></div>
+      </div>
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>Невідомість: що насправді відбувається на&nbsp;курсі?</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Прозорий план занять наперед, <b>без сюрпризів</b>. Ви&nbsp;завжди знаєте, що&nbsp;і&nbsp;навіщо роблять діти.</p><span class="mp-proof"><b>Відкриті двері:</b>&nbsp;можна прийти на&nbsp;будь-яке заняття</span></div>
+      </div>
+      <div class="mp-tr">
+        <div class="mp-tr-fear"><span class="mp-tr-tag">Побоювання</span>«Технології небезпечні для&nbsp;підлітка».</div>
+        <div class="mp-tr-arrow" aria-hidden="true">&rarr;</div>
+        <div class="mp-tr-answer"><p>Поруч&nbsp;— <b>відповідальні наставники-ветерани</b>; а&nbsp;через фізику й&nbsp;інженерію дитина починає краще вчитися.</p><span class="mp-proof"><b>8 занять</b>&nbsp;· власний проєкт наприкінці</span></div>
+      </div>
+    </div>
+    <div class="mp-noyes">
+      <span class="mp-no">«ваші діти будуть воювати»</span>
+      <span class="mp-ar">&rarr;</span>
+      <span class="mp-yes">розвиток · технологія · професія · майбутнє</span>
+    </div>
+  </div>
+  <div class="mp-folio">06 / 08 · довіра</div>
+</section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-blueprint" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Команда</div>
+    <h2 class="mp-h2">Люди, які роблять це&nbsp;реальним</h2>
+    <div class="mp-team">
+      <div class="mp-team-mosaic">
+        <div class="mp-person mp-person--lead">
+          <span class="mp-person-init">К</span>
+          <div>
+            <h4>Кріс</h4>
+            <p class="mp-person-role">голова організації — тримає курс, стратегія й&nbsp;напрям проєкту</p>
+          </div>
+          <span class="mp-person-tag">голова</span>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">Ю</span><span class="mp-person-tag">програма</span>
+          <h4>Юрій «Недок»</h4>
+          <p class="mp-person-role">навчальна програма й&nbsp;методика, автор курсу</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">В</span><span class="mp-person-tag">продукт</span>
+          <h4>Валентин</h4>
+          <p class="mp-person-role">UI/UX, систематизація та&nbsp;впровадження ШІ</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">С</span><span class="mp-person-tag">комунікації</span>
+          <h4>Сергій «Тихий»</h4>
+          <p class="mp-person-role">філософія проєкту й&nbsp;комунікація в&nbsp;соцмережах</p>
+        </div>
+        <div class="mp-person">
+          <span class="mp-person-init">О</span><span class="mp-person-tag">спільнота</span>
+          <h4>Оля</h4>
+          <p class="mp-person-role">аудиторія та&nbsp;зв’язок зі&nbsp;спільнотою</p>
+        </div>
+      </div>
+      <div class="mp-team-aside">
+        <figure class="mp-team-shot">
+          <img src="brand/img/teens-collab.jpg" alt="Підлітки навчаються разом" loading="lazy">
+          <span class="mp-shot-scrim" aria-hidden="true"></span>
+          <figcaption><b>Міст між поколіннями</b>Цивільні, підлітки та&nbsp;ветерани-наставники — за&nbsp;однією справою.</figcaption>
+        </figure>
+        <div class="mp-team-note">
+          <p>Команда поєднує інженерію, педагогіку й&nbsp;щиру турботу про&nbsp;підлітків. Разом ми&nbsp;будуємо середовище, де&nbsp;підлітки бачать у&nbsp;ветеранах особливих і&nbsp;цікавих людей.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mp-folio">07 / 08 · команда</div>
+</section>
+
+<section class="mp-section mp-dark">
+  <div class="mp-finale-bg" aria-hidden="true"></div>
+  <div class="mp-finale-scrim" aria-hidden="true"></div>
+  <div class="mp-inner">
+    <div class="mp-kick">Куди ми рухаємось</div>
+    <h2 class="mp-h2">Від гуртка — до&nbsp;мережі по&nbsp;всій Україні</h2>
+    <div class="mp-horizon-r"><img class="gen-img" src="brand/img/gen-mp-horizon.png" alt="Шлях розвитку: гурток, курс, табір, мережа по всій Україні"></div>
+    <div class="mp-roadsteps">
+      <div><b>Гурток</b><span>старт · MVP</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Курс</b><span>8 занять · 1 місяць</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Табір</b><span>практика в природі</span></div>
+      <div class="mp-rs-arr">→</div>
+      <div><b>Мережа</b><span>вся Україна · 0 грн</span></div>
+    </div>
+    <div class="mp-hz-notes">
+      <div class="mp-hz-note">
+        <h4>Чому мережа</h4>
+        <p>«В обласних центрах ще&nbsp;більш-менш щось є. У&nbsp;регіонах&nbsp;— нічого». Висновок: треба створювати такі гуртки не&nbsp;один, а&nbsp;по&nbsp;всій Україні.</p>
+      </div>
+      <div class="mp-hz-note">
+        <h4>Наша формула</h4>
+        <p>Наука понад хайп. Робити самим, не&nbsp;чекаючи. Спершу сенс, потім техніка. Не&nbsp;рамки, а&nbsp;політ мислі.</p>
+      </div>
+    </div>
+    <div class="mp-cta">
+      <h3>Долучайтеся до&nbsp;тих, хто <span class="mp-acc">будує майбутнє</span></h3>
+      <p>Ми&nbsp;відкриті до&nbsp;підлітків, батьків, наставників і&nbsp;партнерів. Підтримайте школу, станьте наставником або&nbsp;просто дізнайтеся більше&nbsp;— кожен крок наближає нас до&nbsp;покоління, що&nbsp;володіє технологіями впевнено й&nbsp;гідно.</p>
+      <div class="mp-btns">
+        <a class="mp-btn mp-btn-p" href="#" onclick="return false">Долучитися
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="mp-btn mp-btn-g" href="#" onclick="return false">Підтримати проєкт</a>
+      </div>
+      <div class="mp-btn-free">Навчання — <b>на&nbsp;громадських засадах, 0&nbsp;грн</b> для учасників</div>
+    </div>
+  </div>
+  <div class="mp-folio">08 / 08 · горизонт</div>
+</section>
+</div>
 </main>
-
-<footer class="landing-footer">
-  <span>© <span id="year"></span> ГО «Об’єднані. Сильні. Разом!»</span>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<footer class="lfoot"><div class="wrap"><span>© <span id="yr"></span> ГО «Об’єднані. Сильні. Разом!»</span><div class="lfoot-links"><a href="/">Головна</a><a href="landing/parents-raster.html">Батькам</a><a href="landing/teens-raster.html">Підліткам</a><a href="landing/communities-raster.html">Громадам</a><a href="documents/">Документи</a><a href="menu.html">На головну</a></div></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
 </body>
 </html>

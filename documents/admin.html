@@ -114,5 +114,21 @@
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="config.js"></script>
 <script src="admin.js"></script>
+<script type="module">
+  /* Access gate: a signed-in + approved team member (Firebase), or the legacy #k= secret link. */
+  import { auth, getIdToken, me, onAuthStateChanged } from "../assets/firebase-auth.js";
+  const hasK = /[#&]?k=/.test(location.hash);
+  window.__fbToken = async () => await getIdToken();
+  if (hasK) {
+    (window.__bootAdmin || function(){})();
+  } else {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.replace("../account.html"); return; }
+      const info = await me();
+      if (info.status !== "approved") { location.replace("../account.html"); return; }
+      (window.__bootAdmin || function(){})();
+    });
+  }
+</script>
 </body>
 </html>

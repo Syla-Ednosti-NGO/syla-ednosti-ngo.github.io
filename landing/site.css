@@ -136,3 +136,6 @@
   .num-strip > div { flex: 1 1 45%; }
   .hero-bg::after { background: linear-gradient(180deg, rgba(10,12,16,.52), rgba(10,12,16,.92)); }
 }
+
+.lnav-cab{background:var(--yellow,#0F5BFF);color:#fff !important;padding:7px 14px !important;border-radius:8px;}
+.lnav-cab:hover{filter:brightness(.94);}

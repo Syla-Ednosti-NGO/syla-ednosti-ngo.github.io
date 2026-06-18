@@ -10,6 +10,14 @@ function getToken() {
 }
 const TOKEN = getToken();
 
+/* Token resolver: explicit #k= admin token, else the logged-in Firebase ID token
+   (set by the auth module in admin.html once a team member is signed in + approved). */
+async function authToken() {
+  if (TOKEN) return TOKEN;
+  if (typeof window.__fbToken === 'function') { try { return (await window.__fbToken()) || ''; } catch (_) {} }
+  return '';
+}
+
 /* ===== helpers ===== */
 const toastEl = $('#toast');
 function toast(msg, opts = {}) {
@@ -29,8 +37,8 @@ function esc(s) {
 }
 function fioOf(s) { return [s.lastName, s.firstName, s.middleName].filter(Boolean).join(' '); }
 
-function api(path, opts = {}) {
-  const headers = Object.assign({ Authorization: 'Bearer ' + TOKEN }, opts.headers || {});
+async function api(path, opts = {}) {
+  const headers = Object.assign({ Authorization: 'Bearer ' + (await authToken()) }, opts.headers || {});
   return fetch(WORKER + path, Object.assign({}, opts, { headers }));
 }
 
@@ -66,7 +74,7 @@ function portalLabel(doc) {
 
 /* ===== bootstrap ===== */
 async function boot() {
-  if (!TOKEN || !WORKER) return authFail();
+  if (!WORKER) return authFail();
   try {
     const res = await api('/api/admin/ping');
     if (!res.ok) return authFail();
@@ -483,4 +491,6 @@ function fmtDate(iso) {
   return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()}`;
 }
 
-boot();
+/* Booted by the auth module in admin.html once access is resolved
+   (legacy #k= secret link, or a signed-in + approved team member). */
+window.__bootAdmin = boot;
