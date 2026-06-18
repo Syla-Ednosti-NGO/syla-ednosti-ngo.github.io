@@ -563,17 +563,33 @@ async function decideUser(uid, status, ctx, env, cors) {
 }
 
 async function notifyAdminNewUser(env, user) {
-  const to = str(env.NOTIFY_TO), from = str(env.NOTIFY_FROM);
-  if (!to || !from) return; // email is best-effort; the pending user always appears in the admin list
-  const payload = {
-    personalizations: [{ to: [{ email: to }] }],
-    from: { email: from, name: 'Сайт ГО «Об’єднані. Сильні. Разом!»' },
-    subject: 'Нова заявка на доступ',
-    content: [{ type: 'text/plain', value: `Нова заявка на доступ: ${user.name || ''} <${user.email}>.\nЗатвердити або відхилити — у адмінці, розділ «Користувачі».` }],
-  };
-  await fetch('https://api.mailchannels.net/tx/v1/send', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
-  });
+  // Email is best-effort — the pending user always appears in the admin «Користувачі» list.
+  const to = str(env.NOTIFY_TO);
+  if (!to) return;
+  const subject = 'Нова заявка на доступ — кабінет ГО';
+  const text = `Нова заявка на доступ до кабінету:\n\n${user.name || ''} <${user.email}>\n\n`
+    + `Підтвердити або відхилити — у адмінці, розділ «Користувачі»:\nhttps://syla-ednosti-ngo.github.io/admin.html`;
+
+  // Preferred: Resend — works without a custom domain (send from onboarding@resend.dev to your own address).
+  if (str(env.RESEND_API_KEY)) {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: str(env.NOTIFY_FROM) || 'Кабінет ГО <onboarding@resend.dev>', to: [to], subject, text }),
+    });
+    return;
+  }
+  // Fallback: MailChannels — requires a verified sender domain (NOTIFY_FROM).
+  if (str(env.NOTIFY_FROM)) {
+    await fetch('https://api.mailchannels.net/tx/v1/send', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: env.NOTIFY_FROM, name: 'Кабінет ГО' },
+        subject, content: [{ type: 'text/plain', value: text }],
+      }),
+    });
+  }
 }
 
 function extFromMime(mime) {

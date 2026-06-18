@@ -11,8 +11,13 @@ ALLOWED_ORIGINS = "https://syla-ednosti-ngo.github.io,http://127.0.0.1:8765,http
 FIREBASE_PROJECT_ID = "syla-ednosti-ngo"
 # Emails auto-approved with the 'admin' role on first sign-in (comma-separated). The first admin.
 ADMIN_EMAILS = "culaednocti@gmail.com"
-# Optional: email a notification on each new registration (via MailChannels). Needs a verified sender domain.
+# Email a notification to the admin on each new registration.
+# NOTIFY_TO = recipient. Email is best-effort (the pending user always shows in the admin list).
 NOTIFY_TO = "culaednocti@gmail.com"
+# Preferred sender = Resend (works without a custom domain): set the secret
+#   wrangler secret put RESEND_API_KEY     (free key from resend.com)
+# Optionally set NOTIFY_FROM to a verified Resend sender; otherwise onboarding@resend.dev is used.
+# (Fallback path: MailChannels, which needs NOTIFY_FROM on a verified domain.)
 NOTIFY_FROM = ""
 
 # D1 database binding.
