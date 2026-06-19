@@ -126,6 +126,19 @@ body{ background:#fff; color:var(--ink); }
 .bb-spec .c b{ font-family:var(--f-display); font-size:14px; display:block; margin-bottom:5px; }
 .bb-spec .c p{ font-size:13px; color:var(--muted); margin:0; line-height:1.55; }
 
+/* brand graphics */
+.bb-cover .pat{ position:absolute; inset:0; z-index:1; background:url('img/gen-pattern.png') center/440px repeat; opacity:.06; pointer-events:none;
+  mask-image:radial-gradient(ellipse 90% 80% at 70% 50%,#000 0%,transparent 80%); -webkit-mask-image:radial-gradient(ellipse 90% 80% at 70% 50%,#000 0%,transparent 80%); }
+.bb-graphics{ display:grid; grid-template-columns:1.45fr 1fr; gap:18px; margin-top:24px; }
+@media (max-width:820px){ .bb-graphics{ grid-template-columns:1fr; } }
+.bb-gfx{ border:1px solid var(--gray-200); border-radius:var(--r-l); overflow:hidden; background:#fff; }
+.bb-gfx .frame{ background:var(--navy); display:flex; align-items:center; justify-content:center; padding:22px; min-height:230px; position:relative; overflow:hidden; }
+.bb-gfx .frame img{ max-width:100%; max-height:260px; display:block; position:relative; z-index:2; }
+.bb-gfx .frame.pat{ background:#fff; padding:0; }
+.bb-gfx .frame.pat .tile{ width:100%; height:230px; background:url('img/gen-pattern.png') center/300px repeat; }
+.bb-gfx .cap{ padding:13px 16px; font-size:13px; color:var(--muted); border-top:1px solid var(--gray-200); }
+.bb-gfx .cap b{ color:var(--ink); font-weight:700; display:block; font-size:13.5px; }
+
 /* components */
 .bb-comp{ border:1px solid var(--gray-200); border-radius:var(--r-l); padding:28px; background:#fff; margin-top:18px; }
 .bb-comp h4{ font-family:var(--f-display); font-size:14px; margin:0 0 16px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
@@ -165,7 +178,7 @@ body{ background:#fff; color:var(--ink); }
 <div class="bb-bar">
   <div class="bb-bar-in">
     <a class="logo" href="/">
-      <svg width="28" height="28" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg>
+      <svg width="28" height="28" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg>
       <span class="wm">U.S.T.</span>
     </a>
     <span class="sub">Брендбук</span>
@@ -174,6 +187,7 @@ body{ background:#fff; color:var(--ink); }
       <a href="#color">Колір</a>
       <a href="#type">Типографіка</a>
       <a href="#icons">Іконографіка</a>
+      <a href="#graphics">Графіка</a>
       <a href="#components">Компоненти</a>
       <a href="#voice">Принципи</a>
     </nav>
@@ -183,6 +197,7 @@ body{ background:#fff; color:var(--ink); }
 <!-- ===================== COVER ===================== -->
 <section class="bb-cover">
   <div class="grid"></div>
+  <div class="pat"></div>
   <div class="bb-wrap">
     <span class="bb-kick">Айдентика · Інженерний мінімалізм</span>
     <h1>Брендбук <span class="acc">U.S.T.</span></h1>
@@ -207,7 +222,7 @@ body{ background:#fff; color:var(--ink); }
 
     <div class="bb-logo-hero">
       <div class="bb-lockup">
-        <svg width="86" height="86" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg>
+        <svg width="86" height="86" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg>
         <div class="stack">
           <div class="wm">U<span class="d">.</span>S<span class="d">.</span>T<span class="d">.</span></div>
           <div class="name">Об’єднані. Сильні. Разом!</div>
@@ -218,7 +233,7 @@ body{ background:#fff; color:var(--ink); }
     <div class="bb-sub">Елементи знаку</div>
     <div class="bb-grid bb-g3">
       <div class="bb-tile">
-        <div class="frame gray"><svg width="74" height="74" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div>
+        <div class="frame gray"><svg width="74" height="74" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg></div>
         <div class="cap"><b>App-mark (знак)</b>Соцмережі, favicon, аватар, компактні місця.</div>
       </div>
       <div class="bb-tile">
@@ -234,7 +249,7 @@ body{ background:#fff; color:var(--ink); }
     <div class="bb-sub">Колірні варіанти</div>
     <div class="bb-grid bb-g4">
       <div class="bb-tile">
-        <div class="frame gray"><svg width="66" height="66" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div>
+        <div class="frame gray"><svg width="66" height="66" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg></div>
         <div class="cap"><b>Основний</b>Електрик-синій + білий.</div>
       </div>
       <div class="bb-tile">
@@ -258,25 +273,25 @@ body{ background:#fff; color:var(--ink); }
         <p>Навколо знаку лишайте вільний простір не менший за чверть його висоти (¼×). У цій зоні не має бути тексту чи інших елементів.</p>
         <div class="bb-cs">
           <span class="x t">¼×</span><span class="x l">¼×</span>
-          <svg width="80" height="80" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg>
+          <svg width="80" height="80" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg>
         </div>
       </div>
       <div class="panel">
         <h4>Мінімальний розмір</h4>
         <p>Знак лишається читабельним до 24&nbsp;px (екран) та 8&nbsp;мм (друк). Менше — використовуйте лише квадрат без вордмарка.</p>
         <div class="bb-sizes">
-          <div class="s"><svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg><div class="lab">64 px</div></div>
-          <div class="s"><svg width="40" height="40" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg><div class="lab">40 px</div></div>
-          <div class="s"><svg width="24" height="24" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg><div class="lab">24 px · мін.</div></div>
+          <div class="s"><svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg><div class="lab">64 px</div></div>
+          <div class="s"><svg width="40" height="40" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg><div class="lab">40 px</div></div>
+          <div class="s"><svg width="24" height="24" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg><div class="lab">24 px · мін.</div></div>
         </div>
       </div>
     </div>
 
     <div class="bb-sub">Чого не робити</div>
     <div class="bb-dont">
-      <div class="d"><div class="frame"><span class="x">✕</span><svg width="92" height="52" viewBox="0 0 64 64" preserveAspectRatio="none"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div><div class="cap">Не розтягувати</div></div>
+      <div class="d"><div class="frame"><span class="x">✕</span><svg width="92" height="52" viewBox="0 0 64 64" preserveAspectRatio="none"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg></div><div class="cap">Не розтягувати</div></div>
       <div class="d"><div class="frame"><span class="x">✕</span><svg width="58" height="58" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#D23B3B"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div><div class="cap">Не перефарбовувати</div></div>
-      <div class="d"><div class="frame"><span class="x">✕</span><svg width="58" height="58" viewBox="0 0 64 64" style="transform:rotate(18deg)"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div><div class="cap">Не нахиляти</div></div>
+      <div class="d"><div class="frame"><span class="x">✕</span><svg width="58" height="58" viewBox="0 0 64 64" style="transform:rotate(18deg)"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="49.5" cy="46" r="2.4" fill="#8CC2FF"/></svg></div><div class="cap">Не нахиляти</div></div>
       <div class="d"><div class="frame" style="background:#9aa"><span class="x">✕</span><svg width="58" height="58" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#2E5AA8"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#7E8CA0" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div><div class="cap">Без низького контрасту</div></div>
     </div>
   </div>
@@ -363,10 +378,37 @@ body{ background:#fff; color:var(--ink); }
   </div>
 </section>
 
-<!-- ===================== 05 · COMPONENTS ===================== -->
+<!-- ===================== 05 · BRAND GRAPHICS ===================== -->
+<section class="bb-sec alt" id="graphics">
+  <div class="bb-wrap">
+    <div class="bb-sec-h"><span class="no">05</span><h2>Фірмова графіка</h2></div>
+    <p class="intro">Графічна мова бренду — це повторювані технічні елементи: орбіти, вузли, сітка, пунктирні
+      траєкторії, blueprint-схеми. Вони перетворюють набір сторінок на цілісний бренд. Замість випадкових
+      стокових фото використовуємо власні лайн-арт ілюстрації та патерн.</p>
+
+    <div class="bb-graphics">
+      <div class="bb-gfx">
+        <div class="frame"><img src="img/gen-hero-blueprint.png" alt="Hero-ілюстрація: FPV-дрон, орбіти, вузли"></div>
+        <div class="cap"><b>Головна ілюстрація</b>FPV-дрон + орбітальні траєкторії + інженерні вузли. Герой сайту, обкладинки, презентації, соцмережі.</div>
+      </div>
+      <div class="bb-gfx">
+        <div class="frame pat"><div class="tile"></div></div>
+        <div class="cap"><b>Фірмовий патерн</b>Безшовна технічна сітка з вузлів і траєкторій. Фони секцій, обкладинки, PDF, соцмережі — завжди дозовано.</div>
+      </div>
+    </div>
+
+    <div class="bb-spec" style="margin-top:18px">
+      <div class="c"><b>Орбіти та вузли</b><p>Тонкі кола, пунктирні дуги й крапки-вузли — базовий «алфавіт» графіки.</p></div>
+      <div class="c"><b>Електрик-синій + soft-blue</b><p>Основна лінія #0F5BFF, легке світіння — світло-блакитний; на темному — #5B9BFF.</p></div>
+      <div class="c"><b>Дозовано та тихо</b><p>Графіка — атмосфера, не шум. Низька щільність, багато повітря, прозорі фони.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 · COMPONENTS ===================== -->
 <section class="bb-sec" id="components">
   <div class="bb-wrap">
-    <div class="bb-sec-h"><span class="no">05</span><h2>Компоненти</h2></div>
+    <div class="bb-sec-h"><span class="no">06</span><h2>Компоненти</h2></div>
     <p class="intro">Базові елементи інтерфейсу. Радіуси: 8&nbsp;px (основний), 4&nbsp;px (дрібний), 14&nbsp;px (картки).
       М’які межі, без важких тіней — все «інженерно» чітко.</p>
 
@@ -405,7 +447,7 @@ body{ background:#fff; color:var(--ink); }
 <!-- ===================== 06 · VOICE ===================== -->
 <section class="bb-sec alt" id="voice">
   <div class="bb-wrap">
-    <div class="bb-sec-h"><span class="no">06</span><h2>Принципи</h2></div>
+    <div class="bb-sec-h"><span class="no">07</span><h2>Принципи</h2></div>
     <p class="intro">Як ми звучимо й виглядаємо. Чотири орієнтири, що тримають бренд цілісним у будь-якому матеріалі.</p>
     <div class="bb-princ">
       <div class="p"><div class="n">01</div><b>Чесно й по суті</b><span>Говоримо прямо, без пафосу. Пояснюємо складне просто. Демо-дані завжди підписуємо як демо.</span></div>
