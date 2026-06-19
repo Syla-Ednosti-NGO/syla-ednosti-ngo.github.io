@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Айдентика · ГО «Об’єднані. Сильні. Разом!»</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+  body{font-family:var(--f-body);background:var(--gray-50);color:var(--ink);margin:0;min-height:100vh;}
+  .hdr{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .hdr .left{display:flex;align-items:center;gap:11px;}
+  .hdr .mark{font-family:var(--f-display);font-weight:800;letter-spacing:.04em;font-size:13.5px;}
+  .hdr .sub{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9AA7BD;display:block;margin-top:2px;}
+  .hdr a.back{color:#C3CBD6;text-decoration:none;font-size:13px;font-weight:600;}
+  .hdr a.back:hover{color:#fff;}
+  .wrap{max-width:1020px;margin:0 auto;padding:34px 24px 60px;}
+  h1{font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--navy);margin:0 0 4px;letter-spacing:-.02em;}
+  .h1sub{color:var(--muted);font-size:15px;margin:0 0 30px;max-width:64ch;line-height:1.6;}
+  .center{display:flex;align-items:center;justify-content:center;min-height:60vh;padding:24px;}
+  .state{max-width:440px;text-align:center;}
+  .state h2{font-family:var(--f-display);font-weight:700;color:var(--navy);font-size:20px;margin:0 0 10px;}
+  .state p{color:var(--muted);line-height:1.6;margin:0 0 18px;}
+  .btn{display:inline-block;padding:11px 20px;border-radius:var(--r);background:var(--yellow);color:#fff;font-family:var(--f-display);font-weight:700;font-size:14px;text-decoration:none;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+  a.panel{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-l);padding:22px;text-decoration:none;color:inherit;display:block;transition:.15s;}
+  a.panel:hover{border-color:var(--yellow);box-shadow:0 10px 30px rgba(15,91,255,.08);transform:translateY(-2px);}
+  .panel .top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .panel .thumb{width:54px;height:54px;border-radius:13px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--blue-light);}
+  .panel h2{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--navy);margin:0;}
+  .panel .meta{font-size:11.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:3px;}
+  .panel p{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;}
+  .panel .cta{margin-top:14px;font-family:var(--f-display);font-weight:700;font-size:13.5px;color:var(--yellow);}
+  .muted{color:var(--muted);font-size:13.5px;}
+  .hide{display:none!important;}
+  .wm-s{font-family:var(--f-display);font-weight:800;color:var(--navy);font-size:22px;letter-spacing:-.01em;}
+  .wm-s .d{color:var(--yellow);}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="left">
+    <svg width="28" height="28" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg>
+    <div><span class="mark">ОБ'ЄДНАНІ.&nbsp;СИЛЬНІ.&nbsp;РАЗОМ!</span><span class="sub">айдентика</span></div>
+  </div>
+  <a class="back" href="../admin.html">‹ До адміністрування</a>
+</header>
+
+<div id="loading" class="center"><p class="muted">Завантаження…</p></div>
+
+<div id="denied" class="center hide">
+  <div class="state">
+    <h2 id="denied-h">Доступ обмежено</h2>
+    <p id="denied-p"></p>
+    <a class="btn" href="../account.html">До кабінету</a>
+  </div>
+</div>
+
+<main id="hub" class="wrap hide">
+  <h1>Айдентика</h1>
+  <p class="h1sub">Візуальна система бренду «Об’єднані. Сильні. Разом!» та робочі прототипи. Доступно підтвердженій команді — щоб усі говорили однією візуальною мовою.</p>
+
+  <div class="grid">
+    <a class="panel" href="brandbook.html">
+      <div class="top">
+        <div class="thumb"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0F5BFF"/><text x="32" y="42" font-family="Onest,sans-serif" font-weight="800" font-size="25" fill="#fff" text-anchor="middle" letter-spacing="-1.2">UST</text></svg></div>
+        <div><h2>Брендбук U.S.T.</h2><div class="meta">основний документ</div></div>
+      </div>
+      <p>Повна система: логотип і зони, колір, типографіка, іконографіка, компоненти та принципи. Стиль «Інженерний мінімалізм».</p>
+      <div class="cta">Відкрити брендбук →</div>
+    </a>
+
+    <a class="panel" href="logo.html">
+      <div class="top">
+        <div class="thumb" style="background:var(--gray-100)"><span class="wm-s">U<span class="d">.</span>S<span class="d">.</span>T<span class="d">.</span></span></div>
+        <div><h2>Логотип — концепти</h2><div class="meta">монограма</div></div>
+      </div>
+      <p>Скорочений знак U.S.T. (United. Strong. Together.): обраний напрям, розглянуті варіанти та рішення, узяті з референсів.</p>
+      <div class="cta">Переглянути концепти →</div>
+    </a>
+
+    <a class="panel" href="identity.html">
+      <div class="top">
+        <div class="thumb" style="background:var(--gray-100)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22a3 3 0 0 0 3-3v-4a3 3 0 0 0-6 0v4a3 3 0 0 0 3 3z"/></svg></div>
+        <div><h2>Напрями айдентики</h2><div class="meta">5 концептів · демо</div></div>
+      </div>
+      <p>Прототипи п’яти візуальних напрямів, які ми розглядали. Обраний — №3 «Інженерний мінімалізм».</p>
+      <div class="cta">Відкрити демо →</div>
+    </a>
+
+    <a class="panel" href="/school/">
+      <div class="top">
+        <div class="thumb" style="background:var(--gray-100)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v7"/><path d="M12 11l8 5"/><path d="M12 11l-8 5"/><circle cx="20" cy="17" r="2.2"/></svg></div>
+        <div><h2>Прототипи сторінок</h2><div class="meta">бренд у дії</div></div>
+      </div>
+      <p>Як айдентика застосована на живих сторінках: проєкт «Школа дронів» та аудиторні лендінги.</p>
+      <div class="cta">Подивитися сторінки →</div>
+    </a>
+  </div>
+</main>
+
+<script type="module">
+import { me, onAuthStateChanged, auth } from "../assets/firebase-auth.js";
+const $ = (id) => document.getElementById(id);
+function show(id){ $(id).classList.remove("hide"); }
+function hide(id){ $(id).classList.add("hide"); }
+function denied(status){
+  hide("loading"); hide("hub"); show("denied");
+  if (status === "declined"){
+    $("denied-h").textContent = "Доступ відхилено";
+    $("denied-p").textContent = "Адміністратор відхилив вашу заявку.";
+  } else {
+    $("denied-h").textContent = "Очікує підтвердження";
+    $("denied-p").textContent = "Ваша заявка ще не підтверджена адміністратором.";
+  }
+}
+onAuthStateChanged(auth, async (user) => {
+  if (!user){ location.href = "../account.html"; return; }
+  let info;
+  try { info = await me(); } catch(_) { info = { status: "pending" }; }
+  if (info.status !== "approved"){ denied(info.status); return; }
+  hide("loading"); show("hub");
+});
+</script>
+</body>
+</html>
