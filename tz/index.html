@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Технічне завдання — новий сайт ГО «Об’єднані. Сильні. Разом!»</title>
+<meta name="description" content="Технічне завдання для команди розробки: новий сайт громадської організації «Об’єднані. Сильні. Разом!».">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/base.css">
+<style>
+body{ background:#fff; color:var(--ink); }
+.tz-bar{ position:sticky; top:0; z-index:40; background:var(--navy); color:#fff; padding:12px clamp(18px,5vw,40px); display:flex; align-items:center; gap:13px; }
+.tz-bar svg{ flex:none; }
+.tz-bar .t{ font-family:var(--f-display); font-weight:800; font-size:13.5px; letter-spacing:.03em; }
+.tz-bar .v{ margin-left:auto; font-size:11.5px; color:rgba(255,255,255,.55); letter-spacing:.05em; white-space:nowrap; }
+.tz-nav{ position:sticky; top:48px; z-index:39; background:#fff; border-bottom:1px solid var(--gray-200); padding:0 clamp(18px,5vw,40px); overflow-x:auto; }
+.tz-nav ul{ list-style:none; display:flex; gap:22px; margin:0 auto; padding:0; max-width:1080px; white-space:nowrap; }
+.tz-nav a{ display:block; padding:11px 0; font-size:12.5px; font-weight:600; color:var(--muted); text-decoration:none; border-bottom:2px solid transparent; }
+.tz-nav a:hover{ color:var(--yellow); border-color:var(--yellow); }
+.wrap{ max-width:1080px; margin:0 auto; padding:0 clamp(18px,5vw,40px); }
+
+.tz-hero{ padding:clamp(40px,6vw,72px) 0 34px; border-bottom:1px solid var(--gray-200); }
+.kick{ font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--yellow); display:inline-flex; align-items:center; gap:11px; }
+.kick::before{ content:""; width:26px; height:2px; background:currentColor; }
+h1{ font-family:var(--f-display); font-weight:800; font-size:clamp(30px,4.4vw,48px); letter-spacing:-.02em; line-height:1.08; margin:16px 0 14px; }
+.lead{ font-size:16.5px; line-height:1.7; color:var(--muted); max-width:70ch; margin:0; }
+.meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.meta-row .pill{ font-size:12px; font-weight:600; color:var(--ink); background:var(--gray-100); border-radius:100px; padding:6px 13px; }
+.meta-row .pill b{ color:var(--yellow); }
+
+section.tz{ padding:46px 0 8px; }
+.snum{ font-family:var(--f-display); font-weight:800; font-size:12.5px; letter-spacing:.16em; color:var(--yellow); text-transform:uppercase; }
+h2{ font-family:var(--f-display); font-weight:800; font-size:clamp(22px,3vw,30px); letter-spacing:-.015em; margin:8px 0 14px; }
+h3{ font-family:var(--f-display); font-weight:700; font-size:17px; margin:28px 0 10px; }
+p, li{ font-size:15px; line-height:1.7; color:var(--ink); }
+p.mut, li.mut{ color:var(--muted); }
+ul.tz-list{ padding-left:20px; margin:10px 0 18px; }
+ul.tz-list li{ margin-bottom:7px; }
+.note{ background:var(--blue-light); border:1px solid #CFE0FF; border-radius:var(--r-l); padding:16px 20px; margin:18px 0; font-size:14px; line-height:1.65; color:#1B3A78; }
+.note b{ color:#0F3FA8; }
+.warn{ background:rgba(199,123,18,.07); border:1px solid rgba(199,123,18,.3); border-radius:var(--r-l); padding:16px 20px; margin:18px 0; font-size:14px; line-height:1.65; color:#7a4b09; }
+.warn b{ color:#8a5100; }
+.crit{ background:rgba(210,59,59,.06); border:1px solid rgba(210,59,59,.28); border-radius:var(--r-l); padding:16px 20px; margin:18px 0; font-size:14px; line-height:1.65; color:#7c2222; }
+.crit b{ color:#a32c2c; }
+
+table.tz-t{ width:100%; border-collapse:collapse; margin:14px 0 22px; font-size:13.5px; }
+table.tz-t th{ text-align:left; font-family:var(--f-display); font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding:9px 12px; border-bottom:2px solid var(--gray-200); }
+table.tz-t td{ padding:10px 12px; border-bottom:1px solid var(--gray-200); vertical-align:top; line-height:1.55; }
+table.tz-t td:first-child{ font-weight:600; }
+table.tz-t code, p code, li code{ font-size:12.5px; background:var(--gray-100); border-radius:4px; padding:1px 6px; }
+.tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; border-radius:100px; padding:3px 9px; margin-right:4px; }
+.tag.p0{ background:var(--yellow); color:#fff; }
+.tag.p1{ background:var(--blue-light); color:#0F3FA8; }
+.tag.p2{ background:var(--gray-100); color:var(--muted); }
+.tag.keep{ background:rgba(59,167,118,.12); color:#25784f; }
+.tag.new{ background:rgba(15,91,255,.1); color:#0F3FA8; }
+.tag.fix{ background:rgba(199,123,18,.12); color:#8a5100; }
+
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:16px 0; }
+@media (max-width:760px){ .grid2{ grid-template-columns:1fr; } }
+.gcard{ border:1px solid var(--gray-200); border-radius:var(--r-l); padding:20px 22px; }
+.gcard h4{ font-family:var(--f-display); font-weight:700; font-size:15px; margin:0 0 8px; }
+.gcard ul{ padding-left:18px; margin:0; }
+.gcard li{ font-size:13.5px; margin-bottom:6px; line-height:1.55; }
+.gcard.good h4{ color:#25784f; }
+.gcard.bad h4{ color:#a32c2c; }
+
+.tz-foot{ border-top:1px solid var(--gray-200); margin-top:50px; padding:26px 0 60px; font-size:13px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="tz-bar">
+  <svg width="26" height="26" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0F5BFF"/><text x="33" y="44" font-family="Onest,sans-serif" font-weight="800" font-size="26" fill="#fff" text-anchor="middle" letter-spacing="-1.4">UST</text><circle cx="48.8" cy="45" r="2.2" fill="#8CC2FF"/></svg>
+  <span class="t">ТЕХНІЧНЕ ЗАВДАННЯ · НОВИЙ САЙТ</span>
+  <span class="v">версія 1.0 · липень 2026</span>
+</div>
+<nav class="tz-nav"><ul>
+  <li><a href="#org">01 Організація</a></li>
+  <li><a href="#current">02 Поточний стан</a></li>
+  <li><a href="#analysis">03 Аналіз</a></li>
+  <li><a href="#vision">04 Бачення</a></li>
+  <li><a href="#ia">05 Архітектура</a></li>
+  <li><a href="#pages">06 Сторінки</a></li>
+  <li><a href="#modules">07 Модулі</a></li>
+  <li><a href="#design">08 Дизайн</a></li>
+  <li><a href="#content">09 Контент</a></li>
+  <li><a href="#nfr">10 Якість</a></li>
+  <li><a href="#stack">11 Стек</a></li>
+  <li><a href="#stages">12 Етапи</a></li>
+  <li><a href="#handover">13 Передача</a></li>
+  <li><a href="#questions">14 Питання</a></li>
+</ul></nav>
+
+<div class="wrap">
+
+<!-- ============ HERO ============ -->
+<div class="tz-hero">
+  <span class="kick">Технічне завдання</span>
+  <h1>Новий сайт громадської організації<br>«Об’єднані. Сильні. Разом!»</h1>
+  <p class="lead">Документ для зовнішньої команди розробки. Містить повний контекст організації,
+    аудит наявної системи (фронтенд + бекенд), продуктове бачення, вимоги до нового сайту,
+    пріоритети та критерії приймання. Мета — щоб команда могла стартувати без додаткових досліджень.</p>
+  <div class="meta-row">
+    <span class="pill"><b>Замовник:</b> ГО «Об’єднані. Сильні. Разом!»</span>
+    <span class="pill"><b>Поточний сайт:</b> syla-ednosti-ngo.github.io</span>
+    <span class="pill"><b>Мова сайту:</b> українська (EN — P2)</span>
+    <span class="pill"><b>Статус:</b> чернетка на погодження</span>
+  </div>
+</div>
+
+<!-- ============ 01 ОРГАНІЗАЦІЯ ============ -->
+<section class="tz" id="org">
+  <span class="snum">01 · Контекст</span>
+  <h2>Про організацію</h2>
+  <p><b>ГО «Об’єднані. Сильні. Разом!»</b> (скорочено <b>U.S.T.</b> — United. Strong. Together.) — українська
+    громадська організація, що поєднує цивільне й військове суспільство через освіту, інженерію та взаємну
+    підтримку. Заснована ветеранами, освітянами й батьками.</p>
+  <ul class="tz-list">
+    <li><b>Перший проєкт — «Школа дронів»:</b> інженерна школа для підлітків 13–17 років. Ключова теза:
+      дрон — не зброя, а наука (пілотування — лише 5–10&nbsp;%; решта — електроніка, фізика, радіозв’язок,
+      програмування). Наставники — ветерани, які через викладання повертаються в мирне життя.</li>
+    <li><b>Соціальна формула 50/50:</b> половина груп — діти загиблих і діючих військових, половина — діти
+      з родин, не дотичних до війни. Мета — прибрати «прірву нерозуміння».</li>
+    <li><b>Дорожня мапа проєкту:</b> гурток (MVP) → курс (8 занять / 1 місяць) → табір → мережа шкіл у малих
+      громадах по Україні. Для громад модель «під ключ і без бюджету громади».</li>
+    <li><b>Цінності бренду:</b> чесність і прозорість (уся звітність відкрита), інженерна точність,
+      людяність, безпека. Свідомо уникаємо мілітарної естетики і залякування.</li>
+  </ul>
+  <div class="warn"><b>Юридичний нюанс.</b> Організація зараз у процесі перейменування: юридична назва —
+    <b>ГО «КиївТил»</b>, нова назва «Об’єднані. Сильні. Разом!» ще не зареєстрована. У реквізитах, договорах
+    і юридичних текстах до завершення перереєстрації використовується стара назва. На сайті всюди — нова.
+    Передбачити легку заміну юридичних реквізитів (одне місце в конфігурації/контенті, не по коду).</div>
+</section>
+
+<!-- ============ 02 ПОТОЧНИЙ СТАН ============ -->
+<section class="tz" id="current">
+  <span class="snum">02 · Як є</span>
+  <h2>Поточна система</h2>
+  <p>Сайт — статичний (vanilla HTML/CSS/JS, без збірки) на <b>GitHub Pages</b> (org-репозиторій
+    <code>Syla-Ednosti-NGO/syla-ednosti-ngo.github.io</code>), плюс бекенд на <b>Cloudflare Worker</b>.
+    34 HTML-сторінки. Ключове: <b>частина системи вже бойова</b> — нею користуються реальні люди.</p>
+
+  <table class="tz-t">
+    <tr><th>Розділ</th><th>Що це</th><th>Стан</th></tr>
+    <tr><td><code>/</code></td><td>Головна ГО: місія, проєкти, команда, звітність, контакти (5 екранів)</td><td>Живе; фінанси та контакти — демо-дані з бейджами</td></tr>
+    <tr><td><code>/school/</code></td><td>Гейтвей проєкту «Школа дронів»: що це + селектор аудиторії</td><td>Живе</td></tr>
+    <tr><td><code>/landing/*-raster.html</code></td><td>3 аудиторні лендінги (підлітки / батьки / громади) — журнальні «спецвипуски» на 8 екранів</td><td>Живе; всі конверсійні CTA — заглушки</td></tr>
+    <tr><td><code>/vision/</code></td><td>8 сторінок: спецвипуск-лонгрід, 5 персональних сторінок команди, дослідження аудиторії</td><td>Живе; за жанром — внутрішні робочі документи</td></tr>
+    <tr><td><code>/documents/</code></td><td>Портал документів + система збору підписів під протоколами</td><td><b>Бойове:</b> реальні підписані протоколи у проді</td></tr>
+    <tr><td><code>/account.html</code>, <code>/admin.html</code></td><td>Кабінет команди (Firebase-вхід) + адмінка (користувачі, документи, айдентика)</td><td><b>Бойове</b></td></tr>
+    <tr><td><code>/brand/</code></td><td>Брендбук U.S.T. + внутрішні сторінки рішень з айдентики</td><td>Живе; актуальний брендбук — головний дизайн-артефакт</td></tr>
+    <tr><td><code>/worker/</code></td><td>Вихідний код Cloudflare Worker (API)</td><td>Бойовий; код лежить у публічному репо</td></tr>
+  </table>
+
+  <h3>Бекенд (працює, передається як є)</h3>
+  <ul class="tz-list">
+    <li><b>Cloudflare Worker</b> <code>documents-api</code> (URL: <code>documents-api.culaednocti.workers.dev</code>) —
+      єдиний API: публічне підписання документів за токеном, публічний портал, автентифікація, адмін-CRUD.</li>
+    <li><b>D1</b> (SQLite) <code>documents-db</code>: таблиці <code>documents</code>, <code>signatures</code>, <code>users</code>.</li>
+    <li><b>R2</b> <code>documents-files</code>: оригінальні PDF, зображення підписів, зібрані «підписані» PDF.</li>
+    <li><b>Firebase Authentication</b> (проєкт <code>syla-ednosti-ngo</code>, провайдер Email/Password) —
+      вхід команди; Worker верифікує ID-токени по публічних Google JWK (без service-account-секрету).
+      Гейт доступу — рядок у D1 <code>users</code> (pending/approved/declined; role member/admin).</li>
+    <li><b>Потік підписання:</b> адмін завантажує PDF → отримує одне посилання → підписанти відкривають,
+      бачать PDF, вводять ПІБ + малюють/фотографують підпис → після набору кількості документ «підписаний» →
+      адмін збирає фінальний PDF (оригінал + «Аркуш підписів») і публікує на портал. Це <b>візуальний</b> збір
+      підписів, не кваліфікований е-підпис — і це усвідомлений вибір.</li>
+    <li><b>Email-нотифікації</b> адміну про нові заявки: Resend (потрібен ключ) з fallback на MailChannels.</li>
+  </ul>
+  <div class="note"><b>Повна документація API</b> (усі ендпоінти, схема БД, потоки авторизації) — у пакеті
+    передачі (розділ 13). Стислий інвентар: <code>/api/sign/*</code> (публічне підписання),
+    <code>/api/public/documents*</code> (портал), <code>/api/auth/register|me</code>,
+    <code>/api/admin/users*</code>, <code>/api/admin/documents*</code> (+ close / publish / signed-pdf / file).</div>
+</section>
+
+<!-- ============ 03 АНАЛІЗ ============ -->
+<section class="tz" id="analysis">
+  <span class="snum">03 · Аудит</span>
+  <h2>Аналіз поточної реалізації</h2>
+  <p>Перед цим ТЗ проведено повний аудит усіх 34 сторінок, CSS-шарів, бекенд-коду і техгігієни. Висновок:
+    <b>фундамент якісний</b> (айдентика, контент, робочий бекенд), але сайт зараз — «вітрина без дверей»:
+    він розповідає, але не дає жодної дії.</p>
+
+  <div class="grid2">
+    <div class="gcard good">
+      <h4>Що працює добре — зберігаємо</h4>
+      <ul>
+        <li>Айдентика «Інженерний мінімалізм» + повний брендбук (лого U.S.T., палітра, типографіка, компоненти, принципи).</li>
+        <li>Бойовий портал документів із підписанням — реальна цінність, використовується організацією.</li>
+        <li>Автентифікація команди (Firebase + апрув-гейт) — працює end-to-end.</li>
+        <li>Сильний контент: журнальні лендінги під 3 аудиторії, лонгрід-спецвипуск, дослідження аудиторії з реальними інтерв’ю.</li>
+        <li>Чесна культура демо-даних: усе несправжнє позначено бейджем «Демо».</li>
+        <li>100&nbsp;% зображень мають alt; скрізь <code>lang="uk"</code>.</li>
+      </ul>
+    </div>
+    <div class="gcard bad">
+      <h4>Критичні розриви — закриваємо новим сайтом</h4>
+      <ul>
+        <li><b>Нуль шляхів конверсії:</b> усі CTA («Записатися», «Записати дитину», «Запросити в громаду», «Підтримати проєкт», «Завантажити презентацію») — мертві заглушки <code>href="#"</code>.</li>
+        <li><b>Нуль каналів зв’язку:</b> контакти на головній — демо; форм немає; тексти обіцяють «напишіть нам», але нема куди.</li>
+        <li><b>Нема донатів</b> — попри готове дослідження платіжок і чинний договір з Wayforpay.</li>
+        <li><b>Нема новин/живої звітності</b> — розділ «Звітність» показує нулі.</li>
+        <li><b>SEO/шеринг ≈ 0:</b> жодного Open Graph, favicon, sitemap, robots; description лише на 7/34 сторінок.</li>
+        <li><b>Продуктивність:</b> 29 зображень &gt;800 КБ (до 2.5 МБ PNG), сумарно ~41 МБ у /brand/.</li>
+        <li><b>Приватність:</b> внутрішні чернетки, повні ПІБ команди, чутливі сімейні історії та дані ветеранів — публічно і індексуються.</li>
+        <li><b>Нема аналітики</b> — нуль даних про відвідуваність (потрібно для грантів).</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Технічний борг (вибірково)</h3>
+  <ul class="tz-list">
+    <li>Сироти й дублікати: <code>menu.html</code> (стара головна), 4 векторні версії лендінгів поруч із растровими, <code>landing/index*.html</code> — ризик редагувати «не ту» версію.</li>
+    <li>Легасі-імена токенів: <code>--yellow</code> насправді = синій #0F5BFF (айдентика змінювалась) — плутанина гарантована.</li>
+    <li>Логотип не існує як актив: скрізь інлайн-SVG з <code>&lt;text&gt;</code>, залежить від вебшрифту; немає SVG у кривих, PNG, favicon-пакета.</li>
+    <li>Два «джерела правди» токенів (<code>brand/themes.css</code> і <code>assets/base.css</code>), змішані root-absolute та relative шляхи, застарілий README.</li>
+    <li>Безпекові зауваження бекенда (деталі — у приватному додатку до ТЗ, не публікуємо): розширення ролей, ліміти на публічні ендпоінти, серверна валідація зібраних PDF, верифікація email, SRI для CDN-скриптів.</li>
+  </ul>
+</section>
+
+<!-- ============ 04 БАЧЕННЯ ============ -->
+<section class="tz" id="vision">
+  <span class="snum">04 · Як має бути</span>
+  <h2>Продуктове бачення нового сайту</h2>
+  <p>Сайт має перетворитися з «презентації» на <b>робочий інструмент організації</b>. Чотири принципи,
+    у порядку пріоритету:</p>
+  <table class="tz-t">
+    <tr><th>#</th><th>Принцип</th><th>Що це означає практично</th></tr>
+    <tr><td>1</td><td><b>Конверсія</b></td><td>Кожна сторінка має наступний крок: записати дитину, запросити школу в громаду, задонатити, написати нам. Форми працюють, заявки не губляться (потрапляють в адмінку + email).</td></tr>
+    <tr><td>2</td><td><b>Довіра через прозорість</b></td><td>Жива звітність замість нулів: підписані документи (вже є), надходження/витрати по напрямах (автоматизовано через API банку/шлюзу), новини про зроблене.</td></tr>
+    <tr><td>3</td><td><b>Безпека людей</b></td><td>Публічний контур відділено від внутрішнього. Персональні дані команди, ветеранів і дітей — тільки за згодою і мінімально необхідні. Чернетки й дослідження — у внутрішній зоні.</td></tr>
+    <tr><td>4</td><td><b>Швидкість і охайність</b></td><td>Сторінки легкі (&lt;1 МБ), швидкі, коректно шеряться в месенджерах, знаходяться в пошуку. Код підтримуваний однією людиною-непрограмістом на рівні контенту.</td></tr>
+  </table>
+  <div class="note"><b>Що НЕ є метою.</b> Не потрібен «редизайн заради редизайну»: айдентика, тон і більшість
+    контенту вже готові й погоджені. Не потрібен важкий CMS/фреймворк із бекенд-рендерингом. Не потрібно
+    переписувати бойовий портал документів — лише акуратно інтегрувати і зміцнити.</div>
+</section>
+
+<!-- ============ 05 ІНФОРМАЦІЙНА АРХІТЕКТУРА ============ -->
+<section class="tz" id="ia">
+  <span class="snum">05 · Структура</span>
+  <h2>Нова інформаційна архітектура</h2>
+  <p>Логіка та ієрархія чинного сайту зберігаються (вони правильні: ГО → проєкти → аудиторії), додаються
+    відсутні розділи дії. Пропонована мапа:</p>
+  <table class="tz-t">
+    <tr><th>URL</th><th>Сторінка</th><th>Статус</th><th>Пріоритет</th></tr>
+    <tr><td><code>/</code></td><td>Головна ГО (5 екранів, як зараз + реальні дані + блок «Підтримати»)</td><td><span class="tag fix">оновити</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/school/</code></td><td>Гейтвей «Школи дронів» + селектор аудиторії</td><td><span class="tag keep">зберегти</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/school/teens/</code> <code>/parents/</code> <code>/communities/</code></td><td>3 аудиторні лендінги (контент з raster-версій) + робочі CTA-форми</td><td><span class="tag fix">оновити</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/support/</code></td><td><b>Нова.</b> «Підтримати»: донати по напрямах, разові та щомісячні, реквізити, банки Monobank</td><td><span class="tag new">нова</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/news/</code></td><td><b>Нова.</b> Новини/звіти про діяльність (список + сторінка запису)</td><td><span class="tag new">нова</span></td><td><span class="tag p1">P1</span></td></tr>
+    <tr><td><code>/about/</code></td><td><b>Нова.</b> «Про нас»: місія + дистильоване бачення + команда (короткі публічні біо) + документи реєстрації</td><td><span class="tag new">нова</span></td><td><span class="tag p1">P1</span></td></tr>
+    <tr><td><code>/reporting/</code></td><td><b>Нова.</b> Прозорість: підписані документи + фінансова звітність по напрямах (автоматизована)</td><td><span class="tag new">нова</span></td><td><span class="tag p1">P1</span></td></tr>
+    <tr><td><code>/contacts/</code></td><td>Контакти (реальні) + форма звернення</td><td><span class="tag new">нова</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/documents/</code></td><td>Портал документів + підписання</td><td><span class="tag keep">зберегти</span></td><td><span class="tag p0">P0</span></td></tr>
+    <tr><td><code>/account</code> · <code>/admin</code></td><td>Кабінет команди + адмінка (користувачі, документи, заявки з форм, новини)</td><td><span class="tag fix">розширити</span></td><td><span class="tag p1">P1</span></td></tr>
+    <tr><td><code>/brand/</code></td><td>Брендбук (публічний) + внутрішні артефакти за авторизацією</td><td><span class="tag keep">зберегти</span></td><td><span class="tag p2">P2</span></td></tr>
+    <tr><td><em>внутрішня зона</em></td><td>Бачення (повні версії), дослідження аудиторії, чернетки — за логіном команди</td><td><span class="tag fix">перенести</span></td><td><span class="tag p1">P1</span></td></tr>
+  </table>
+  <ul class="tz-list">
+    <li>Векторні дублікати лендінгів, <code>menu.html</code>, лабораторні <code>_*.html</code> — в архівну гілку, з продакшена прибрати.</li>
+    <li>Постійні редіректи зі старих URL (<code>/landing/teens-raster.html</code> → <code>/school/teens/</code> тощо), щоб не втратити наявні посилання.</li>
+  </ul>
+</section>
+
+<!-- ============ 06 СТОРІНКИ ============ -->
+<section class="tz" id="pages">
+  <span class="snum">06 · Вимоги до сторінок</span>
+  <h2>Постранічні вимоги</h2>
+
+  <h3>Головна <code>/</code></h3>
+  <ul class="tz-list">
+    <li>Зберегти поточну структуру 5 екранів: герой-місія → проєкти → команда → звітність → контакти. Дизайн уже погоджений — переносити 1:1 з чинної версії.</li>
+    <li>Замінити демо: реальні контакти, реальні цифри звітності (з модуля фінансів, §7.4), реальні соцмережі. Компонент «Демо»-бейджа лишити в системі — він частина брендбука.</li>
+    <li>Додати в герой або після проєктів блок «Підтримати» (короткий, з CTA на <code>/support/</code>).</li>
+    <li>Блок команди: короткі публічні біо (ім’я/псевдонім + роль + 1 речення), без посилань на робочі чернетки. Позивні замість ПІБ — за замовчуванням для ветеранів.</li>
+  </ul>
+
+  <h3>Лендінги аудиторій <code>/school/*</code></h3>
+  <ul class="tz-list">
+    <li>Контент і верстка — з чинних raster-версій (вони фінальні за текстом і структурою). Ілюстрації — оптимізовані (§10).</li>
+    <li><b>Кожен мертвий CTA стає робочим:</b> «Записатися» / «Записати дитину» → форма запису (§7.3); «Запросити в громаду» → форма для громад; «Завантажити презентацію» → реальний PDF (замовник надасть; є готова презентація програми).</li>
+    <li>Прибрати службовий маркер «· растр» із title. Додати description + OG-картки на кожну.</li>
+    <li>Редакторський пас безпеки меседжу: у публічній програмі занять зняти/переформулювати мілітарні пункти (маскування, позиції операторів) у цивільній рамці — вони суперечать ключовому меседжу «не зброя, а наука» і лякають батьків (це задокументовано у власному дослідженні аудиторії).</li>
+  </ul>
+
+  <h3>Підтримати <code>/support/</code> — нова</h3>
+  <ul class="tz-list">
+    <li>Напрями збору картками (наприклад: школа дронів / обладнання / статутна діяльність) + «швидкий донат».</li>
+    <li>Разовий платіж і щомісячна підписка (Wayforpay), банки Monobank як альтернатива, реквізити IBAN для юросіб.</li>
+    <li>Блок прозорості: «скільки зібрано цього місяця по напряму» (автоматично, §7.4) + посилання на звітність.</li>
+  </ul>
+
+  <h3>Новини <code>/news/</code> — нова</h3>
+  <ul class="tz-list">
+    <li>Список (картки: фото, заголовок, дата, тизер) + сторінка запису. Категорії: новини / звіти / події.</li>
+    <li>Публікація через адмінку без правки коду (§7.5). RSS — бажано.</li>
+  </ul>
+
+  <h3>Про нас <code>/about/</code> — нова</h3>
+  <ul class="tz-list">
+    <li>Місія + цінності (готовий текст з головної/бачення), дистильований лонгрід «як ми це бачимо» (редакція чинного спецвипуску без внутрішніх приміток), команда, установчі документи, юрдані.</li>
+  </ul>
+
+  <h3>Портал документів <code>/documents/</code> — зберегти</h3>
+  <ul class="tz-list">
+    <li>Функціонал не змінюється (список публічних документів, сторінка підписання за токеном, адмінка документів). Переверстати шапку/футер у загальну навігацію нового сайту.</li>
+    <li>Зміцнення бекенда — окремим переліком у приватному додатку (ролі для мутацій, ліміти розміру/частоти на публічне підписання, серверна перевірка зібраного PDF, аудит-лог адмін-дій).</li>
+  </ul>
+</section>
+
+<!-- ============ 07 МОДУЛІ ============ -->
+<section class="tz" id="modules">
+  <span class="snum">07 · Функціональні модулі</span>
+  <h2>Функціональні вимоги</h2>
+
+  <h3>7.1 Автентифікація та ролі <span class="tag keep">зберегти + посилити</span></h3>
+  <ul class="tz-list">
+    <li>Залишається Firebase Email/Password + апрув-гейт у D1 (працює). Додати: обов’язкова верифікація email перед наданням доступу; розділення прав — мутації документів лише для role=admin; поступове виведення легасі-токен-лінка.</li>
+    <li>Ролі v2: <code>admin</code> (усе), <code>member</code> (перегляд внутрішньої зони, підписання), задел під <code>editor</code> (новини/контент).</li>
+  </ul>
+
+  <h3>7.2 Документи й підписання <span class="tag keep">зберегти</span></h3>
+  <ul class="tz-list">
+    <li>Чинний функціонал переноситься без змін для користувача. База даних і файли (D1/R2) — бойові, <b>міграція без втрат обов’язкова</b>; будь-які роботи — тільки через копію.</li>
+  </ul>
+
+  <h3>7.3 Форми та заявки <span class="tag new">нове</span></h3>
+  <ul class="tz-list">
+    <li>Три форми: <b>запис дитини</b> (батько/дитина, вік, контакт, звідки дізнались), <b>запит громади</b> (громада, контактна особа, посада, коментар), <b>звернення</b> (ім’я, канал зв’язку, текст). Мінімум полів, мобайл-фьорст.</li>
+    <li>Обробка на наявному Cloudflare Worker: збереження в D1 + миттєвий email команді + список заявок в адмінці зі статусами (нова / в роботі / закрита).</li>
+    <li>Антиспам без CAPTCHA-фрустрації: honeypot + rate-limit + Turnstile (Cloudflare) за потреби.</li>
+    <li>Згода на обробку персональних даних (чекбокс + сторінка політики) — обов’язково.</li>
+  </ul>
+
+  <h3>7.4 Донати та фінансова прозорість <span class="tag new">нове</span></h3>
+  <ul class="tz-list">
+    <li><b>База — готове дослідження</b> (передається в пакеті): гібридна модель. У ГО вже є договір з <b>Wayforpay</b> (комісія 2%, без абонплати).</li>
+    <li><b>Wayforpay:</b> кнопка/віджет разового платежу + сторінка підписки на щомісячний донат. Напрям збору кодується в <code>orderReference</code>. Вебхук на Worker — для лічильників зборів у реальному часі.</li>
+    <li><b>Monobank-банки:</b> окрема банка на напрям як прозорий публічний рахунок; відкритий API банки — для автоматичного зчитування зібраного.</li>
+    <li><b>Автозвітність:</b> Worker раз на добу тягне Wayforpay <code>TRANSACTION_LIST</code> + виписки банок → агрегує по напрямах → публічний блок «зібрано/витрачено» на <code>/support/</code> і <code>/reporting/</code>. Ручне внесення витрат — через адмінку.</li>
+  </ul>
+
+  <h3>7.5 Контент і новини <span class="tag new">нове</span></h3>
+  <ul class="tz-list">
+    <li>Керування новинами і ключовими цифрами — <b>без редагування коду</b>. Прийнятні варіанти: markdown-файли в репозиторії з автозбіркою; або міні-CRUD в наявній адмінці (D1). Обрати і погодити на етапі архітектури.</li>
+    <li>Редаговані зони v1: новини, цифри головної, контакти/реквізити, список напрямів зборів.</li>
+  </ul>
+
+  <h3>7.6 Внутрішня зона <span class="tag fix">перенести</span></h3>
+  <ul class="tz-list">
+    <li>Повні версії «Бачення», дослідження аудиторії, робочі чернетки — за логіном (approved). Публічно — лише дистильована сторінка «Про нас».</li>
+  </ul>
+</section>
+
+<!-- ============ 08 ДИЗАЙН ============ -->
+<section class="tz" id="design">
+  <span class="snum">08 · Дизайн-система</span>
+  <h2>Айдентика та UI</h2>
+  <p>Айдентика <b>«Інженерний мінімалізм» затверджена і не переглядається.</b> Головний артефакт —
+    брендбук (<code>/brand/brandbook.html</code>): логотип U.S.T. (app-mark + вордмарк + повна назва),
+    палітра, типографіка Onest, іконографіка line-art 24×24, фірмова графіка (орбіти/вузли/blueprint-сітка),
+    компоненти, принципи. Новий сайт верстається строго по ньому.</p>
+  <table class="tz-t">
+    <tr><th>Токен</th><th>Значення</th><th>Примітка</th></tr>
+    <tr><td>Акцент</td><td><code>#0F5BFF</code></td><td>у легасі-коді називається <code>--yellow</code> (!) — у новому коді назвати <code>--accent</code></td></tr>
+    <tr><td>Темний бренд</td><td><code>#171A1F</code></td><td>легасі-ім’я <code>--navy</code> → <code>--brand-dark</code></td></tr>
+    <tr><td>Текст / другорядний</td><td><code>#23272E</code> / <code>#6B7280</code></td><td>—</td></tr>
+    <tr><td>Тінт акценту / сірі</td><td><code>#E8F0FF</code> / 50–300</td><td>—</td></tr>
+    <tr><td>Акцент на темному / крапка лого</td><td><code>#5B9BFF</code> / <code>#8CC2FF</code></td><td>додати як токени (зараз хардкод)</td></tr>
+    <tr><td>Семантичні</td><td><code>#3BA776</code> · <code>#C77B12</code> · <code>#D23B3B</code></td><td>успіх · увага/демо · помилка</td></tr>
+    <tr><td>Радіуси / шрифт</td><td>8 / 4 / 14 px · Onest 300–800</td><td>шрифт self-host у новій версії</td></tr>
+  </table>
+  <ul class="tz-list">
+    <li><b>Завдання команді — logo-kit:</b> перевести знак у криві (канонічний SVG-майстер), згенерувати пакет: SVG/PNG у 4 колірних варіантах, favicon (ico+svg+apple-touch+manifest), OG-image 1200×630, аватари соцмереж. Уніфікувати геометрію між варіантами (зараз розбіжності rx/кегля).</li>
+    <li>Ввести семантичні імена токенів (мапа вище) + spacing-шкалу (4/8/12/16/24/32/48) + документовані брейкпоінти; узгодити з брендбуком стани hover/focus/disabled і фокус-обведення.</li>
+    <li>Єдине джерело правди токенів — один файл; <code>brand/themes.css</code> позначити архівом.</li>
+  </ul>
+</section>
+
+<!-- ============ 09 КОНТЕНТ ============ -->
+<section class="tz" id="content">
+  <span class="snum">09 · Контент</span>
+  <h2>Контент і приватність</h2>
+  <ul class="tz-list">
+    <li><b>Готово і переноситься:</b> тексти головної, гейтвею, трьох лендінгів, брендбук, лонгрід бачення (після редпасу), фото/ілюстрації (після оптимізації).</li>
+    <li><b>Надає замовник до старту розробки:</b> реальні контакти (email на власному домені, телефон, соцмережі), юридичні реквізити (з урахуванням перейменування), презентація для громад (PDF), напрями зборів + реквізити банок, згоди учасників команди на публікацію імен/фото.</li>
+    <li><b>Політика приватності контенту:</b> для ветеранів за замовчуванням позивні; повні ПІБ і сімейні історії — лише за письмовою згодою; цитати з інтерв’ю знеособлюються; внутрішні дисклеймери («чернетка для обговорення», виробничі нотатки) на публічних сторінках недопустимі.</li>
+    <li><b>Юридичні сторінки:</b> політика конфіденційності (обробка ПДн з форм), умови використання, публічна оферта для донатів.</li>
+  </ul>
+</section>
+
+<!-- ============ 10 ЯКІСТЬ ============ -->
+<section class="tz" id="nfr">
+  <span class="snum">10 · Нефункціональні вимоги</span>
+  <h2>Якість: метрики приймання</h2>
+  <table class="tz-t">
+    <tr><th>Область</th><th>Вимога</th></tr>
+    <tr><td>Продуктивність</td><td>LCP ≤ 2.5 c (mobile, повільний 4G), CLS ≤ 0.1, вага сторінки ≤ 1 МБ. Зображення: WebP/AVIF, ≤ 200 КБ (hero ≤ 150 КБ), srcset + width/height, lazy нижче фолду. Lighthouse Performance ≥ 90.</td></tr>
+    <tr><td>SEO / шеринг</td><td>На кожній публічній сторінці: унікальні title + description, OG (title/description/image/url) + Twitter card, canonical. У корені: sitemap.xml, robots.txt (закриті кабінет/адмінка/внутрішнє), favicon-набір. Валідне прев’ю у Telegram/Facebook — критерій приймання.</td></tr>
+    <tr><td>Доступність</td><td>WCAG 2.1 AA: контрасти, фокус-стани, клавіатурна навігація, alt-тексти (планка 100&nbsp;% вже є), skip-link, aria для інтерактиву. Ніяких клікабельних заглушок.</td></tr>
+    <tr><td>Адаптивність</td><td>320px → 1440px+ без горизонтального скролу; тач-цілі ≥ 44px.</td></tr>
+    <tr><td>Аналітика</td><td>Privacy-friendly без cookie-банера (Plausible / Umami / GoatCounter). Події на всі конверсійні CTA і submit форм.</td></tr>
+    <tr><td>Безпека</td><td>SRI або self-host для сторонніх скриптів; CSP; секрети тільки в env Cloudflare; ліміти й валідація на всіх публічних POST; аудит-лог адмін-дій. Деталі — приватний додаток.</td></tr>
+    <tr><td>Надійність</td><td>Робота порталу документів не переривається; міграції БД — з бекапом і планом відкату.</td></tr>
+  </table>
+</section>
+
+<!-- ============ 11 СТЕК ============ -->
+<section class="tz" id="stack">
+  <span class="snum">11 · Технології</span>
+  <h2>Технічний стек</h2>
+  <p><b>Незмінна основа:</b> Cloudflare Worker + D1 + R2 (бойовий бекенд), Firebase Auth, статичний фронт.
+    Це дешево (фактично 0 грн/міс), надійно і вже освоєно організацією.</p>
+  <table class="tz-t">
+    <tr><th>Шар</th><th>Рекомендація</th><th>Коментар</th></tr>
+    <tr><td>Фронтенд</td><td>Статичний генератор (Astro — перевага, або Eleventy)</td><td>Компонентизація (шапка/футер/head зараз копіпастяться по 34 файлах), markdown-контент для новин, нуль JS за замовчуванням. Чистий vanilla прийнятний, якщо команда обґрунтує підтримуваність.</td></tr>
+    <tr><td>Хостинг фронту</td><td>Cloudflare Pages (перевага) або GitHub Pages</td><td>CF Pages: той самий акаунт, що й Worker; прев’ю-деплої на PR; редіректи/заголовки конфігом. Домен — окреме питання (§14).</td></tr>
+    <tr><td>API</td><td>Наявний Worker, розширюваний модульно</td><td>Нові ендпоінти: форми, донат-вебхуки, агрегація фінансів, новини (якщо через D1).</td></tr>
+    <tr><td>Дані</td><td>D1 (заявки, новини, фінагрегати) + R2 (медіа)</td><td>Схема міграцій — версіонована (файли migrations/).</td></tr>
+    <tr><td>CI/CD</td><td>GitHub Actions</td><td>Збірка, лінт, оптимізація зображень, деплой фронту і воркера; прев’ю на PR.</td></tr>
+  </table>
+  <div class="note"><b>Свобода команди.</b> Конкретні інструменти в межах цих рамок команда обирає сама і фіксує
+    в архітектурній записці (1–2 стор.) на старті. Жорсткі межі: без платних SaaS-залежностей, без серверів,
+    які треба адмініструвати, вихідний код — у репозиторії організації.</div>
+</section>
+
+<!-- ============ 12 ЕТАПИ ============ -->
+<section class="tz" id="stages">
+  <span class="snum">12 · План</span>
+  <h2>Етапи, пріоритети, приймання</h2>
+  <table class="tz-t">
+    <tr><th>Етап</th><th>Обсяг</th><th>Критерій приймання</th></tr>
+    <tr><td><b>0. Архітектура</b></td><td>Архітектурна записка, макет компонентної системи, план міграції даних, узгодження CMS-підходу</td><td>Погоджена записка; ризики міграції зняті</td></tr>
+    <tr><td><b>1. Фундамент (P0)</b></td><td>Каркас на новому стеку, дизайн-токени, logo-kit, головна + школа + 3 лендінги з живими формами, /support/ з Wayforpay+Monobank, /contacts/, SEO/OG/favicon, оптимізація зображень, аналітика, редіректи</td><td>Всі CTA працюють end-to-end (заявка → адмінка+email); донат проходить тестовий платіж; Lighthouse ≥ 90; прев’ю шерингу валідні</td></tr>
+    <tr><td><b>2. Прозорість (P1)</b></td><td>/news/ + публікація з адмінки, /reporting/ з автозвітністю фінансів, /about/, внутрішня зона (перенесення vision/research), розширення ролей, зміцнення бекенда за приватним додатком</td><td>Новина публікується без розробника; фінблок оновлюється автоматично; чернетки недоступні без логіну</td></tr>
+    <tr><td><b>3. Розвиток (P2)</b></td><td>EN-версія ключових сторінок (для міжнародних донорів), RSS, розділи адмінки «Члени/Наради/Фінанси», покращення порталу документів</td><td>Окремо погоджений беклог</td></tr>
+  </table>
+  <ul class="tz-list">
+    <li>Робота — ітераціями з демо кожні 1–2 тижні на прев’ю-URL. Код-рев’ю з боку замовника (Валентин) — обов’язковий крок перед мержем.</li>
+    <li>Definition of Done для кожної сторінки: контент фінальний, метрики §10 виконані, мобільна верстка перевірена, події аналітики стоять.</li>
+  </ul>
+</section>
+
+<!-- ============ 13 ПЕРЕДАЧА ============ -->
+<section class="tz" id="handover">
+  <span class="snum">13 · Онбординг</span>
+  <h2>Пакет передачі команді</h2>
+  <table class="tz-t">
+    <tr><th>Актив</th><th>Що всередині / де</th></tr>
+    <tr><td>Репозиторій</td><td><code>Syla-Ednosti-NGO/syla-ednosti-ngo.github.io</code> — весь фронт + worker/ (API, schema.sql, wrangler.toml)</td></tr>
+    <tr><td>Брендбук</td><td><code>/brand/brandbook.html</code> + сторінки рішень (логотип, напрями айдентики)</td></tr>
+    <tr><td>Документація API</td><td>Повний опис ендпоінтів, схеми D1, потоків підписання й авторизації (додаток А до цього ТЗ)</td></tr>
+    <tr><td>Безпековий додаток</td><td>Приватний перелік зауважень бекенда з рекомендаціями (додаток Б — передається особисто, не публікується)</td></tr>
+    <tr><td>Дослідження платіжок</td><td>Wayforpay + Monobank: можливості, API, рекомендована модель (додаток В)</td></tr>
+    <tr><td>Дослідження аудиторії</td><td>Персони, JTBD, ціннісні пропозиції — база для текстів і форм</td></tr>
+    <tr><td>Доступи (за запитом, після NDA)</td><td>Cloudflare (Worker/D1/R2/Pages), Firebase-проєкт, GitHub-org, кабінет Wayforpay, аналітика</td></tr>
+    <tr><td>Контактна особа</td><td>Валентин — дизайн, систематизація, приймання робіт з боку ГО</td></tr>
+  </table>
+  <div class="crit"><b>Червоні лінії.</b> (1) Продакшн-дані порталу документів (D1/R2) — бойові: жодних операцій
+    без бекапа й погодження. (2) Секрети — ніколи в репозиторії. (3) Персональні дані з форм — тільки в D1,
+    мінімізація, без передачі третім сторонам. (4) Будь-яка публікація даних людей — тільки за наявною згодою.</div>
+</section>
+
+<!-- ============ 14 ПИТАННЯ ============ -->
+<section class="tz" id="questions">
+  <span class="snum">14 · До обговорення</span>
+  <h2>Відкриті питання</h2>
+  <ul class="tz-list">
+    <li><b>Домен:</b> лишаємось на <code>syla-ednosti-ngo.github.io</code> чи купуємо власний (наприклад, <code>ust.org.ua</code>)? Рекомендація — власний домен до запуску (email організації, довіра донорів, OG-посилання).</li>
+    <li><b>Терміни перейменування ГО</b> — впливає на юридичні тексти й оферту донатів.</li>
+    <li><b>Обсяг EN-версії</b> у P2: тільки «Про нас + Підтримати» чи повний сайт?</li>
+    <li><b>CMS-підхід</b> (markdown у репо vs адмінка на D1) — рішення етапу 0 разом із командою.</li>
+    <li><b>Бюджет і формат співпраці</b> команди (фікс за етапи vs T&M) — поза цим документом.</li>
+  </ul>
+</section>
+
+<div class="tz-foot">
+  ТЗ підготовлено на основі повного аудиту чинного сайту (34 сторінки, бекенд, дизайн-система) станом на липень 2026.
+  Живі референси: <a href="/">головна</a> · <a href="/school/">школа дронів</a> · <a href="/documents/">документи</a> · <a href="/brand/brandbook.html">брендбук</a>.
+  <br>© ГО «Об’єднані. Сильні. Разом!» — внутрішній документ для команди розробки.
+</div>
+
+</div>
+</body>
+</html>
